@@ -116,9 +116,98 @@ export const tulipiaAntiIdade: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS TULÍPIA - ACNE & OLEOSIDADE
+// ============================================
+
+export const tulipiaAcne: Product[] = [
+  {
+    id: 201,
+    name: "Salicylic Clear | Nano Sérum Antiacne",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: false,
+    description: "Reduz inflamação, controla oleosidade e previne acne",
+    price: "Consultar",
+  },
+  {
+    id: 202,
+    name: "Salicylic Clear | Nano Gel Secativo Pontual",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: false,
+    description: "Ação direcionada em lesões ativas de acne",
+    price: "Consultar",
+  },
+  {
+    id: 203,
+    name: "Acne Control | Sabonete Cleanser Deep",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: true,
+    description: "Limpeza profunda com ação antioleosidade",
+    price: "Consultar",
+  },
+  {
+    id: 204,
+    name: "Acne Control | Nano Gel Regulador",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: false,
+    description: "Controla a oleosidade e reduz cravos e espinhas",
+    price: "Consultar",
+  },
+  {
+    id: 205,
+    name: "Acne Control | Máscara Antiacne",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: true,
+    description: "Ação secativa e renovadora para peles acneicas",
+    price: "Consultar",
+  },
+  {
+    id: 206,
+    name: "Acne Control | Tônico Desengordurante",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: true,
+    description: "Reduz brilho, controla oleosidade e prepara pele",
+    price: "Consultar",
+  },
+  {
+    id: 207,
+    name: "Black Secret | Peeling Antiacne",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: true,
+    description: "Renovação química para acne e manchas pós-acne",
+    price: "Consultar",
+  },
+  {
+    id: 208,
+    name: "Peeling Bioenzimático | Enzimas Renovadoras",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: true,
+    description: "Remove células mortas sem agredir, auxilia no controle da acne",
+    price: "Consultar",
+  },
+  {
+    id: 209,
+    name: "Peeling Fitoácido | Renovação com Ácidos Naturais",
+    brand: "Tulípia",
+    category: "acne-oleosidade",
+    isProfessional: true,
+    description: "Melhora textura e desobstrui poros",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
 export const allTulipiaProducts: Product[] = [
   ...tulipiaAntiIdade,
+  ...tulipiaAcne,
 ];
