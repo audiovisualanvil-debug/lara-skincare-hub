@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { MessageCircle, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface Product {
@@ -64,20 +64,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         {/* CTA */}
         <div className="pt-2">
-          {product.isProfessional ? (
-            <Button variant="gold-outline" size="sm" className="w-full text-xs" asChild>
-              <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
-                Consultar
-              </a>
-            </Button>
-          ) : (
-            <Button variant="elegant" size="sm" className="w-full text-xs" asChild>
-              <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="w-3.5 h-3.5 stroke-[1.5]" />
-                Comprar
-              </a>
-            </Button>
-          )}
+          <Button variant="gold-outline" size="sm" className="w-full text-xs" asChild>
+            <Link to={`/produto/${product.id}`}>
+              Ver mais
+            </Link>
+          </Button>
         </div>
       </div>
     </div>
