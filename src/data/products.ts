@@ -835,6 +835,64 @@ export const tulipiaKits: Product[] = [
 ];
 
 // ============================================
+// ============================================
+// PRODUTOS MEZZO
+// ============================================
+// ============================================
+
+// ============================================
+// PRODUTOS MEZZO - CLAREAMENTO & MANCHAS
+// ============================================
+
+export const mezzoClareamento: Product[] = [
+  {
+    id: 1001,
+    name: "Glicólico Hyalu+ CA | Peeling Rejuvenescedor",
+    brand: "Mezzo",
+    category: "clareamento",
+    isProfessional: true,
+    description: "Peeling rejuvenescedor para clareamento e renovação celular",
+    price: "Consultar",
+  },
+  {
+    id: 1002,
+    name: "Tranexâmico C 10 | Peeling Clareador e Iluminador",
+    brand: "Mezzo",
+    category: "clareamento",
+    isProfessional: true,
+    description: "Peeling clareador e iluminador para tratamento de manchas",
+    price: "Consultar",
+  },
+  {
+    id: 1003,
+    name: "Mellan Corrector | Sérum Clareador Facial",
+    brand: "Mezzo",
+    category: "clareamento",
+    isProfessional: false,
+    description: "Sérum clareador facial para uniformização do tom da pele",
+    price: "Consultar",
+  },
+  {
+    id: 1004,
+    name: "Mellan Repair | Booster Reparador Facial",
+    brand: "Mezzo",
+    category: "clareamento",
+    isProfessional: false,
+    description: "Booster reparador facial para recuperação pós-tratamento",
+    price: "Consultar",
+  },
+  {
+    id: 1005,
+    name: "Mella White Xsome | Sérum Multicorretivo",
+    brand: "Mezzo",
+    category: "clareamento",
+    isProfessional: false,
+    description: "Sérum multicorretivo para clareamento e uniformização",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -846,4 +904,8 @@ export const allTulipiaProducts: Product[] = [
   ...tulipiaFotoprotecao,
   ...tulipiaProfissional,
   ...tulipiaKits,
+];
+
+export const allMezzoProducts: Product[] = [
+  ...mezzoClareamento,
 ];
