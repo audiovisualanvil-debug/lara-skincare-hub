@@ -204,10 +204,153 @@ export const tulipiaAcne: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS TULÍPIA - CORPO & FIRMADOR
+// ============================================
+
+export const tulipiaCorpo: Product[] = [
+  {
+    id: 301,
+    name: "Nano Reduxx | Gel Redutor e Firmador",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Auxilia na redução de medidas, textura da pele e firmeza",
+    price: "Consultar",
+  },
+  {
+    id: 302,
+    name: "Nano Reduxx | Sérum Corporal Intensivo",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Ação concentrada para gordura localizada e celulite",
+    price: "Consultar",
+  },
+  {
+    id: 303,
+    name: "Nano Reduxx | Creme Modelador Corporal",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: false,
+    description: "Modela contorno corporal e melhora aspecto da pele",
+    price: "Consultar",
+  },
+  {
+    id: 304,
+    name: "Dermo Reduxx | Gel Redutor Termoativado",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Efeito térmico para potencializar redução de medidas",
+    price: "Consultar",
+  },
+  {
+    id: 305,
+    name: "Dermo Reduxx | Creme Anticelulite",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Redução do aspecto da celulite e irregularidade",
+    price: "Consultar",
+  },
+  {
+    id: 306,
+    name: "Immortalité | Serum Firmador Corporal",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Melhora elasticidade e firmeza corporal",
+    price: "Consultar",
+  },
+  {
+    id: 307,
+    name: "DMAE+ | Nano Gel Corporal Firmador",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: false,
+    description: "Firmeza imediata e melhora do contorno",
+    price: "Consultar",
+  },
+  {
+    id: 308,
+    name: "Nano Glute Up | Sérum Reafirmante para Glúteos",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Efeito tensor, melhora textura e sustentação dos glúteos",
+    price: "Consultar",
+  },
+  {
+    id: 309,
+    name: "Nano Glute Up | Creme Intensivo Modelador",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Modelagem e firmeza concentrada para glúteos",
+    price: "Consultar",
+  },
+  {
+    id: 310,
+    name: "Strio Repair | Gel Reparador de Estrias",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: false,
+    description: "Reduz aparência de estrias recentes e antigas",
+    price: "Consultar",
+  },
+  {
+    id: 311,
+    name: "Strio Repair | Creme Corporal Regenerador",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Regeneração intensiva para áreas com estrias",
+    price: "Consultar",
+  },
+  {
+    id: 312,
+    name: "Nano Slim | Sérum Lipolítico",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Auxilia na quebra de gordura localizada",
+    price: "Consultar",
+  },
+  {
+    id: 313,
+    name: "Nano Model Up | Sérum Modelador",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Melhora aparência de celulite e contorno corporal",
+    price: "Consultar",
+  },
+  {
+    id: 314,
+    name: "PDRN Body | Sérum Regenerador Corporal",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Recuperação tecidual, cicatrização e melhora da textura",
+    price: "Consultar",
+  },
+  {
+    id: 315,
+    name: "Hyalu Body Mask | Máscara Hidratante Corporal",
+    brand: "Tulípia",
+    category: "corpo",
+    isProfessional: true,
+    description: "Hidratação profunda para áreas ressecadas e pós-tratamentos",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
 export const allTulipiaProducts: Product[] = [
   ...tulipiaAntiIdade,
   ...tulipiaAcne,
+  ...tulipiaCorpo,
 ];
