@@ -736,6 +736,105 @@ export const tulipiaProfissional: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS TULÍPIA - KITS & COMBOS
+// ============================================
+
+export const tulipiaKits: Product[] = [
+  // KITS PARA ROTINA DIÁRIA
+  {
+    id: 701,
+    name: "Kit Clareamento Diário (Melasma & Manchas)",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: false,
+    description: "Acne Control Sabonete + Immortalité-C Nano Sérum + BB Cream FPS. Uniformiza o tom e ilumina com proteção solar",
+    price: "Consultar",
+  },
+  {
+    id: 702,
+    name: "Kit Acne e Oleosidade",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: false,
+    description: "Acne Control Sabonete + Niacinamida Nano Sérum B3 + Salicylic Clear Gel. Reduz acne e controla oleosidade",
+    price: "Consultar",
+  },
+  {
+    id: 703,
+    name: "Kit Anti-idade & Firmeza",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: false,
+    description: "Immortalité Nano Sérum + DMAE+ Nano Sérum + BB Cream FPS. Melhora firmeza e linhas com proteção diária",
+    price: "Consultar",
+  },
+  {
+    id: 704,
+    name: "Kit Hidratação & Reparação",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: false,
+    description: "Hydra Dermo Máscara + Ácido Hialurônico Plus + Hydra Vita Day FPS. Recupera viço e hidrata profundamente",
+    price: "Consultar",
+  },
+  {
+    id: 705,
+    name: "Kit Capilar Antiqueda",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: false,
+    description: "Tricho Control Shampoo + Tricho Repair Nano Sérum + PDRN Capilar. Reduz queda e melhora densidade capilar",
+    price: "Consultar",
+  },
+  // KITS PARA TRATAMENTOS AVANÇADOS
+  {
+    id: 706,
+    name: "Combo Clareamento Intensivo",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: true,
+    description: "Peeling Mandélico + Immortalité-C Sérum + BB Cream FPS. Resultados progressivos com menor irritação",
+    price: "Consultar",
+  },
+  {
+    id: 707,
+    name: "Combo Acne Avançada",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: true,
+    description: "Peeling Salicílico + Nano Niacin B3 + Cica Repair Nano Gel. Trata acne ativa e reduz manchas pós-inflamatórias",
+    price: "Consultar",
+  },
+  {
+    id: 708,
+    name: "Combo Rejuvenescimento Profundo",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: true,
+    description: "Peeling Glicólico + Collagen Boost + DMAE+ Pro. Renovação + estímulo de colágeno + efeito tensor",
+    price: "Consultar",
+  },
+  {
+    id: 709,
+    name: "Combo Corpo & Modelagem",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: false,
+    description: "Nano Reduxx Gel + Dermo Reduxx Termoativado + Nano Glute Up. Melhora contorno e firmeza corporal",
+    price: "Consultar",
+  },
+  {
+    id: 710,
+    name: "Combo Pós-Procedimento",
+    brand: "Tulípia",
+    category: "kits",
+    isProfessional: true,
+    description: "Hyalu Mask + Cica Repair Nano Gel + Água Micelar. Acalma, repara e devolve hidratação",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -746,4 +845,5 @@ export const allTulipiaProducts: Product[] = [
   ...tulipiaCapilar,
   ...tulipiaFotoprotecao,
   ...tulipiaProfissional,
+  ...tulipiaKits,
 ];
