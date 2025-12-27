@@ -488,6 +488,94 @@ export const tulipiaCapilar: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS TULÍPIA - FOTOPROTEÇÃO
+// ============================================
+
+export const tulipiaFotoprotecao: Product[] = [
+  {
+    id: 501,
+    name: "Immortalité-C | BB Cream FPS",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Proteção solar com cobertura leve e tratamento anti-idade. Indispensável em rotinas pós-tratamento e melasma",
+    price: "Consultar",
+  },
+  {
+    id: 502,
+    name: "Hyalu Sunscreen | Hidratante com FPS",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Hidratação + fotoproteção para uso diário. Ideal para pele seca, sensível ou pós procedimentos",
+    price: "Consultar",
+  },
+  {
+    id: 503,
+    name: "Fluid Block | Fluido Protetor para Rotinas com Ácidos",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Proteção para peles em tratamento com ácidos e clareadores. Não pesa, não esfarela",
+    price: "Consultar",
+  },
+  {
+    id: 504,
+    name: "Hydra Vita Day | Creme Hidratante com FPS",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Hidratação multinível com proteção UV. Reduz ressecamento e mantém barreira cutânea protegida",
+    price: "Consultar",
+  },
+  {
+    id: 505,
+    name: "Immortalité-C | Primer FPS",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Preparação da pele para maquiagem com fotoproteção. Acabamento uniforme e prolonga fixação",
+    price: "Consultar",
+  },
+  {
+    id: 506,
+    name: "Água Micelar | Pós-Proteção Solar",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Limpeza suave sem remover barreira protetora. Remove resíduos de filtro sem agredir",
+    price: "Consultar",
+  },
+  {
+    id: 507,
+    name: "Cica Repair | Gel Restaurador Pós-Solar",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: true,
+    description: "Reparação de pele sensibilizada por exposição solar. Reduz vermelhidão e desconforto",
+    price: "Consultar",
+  },
+  {
+    id: 508,
+    name: "Hyalu Mask | Máscara de Hidratação Pós-Sol",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: true,
+    description: "Hidratação intensa e recuperação da pele após radiação UV. Devolve viço",
+    price: "Consultar",
+  },
+  {
+    id: 509,
+    name: "Nano Vitamin C | Antioxidante para Rotina Solar",
+    brand: "Tulípia",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Ação antioxidante complementar ao protetor solar. Ilumina e protege contra radicais livres",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -496,4 +584,5 @@ export const allTulipiaProducts: Product[] = [
   ...tulipiaAcne,
   ...tulipiaCorpo,
   ...tulipiaCapilar,
+  ...tulipiaFotoprotecao,
 ];
