@@ -346,6 +346,148 @@ export const tulipiaCorpo: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS TULÍPIA - CAPILAR
+// ============================================
+
+export const tulipiaCapilar: Product[] = [
+  {
+    id: 401,
+    name: "Tricho Repair | Nano Sérum Antiqueda",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Fortalece a raiz, reduz queda e estimula crescimento",
+    price: "Consultar",
+  },
+  {
+    id: 402,
+    name: "Tricho Repair | Loção Tônica Antiqueda",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: false,
+    description: "Estimula circulação e reforça o bulbo capilar",
+    price: "Consultar",
+  },
+  {
+    id: 403,
+    name: "Tricho Control | Shampoo Antiqueda",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: false,
+    description: "Reduz quebra e queda, controla afinamento",
+    price: "Consultar",
+  },
+  {
+    id: 404,
+    name: "Tricho Revitalizante | Máscara Capilar",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Repõe massa, fortalece fios fragilizados",
+    price: "Consultar",
+  },
+  {
+    id: 405,
+    name: "Tricho Sensi Scalp | Fluido Calmante",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: false,
+    description: "Reduz coceira, irritação e sensibilidade no couro cabeludo",
+    price: "Consultar",
+  },
+  {
+    id: 406,
+    name: "Tricho Dandruff | Shampoo Anticaspa",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: false,
+    description: "Controla caspa e descamação sem agredir o couro cabeludo",
+    price: "Consultar",
+  },
+  {
+    id: 407,
+    name: "Tricho Dandruff | Loção Controle da Caspa",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: false,
+    description: "Ação antifúngica e anti-inflamatória para controle prolongado",
+    price: "Consultar",
+  },
+  {
+    id: 408,
+    name: "Nano Capillar | Sérum Fortalecedor",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Fortalecimento avançado, indicado para queda crônica",
+    price: "Consultar",
+  },
+  {
+    id: 409,
+    name: "Nano Capillar | Tônico Reforçador",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Reduz afinamento e melhora densidade dos fios",
+    price: "Consultar",
+  },
+  {
+    id: 410,
+    name: "Peeling Capilar Enzimático | Pré-Shampoo",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Limpeza profunda do couro cabeludo, remove resíduos e sebo",
+    price: "Consultar",
+  },
+  {
+    id: 411,
+    name: "PDRN Capilar | Sérum Regenerador",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Regeneração tecidual e estímulo de crescimento",
+    price: "Consultar",
+  },
+  {
+    id: 412,
+    name: "Amino Repair | Máscara Reconstrutora",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Reposição de massa e fortalecimento para fios danificados",
+    price: "Consultar",
+  },
+  {
+    id: 413,
+    name: "Hyalu Capillar | Hidratante Reconstrutor",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: false,
+    description: "Hidratação profunda e maciez pós-química",
+    price: "Consultar",
+  },
+  {
+    id: 414,
+    name: "Bio Booster Hair | Nano Ampolas",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Tratamento intensivo para crescimento e densidade",
+    price: "Consultar",
+  },
+  {
+    id: 415,
+    name: "Scalp Detox | Gel Pré-Tratamento",
+    brand: "Tulípia",
+    category: "capilar",
+    isProfessional: true,
+    description: "Prepara couro cabeludo para melhor absorção de ativos",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -353,4 +495,5 @@ export const allTulipiaProducts: Product[] = [
   ...tulipiaAntiIdade,
   ...tulipiaAcne,
   ...tulipiaCorpo,
+  ...tulipiaCapilar,
 ];
