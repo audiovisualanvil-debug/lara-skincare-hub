@@ -91,31 +91,31 @@ const Index = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-card/98 via-card/90 to-card/60" />
         </div>
         
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <div className="max-w-2xl space-y-6 animate-slide-up">
-            <span className="inline-block font-body text-sm font-medium text-primary uppercase tracking-widest">
-              Lara Estética & Dermocosméticos
+          <div className="max-w-2xl space-y-8 animate-slide-up">
+            <span className="inline-block font-script text-3xl text-primary">
+              Multti Med Cosméticos
             </span>
-            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight">
-              Cuidados{" "}
-              <span className="text-gradient-rose">personalizados</span>{" "}
-              para a sua pele
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-foreground leading-tight tracking-wide">
+              Dermocosméticos{" "}
+              <span className="text-gradient-gold">premium</span>{" "}
+              para sua pele
             </h1>
             <p className="font-body text-lg text-muted-foreground leading-relaxed">
-              Descubra tratamentos profissionais e produtos dermocosméticos de alta 
-              performance para alcançar resultados reais e duradouros.
+              Descubra tratamentos profissionais e produtos de alta performance 
+              para alcançar resultados reais e duradouros.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button variant="rose" size="xl" asChild>
+              <Button variant="gold" size="xl" asChild>
                 <Link to="/loja">
                   Explorar Produtos
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-5 h-5 stroke-[1.5]" />
                 </Link>
               </Button>
-              <Button variant="elegant" size="xl" asChild>
+              <Button variant="gold-outline" size="xl" asChild>
                 <Link to="/consultoria">
                   Agendar Consultoria
                 </Link>
@@ -126,13 +126,13 @@ const Index = () => {
       </section>
 
       {/* Categories Section */}
-      <section className="py-24 bg-gradient-cream">
+      <section className="py-24 bg-gradient-pearl">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="inline-block font-body text-sm font-medium text-primary uppercase tracking-widest mb-4">
+            <span className="inline-block font-script text-2xl text-primary mb-4">
               Nossas Categorias
             </span>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-4 tracking-wide">
               Soluções para cada necessidade
             </h2>
             <p className="font-body text-muted-foreground">
@@ -145,10 +145,10 @@ const Index = () => {
               <Link
                 key={category.slug}
                 to={`/loja?categoria=${category.slug}`}
-                className={`group p-6 bg-card rounded-xl border border-border/50 hover:border-primary/30 hover:shadow-card transition-all duration-300 animate-slide-up stagger-${(index % 5) + 1}`}
+                className={`group p-6 bg-card border border-border hover:border-primary/50 hover:shadow-luxury transition-all duration-300 animate-slide-up stagger-${(index % 5) + 1}`}
                 style={{ opacity: 0 }}
               >
-                <h3 className="font-display text-sm font-medium text-foreground group-hover:text-primary transition-colors mb-2">
+                <h3 className="font-display text-sm font-medium text-foreground group-hover:text-primary transition-colors mb-2 tracking-wide">
                   {category.name}
                 </h3>
                 <p className="font-body text-xs text-muted-foreground leading-relaxed">
@@ -161,7 +161,7 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-24">
+      <section className="py-24 bg-card">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid md:grid-cols-3 gap-8">
             {features.map((feature, index) => (
@@ -170,10 +170,10 @@ const Index = () => {
                 className={`text-center p-8 animate-slide-up stagger-${index + 1}`}
                 style={{ opacity: 0 }}
               >
-                <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-rose flex items-center justify-center shadow-glow">
-                  <feature.icon className="w-8 h-8 text-primary-foreground" />
+                <div className="w-16 h-16 mx-auto mb-6 border border-primary flex items-center justify-center">
+                  <feature.icon className="w-8 h-8 text-primary stroke-[1.5]" />
                 </div>
-                <h3 className="font-display text-xl font-semibold text-foreground mb-3">
+                <h3 className="font-display text-xl font-semibold text-foreground mb-3 tracking-wide">
                   {feature.title}
                 </h3>
                 <p className="font-body text-muted-foreground leading-relaxed">
@@ -186,14 +186,14 @@ const Index = () => {
       </section>
 
       {/* Products Preview */}
-      <section className="py-24 bg-secondary/30">
+      <section className="py-24 bg-gradient-pearl">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-6">
-              <span className="inline-block font-body text-sm font-medium text-primary uppercase tracking-widest">
+              <span className="inline-block font-script text-2xl text-primary">
                 Nossa Loja
               </span>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground">
+              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground tracking-wide">
                 Dermocosméticos de <span className="text-gradient-gold">alta performance</span>
               </h2>
               <p className="font-body text-muted-foreground leading-relaxed">
@@ -205,50 +205,54 @@ const Index = () => {
                 {brands.map((brand) => (
                   <div 
                     key={brand.name}
-                    className="px-6 py-3 bg-card rounded-full border border-border/50 font-body text-sm font-medium text-foreground"
+                    className="px-6 py-3 bg-card border border-border font-body text-sm font-medium text-foreground"
                   >
                     {brand.name}
                   </div>
                 ))}
               </div>
-              <Button variant="rose" size="lg" asChild className="mt-6">
+              <Button variant="elegant" size="lg" asChild className="mt-6">
                 <Link to="/loja">
                   Ver Todos os Produtos
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-5 h-5 stroke-[1.5]" />
                 </Link>
               </Button>
             </div>
             <div className="relative">
-              <img 
-                src={productsImage} 
-                alt="Dermocosméticos de alta qualidade"
-                className="rounded-2xl shadow-elevated"
-              />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-rose rounded-2xl -z-10" />
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-gradient-gold rounded-2xl -z-10" />
+              <div className="border border-primary p-2">
+                <img 
+                  src={productsImage} 
+                  alt="Dermocosméticos de alta qualidade"
+                  className="w-full"
+                />
+              </div>
+              <div className="absolute -bottom-4 -left-4 w-24 h-24 border border-primary/30 -z-10" />
+              <div className="absolute -top-4 -right-4 w-16 h-16 bg-primary/10 -z-10" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Consultation CTA */}
-      <section className="py-24">
+      <section className="py-24 bg-card">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative order-2 lg:order-1">
-              <img 
-                src={consultationImage} 
-                alt="Consultoria de skincare personalizada"
-                className="rounded-2xl shadow-elevated"
-              />
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-gold rounded-2xl -z-10" />
+              <div className="border border-primary p-2">
+                <img 
+                  src={consultationImage} 
+                  alt="Consultoria de skincare personalizada"
+                  className="w-full"
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 border border-primary/30 -z-10" />
             </div>
             <div className="space-y-6 order-1 lg:order-2">
-              <span className="inline-block font-body text-sm font-medium text-primary uppercase tracking-widest">
+              <span className="inline-block font-script text-2xl text-primary">
                 Consultoria Especializada
               </span>
-              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground">
-                Skincare personalizado para <span className="text-gradient-rose">você</span>
+              <h2 className="font-display text-3xl md:text-4xl font-semibold text-foreground tracking-wide">
+                Skincare personalizado para <span className="text-gradient-gold">você</span>
               </h2>
               <p className="font-body text-muted-foreground leading-relaxed">
                 Cada pele é única e merece cuidados específicos. Na consultoria de skincare, 
@@ -257,26 +261,26 @@ const Index = () => {
               </p>
               <ul className="space-y-3 font-body text-foreground">
                 <li className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-primary" />
+                  <span className="w-1.5 h-1.5 bg-primary" />
                   Análise detalhada do seu tipo de pele
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-primary" />
+                  <span className="w-1.5 h-1.5 bg-primary" />
                   Identificação de necessidades específicas
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-primary" />
+                  <span className="w-1.5 h-1.5 bg-primary" />
                   Montagem de rotina personalizada
                 </li>
                 <li className="flex items-center gap-3">
-                  <span className="w-2 h-2 rounded-full bg-primary" />
+                  <span className="w-1.5 h-1.5 bg-primary" />
                   Acompanhamento e ajustes
                 </li>
               </ul>
-              <Button variant="gold" size="lg" asChild className="mt-6">
+              <Button variant="elegant" size="lg" asChild className="mt-6">
                 <Link to="/consultoria">
                   Agendar Consultoria
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-5 h-5 stroke-[1.5]" />
                 </Link>
               </Button>
             </div>

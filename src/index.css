@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&family=Allura&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,112 +6,102 @@
 
 @layer base {
   :root {
-    --background: 30 30% 98%;
-    --foreground: 20 10% 15%;
-
-    --card: 30 25% 97%;
-    --card-foreground: 20 10% 15%;
-
-    --popover: 30 30% 98%;
-    --popover-foreground: 20 10% 15%;
-
-    --primary: 350 45% 65%;
-    --primary-foreground: 30 30% 98%;
-
-    --secondary: 35 30% 92%;
-    --secondary-foreground: 20 10% 25%;
-
-    --muted: 30 20% 94%;
-    --muted-foreground: 20 10% 45%;
-
-    --accent: 38 60% 55%;
-    --accent-foreground: 30 30% 98%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 30 20% 88%;
-    --input: 30 20% 88%;
-    --ring: 350 45% 65%;
-
-    --radius: 0.5rem;
-
-    /* Custom colors */
-    --rose-soft: 350 40% 75%;
-    --rose-deep: 350 50% 55%;
-    --cream: 35 35% 95%;
-    --gold: 38 60% 55%;
-    --gold-light: 40 50% 75%;
-    --charcoal: 20 10% 20%;
-    --sage: 145 20% 60%;
-
-    /* Gradients */
-    --gradient-rose: linear-gradient(135deg, hsl(350 45% 65%) 0%, hsl(350 50% 55%) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(40 50% 75%) 0%, hsl(38 60% 55%) 100%);
-    --gradient-cream: linear-gradient(180deg, hsl(30 30% 98%) 0%, hsl(35 35% 95%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(350 40% 75% / 0.3) 0%, hsl(38 60% 55% / 0.2) 100%);
-
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -4px hsl(20 10% 15% / 0.08);
-    --shadow-card: 0 8px 30px -8px hsl(20 10% 15% / 0.1);
-    --shadow-elevated: 0 20px 50px -12px hsl(20 10% 15% / 0.15);
-    --shadow-glow: 0 0 40px hsl(350 45% 65% / 0.2);
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Multti Med - Identidade Visual */
+    --background: 40 33% 97%; /* #FBF7F2 */
+    --foreground: 0 0% 16%; /* #2A2A2A */
+    
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 0 0% 16%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 16%;
+    
+    --primary: 35 36% 62%; /* #C6A574 - Dourado suave */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 36 38% 92%; /* #F3ECE2 - Bege perolado */
+    --secondary-foreground: 0 0% 16%;
+    
+    --muted: 36 38% 92%;
+    --muted-foreground: 0 0% 40%;
+    
+    --accent: 30 32% 86%; /* #E8D6C3 - Rosé nude */
+    --accent-foreground: 0 0% 16%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 30 32% 86%; /* Divisórias sutis */
+    --input: 30 32% 86%;
+    --ring: 35 36% 62%;
+    
+    --radius: 0.25rem;
+    
+    /* Cores da marca */
+    --gold: 35 36% 62%; /* #C6A574 */
+    --gold-light: 35 36% 72%;
+    --pearl: 36 38% 92%; /* #F3ECE2 */
+    --cream: 40 33% 97%; /* #FBF7F2 */
+    --charcoal: 0 0% 16%; /* #2A2A2A */
+    --rose-nude: 30 32% 86%; /* #E8D6C3 */
+    --brown-soft: 33 28% 42%; /* #8A6F4E */
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 16%;
+    --sidebar-primary: 35 36% 62%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 36 38% 92%;
+    --sidebar-accent-foreground: 0 0% 16%;
+    --sidebar-border: 30 32% 86%;
+    --sidebar-ring: 35 36% 62%;
   }
 
   .dark {
-    --background: 20 15% 10%;
-    --foreground: 30 20% 95%;
-
-    --card: 20 15% 12%;
-    --card-foreground: 30 20% 95%;
-
-    --popover: 20 15% 10%;
-    --popover-foreground: 30 20% 95%;
-
-    --primary: 350 45% 65%;
-    --primary-foreground: 20 15% 10%;
-
-    --secondary: 20 15% 18%;
-    --secondary-foreground: 30 20% 90%;
-
-    --muted: 20 15% 20%;
-    --muted-foreground: 30 15% 60%;
-
-    --accent: 38 60% 55%;
-    --accent-foreground: 20 15% 10%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 20 15% 20%;
-    --input: 20 15% 20%;
-    --ring: 350 45% 65%;
-
-    --rose-soft: 350 40% 65%;
-    --rose-deep: 350 50% 50%;
-    --cream: 35 20% 20%;
-    --gold: 38 50% 50%;
-    --gold-light: 40 40% 60%;
-    --charcoal: 30 20% 85%;
-    --sage: 145 15% 50%;
-
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --background: 0 0% 10%;
+    --foreground: 36 38% 92%;
+    
+    --card: 0 0% 12%;
+    --card-foreground: 36 38% 92%;
+    
+    --popover: 0 0% 12%;
+    --popover-foreground: 36 38% 92%;
+    
+    --primary: 35 36% 62%;
+    --primary-foreground: 0 0% 10%;
+    
+    --secondary: 0 0% 16%;
+    --secondary-foreground: 36 38% 92%;
+    
+    --muted: 0 0% 16%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 0 0% 16%;
+    --accent-foreground: 36 38% 92%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 35 36% 62%;
+    
+    --gold: 35 36% 62%;
+    --gold-light: 35 36% 72%;
+    --pearl: 0 0% 16%;
+    --cream: 0 0% 12%;
+    --charcoal: 36 38% 92%;
+    --rose-nude: 0 0% 20%;
+    --brown-soft: 33 28% 52%;
+    
+    --sidebar-background: 0 0% 12%;
+    --sidebar-foreground: 36 38% 92%;
+    --sidebar-primary: 35 36% 62%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 0 0% 16%;
+    --sidebar-accent-foreground: 36 38% 92%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 35 36% 62%;
   }
 }
 
@@ -119,89 +109,113 @@
   * {
     @apply border-border;
   }
-
+  
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
-
+  
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.02em;
   }
 }
 
 @layer utilities {
   .font-display {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
   }
-
+  
   .font-body {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
-
-  .text-gradient-rose {
-    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--rose-deep)) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  
+  .font-script {
+    font-family: 'Allura', cursive;
   }
-
+  
+  /* Gradiente dourado sutil */
+  .gradient-gold {
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 100%);
+  }
+  
+  /* Textura perolada */
+  .texture-pearl {
+    background: linear-gradient(180deg, hsl(var(--pearl)) 0%, hsl(var(--cream)) 100%);
+  }
+  
+  .bg-gradient-pearl {
+    background: linear-gradient(180deg, hsl(var(--pearl)) 0%, hsl(var(--cream)) 100%);
+  }
+  
+  /* Texto gradient dourado */
   .text-gradient-gold {
-    background: linear-gradient(135deg, hsl(var(--gold-light)) 0%, hsl(var(--gold)) 100%);
+    background: linear-gradient(135deg, hsl(var(--gold)) 0%, hsl(var(--brown-soft)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-
-  .bg-gradient-rose {
-    background: var(--gradient-rose);
+  
+  /* Sombra suave luxo */
+  .shadow-luxury {
+    box-shadow: 0 4px 20px -4px hsl(var(--gold) / 0.15);
   }
-
-  .bg-gradient-gold {
-    background: var(--gradient-gold);
-  }
-
-  .bg-gradient-cream {
-    background: var(--gradient-cream);
-  }
-
-  .bg-gradient-hero {
-    background: var(--gradient-hero);
-  }
-
+  
   .shadow-soft {
-    box-shadow: var(--shadow-soft);
+    box-shadow: 0 4px 20px -4px hsl(var(--charcoal) / 0.08);
   }
-
+  
   .shadow-card {
-    box-shadow: var(--shadow-card);
+    box-shadow: 0 8px 30px -8px hsl(var(--charcoal) / 0.1);
   }
-
+  
   .shadow-elevated {
-    box-shadow: var(--shadow-elevated);
+    box-shadow: 0 20px 50px -12px hsl(var(--charcoal) / 0.12);
   }
-
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
+  
+  /* Borda dourada fina */
+  .border-gold {
+    border: 1px solid hsl(var(--gold));
+  }
+  
+  /* Moldura dourada elegante */
+  .frame-gold {
+    border: 1px solid hsl(var(--gold));
+    padding: 1rem;
+  }
+  
+  /* Divisória sutil */
+  .divider-subtle {
+    border-top: 1px solid hsl(var(--rose-nude));
+  }
+  
+  /* Animação hover suave */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px -8px hsl(var(--gold) / 0.2);
   }
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
+  background: hsl(var(--pearl));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.3);
-  border-radius: 4px;
+  background: hsl(var(--gold) / 0.4);
+  border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 0.5);
+  background: hsl(var(--gold) / 0.6);
 }
 
 /* Animations */
@@ -243,11 +257,6 @@
   }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
 }
@@ -262,10 +271,6 @@
 
 .animate-scale-in {
   animation: scaleIn 0.4s ease-out forwards;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
 }
 
 /* Staggered animations */
