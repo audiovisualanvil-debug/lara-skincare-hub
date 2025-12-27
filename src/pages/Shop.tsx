@@ -4,6 +4,7 @@ import { Search, Filter, X, MessageCircle, ShieldCheck, ChevronDown } from "luci
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
 
 const categories = [
   { name: "Todos", slug: "todos" },
@@ -185,7 +186,9 @@ const Shop = () => {
   );
 
   return (
-    <main className="pt-20 min-h-screen bg-background">
+    <main className="pt-20 min-h-screen bg-card">
+      <BreadcrumbNav />
+      
       {/* Header */}
       <section className="py-12 bg-gradient-pearl">
         <div className="container mx-auto px-4 lg:px-8">

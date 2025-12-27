@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Award, Users, Heart, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
 
 const values = [
   {
@@ -33,7 +34,8 @@ const brands = [
 
 const About = () => {
   return (
-    <main className="pt-20">
+    <main className="pt-20 bg-card">
+      <BreadcrumbNav />
       {/* Hero */}
       <section className="py-24 bg-gradient-pearl">
         <div className="container mx-auto px-4 lg:px-8">

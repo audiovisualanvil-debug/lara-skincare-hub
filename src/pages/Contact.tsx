@@ -2,10 +2,12 @@ import { MessageCircle, Instagram, MapPin, Mail, Phone, Clock, Send } from "luci
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
 
 const Contact = () => {
   return (
-    <main className="pt-20">
+    <main className="pt-20 bg-card">
+      <BreadcrumbNav />
       {/* Header */}
       <section className="py-16 bg-gradient-pearl">
         <div className="container mx-auto px-4 lg:px-8">
