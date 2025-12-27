@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Sparkles, Droplets, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
 
 const skinTypes = [
   { name: "Pele Oleosa", slug: "oleosa", description: "Brilho excessivo, poros dilatados" },
@@ -52,7 +53,8 @@ const routineSteps = [
 
 const BuildRoutine = () => {
   return (
-    <main className="pt-20">
+    <main className="pt-20 bg-card">
+      <BreadcrumbNav />
       {/* Hero */}
       <section className="py-24 bg-gradient-pearl">
         <div className="container mx-auto px-4 lg:px-8">

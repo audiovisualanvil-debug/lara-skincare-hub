@@ -66,6 +66,7 @@ export default {
         charcoal: "hsl(var(--charcoal))",
         "rose-nude": "hsl(var(--rose-nude))",
         "brown-soft": "hsl(var(--brown-soft))",
+        "gray-light": "hsl(var(--gray-light))",
       },
       fontFamily: {
         display: ["Cormorant Garamond", "serif"],
