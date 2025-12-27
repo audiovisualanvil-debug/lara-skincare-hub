@@ -893,6 +893,85 @@ export const mezzoClareamento: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS MEZZO - ANTIACNE & OLEOSIDADE
+// ============================================
+
+export const mezzoAntiacne: Product[] = [
+  {
+    id: 1101,
+    name: "Peeling Salicílico B3 | Peeling Anti-Acne",
+    brand: "Mezzo",
+    category: "acne",
+    isProfessional: true,
+    description: "Peeling anti-acne para controle de oleosidade e desobstrução de poros",
+    price: "Consultar",
+  },
+  {
+    id: 1102,
+    name: "Peeling PHA | Esfoliante Químico B-Ocean",
+    brand: "Mezzo",
+    category: "acne",
+    isProfessional: true,
+    description: "Esfoliante químico suave para renovação celular",
+    price: "Consultar",
+  },
+  {
+    id: 1103,
+    name: "ACNE Xsome Sérum ON/OFF | Sérum Anti-imperfeição",
+    brand: "Mezzo",
+    category: "acne",
+    isProfessional: false,
+    description: "Sérum anti-imperfeição para tratamento de acne",
+    price: "Consultar",
+  },
+  {
+    id: 1104,
+    name: "Sabonete Anti-Acne | Controle de Oleosidade",
+    brand: "Mezzo",
+    category: "acne",
+    isProfessional: false,
+    description: "Sabonete para controle de oleosidade e acne",
+    price: "Consultar",
+  },
+  {
+    id: 1105,
+    name: "Gel de Limpeza Profundo Concentrado",
+    brand: "Mezzo",
+    category: "acne",
+    isProfessional: false,
+    description: "Limpeza profunda para peles oleosas e acneicas",
+    price: "Consultar",
+  },
+  {
+    id: 1106,
+    name: "Fluid Antiacne FPS 70 | Protetor Antiacne",
+    brand: "Mezzo",
+    category: "acne",
+    isProfessional: false,
+    description: "Protetor solar antiacne com alta proteção",
+    price: "Consultar",
+  },
+  {
+    id: 1107,
+    name: "Loção Secativa Tonalizante + FPS 40",
+    brand: "Mezzo",
+    category: "acne",
+    isProfessional: false,
+    description: "Camufla e trata imperfeições com proteção solar",
+    price: "Consultar",
+  },
+  {
+    id: 1108,
+    name: "ACNEDIOL Noite | Sérum Anti-imperfeições",
+    brand: "Mezzo",
+    category: "acne",
+    isProfessional: false,
+    description: "Sérum noturno anti-imperfeições para tratamento intensivo",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -908,4 +987,5 @@ export const allTulipiaProducts: Product[] = [
 
 export const allMezzoProducts: Product[] = [
   ...mezzoClareamento,
+  ...mezzoAntiacne,
 ];
