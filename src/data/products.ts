@@ -1373,6 +1373,103 @@ export const extratosHigienizacao: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS EXTRATOS DA TERRA - ESFOLIAÇÃO
+// ============================================
+
+export const extratosEsfoliacao: Product[] = [
+  {
+    id: 2101,
+    name: "Floral Acqua Esfoliante Suave",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: false,
+    description: "Esfoliante suave com fragrância floral",
+    price: "Consultar",
+  },
+  {
+    id: 2102,
+    name: "Peeling Enzimático Suave",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: true,
+    description: "Peeling enzimático suave para renovação celular",
+    price: "Consultar",
+  },
+  {
+    id: 2103,
+    name: "Esfoliante Facial Renovador GlycoActive",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: false,
+    description: "Esfoliante facial renovador com ácido glicólico",
+    price: "Consultar",
+  },
+  {
+    id: 2104,
+    name: "Peeling Diamante Bionic Esfoliante",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: true,
+    description: "Peeling com micropartículas de diamante",
+    price: "Consultar",
+  },
+  {
+    id: 2105,
+    name: "Esfoliante de Cristais Iluminador",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: false,
+    description: "Esfoliante com cristais para iluminação da pele",
+    price: "Consultar",
+  },
+  {
+    id: 2106,
+    name: "Esfoliante Facial Flor da Terra",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: false,
+    description: "Esfoliante facial com extratos naturais",
+    price: "Consultar",
+  },
+  {
+    id: 2107,
+    name: "Peeling de Hortelã Iluminador",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: true,
+    description: "Peeling iluminador com extrato de hortelã",
+    price: "Consultar",
+  },
+  {
+    id: 2108,
+    name: "Esfoliante Corporal Dermosoft Body",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: false,
+    description: "Esfoliante corporal suave para renovação",
+    price: "Consultar",
+  },
+  {
+    id: 2109,
+    name: "Peeling Enzimático Aroma e Calêndula",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: true,
+    description: "Peeling enzimático com calêndula calmante",
+    price: "Consultar",
+  },
+  {
+    id: 2110,
+    name: "Esfoliante Corporal Hortelã e Jasmim",
+    brand: "Extratos da Terra",
+    category: "esfoliacao",
+    isProfessional: false,
+    description: "Esfoliante corporal refrescante com hortelã e jasmim",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -1397,4 +1494,5 @@ export const allMezzoProducts: Product[] = [
 
 export const allExtratosProducts: Product[] = [
   ...extratosHigienizacao,
+  ...extratosEsfoliacao,
 ];
