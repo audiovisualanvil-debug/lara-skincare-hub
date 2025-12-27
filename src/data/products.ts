@@ -972,6 +972,173 @@ export const mezzoAntiacne: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS MEZZO - CORPORAL & FIRMADOR
+// ============================================
+
+export const mezzoCorpo: Product[] = [
+  {
+    id: 1201,
+    name: "Redensify® Body | Biomodulador Corporal",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: true,
+    description: "Biomodulador corporal para firmeza e redensificação",
+    price: "Consultar",
+  },
+  {
+    id: 1202,
+    name: "Espuma Biostimuladora de Glúteos | Firmador & Volume",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: true,
+    description: "Firmador e volumizador para glúteos",
+    price: "Consultar",
+  },
+  {
+    id: 1203,
+    name: "Glute Up® | Gel Firmador",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: false,
+    description: "Gel firmador para glúteos e coxas",
+    price: "Consultar",
+  },
+  {
+    id: 1204,
+    name: "Cellu Intense | Creme Anticelulite",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: false,
+    description: "Creme anticelulite para redução de irregularidades",
+    price: "Consultar",
+  },
+  {
+    id: 1205,
+    name: "Lipo Intense | Gel Redutor Adiposo",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: false,
+    description: "Gel redutor de gordura localizada",
+    price: "Consultar",
+  },
+  {
+    id: 1206,
+    name: "Moro Evolution Creme | Definição Corporal",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: false,
+    description: "Creme para definição e modelagem corporal",
+    price: "Consultar",
+  },
+  {
+    id: 1207,
+    name: "Gel Termogênico | Termoativador Redutor",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: false,
+    description: "Gel termoativador para redução de medidas",
+    price: "Consultar",
+  },
+  {
+    id: 1208,
+    name: "Maternity | Anti-estrias",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: false,
+    description: "Tratamento anti-estrias para gestantes e pós-parto",
+    price: "Consultar",
+  },
+  {
+    id: 1209,
+    name: "Body Slim Amazônica | Ativador Modelador",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: false,
+    description: "Ativador modelador com ativos amazônicos",
+    price: "Consultar",
+  },
+  {
+    id: 1210,
+    name: "Ultra Deslizante Detox | Creme de Massagem",
+    brand: "Mezzo",
+    category: "corpo",
+    isProfessional: true,
+    description: "Creme de massagem detox com alta deslizância",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS MEZZO - CAPILAR & ANTIQUEDA
+// ============================================
+
+export const mezzoCapilar: Product[] = [
+  {
+    id: 1301,
+    name: "Trichology Xsome | Concentrado Sensi Scalp Pro",
+    brand: "Mezzo",
+    category: "capilar",
+    isProfessional: true,
+    description: "Concentrado para couro cabeludo sensível",
+    price: "Consultar",
+  },
+  {
+    id: 1302,
+    name: "Trichology Xsome Force | Estímulo de Crescimento",
+    brand: "Mezzo",
+    category: "capilar",
+    isProfessional: true,
+    description: "Estímulo de crescimento capilar intensivo",
+    price: "Consultar",
+  },
+  {
+    id: 1303,
+    name: "Trichology Xsome Repair | Reconstrução Capilar",
+    brand: "Mezzo",
+    category: "capilar",
+    isProfessional: true,
+    description: "Reconstrução capilar para fios danificados",
+    price: "Consultar",
+  },
+  {
+    id: 1304,
+    name: "Peeling Capilar Prebiótico | Higienização Profunda",
+    brand: "Mezzo",
+    category: "capilar",
+    isProfessional: true,
+    description: "Higienização profunda do couro cabeludo com prebióticos",
+    price: "Consultar",
+  },
+  {
+    id: 1305,
+    name: "Shampoo Pré-Antiqueda | Controle e Estímulo",
+    brand: "Mezzo",
+    category: "capilar",
+    isProfessional: false,
+    description: "Shampoo para controle e estímulo antiqueda",
+    price: "Consultar",
+  },
+  {
+    id: 1306,
+    name: "Tônico Antiqueda Trichology | Estímulo + Fortalecimento",
+    brand: "Mezzo",
+    category: "capilar",
+    isProfessional: false,
+    description: "Tônico para estímulo e fortalecimento capilar",
+    price: "Consultar",
+  },
+  {
+    id: 1307,
+    name: "Shampoo Anticaspa | Controle de Caspa",
+    brand: "Mezzo",
+    category: "capilar",
+    isProfessional: false,
+    description: "Shampoo para controle de caspa e descamação",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -988,4 +1155,6 @@ export const allTulipiaProducts: Product[] = [
 export const allMezzoProducts: Product[] = [
   ...mezzoClareamento,
   ...mezzoAntiacne,
+  ...mezzoCorpo,
+  ...mezzoCapilar,
 ];
