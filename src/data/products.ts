@@ -1139,6 +1139,92 @@ export const mezzoCapilar: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS MEZZO - EXOSSOMAS (ALTA PERFORMANCE)
+// ============================================
+
+export const mezzoExossomas: Product[] = [
+  {
+    id: 1401,
+    name: "Mella White Xsome | Sérum Multicorretivo Clareador",
+    brand: "Mezzo",
+    category: "exossomas",
+    isProfessional: true,
+    description: "Sérum multicorretivo clareador com tecnologia de exossomas",
+    price: "Consultar",
+  },
+  {
+    id: 1402,
+    name: "Skin Fill Xsome | Bioestimulador & Redensificador",
+    brand: "Mezzo",
+    category: "exossomas",
+    isProfessional: true,
+    description: "Bioestimulador e redensificador com exossomas",
+    price: "Consultar",
+  },
+  {
+    id: 1403,
+    name: "Skin Fill Xsome Concentrado | Preenchimento Concentrado",
+    brand: "Mezzo",
+    category: "exossomas",
+    isProfessional: true,
+    description: "Preenchimento concentrado com alta tecnologia",
+    price: "Consultar",
+  },
+  {
+    id: 1404,
+    name: "Mask Xsome PDRN | Máscara Regeneradora",
+    brand: "Mezzo",
+    category: "exossomas",
+    isProfessional: true,
+    description: "Máscara regeneradora com PDRN e exossomas",
+    price: "Consultar",
+  },
+  {
+    id: 1405,
+    name: "Eyes Xsome Concentrado Biomodulador PRO | Área dos Olhos",
+    brand: "Mezzo",
+    category: "exossomas",
+    isProfessional: true,
+    description: "Concentrado biomodulador profissional para área dos olhos",
+    price: "Consultar",
+  },
+  {
+    id: 1406,
+    name: "Eyes Xsome Cremè Multirreparador | Área dos Olhos",
+    brand: "Mezzo",
+    category: "exossomas",
+    isProfessional: false,
+    description: "Creme multirreparador para área dos olhos",
+    price: "Consultar",
+  },
+  {
+    id: 1407,
+    name: "Acne Xsome Sérum ON/OFF | Anti-imperfeição",
+    brand: "Mezzo",
+    category: "exossomas",
+    isProfessional: false,
+    description: "Sérum anti-imperfeição com tecnologia de exossomas",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS MEZZO - BIOHACKING / ÁGUA DERMATOLÓGICA
+// ============================================
+
+export const mezzoBiohacking: Product[] = [
+  {
+    id: 1501,
+    name: "Água Dermatológica Bio Inteligente | Regeneração & Hidratação",
+    brand: "Mezzo",
+    category: "biohacking",
+    isProfessional: false,
+    description: "Água dermatológica bio inteligente para regeneração e hidratação",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -1157,4 +1243,6 @@ export const allMezzoProducts: Product[] = [
   ...mezzoAntiacne,
   ...mezzoCorpo,
   ...mezzoCapilar,
+  ...mezzoExossomas,
+  ...mezzoBiohacking,
 ];
