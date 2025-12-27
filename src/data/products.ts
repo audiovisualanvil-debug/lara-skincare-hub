@@ -1470,6 +1470,700 @@ export const extratosEsfoliacao: Product[] = [
 ];
 
 // ============================================
+// PRODUTOS EXTRATOS DA TERRA - ACNE & OLEOSIDADE
+// ============================================
+
+export const extratosAcne: Product[] = [
+  {
+    id: 2201,
+    name: "Sabonete Suavizante Antiacne",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: false,
+    description: "Sabonete suavizante para controle de acne",
+    price: "Consultar",
+  },
+  {
+    id: 2202,
+    name: "Água Tônica Adstringente",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: false,
+    description: "Tônico adstringente para controle de oleosidade",
+    price: "Consultar",
+  },
+  {
+    id: 2203,
+    name: "Tônico Suavizante Calmante",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: false,
+    description: "Tônico calmante para peles sensibilizadas",
+    price: "Consultar",
+  },
+  {
+    id: 2204,
+    name: "Peeling Enzimático Antiacne",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: true,
+    description: "Peeling enzimático para tratamento de acne",
+    price: "Consultar",
+  },
+  {
+    id: 2205,
+    name: "Fluido Secativo AcneControl",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: false,
+    description: "Fluido secativo para controle de lesões acneicas",
+    price: "Consultar",
+  },
+  {
+    id: 2206,
+    name: "Sérum Control Acne + Niacinamida",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: false,
+    description: "Sérum com niacinamida para controle de acne",
+    price: "Consultar",
+  },
+  {
+    id: 2207,
+    name: "Ars ac Control Sérum Detox",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: false,
+    description: "Sérum detox para peles acneicas",
+    price: "Consultar",
+  },
+  {
+    id: 2208,
+    name: "Peeling Multifuncional Dermosoft",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: true,
+    description: "Peeling multifuncional para renovação",
+    price: "Consultar",
+  },
+  {
+    id: 2209,
+    name: "Máscara Secativa Acne Dermosoft",
+    brand: "Extratos da Terra",
+    category: "acne",
+    isProfessional: false,
+    description: "Máscara secativa para tratamento de acne",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - MANCHAS & CLAREAMENTO
+// ============================================
+
+export const extratosClareamento: Product[] = [
+  {
+    id: 2301,
+    name: "Clarismart Sérum Clareador",
+    brand: "Extratos da Terra",
+    category: "clareamento",
+    isProfessional: false,
+    description: "Sérum clareador para uniformização do tom",
+    price: "Consultar",
+  },
+  {
+    id: 2302,
+    name: "Clarismart Booster Alta Performance",
+    brand: "Extratos da Terra",
+    category: "clareamento",
+    isProfessional: true,
+    description: "Booster de alta performance para clareamento intensivo",
+    price: "Consultar",
+  },
+  {
+    id: 2303,
+    name: "Clareador Pontual Roll-On",
+    brand: "Extratos da Terra",
+    category: "clareamento",
+    isProfessional: false,
+    description: "Clareador pontual em roll-on para manchas localizadas",
+    price: "Consultar",
+  },
+  {
+    id: 2304,
+    name: "Clareador Facial Glycolic+",
+    brand: "Extratos da Terra",
+    category: "clareamento",
+    isProfessional: false,
+    description: "Clareador facial com ácido glicólico",
+    price: "Consultar",
+  },
+  {
+    id: 2305,
+    name: "Máscara Iluminadora Clareadora",
+    brand: "Extratos da Terra",
+    category: "clareamento",
+    isProfessional: false,
+    description: "Máscara iluminadora para clareamento facial",
+    price: "Consultar",
+  },
+  {
+    id: 2306,
+    name: "Sérum Uniformizador Dermosoft",
+    brand: "Extratos da Terra",
+    category: "clareamento",
+    isProfessional: false,
+    description: "Sérum uniformizador para tom de pele",
+    price: "Consultar",
+  },
+  {
+    id: 2307,
+    name: "Clareador Redutor de Melanina",
+    brand: "Extratos da Terra",
+    category: "clareamento",
+    isProfessional: true,
+    description: "Clareador redutor de melanina para manchas persistentes",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - ANTI-IDADE & RUGAS
+// ============================================
+
+export const extratosAntiIdade: Product[] = [
+  {
+    id: 2401,
+    name: "DMAE Lift Sérum Firmador",
+    brand: "Extratos da Terra",
+    category: "anti-idade",
+    isProfessional: false,
+    description: "Sérum firmador com DMAE para efeito lifting",
+    price: "Consultar",
+  },
+  {
+    id: 2402,
+    name: "Sérum Retinol Active",
+    brand: "Extratos da Terra",
+    category: "anti-idade",
+    isProfessional: false,
+    description: "Sérum com retinol para renovação celular",
+    price: "Consultar",
+  },
+  {
+    id: 2403,
+    name: "Sérum Preenchedor Ácido Hialurônico",
+    brand: "Extratos da Terra",
+    category: "anti-idade",
+    isProfessional: false,
+    description: "Sérum preenchedor com ácido hialurônico",
+    price: "Consultar",
+  },
+  {
+    id: 2404,
+    name: "Booster Anti-idade Péptidos",
+    brand: "Extratos da Terra",
+    category: "anti-idade",
+    isProfessional: true,
+    description: "Booster anti-idade com peptídeos bioativos",
+    price: "Consultar",
+  },
+  {
+    id: 2405,
+    name: "Vitamina C Nano 20% Sérum",
+    brand: "Extratos da Terra",
+    category: "anti-idade",
+    isProfessional: false,
+    description: "Sérum de vitamina C nano 20% antioxidante",
+    price: "Consultar",
+  },
+  {
+    id: 2406,
+    name: "Máscara Facial Rejuvenescedora",
+    brand: "Extratos da Terra",
+    category: "anti-idade",
+    isProfessional: false,
+    description: "Máscara facial rejuvenescedora anti-idade",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - ÁREA DOS OLHOS
+// ============================================
+
+export const extratosOlhos: Product[] = [
+  {
+    id: 2501,
+    name: "Fluido Anti-olheiras e Bolsas",
+    brand: "Extratos da Terra",
+    category: "olhos",
+    isProfessional: false,
+    description: "Fluido para redução de olheiras e bolsas",
+    price: "Consultar",
+  },
+  {
+    id: 2502,
+    name: "Sérum Clareador para Olhos",
+    brand: "Extratos da Terra",
+    category: "olhos",
+    isProfessional: false,
+    description: "Sérum clareador específico para área dos olhos",
+    price: "Consultar",
+  },
+  {
+    id: 2503,
+    name: "Gel Suavizante Redutor de Inchaço",
+    brand: "Extratos da Terra",
+    category: "olhos",
+    isProfessional: false,
+    description: "Gel suavizante para redução de inchaço",
+    price: "Consultar",
+  },
+  {
+    id: 2504,
+    name: "Creme Anti-idade para Olhos DMAE",
+    brand: "Extratos da Terra",
+    category: "olhos",
+    isProfessional: false,
+    description: "Creme anti-idade com DMAE para área dos olhos",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - HIDRATAÇÃO & PELES SENSÍVEIS
+// ============================================
+
+export const extratosHidratacao: Product[] = [
+  {
+    id: 2601,
+    name: "Creme Ultra Hidratante Calmante",
+    brand: "Extratos da Terra",
+    category: "hidratacao",
+    isProfessional: false,
+    description: "Creme ultra hidratante com ação calmante",
+    price: "Consultar",
+  },
+  {
+    id: 2602,
+    name: "Gel Calmante Flor da Terra",
+    brand: "Extratos da Terra",
+    category: "hidratacao",
+    isProfessional: false,
+    description: "Gel calmante com extratos florais",
+    price: "Consultar",
+  },
+  {
+    id: 2603,
+    name: "Sérum Calmante Niacinamida + Aloe",
+    brand: "Extratos da Terra",
+    category: "hidratacao",
+    isProfessional: false,
+    description: "Sérum calmante com niacinamida e aloe vera",
+    price: "Consultar",
+  },
+  {
+    id: 2604,
+    name: "Máscara Calmante Anti-vermelhidão",
+    brand: "Extratos da Terra",
+    category: "hidratacao",
+    isProfessional: false,
+    description: "Máscara calmante para redução de vermelhidão",
+    price: "Consultar",
+  },
+  {
+    id: 2605,
+    name: "Booster Hidratante Ácido Hialurônico",
+    brand: "Extratos da Terra",
+    category: "hidratacao",
+    isProfessional: false,
+    description: "Booster hidratante com ácido hialurônico",
+    price: "Consultar",
+  },
+  {
+    id: 2606,
+    name: "Creme Nutritivo Dermosoft",
+    brand: "Extratos da Terra",
+    category: "hidratacao",
+    isProfessional: false,
+    description: "Creme nutritivo para hidratação profunda",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - LIMPEZA DE PELE (PROFISSIONAL)
+// ============================================
+
+export const extratosLimpezaProfissional: Product[] = [
+  {
+    id: 2701,
+    name: "Sabonete Glycolic Skin Profissional",
+    brand: "Extratos da Terra",
+    category: "profissional",
+    isProfessional: true,
+    description: "Sabonete profissional com ácido glicólico",
+    price: "Consultar",
+  },
+  {
+    id: 2702,
+    name: "Sabonete Dermosoft Renovador Profissional",
+    brand: "Extratos da Terra",
+    category: "profissional",
+    isProfessional: true,
+    description: "Sabonete renovador para uso profissional",
+    price: "Consultar",
+  },
+  {
+    id: 2703,
+    name: "Solução Desengordurante Pré-peeling",
+    brand: "Extratos da Terra",
+    category: "profissional",
+    isProfessional: true,
+    description: "Solução desengordurante para preparação de peelings",
+    price: "Consultar",
+  },
+  {
+    id: 2704,
+    name: "Tônico Pré Extração",
+    brand: "Extratos da Terra",
+    category: "profissional",
+    isProfessional: true,
+    description: "Tônico preparatório para extração",
+    price: "Consultar",
+  },
+  {
+    id: 2705,
+    name: "Máscara Enzimática Renovadora",
+    brand: "Extratos da Terra",
+    category: "profissional",
+    isProfessional: true,
+    description: "Máscara enzimática para renovação profissional",
+    price: "Consultar",
+  },
+  {
+    id: 2706,
+    name: "Gel Emoliente Extração",
+    brand: "Extratos da Terra",
+    category: "profissional",
+    isProfessional: true,
+    description: "Gel emoliente para facilitar extração",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - MULTIFUNCIONAIS
+// ============================================
+
+export const extratosMultifuncionais: Product[] = [
+  {
+    id: 2801,
+    name: "Neo Derm Sérum Multi Ação",
+    brand: "Extratos da Terra",
+    category: "multifuncional",
+    isProfessional: false,
+    description: "Sérum multi ação para diversos benefícios",
+    price: "Consultar",
+  },
+  {
+    id: 2802,
+    name: "Booster Intensivo Anti-idade & Manchas",
+    brand: "Extratos da Terra",
+    category: "multifuncional",
+    isProfessional: false,
+    description: "Booster intensivo para anti-idade e manchas",
+    price: "Consultar",
+  },
+  {
+    id: 2803,
+    name: "Sérum Pantenol + AH + Niacinamida",
+    brand: "Extratos da Terra",
+    category: "multifuncional",
+    isProfessional: false,
+    description: "Sérum multifuncional com pantenol, AH e niacinamida",
+    price: "Consultar",
+  },
+  {
+    id: 2804,
+    name: "Dermosoft Antioxidante Multi",
+    brand: "Extratos da Terra",
+    category: "multifuncional",
+    isProfessional: false,
+    description: "Antioxidante multifuncional para proteção",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - PEELINGS
+// ============================================
+
+export const extratosPeelings: Product[] = [
+  {
+    id: 2901,
+    name: "Peeling Enzimático Calêndula",
+    brand: "Extratos da Terra",
+    category: "peelings",
+    isProfessional: true,
+    description: "Peeling enzimático com calêndula calmante",
+    price: "Consultar",
+  },
+  {
+    id: 2902,
+    name: "Peeling Ácido Mandélico",
+    brand: "Extratos da Terra",
+    category: "peelings",
+    isProfessional: true,
+    description: "Peeling com ácido mandélico para renovação",
+    price: "Consultar",
+  },
+  {
+    id: 2903,
+    name: "Peeling Renovador Glycolic",
+    brand: "Extratos da Terra",
+    category: "peelings",
+    isProfessional: true,
+    description: "Peeling renovador com ácido glicólico",
+    price: "Consultar",
+  },
+  {
+    id: 2904,
+    name: "Peeling Bioativo Multifuncional",
+    brand: "Extratos da Terra",
+    category: "peelings",
+    isProfessional: true,
+    description: "Peeling bioativo multifuncional",
+    price: "Consultar",
+  },
+  {
+    id: 2905,
+    name: "Peeling Diamante Renovador",
+    brand: "Extratos da Terra",
+    category: "peelings",
+    isProfessional: true,
+    description: "Peeling com micropartículas de diamante",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - MÁSCARAS FACIAIS
+// ============================================
+
+export const extratosMascaras: Product[] = [
+  {
+    id: 3001,
+    name: "Máscara de Argila Verde Control",
+    brand: "Extratos da Terra",
+    category: "mascaras",
+    isProfessional: false,
+    description: "Máscara de argila verde para controle de oleosidade",
+    price: "Consultar",
+  },
+  {
+    id: 3002,
+    name: "Máscara de Argila Branca Iluminadora",
+    brand: "Extratos da Terra",
+    category: "mascaras",
+    isProfessional: false,
+    description: "Máscara de argila branca para iluminação",
+    price: "Consultar",
+  },
+  {
+    id: 3003,
+    name: "Máscara Calmante Aloe + Camomila",
+    brand: "Extratos da Terra",
+    category: "mascaras",
+    isProfessional: false,
+    description: "Máscara calmante com aloe e camomila",
+    price: "Consultar",
+  },
+  {
+    id: 3004,
+    name: "Máscara Secativa Antiacne",
+    brand: "Extratos da Terra",
+    category: "mascaras",
+    isProfessional: false,
+    description: "Máscara secativa para tratamento de acne",
+    price: "Consultar",
+  },
+  {
+    id: 3005,
+    name: "Máscara de Ouro Firmadora",
+    brand: "Extratos da Terra",
+    category: "mascaras",
+    isProfessional: true,
+    description: "Máscara de ouro para firmeza e luminosidade",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - PROTEÇÃO SOLAR
+// ============================================
+
+export const extratosSolar: Product[] = [
+  {
+    id: 3101,
+    name: "Protetor Solar FPS 30 Oil Control",
+    brand: "Extratos da Terra",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Protetor solar FPS 30 com controle de oleosidade",
+    price: "Consultar",
+  },
+  {
+    id: 3102,
+    name: "Protetor Solar FPS 50 Clareador",
+    brand: "Extratos da Terra",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Protetor solar FPS 50 com ação clareadora",
+    price: "Consultar",
+  },
+  {
+    id: 3103,
+    name: "Protetor Solar FPS 50 Hialurônico",
+    brand: "Extratos da Terra",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Protetor solar FPS 50 com ácido hialurônico",
+    price: "Consultar",
+  },
+  {
+    id: 3104,
+    name: "Protetor Solar FPS 30 Corporal",
+    brand: "Extratos da Terra",
+    category: "fotoprotecao",
+    isProfessional: false,
+    description: "Protetor solar corporal FPS 30",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - REDUTOR / CELULITE / FIRMADOR
+// ============================================
+
+export const extratosCorpo: Product[] = [
+  {
+    id: 3201,
+    name: "Gel Redutor Cafeína + Mentol",
+    brand: "Extratos da Terra",
+    category: "corpo",
+    isProfessional: false,
+    description: "Gel redutor com cafeína e mentol",
+    price: "Consultar",
+  },
+  {
+    id: 3202,
+    name: "Sérum LipoAtivo Anticelulite",
+    brand: "Extratos da Terra",
+    category: "corpo",
+    isProfessional: false,
+    description: "Sérum lipoativo para tratamento de celulite",
+    price: "Consultar",
+  },
+  {
+    id: 3203,
+    name: "Creme Firmador DMAE Corpo",
+    brand: "Extratos da Terra",
+    category: "corpo",
+    isProfessional: false,
+    description: "Creme firmador corporal com DMAE",
+    price: "Consultar",
+  },
+  {
+    id: 3204,
+    name: "Gel Modelador Termoativo",
+    brand: "Extratos da Terra",
+    category: "corpo",
+    isProfessional: false,
+    description: "Gel modelador termoativo para redução",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - ESTRIAS
+// ============================================
+
+export const extratosEstrias: Product[] = [
+  {
+    id: 3301,
+    name: "Booster Reparador Estrias",
+    brand: "Extratos da Terra",
+    category: "estrias",
+    isProfessional: false,
+    description: "Booster reparador para tratamento de estrias",
+    price: "Consultar",
+  },
+  {
+    id: 3302,
+    name: "Creme Retexturizador Estrias",
+    brand: "Extratos da Terra",
+    category: "estrias",
+    isProfessional: false,
+    description: "Creme retexturizador para estrias",
+    price: "Consultar",
+  },
+  {
+    id: 3303,
+    name: "Gel Esfoliante Pré-tratamento Estrias",
+    brand: "Extratos da Terra",
+    category: "estrias",
+    isProfessional: true,
+    description: "Gel esfoliante preparatório para tratamento de estrias",
+    price: "Consultar",
+  },
+];
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - CAPILAR & ANTIQUEDA
+// ============================================
+
+export const extratosCapilar: Product[] = [
+  {
+    id: 3401,
+    name: "Loção Antiqueda Capilar",
+    brand: "Extratos da Terra",
+    category: "capilar",
+    isProfessional: false,
+    description: "Loção antiqueda para fortalecimento capilar",
+    price: "Consultar",
+  },
+  {
+    id: 3402,
+    name: "Tônico Capilar Fortalecedor",
+    brand: "Extratos da Terra",
+    category: "capilar",
+    isProfessional: false,
+    description: "Tônico fortalecedor para cabelos fragilizados",
+    price: "Consultar",
+  },
+  {
+    id: 3403,
+    name: "Shampoo Antiqueda",
+    brand: "Extratos da Terra",
+    category: "capilar",
+    isProfessional: false,
+    description: "Shampoo antiqueda para uso diário",
+    price: "Consultar",
+  },
+  {
+    id: 3404,
+    name: "Máscara Capilar Nutritiva",
+    brand: "Extratos da Terra",
+    category: "capilar",
+    isProfessional: false,
+    description: "Máscara nutritiva para hidratação capilar",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -1495,4 +2189,17 @@ export const allMezzoProducts: Product[] = [
 export const allExtratosProducts: Product[] = [
   ...extratosHigienizacao,
   ...extratosEsfoliacao,
+  ...extratosAcne,
+  ...extratosClareamento,
+  ...extratosAntiIdade,
+  ...extratosOlhos,
+  ...extratosHidratacao,
+  ...extratosLimpezaProfissional,
+  ...extratosMultifuncionais,
+  ...extratosPeelings,
+  ...extratosMascaras,
+  ...extratosSolar,
+  ...extratosCorpo,
+  ...extratosEstrias,
+  ...extratosCapilar,
 ];
