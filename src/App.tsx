@@ -8,7 +8,9 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import Index from "./pages/Index";
 import Shop from "./pages/Shop";
+import BuildRoutine from "./pages/BuildRoutine";
 import Consultation from "./pages/Consultation";
+import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -24,7 +26,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/loja" element={<Shop />} />
+          <Route path="/monte-sua-rotina" element={<BuildRoutine />} />
           <Route path="/consultoria" element={<Consultation />} />
+          <Route path="/sobre" element={<About />} />
           <Route path="/contato" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

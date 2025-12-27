@@ -5,18 +5,20 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const quickLinks = [
-    { name: "Home", href: "/" },
+    { name: "Início", href: "/" },
     { name: "Loja", href: "/loja" },
-    { name: "Consultoria de Skincare", href: "/consultoria" },
+    { name: "Monte sua Rotina", href: "/monte-sua-rotina" },
+    { name: "Consultoria de Pele", href: "/consultoria" },
+    { name: "Sobre", href: "/sobre" },
     { name: "Contato", href: "/contato" },
   ];
 
   const categories = [
+    { name: "Manchas e Melasma", href: "/loja?categoria=manchas-melasma" },
+    { name: "Acne e Oleosidade", href: "/loja?categoria=acne-oleosidade" },
     { name: "Anti-idade", href: "/loja?categoria=anti-idade" },
-    { name: "Clareamento", href: "/loja?categoria=clareamento" },
-    { name: "Acne & Oleosidade", href: "/loja?categoria=acne" },
     { name: "Vitamina C", href: "/loja?categoria=vitamina-c" },
-    { name: "Corpo", href: "/loja?categoria=corpo" },
+    { name: "Profissional", href: "/loja?categoria=profissional" },
   ];
 
   return (
