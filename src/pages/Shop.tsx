@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import ProductCard, { Product } from "@/components/shop/ProductCard";
+import { allTulipiaProducts } from "@/data/products";
 
 // Category definitions with descriptions
 const categoryDefinitions: Record<string, { title: string; description: string }> = {
@@ -86,8 +87,8 @@ const usageTypes = [
   { name: "Profissional", slug: "profissional" },
 ];
 
-// Sample products
-const allProducts: Product[] = [
+// Base sample products + imported catalog
+const sampleProducts: Product[] = [
   {
     id: 1,
     name: "Sérum Clareador Intensivo",
@@ -95,16 +96,7 @@ const allProducts: Product[] = [
     category: "manchas-melasma",
     isProfessional: false,
     description: "Reduz manchas e uniformiza o tom da pele",
-    price: "R$ 189,90",
-  },
-  {
-    id: 2,
-    name: "Vitamina C 20% Estabilizada",
-    brand: "Tulípia",
-    category: "vitamina-c",
-    isProfessional: false,
-    description: "Antioxidante poderoso para luminosidade",
-    price: "R$ 159,90",
+    price: "Consultar",
   },
   {
     id: 3,
@@ -113,7 +105,7 @@ const allProducts: Product[] = [
     category: "fotoprotecao",
     isProfessional: false,
     description: "Alta proteção com toque seco e leve",
-    price: "R$ 89,90",
+    price: "Consultar",
   },
   {
     id: 4,
@@ -122,16 +114,7 @@ const allProducts: Product[] = [
     category: "acne-oleosidade",
     isProfessional: false,
     description: "Limpeza profunda sem ressecar",
-    price: "R$ 69,90",
-  },
-  {
-    id: 5,
-    name: "Creme Anti-idade Retinol",
-    brand: "Extratos da Terra",
-    category: "anti-idade",
-    isProfessional: false,
-    description: "Reduz rugas e linhas de expressão",
-    price: "R$ 199,90",
+    price: "Consultar",
   },
   {
     id: 6,
@@ -140,16 +123,7 @@ const allProducts: Product[] = [
     category: "hidratacao-reparacao",
     isProfessional: false,
     description: "Restaura a barreira cutânea",
-    price: "R$ 129,90",
-  },
-  {
-    id: 7,
-    name: "Peeling Enzimático",
-    brand: "Extratos da Terra",
-    category: "profissional",
-    isProfessional: true,
-    description: "Renovação celular suave",
-    price: "R$ 249,90",
+    price: "Consultar",
   },
   {
     id: 8,
@@ -158,7 +132,7 @@ const allProducts: Product[] = [
     category: "acne-oleosidade",
     isProfessional: false,
     description: "Controle de poros e oleosidade",
-    price: "R$ 139,90",
+    price: "Consultar",
   },
   {
     id: 9,
@@ -167,8 +141,14 @@ const allProducts: Product[] = [
     category: "area-olhos",
     isProfessional: false,
     description: "Reduz olheiras e linhas finas",
-    price: "R$ 149,90",
+    price: "Consultar",
   },
+];
+
+// Merge all products
+const allProducts: Product[] = [
+  ...sampleProducts,
+  ...allTulipiaProducts,
 ];
 
 // Related products for CTA section
