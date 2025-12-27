@@ -1225,6 +1225,154 @@ export const mezzoBiohacking: Product[] = [
 ];
 
 // ============================================
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA
+// ============================================
+// ============================================
+
+// ============================================
+// PRODUTOS EXTRATOS DA TERRA - HIGIENIZAÇÃO
+// ============================================
+
+export const extratosHigienizacao: Product[] = [
+  {
+    id: 2001,
+    name: "Sabonete Suavizante Antirressecamento",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete suavizante para peles ressecadas",
+    price: "Consultar",
+  },
+  {
+    id: 2002,
+    name: "Sabonete Suavizante Pele Sensível",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete suavizante para peles sensíveis",
+    price: "Consultar",
+  },
+  {
+    id: 2003,
+    name: "Sabonete Suavizante Antiacne",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete suavizante para controle de acne",
+    price: "Consultar",
+  },
+  {
+    id: 2004,
+    name: "Sabonete Líquido Glycolic Skin",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete líquido com ácido glicólico para renovação",
+    price: "Consultar",
+  },
+  {
+    id: 2005,
+    name: "Sabonete Purificante Glycolic+",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete purificante com ácido glicólico potencializado",
+    price: "Consultar",
+  },
+  {
+    id: 2006,
+    name: "GlycoActive Sabonete Facial Renovador",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete facial renovador com ativos glicólicos",
+    price: "Consultar",
+  },
+  {
+    id: 2007,
+    name: "Higeia Gel de Limpeza Suavizante",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Gel de limpeza suavizante para todos os tipos de pele",
+    price: "Consultar",
+  },
+  {
+    id: 2008,
+    name: "Hidro Sabonete Detox Espumante",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete detox espumante para limpeza profunda",
+    price: "Consultar",
+  },
+  {
+    id: 2009,
+    name: "Sabonete Calmante Flor da Terra",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete calmante com extratos florais",
+    price: "Consultar",
+  },
+  {
+    id: 2010,
+    name: "Sabonete Mousse Glycolic",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete em mousse com ácido glicólico",
+    price: "Consultar",
+  },
+  {
+    id: 2011,
+    name: "Dermosoft Clean Sabonete Líquido",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Sabonete líquido suave para limpeza diária",
+    price: "Consultar",
+  },
+  {
+    id: 2012,
+    name: "Solução Micelar Facial Dermosoft",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Solução micelar facial para limpeza suave",
+    price: "Consultar",
+  },
+  {
+    id: 2013,
+    name: "Água Micelar Detox",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Água micelar detox para remoção de impurezas",
+    price: "Consultar",
+  },
+  {
+    id: 2014,
+    name: "Demaquilante Suavizante",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: false,
+    description: "Demaquilante suavizante para remoção de maquiagem",
+    price: "Consultar",
+  },
+  {
+    id: 2015,
+    name: "Gel de Limpeza Protoclean Renovador",
+    brand: "Extratos da Terra",
+    category: "higienizacao",
+    isProfessional: true,
+    description: "Gel de limpeza renovador para protocolos profissionais",
+    price: "Consultar",
+  },
+];
+
+// ============================================
 // EXPORT ALL PRODUCTS
 // ============================================
 
@@ -1245,4 +1393,8 @@ export const allMezzoProducts: Product[] = [
   ...mezzoCapilar,
   ...mezzoExossomas,
   ...mezzoBiohacking,
+];
+
+export const allExtratosProducts: Product[] = [
+  ...extratosHigienizacao,
 ];
