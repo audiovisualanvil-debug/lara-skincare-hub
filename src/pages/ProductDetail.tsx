@@ -1,13 +1,16 @@
 import { useParams, Link } from "react-router-dom";
-import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2, ShoppingCart } from "lucide-react";
+import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2, ShoppingCart, Scale } from "lucide-react";
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductCardNew from "@/components/shop/ProductCardNew";
+import ProductReviews from "@/components/shop/ProductReviews";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useCompare } from "@/contexts/CompareContext";
+import { useReviews } from "@/contexts/ReviewsContext";
 import { toast } from "sonner";
 
 // Merge all products
@@ -500,60 +503,14 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* Reviews */}
+      {/* Reviews Section */}
       <section className="py-12 lg:py-16 bg-cream border-t border-detail/30">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-3">
-                Avaliações de Clientes
-              </h2>
-              <div className="flex items-center justify-center gap-2">
-                <div className="flex gap-0.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-primary fill-primary" />
-                  ))}
-                </div>
-                <span className="font-body text-muted-foreground">
-                  4.9 baseado em {reviews.length} avaliações
-                </span>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {reviews.map((review, i) => (
-                <div key={i} className="p-6 bg-background border border-detail/30 rounded-lg">
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="font-body text-sm font-medium text-foreground">{review.name}</p>
-                        {review.verified && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary font-body text-xs rounded">
-                            <Check className="w-3 h-3" />
-                            Compra verificada
-                          </span>
-                        )}
-                      </div>
-                      <p className="font-body text-xs text-muted-foreground">{review.city}</p>
-                    </div>
-                    <span className="font-body text-xs text-muted-foreground">{review.date}</span>
-                  </div>
-                  
-                  <div className="flex gap-0.5 mb-3">
-                    {[...Array(5)].map((_, starIndex) => (
-                      <Star 
-                        key={starIndex} 
-                        className={`w-4 h-4 ${starIndex < review.rating ? "text-primary fill-primary" : "text-detail"}`} 
-                      />
-                    ))}
-                  </div>
-                  
-                  <p className="font-body text-sm text-foreground/80 leading-relaxed">
-                    {review.text}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <h2 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-8 text-center">
+              Avaliações de Clientes
+            </h2>
+            <ProductReviews productId={product.id} />
           </div>
         </div>
       </section>
