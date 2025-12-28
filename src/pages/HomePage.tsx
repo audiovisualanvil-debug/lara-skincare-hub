@@ -8,14 +8,14 @@ import ProductCarousel from "@/components/shop/ProductCarousel";
 
 // Featured products with required fields
 const featuredProducts = [
-  { id: 1, name: "Immortalité-C | Nano Sérum Vitamina C", brand: "Tulípia", price: "Consultar" },
-  { id: 2, name: "DMAE+ | Nano Sérum Firmador", brand: "Tulípia", price: "Consultar" },
-  { id: 3, name: "Mellan Corrector | Sérum Clareador", brand: "Mezzo", price: "Consultar" },
-  { id: 4, name: "Clarismart Sérum Clareador", brand: "Extratos da Terra", price: "Consultar" },
-  { id: 5, name: "Acne Control | Gel Secativo", brand: "Tulípia", price: "Consultar" },
-  { id: 6, name: "Peeling Mandélico", brand: "Tulípia", price: "Consultar" },
-  { id: 7, name: "Skin Fill Xsome | Bioestimulador", brand: "Mezzo", price: "Consultar" },
-  { id: 8, name: "DMAE Lift Sérum Firmador", brand: "Extratos da Terra", price: "Consultar" },
+  { id: 1, name: "Mellan Corrector | Sérum Clareador", brand: "Mezzo", price: "Consultar" },
+  { id: 2, name: "Sérum Vitamina C", brand: "Extratos da Terra", price: "Consultar" },
+  { id: 3, name: "Skin Fill Xsome | Bioestimulador", brand: "Mezzo", price: "Consultar" },
+  { id: 4, name: "Nanospot Clareador", brand: "Extratos da Terra", price: "Consultar" },
+  { id: 5, name: "Acnediol Noite | Sérum Antiacne", brand: "Mezzo", price: "Consultar" },
+  { id: 6, name: "Reverse AH-10 | Sérum Anti-idade", brand: "Extratos da Terra", price: "Consultar" },
+  { id: 7, name: "Eyes Xsome | Área dos Olhos", brand: "Mezzo", price: "Consultar" },
+  { id: 8, name: "Hydra Face | Hidratante Facial", brand: "Extratos da Terra", price: "Consultar" },
 ];
 
 // Categories data

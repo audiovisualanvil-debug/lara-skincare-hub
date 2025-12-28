@@ -27,14 +27,13 @@ const productsData: Record<string, {
 }> = {
   "1": {
     id: 1,
-    name: "Sérum Clareador Intensivo",
-    brand: "Tulípia",
-    category: "manchas-melasma",
-    categoryName: "Manchas e Melasma",
+    name: "Mellan Corrector | Sérum Clareador",
+    brand: "Mezzo",
+    category: "clareamento",
+    categoryName: "Clareamento",
     isProfessional: false,
-    shortBenefit: "Clareia manchas e uniformiza o tom da pele com tecnologia nano",
-    price: "R$ 189,90",
-    originalPrice: "R$ 229,90",
+    shortBenefit: "Clareia manchas e uniformiza o tom da pele",
+    price: "Consultar",
     badges: ["Home Care", "Vegano", "Cruelty Free"],
     benefits: [
       "Auxilia no clareamento e na uniformização do tom",
@@ -43,9 +42,9 @@ const productsData: Record<string, {
       "Potencializa resultados quando combinado com protetor solar"
     ],
     actives: [
-      { name: "Vitamina C Nanoencapsulada", description: "Ação antioxidante potente e iluminadora, penetra nas camadas mais profundas", icon: Sparkles },
+      { name: "Vitamina C", description: "Ação antioxidante potente e iluminadora", icon: Sparkles },
       { name: "Ácido Tranexâmico", description: "Inibe a produção de melanina, reduzindo manchas existentes", icon: Shield },
-      { name: "Niacinamida 5%", description: "Melhora textura, fortalece a barreira cutânea e uniformiza o tom", icon: Droplets },
+      { name: "Niacinamida", description: "Melhora textura, fortalece a barreira cutânea e uniformiza o tom", icon: Droplets },
       { name: "Ácido Mandélico", description: "Esfolia suavemente sem agredir, promove renovação celular", icon: Leaf },
     ],
     usage: [
@@ -67,13 +66,13 @@ const productsData: Record<string, {
   },
   "2": {
     id: 2,
-    name: "Vitamina C 20% Estabilizada",
-    brand: "Tulípia",
-    category: "anti-idade",
-    categoryName: "Anti-idade",
+    name: "Sérum Vitamina C",
+    brand: "Extratos da Terra",
+    category: "clareamento",
+    categoryName: "Clareamento",
     isProfessional: false,
     shortBenefit: "Antioxidante poderoso para luminosidade e proteção",
-    price: "R$ 159,90",
+    price: "Consultar",
     badges: ["Home Care", "Sem Perfume"],
     benefits: [
       "Ação antioxidante potente contra radicais livres",
@@ -82,7 +81,7 @@ const productsData: Record<string, {
       "Uniformiza o tom da pele"
     ],
     actives: [
-      { name: "Vitamina C 20%", description: "Alta concentração estabilizada para máxima eficácia", icon: Sparkles },
+      { name: "Vitamina C", description: "Alta concentração estabilizada para máxima eficácia", icon: Sparkles },
       { name: "Vitamina E", description: "Potencializa a ação antioxidante e protege a pele", icon: Shield },
       { name: "Ácido Ferúlico", description: "Estabiliza a Vitamina C e aumenta sua eficácia", icon: Droplets },
     ],
@@ -126,9 +125,9 @@ const relatedProducts = [
   },
   {
     id: 6,
-    name: "Tônico Calmante com Niacinamida",
-    brand: "Tulípia",
-    price: "R$ 79,90",
+    name: "Sérum Niacinamida",
+    brand: "Extratos da Terra",
+    price: "Consultar",
   },
 ];
 

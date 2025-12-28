@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import ProductCardNew from "@/components/shop/ProductCardNew";
-import { allTulipiaProducts, allMezzoProducts, allExtratosProducts } from "@/data/products";
+import { allMezzoProducts, allExtratosProducts } from "@/data/products";
 
 // Category definitions with descriptions
 const categoryDefinitions: Record<string, { title: string; description: string }> = {
@@ -79,7 +79,6 @@ const productTypes = [
 ];
 
 const brands = [
-  { name: "Tulípia", slug: "tulípia" },
   { name: "Mezzo", slug: "mezzo" },
   { name: "Extratos da Terra", slug: "extratos da terra" },
 ];
@@ -91,7 +90,6 @@ const usageTypes = [
 
 // Merge all products
 const allProducts = [
-  ...allTulipiaProducts,
   ...allMezzoProducts,
   ...allExtratosProducts,
 ];
