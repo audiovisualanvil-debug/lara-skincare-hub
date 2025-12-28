@@ -6,6 +6,7 @@ import KitsSection from "@/components/home/KitsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import ProductCarousel from "@/components/shop/ProductCarousel";
 import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
+import QuizCTA from "@/components/home/QuizCTA";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
@@ -133,6 +134,9 @@ const HomePage = () => {
 
         {/* Kits Section */}
         <KitsSection kits={kits} />
+
+        {/* Quiz CTA */}
+        <QuizCTA />
 
         {/* Featured Products */}
         <section className="section-padding">
