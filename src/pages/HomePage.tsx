@@ -5,6 +5,8 @@ import CategoryCardHome from "@/components/home/CategoryCardHome";
 import KitsSection from "@/components/home/KitsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import ProductCarousel from "@/components/shop/ProductCarousel";
+import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
+import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 
@@ -96,6 +98,8 @@ const testimonials = [
 ];
 
 const HomePage = () => {
+  const { recentProducts } = useRecentlyViewed();
+
   return (
     <div className="min-h-screen flex flex-col">
       <MainHeader />
@@ -139,6 +143,11 @@ const HomePage = () => {
             />
           </div>
         </section>
+
+        {/* Recently Viewed - Only show if there are products */}
+        {recentProducts.length > 0 && (
+          <RecentlyViewedSection products={recentProducts} />
+        )}
 
         {/* Testimonials */}
         <TestimonialsSection testimonials={testimonials} />
