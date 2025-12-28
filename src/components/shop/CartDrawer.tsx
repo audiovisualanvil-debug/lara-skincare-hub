@@ -1,14 +1,55 @@
-import { X, Minus, Plus, ShoppingBag, Trash2 } from "lucide-react";
+import { useState } from "react";
+import { Minus, Plus, ShoppingBag, Trash2, Tag, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useCart } from "@/contexts/CartContext";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const freeShippingThreshold = 299;
 
 const CartDrawer = () => {
-  const { items, removeItem, updateQuantity, subtotal, isCartOpen, closeCart, totalItems } = useCart();
-  const remainingForFreeShipping = Math.max(0, freeShippingThreshold - subtotal);
+  const { 
+    items, 
+    removeItem, 
+    updateQuantity, 
+    subtotal, 
+    discount, 
+    total, 
+    appliedCoupon, 
+    applyCoupon, 
+    removeCoupon,
+    isCartOpen, 
+    closeCart, 
+    totalItems 
+  } = useCart();
+  const { toast } = useToast();
+  const [couponCode, setCouponCode] = useState("");
+  const remainingForFreeShipping = Math.max(0, freeShippingThreshold - total);
+
+  const handleApplyCoupon = () => {
+    if (!couponCode.trim()) return;
+    
+    const result = applyCoupon(couponCode);
+    toast({
+      title: result.success ? "Cupom aplicado!" : "Erro",
+      description: result.message,
+      variant: result.success ? "default" : "destructive",
+    });
+    
+    if (result.success) {
+      setCouponCode("");
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    removeCoupon();
+    toast({
+      title: "Cupom removido",
+      description: "O cupom foi removido do seu carrinho",
+    });
+  };
 
   return (
     <Sheet open={isCartOpen} onOpenChange={(open) => !open && closeCart()}>
@@ -34,7 +75,7 @@ const CartDrawer = () => {
             <div className="mt-2 h-1.5 bg-detail/30 rounded-full overflow-hidden">
               <div 
                 className="h-full bg-primary transition-all duration-300 rounded-full"
-                style={{ width: `${Math.min(100, (subtotal / freeShippingThreshold) * 100)}%` }}
+                style={{ width: `${Math.min(100, (total / freeShippingThreshold) * 100)}%` }}
               />
             </div>
           </div>
@@ -112,13 +153,72 @@ const CartDrawer = () => {
           )}
         </div>
 
-        {/* Footer */}
+        {/* Footer with Coupon and Total */}
         {items.length > 0 && (
-          <div className="p-6 border-t border-detail bg-cream">
-            <div className="flex items-center justify-between mb-4">
-              <span className="font-body text-sm text-muted-foreground">Subtotal</span>
-              <span className="font-display text-xl font-semibold text-foreground">R$ {subtotal.toFixed(2)}</span>
+          <div className="p-6 border-t border-detail bg-cream space-y-4">
+            {/* Coupon Section */}
+            {!appliedCoupon ? (
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <Tag className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="Código do cupom"
+                    value={couponCode}
+                    onChange={(e) => setCouponCode(e.target.value.toUpperCase())}
+                    onKeyDown={(e) => e.key === "Enter" && handleApplyCoupon()}
+                    className="pl-10 font-body text-sm uppercase"
+                  />
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={handleApplyCoupon}
+                  className="font-display"
+                >
+                  Aplicar
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between p-3 bg-primary/10 rounded-lg border border-primary/20">
+                <div className="flex items-center gap-2">
+                  <Tag className="h-4 w-4 text-primary" />
+                  <span className="font-display text-sm font-medium text-primary">
+                    {appliedCoupon.code}
+                  </span>
+                  <span className="font-body text-xs text-muted-foreground">
+                    (-{appliedCoupon.discountType === "percentage" 
+                      ? `${appliedCoupon.discountValue}%` 
+                      : `R$ ${appliedCoupon.discountValue.toFixed(2)}`})
+                  </span>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-6 w-6 text-muted-foreground hover:text-destructive"
+                  onClick={handleRemoveCoupon}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
+
+            {/* Price Summary */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-body text-sm text-muted-foreground">Subtotal</span>
+                <span className="font-body text-sm text-foreground">R$ {subtotal.toFixed(2)}</span>
+              </div>
+              {discount > 0 && (
+                <div className="flex items-center justify-between">
+                  <span className="font-body text-sm text-primary">Desconto</span>
+                  <span className="font-body text-sm text-primary">-R$ {discount.toFixed(2)}</span>
+                </div>
+              )}
+              <div className="flex items-center justify-between pt-2 border-t border-detail/30">
+                <span className="font-display text-base font-medium text-foreground">Total</span>
+                <span className="font-display text-xl font-semibold text-foreground">R$ {total.toFixed(2)}</span>
+              </div>
             </div>
+
             <Button variant="gold" className="w-full h-12 font-display font-medium" asChild>
               <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
                 Finalizar via WhatsApp
@@ -126,7 +226,7 @@ const CartDrawer = () => {
             </Button>
             <Button 
               variant="ghost" 
-              className="w-full mt-2 font-body text-sm text-muted-foreground"
+              className="w-full font-body text-sm text-muted-foreground"
               onClick={closeCart}
             >
               Continuar Comprando
