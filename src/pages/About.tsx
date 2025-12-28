@@ -27,7 +27,6 @@ const values = [
 ];
 
 const brands = [
-  { name: "Tulípia", description: "Dermocosméticos nacionais de alta tecnologia" },
   { name: "Extratos da Terra", description: "Cosméticos naturais com eficácia comprovada" },
   { name: "Mezzo", description: "Linha profissional de tratamentos avançados" },
 ];
