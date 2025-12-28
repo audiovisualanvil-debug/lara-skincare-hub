@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
 import ProductCardNew from "@/components/shop/ProductCardNew";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
@@ -89,11 +90,32 @@ const usageTypes = [
   { name: "Profissional", slug: "profissional" },
 ];
 
+// Price range options
+const priceRanges = [
+  { name: "Até R$ 50", min: 0, max: 50 },
+  { name: "R$ 50 - R$ 100", min: 50, max: 100 },
+  { name: "R$ 100 - R$ 200", min: 100, max: 200 },
+  { name: "R$ 200 - R$ 300", min: 200, max: 300 },
+  { name: "Acima de R$ 300", min: 300, max: 9999 },
+];
+
+// Helper to extract numeric price from string
+const extractPrice = (priceStr?: string): number | null => {
+  if (!priceStr || priceStr === "Consultar") return null;
+  const match = priceStr.replace(/[^\d,]/g, "").replace(",", ".");
+  return parseFloat(match) || null;
+};
+
 // Merge all products with images
 const allProducts = [
   ...allMezzoWithImages,
   ...allExtratosWithImages,
 ];
+
+// Get price statistics
+const productPrices = allProducts.map(p => extractPrice(p.price)).filter((p): p is number => p !== null);
+const minProductPrice = Math.min(...productPrices);
+const maxProductPrice = Math.max(...productPrices);
 
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -114,6 +136,8 @@ const Shop = () => {
     searchParams.get("marca") ? [searchParams.get("marca")!] : []
   );
   const [selectedUsageTypes, setSelectedUsageTypes] = useState<string[]>([]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, maxProductPrice]);
+  const [selectedPriceRanges, setSelectedPriceRanges] = useState<number[]>([]);
 
   // Collapsible sections
   const [openSections, setOpenSections] = useState({
@@ -121,6 +145,7 @@ const Shop = () => {
     productTypes: true,
     brands: true,
     usageTypes: true,
+    price: true,
   });
 
   // Sync URL params with filters
@@ -152,24 +177,59 @@ const Shop = () => {
     setSelectedProductTypes([]);
     setSelectedBrands([]);
     setSelectedUsageTypes([]);
+    setSelectedPriceRanges([]);
+    setPriceRange([0, maxProductPrice]);
     setSearchQuery("");
     setSearchParams({});
   };
 
   const hasActiveFilters = selectedObjectives.length > 0 || selectedProductTypes.length > 0 || 
-    selectedBrands.length > 0 || selectedUsageTypes.length > 0 || searchQuery !== "";
+    selectedBrands.length > 0 || selectedUsageTypes.length > 0 || selectedPriceRanges.length > 0 || searchQuery !== "";
 
   // Filter products
   const filteredProducts = useMemo(() => {
-    return allProducts.filter(product => {
+    let result = allProducts.filter(product => {
       if (selectedObjectives.length > 0 && !selectedObjectives.includes(product.category)) return false;
       if (selectedBrands.length > 0 && !selectedBrands.includes(product.brand.toLowerCase())) return false;
       if (selectedUsageTypes.includes("profissional") && !product.isProfessional) return false;
       if (selectedUsageTypes.includes("home-care") && product.isProfessional) return false;
       if (searchQuery && !product.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      
+      // Price filter
+      if (selectedPriceRanges.length > 0) {
+        const productPrice = extractPrice(product.price);
+        if (productPrice === null) return false;
+        const inRange = selectedPriceRanges.some(rangeIndex => {
+          const range = priceRanges[rangeIndex];
+          return productPrice >= range.min && productPrice < range.max;
+        });
+        if (!inRange) return false;
+      }
+      
       return true;
     });
-  }, [selectedObjectives, selectedBrands, selectedUsageTypes, searchQuery]);
+
+    // Sort products
+    if (sortBy === "nome-az") {
+      result = [...result].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'));
+    } else if (sortBy === "nome-za") {
+      result = [...result].sort((a, b) => b.name.localeCompare(a.name, 'pt-BR'));
+    } else if (sortBy === "preco-menor") {
+      result = [...result].sort((a, b) => {
+        const priceA = extractPrice(a.price) ?? 9999;
+        const priceB = extractPrice(b.price) ?? 9999;
+        return priceA - priceB;
+      });
+    } else if (sortBy === "preco-maior") {
+      result = [...result].sort((a, b) => {
+        const priceA = extractPrice(a.price) ?? 0;
+        const priceB = extractPrice(b.price) ?? 0;
+        return priceB - priceA;
+      });
+    }
+
+    return result;
+  }, [selectedObjectives, selectedBrands, selectedUsageTypes, searchQuery, selectedPriceRanges, sortBy]);
 
   // Filter section component
   const FilterSection = ({ 
@@ -341,6 +401,28 @@ const Shop = () => {
                       />
                     ))}
                   </FilterSection>
+
+                  {/* Faixa de Preço */}
+                  <FilterSection 
+                    title="Faixa de Preço" 
+                    isOpen={openSections.price}
+                    onToggle={() => toggleSection("price")}
+                  >
+                    {priceRanges.map((range, index) => (
+                      <CheckboxItem
+                        key={index}
+                        label={range.name}
+                        checked={selectedPriceRanges.includes(index)}
+                        onChange={() => {
+                          setSelectedPriceRanges(prev => 
+                            prev.includes(index) 
+                              ? prev.filter(i => i !== index) 
+                              : [...prev, index]
+                          );
+                        }}
+                      />
+                    ))}
+                  </FilterSection>
                 </div>
 
                 {/* Sidebar CTA */}
@@ -448,6 +530,23 @@ const Shop = () => {
                           />
                         ))}
                       </FilterSection>
+
+                      <FilterSection title="Faixa de Preço" isOpen={true} onToggle={() => {}}>
+                        {priceRanges.map((range, index) => (
+                          <CheckboxItem
+                            key={index}
+                            label={range.name}
+                            checked={selectedPriceRanges.includes(index)}
+                            onChange={() => {
+                              setSelectedPriceRanges(prev => 
+                                prev.includes(index) 
+                                  ? prev.filter(i => i !== index) 
+                                  : [...prev, index]
+                              );
+                            }}
+                          />
+                        ))}
+                      </FilterSection>
                     </div>
 
                     <Button variant="gold" className="w-full mt-8" onClick={() => setIsFilterOpen(false)}>
@@ -481,15 +580,15 @@ const Shop = () => {
 
                   {/* Sort */}
                   <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger className="w-44 h-9 font-body text-sm border-detail bg-cream">
+                    <SelectTrigger className="w-48 h-9 font-body text-sm border-detail bg-cream">
                       <SelectValue placeholder="Ordenar por" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="relevancia">Relevância</SelectItem>
                       <SelectItem value="nome-az">Nome A-Z</SelectItem>
                       <SelectItem value="nome-za">Nome Z-A</SelectItem>
-                      <SelectItem value="mais-vendidos">Mais Vendidos</SelectItem>
-                      <SelectItem value="novidades">Novidades</SelectItem>
+                      <SelectItem value="preco-menor">Menor preço</SelectItem>
+                      <SelectItem value="preco-maior">Maior preço</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -535,6 +634,14 @@ const Shop = () => {
                     <span key={slug} className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream border border-detail text-foreground font-body text-xs rounded-full">
                       {usageTypes.find(u => u.slug === slug)?.name}
                       <button onClick={() => toggleFilter(slug, selectedUsageTypes, setSelectedUsageTypes)} className="hover:text-primary">
+                        <X className="w-3 h-3" />
+                      </button>
+                    </span>
+                  ))}
+                  {selectedPriceRanges.map(index => (
+                    <span key={`price-${index}`} className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream border border-detail text-foreground font-body text-xs rounded-full">
+                      {priceRanges[index]?.name}
+                      <button onClick={() => setSelectedPriceRanges(prev => prev.filter(i => i !== index))} className="hover:text-primary">
                         <X className="w-3 h-3" />
                       </button>
                     </span>
