@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Heart, Scale } from "lucide-react";
+import { ShoppingCart, Heart, Scale, Check } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCompare } from "@/contexts/CompareContext";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 
 interface Product {
   id: number;
@@ -33,6 +34,8 @@ const extractPrice = (priceStr?: string): number | null => {
 
 const ProductCardNew = ({ product }: ProductCardNewProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { addToCompare, removeFromCompare, isInCompare, canAddMore } = useCompare();
@@ -58,6 +61,10 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
       price: price,
       image: product.image,
     });
+    
+    // Animate button
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 1500);
     
     toast.success(`${product.name} adicionado ao carrinho!`);
   };
@@ -117,10 +124,18 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
     >
       {/* Image Container */}
       <Link to={`/produto/${product.id}`} className="block relative aspect-square overflow-hidden bg-secondary">
+        {/* Skeleton placeholder while loading */}
+        {!imageLoaded && (
+          <div className="absolute inset-0 bg-secondary animate-pulse" />
+        )}
         <img
           src={isHovered && product.imageHover ? product.imageHover : (product.image || placeholderImage)}
           alt={product.name}
-          className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+          onLoad={() => setImageLoaded(true)}
+          className={cn(
+            "w-full h-full object-contain p-2 transition-all duration-500 group-hover:scale-105",
+            imageLoaded ? "opacity-100" : "opacity-0"
+          )}
         />
         {product.isProfessional && (
           <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-heading">
@@ -184,10 +199,17 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
           <Button 
             variant="gold"
             size="icon"
-            className="h-9 w-9 shrink-0"
+            className={cn(
+              "h-9 w-9 shrink-0 transition-all duration-300",
+              addedToCart && "bg-green-500 hover:bg-green-500 scale-110"
+            )}
             onClick={handleAddToCart}
           >
-            <ShoppingCart className="h-4 w-4" />
+            {addedToCart ? (
+              <Check className="h-4 w-4 animate-scale-in" />
+            ) : (
+              <ShoppingCart className="h-4 w-4" />
+            )}
           </Button>
         </div>
       </div>
