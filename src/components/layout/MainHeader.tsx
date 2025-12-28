@@ -99,13 +99,8 @@ const menuItems = [
     },
   },
   { 
-    label: "Passos da Rotina", 
-    href: "/monte-sua-rotina",
-    hasMegaMenu: false 
-  },
-  { 
-    label: "Tipos de Pele", 
-    href: "/shop?filtro=tipo-pele",
+    label: "Quiz de Pele", 
+    href: "/quiz-pele",
     hasMegaMenu: false 
   },
   { 
