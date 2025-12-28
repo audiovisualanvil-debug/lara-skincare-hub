@@ -1,135 +1,70 @@
 import { useParams, Link } from "react-router-dom";
 import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductCardNew from "@/components/shop/ProductCardNew";
+import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
+import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 
-// Sample product data - would come from database/API
-const productsData: Record<string, {
-  id: number;
-  name: string;
-  brand: string;
-  category: string;
-  categoryName: string;
-  isProfessional: boolean;
-  shortBenefit: string;
-  price: string;
-  originalPrice?: string;
-  badges: string[];
-  benefits: string[];
-  actives: { name: string; description: string; icon: React.ElementType }[];
-  usage: string[];
-  usageTip: string;
-  indicatedFor: string[];
-  results: string[];
-  images: string[];
-}> = {
-  "1": {
-    id: 1,
-    name: "Mellan Corrector | Sérum Clareador",
-    brand: "Mezzo",
-    category: "clareamento",
-    categoryName: "Clareamento",
-    isProfessional: false,
-    shortBenefit: "Clareia manchas e uniformiza o tom da pele",
-    price: "Consultar",
-    badges: ["Home Care", "Vegano", "Cruelty Free"],
-    benefits: [
-      "Auxilia no clareamento e na uniformização do tom",
-      "Reduz o aspecto de manchas escuras e melasma",
-      "Melhora a textura e luminosidade da pele",
-      "Potencializa resultados quando combinado com protetor solar"
-    ],
-    actives: [
-      { name: "Vitamina C", description: "Ação antioxidante potente e iluminadora", icon: Sparkles },
-      { name: "Ácido Tranexâmico", description: "Inibe a produção de melanina, reduzindo manchas existentes", icon: Shield },
-      { name: "Niacinamida", description: "Melhora textura, fortalece a barreira cutânea e uniformiza o tom", icon: Droplets },
-      { name: "Ácido Mandélico", description: "Esfolia suavemente sem agredir, promove renovação celular", icon: Leaf },
-    ],
-    usage: [
-      "Higienize a pele com seu limpador habitual",
-      "Aplique o tônico e aguarde secar",
-      "Aplique 3 a 4 gotas do sérum no rosto e pescoço",
-      "Espalhe com movimentos suaves até completa absorção",
-      "Finalize com protetor solar durante o dia"
-    ],
-    usageTip: "Para melhores resultados, use preferencialmente à noite e sempre complemente com protetor solar FPS 50+ durante o dia.",
-    indicatedFor: ["Manchas escuras", "Melasma", "Pós-acne", "Tom irregular", "Pele opaca", "Sardas"],
-    results: [
-      "Clareamento visível em 4 semanas de uso contínuo",
-      "Pele mais luminosa e uniforme",
-      "Redução de manchas em até 70%",
-      "Textura mais lisa e radiante"
-    ],
-    images: []
-  },
-  "2": {
-    id: 2,
-    name: "Sérum Vitamina C",
-    brand: "Extratos da Terra",
-    category: "clareamento",
-    categoryName: "Clareamento",
-    isProfessional: false,
-    shortBenefit: "Antioxidante poderoso para luminosidade e proteção",
-    price: "Consultar",
-    badges: ["Home Care", "Sem Perfume"],
-    benefits: [
-      "Ação antioxidante potente contra radicais livres",
-      "Promove luminosidade e viço à pele",
-      "Estimula a produção de colágeno",
-      "Uniformiza o tom da pele"
-    ],
-    actives: [
-      { name: "Vitamina C", description: "Alta concentração estabilizada para máxima eficácia", icon: Sparkles },
-      { name: "Vitamina E", description: "Potencializa a ação antioxidante e protege a pele", icon: Shield },
-      { name: "Ácido Ferúlico", description: "Estabiliza a Vitamina C e aumenta sua eficácia", icon: Droplets },
-    ],
-    usage: [
-      "Aplique pela manhã na pele limpa",
-      "Use 3 a 4 gotas no rosto, pescoço e colo",
-      "Aguarde a absorção completa",
-      "Finalize sempre com protetor solar"
-    ],
-    usageTip: "Para melhores resultados, usar diariamente pela manhã.",
-    indicatedFor: ["Pele sem viço", "Sinais de envelhecimento", "Tom irregular", "Prevenção de rugas"],
-    results: [
-      "Pele mais luminosa desde a primeira semana",
-      "Redução de linhas finas em 8 semanas",
-      "Proteção antioxidante diária",
-      "Tom mais uniforme e radiante"
-    ],
-    images: []
-  },
+// Merge all products
+const allProducts = [...allMezzoWithImages, ...allExtratosWithImages];
+
+// Category name mapping
+const categoryNames: Record<string, string> = {
+  "exossomas": "Exossomas",
+  "fotoprotetor": "Fotoprotetores",
+  "capilar": "Linha Capilar",
+  "home-care": "Home Care",
+  "limpeza": "Limpeza",
+  "vitamina-c": "Vitamina C",
+  "esfoliacao": "Esfoliação",
+  "mascaras": "Máscaras",
+  "hidratacao": "Hidratação",
+  "peeling": "Peelings Ácidos",
+  "acnediol": "Tratamento Acne",
+  "nutraceuticos": "Nutracêuticos",
+  "corpo": "Linha Corpo",
+  "niacinamida": "Niacinamida",
+  "higienizacao": "Higienização",
+  "acido-hialuronico": "Ácido Hialurônico",
+  "esfoliante": "Esfoliantes",
+  "peles-sensiveis": "Peles Sensíveis",
+  "clareamento": "Clareamento",
+  "oleosidade": "Controle de Oleosidade",
+  "acne": "Tratamento Acne",
+  "antiage": "Anti-idade",
 };
 
-// Related products
-const relatedProducts = [
-  {
-    id: 3,
-    name: "Protetor Solar FPS 60 Toque Seco",
-    brand: "Mezzo",
-    price: "R$ 89,90",
-  },
-  {
-    id: 4,
-    name: "Gel de Limpeza Suave",
-    brand: "Extratos da Terra",
-    price: "R$ 59,90",
-  },
-  {
-    id: 5,
-    name: "Hidratante Reparador Intensivo",
-    brand: "Mezzo",
-    price: "R$ 99,90",
-  },
-  {
-    id: 6,
-    name: "Sérum Niacinamida",
-    brand: "Extratos da Terra",
-    price: "Consultar",
-  },
-];
+// Default product info for tabs
+const getDefaultProductInfo = (category: string) => ({
+  benefits: [
+    "Formulação dermatológica avançada",
+    "Testado dermatologicamente",
+    "Alta concentração de ativos",
+    "Resultados visíveis com uso contínuo"
+  ],
+  actives: [
+    { name: "Ativos Biotecnológicos", description: "Tecnologia de ponta para máxima eficácia", icon: Sparkles },
+    { name: "Hidratação Profunda", description: "Mantém a pele nutrida e protegida", icon: Droplets },
+    { name: "Proteção Cutânea", description: "Fortalece a barreira natural da pele", icon: Shield },
+    { name: "Ingredientes Naturais", description: "Formulação com ativos da natureza", icon: Leaf },
+  ],
+  usage: [
+    "Higienize a pele com seu limpador habitual",
+    "Aplique o produto na área desejada",
+    "Massageie suavemente até completa absorção",
+    "Use conforme orientação profissional"
+  ],
+  usageTip: "Para melhores resultados, use diariamente e complemente com protetor solar.",
+  indicatedFor: ["Todos os tipos de pele", "Uso profissional e home care"],
+  results: [
+    "Pele mais saudável e equilibrada",
+    "Resultados visíveis com uso contínuo",
+    "Melhora na textura e aparência",
+    "Hidratação duradoura"
+  ],
+});
 
 // Sample reviews
 const reviews = [
@@ -137,7 +72,7 @@ const reviews = [
     name: "Ana Paula M.", 
     city: "São Paulo, SP", 
     rating: 5, 
-    text: "Minha pele clareou visivelmente em 4 semanas! As manchas do melasma reduziram bastante e a textura ficou muito mais uniforme.",
+    text: "Produto incrível! Minha pele melhorou visivelmente em poucas semanas. Textura leve e absorção rápida.",
     date: "12/12/2024",
     verified: true
   },
@@ -145,7 +80,7 @@ const reviews = [
     name: "Fernanda L.", 
     city: "Curitiba, PR", 
     rating: 5, 
-    text: "Textura leve, absorve super rápido e não deixa a pele oleosa. Resultado visível desde a segunda semana de uso.",
+    text: "Superou minhas expectativas. Uso diariamente e os resultados são visíveis. Recomendo!",
     date: "28/11/2024",
     verified: true
   },
@@ -153,7 +88,7 @@ const reviews = [
     name: "Juliana S.", 
     city: "Belo Horizonte, MG", 
     rating: 4, 
-    text: "Excelente produto! Superou minhas expectativas. Uso junto com o protetor solar e os resultados são incríveis.",
+    text: "Excelente produto! Qualidade profissional para uso em casa. Vale o investimento.",
     date: "15/11/2024",
     verified: true
   },
@@ -161,9 +96,48 @@ const reviews = [
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
-  const product = productsData[id || "1"] || productsData["1"];
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+
+  // Find the product from our real data
+  const product = useMemo(() => {
+    const productId = parseInt(id || "0");
+    return allProducts.find(p => p.id === productId);
+  }, [id]);
+
+  // Get related products from the same brand
+  const relatedProducts = useMemo(() => {
+    if (!product) return allProducts.slice(0, 4);
+    return allProducts
+      .filter(p => p.brand === product.brand && p.id !== product.id)
+      .slice(0, 4);
+  }, [product]);
+
+  // Get default info based on category
+  const productInfo = useMemo(() => {
+    return getDefaultProductInfo(product?.category || "");
+  }, [product]);
+
+  // If product not found, show message
+  if (!product) {
+    return (
+      <main className="pt-[140px] lg:pt-[160px] min-h-screen bg-background">
+        <div className="container mx-auto px-4 lg:px-8 py-20 text-center">
+          <h1 className="font-display text-2xl font-semibold text-foreground mb-4">
+            Produto não encontrado
+          </h1>
+          <p className="font-body text-muted-foreground mb-8">
+            O produto que você procura não está disponível.
+          </p>
+          <Button variant="gold" asChild>
+            <Link to="/loja">Ver todos os produtos</Link>
+          </Button>
+        </div>
+      </main>
+    );
+  }
+
+  const categoryName = categoryNames[product.category || ""] || product.category || "Produtos";
 
   return (
     <main className="pt-[140px] lg:pt-[160px] min-h-screen bg-background">
@@ -176,7 +150,7 @@ const ProductDetail = () => {
             <Link to="/loja" className="hover:text-primary transition-colors">Loja</Link>
             <ChevronRight className="w-3 h-3" />
             <Link to={`/loja?categoria=${product.category}`} className="hover:text-primary transition-colors">
-              {product.categoryName}
+              {categoryName}
             </Link>
             <ChevronRight className="w-3 h-3" />
             <span className="text-foreground truncate max-w-[200px]">{product.name}</span>
@@ -191,25 +165,30 @@ const ProductDetail = () => {
             {/* Left - Product Images */}
             <div className="space-y-4">
               {/* Main Image */}
-              <div className="aspect-square bg-cream border border-detail/30 flex items-center justify-center overflow-hidden">
-                <span className="font-body text-muted-foreground">Imagem do Produto</span>
+              <div className="aspect-square bg-cream border border-detail/30 flex items-center justify-center overflow-hidden rounded-lg">
+                <img 
+                  src={product.image} 
+                  alt={product.name}
+                  className="w-full h-full object-contain p-4"
+                />
               </div>
               
-              {/* Thumbnails */}
+              {/* Thumbnail - just the main image for now */}
               <div className="flex gap-3">
-                {[0, 1, 2, 3].map((index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImage(index)}
-                    className={`w-20 h-20 bg-cream border flex items-center justify-center transition-all ${
-                      selectedImage === index 
-                        ? "border-primary ring-2 ring-primary/20" 
-                        : "border-detail/30 hover:border-primary/50"
-                    }`}
-                  >
-                    <span className="font-body text-xs text-muted-foreground">{index + 1}</span>
-                  </button>
-                ))}
+                <button
+                  onClick={() => setSelectedImage(0)}
+                  className={`w-20 h-20 bg-cream border flex items-center justify-center transition-all overflow-hidden rounded ${
+                    selectedImage === 0 
+                      ? "border-primary ring-2 ring-primary/20" 
+                      : "border-detail/30 hover:border-primary/50"
+                  }`}
+                >
+                  <img 
+                    src={product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-contain p-1"
+                  />
+                </button>
               </div>
             </div>
 
@@ -225,10 +204,12 @@ const ProductDetail = () => {
                 {product.name}
               </h1>
 
-              {/* Short benefit */}
-              <p className="font-body text-base text-muted-foreground mb-6 leading-relaxed">
-                {product.shortBenefit}
-              </p>
+              {/* Description */}
+              {product.description && (
+                <p className="font-body text-base text-muted-foreground mb-6 leading-relaxed">
+                  {product.description}
+                </p>
+              )}
 
               {/* Rating Summary */}
               <div className="flex items-center gap-3 mb-6">
@@ -244,39 +225,34 @@ const ProductDetail = () => {
 
               {/* Price */}
               <div className="mb-6">
-                {product.originalPrice && (
-                  <p className="font-body text-sm text-muted-foreground line-through">
-                    {product.originalPrice}
+                <p className="font-display text-3xl font-semibold text-foreground">
+                  {product.price || "Consultar"}
+                </p>
+                {product.price && product.price !== "Consultar" && (
+                  <p className="font-body text-xs text-muted-foreground mt-1">
+                    ou 3x sem juros
                   </p>
                 )}
-                <p className="font-display text-3xl font-semibold text-foreground">
-                  {product.price}
-                </p>
-                <p className="font-body text-xs text-muted-foreground mt-1">
-                  ou 3x de R$ 63,30 sem juros
-                </p>
               </div>
 
               {/* Badges */}
               <div className="flex flex-wrap gap-2 mb-8">
-                {product.badges.map((badge) => (
-                  <span 
-                    key={badge} 
-                    className="px-3 py-1.5 bg-cream border border-detail/50 font-body text-xs text-foreground"
-                  >
-                    {badge}
-                  </span>
-                ))}
+                <span className="px-3 py-1.5 bg-cream border border-detail/50 font-body text-xs text-foreground">
+                  {product.brand}
+                </span>
                 {product.isProfessional && (
                   <span className="px-3 py-1.5 bg-foreground text-background font-body text-xs uppercase tracking-wide">
                     Profissional
                   </span>
                 )}
+                <span className="px-3 py-1.5 bg-cream border border-detail/50 font-body text-xs text-foreground">
+                  {categoryName}
+                </span>
               </div>
 
               {/* Quantity + Add to Cart */}
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
-                <div className="flex items-center border border-detail">
+                <div className="flex items-center border border-detail rounded">
                   <button 
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     className="p-3 hover:bg-cream transition-colors"
@@ -313,12 +289,12 @@ const ProductDetail = () => {
               </div>
 
               {/* Quick Benefits */}
-              <div className="p-6 bg-cream border border-detail/30">
+              <div className="p-6 bg-cream border border-detail/30 rounded-lg">
                 <h3 className="font-display text-sm font-semibold text-foreground mb-4">
                   Por que escolher este produto?
                 </h3>
                 <ul className="space-y-3">
-                  {product.benefits.slice(0, 3).map((benefit, i) => (
+                  {productInfo.benefits.slice(0, 3).map((benefit, i) => (
                     <li key={i} className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                       <span className="font-body text-sm text-foreground/80">{benefit}</span>
@@ -368,8 +344,8 @@ const ProductDetail = () => {
                   Resultados Esperados
                 </h3>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {product.results.map((result, i) => (
-                    <div key={i} className="flex items-start gap-3 p-4 bg-background border border-detail/30">
+                  {productInfo.results.map((result, i) => (
+                    <div key={i} className="flex items-start gap-3 p-4 bg-background border border-detail/30 rounded-lg">
                       <Check className="w-5 h-5 text-primary shrink-0 mt-0.5" />
                       <span className="font-body text-foreground">{result}</span>
                     </div>
@@ -384,11 +360,11 @@ const ProductDetail = () => {
                   Ativos Principais
                 </h3>
                 <div className="space-y-4">
-                  {product.actives.map((active) => {
+                  {productInfo.actives.map((active) => {
                     const IconComponent = active.icon;
                     return (
-                      <div key={active.name} className="flex items-start gap-4 p-5 bg-background border border-detail/30">
-                        <div className="w-12 h-12 bg-cream border border-primary/20 flex items-center justify-center shrink-0">
+                      <div key={active.name} className="flex items-start gap-4 p-5 bg-background border border-detail/30 rounded-lg">
+                        <div className="w-12 h-12 bg-cream border border-primary/20 flex items-center justify-center shrink-0 rounded">
                           <IconComponent className="w-5 h-5 text-primary" />
                         </div>
                         <div>
@@ -412,18 +388,18 @@ const ProductDetail = () => {
                   Modo de Uso
                 </h3>
                 <ol className="space-y-4 mb-8">
-                  {product.usage.map((step, i) => (
+                  {productInfo.usage.map((step, i) => (
                     <li key={i} className="flex items-start gap-4">
-                      <span className="w-8 h-8 bg-primary text-background font-display text-sm font-semibold flex items-center justify-center shrink-0">
+                      <span className="w-8 h-8 bg-primary text-background font-display text-sm font-semibold flex items-center justify-center shrink-0 rounded">
                         {i + 1}
                       </span>
                       <span className="font-body text-foreground pt-1">{step}</span>
                     </li>
                   ))}
                 </ol>
-                <div className="p-4 bg-primary/5 border border-primary/20">
+                <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg">
                   <p className="font-body text-sm text-foreground">
-                    <strong className="text-primary">Dica:</strong> {product.usageTip}
+                    <strong className="text-primary">Dica:</strong> {productInfo.usageTip}
                   </p>
                 </div>
               </div>
@@ -435,10 +411,10 @@ const ProductDetail = () => {
                   Indicado Para
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {product.indicatedFor.map((indication) => (
+                  {productInfo.indicatedFor.map((indication) => (
                     <span 
                       key={indication}
-                      className="flex items-center gap-2 px-4 py-2 bg-background border border-detail/30 font-body text-sm text-foreground"
+                      className="flex items-center gap-2 px-4 py-2 bg-background border border-detail/30 font-body text-sm text-foreground rounded-lg"
                     >
                       <Check className="w-4 h-4 text-primary" />
                       {indication}
@@ -497,13 +473,13 @@ const ProductDetail = () => {
 
             <div className="space-y-4">
               {reviews.map((review, i) => (
-                <div key={i} className="p-6 bg-background border border-detail/30">
+                <div key={i} className="p-6 bg-background border border-detail/30 rounded-lg">
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
                         <p className="font-body text-sm font-medium text-foreground">{review.name}</p>
                         {review.verified && (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary font-body text-xs">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-primary/10 text-primary font-body text-xs rounded">
                             <Check className="w-3 h-3" />
                             Compra verificada
                           </span>
