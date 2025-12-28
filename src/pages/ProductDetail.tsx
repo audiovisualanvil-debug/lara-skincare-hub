@@ -1,16 +1,18 @@
 import { useParams, Link } from "react-router-dom";
 import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2, ShoppingCart, Scale } from "lucide-react";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductCardNew from "@/components/shop/ProductCardNew";
 import ProductReviews from "@/components/shop/ProductReviews";
+import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCompare } from "@/contexts/CompareContext";
 import { useReviews } from "@/contexts/ReviewsContext";
+import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { toast } from "sonner";
 
 // Merge all products
@@ -113,6 +115,7 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const { addItem } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
+  const { recentProducts, addToRecentlyViewed, getRecentlyViewed } = useRecentlyViewed();
 
   // Find the product from our real data
   const product = useMemo(() => {
@@ -132,6 +135,24 @@ const ProductDetail = () => {
   const productInfo = useMemo(() => {
     return getDefaultProductInfo(product?.category || "");
   }, [product]);
+
+  // Add to recently viewed when product changes
+  useEffect(() => {
+    if (product) {
+      addToRecentlyViewed({
+        id: product.id,
+        name: product.name,
+        brand: product.brand,
+        price: product.price,
+        image: product.image,
+      });
+    }
+  }, [product, addToRecentlyViewed]);
+
+  // Get recently viewed products (excluding current)
+  const recentlyViewedProducts = useMemo(() => {
+    return getRecentlyViewed(product?.id, 4);
+  }, [getRecentlyViewed, product?.id, recentProducts]);
 
   // If product not found, show message
   if (!product) {
@@ -502,6 +523,14 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* Recently Viewed Section */}
+      {recentlyViewedProducts.length > 0 && (
+        <RecentlyViewedSection 
+          products={recentlyViewedProducts} 
+          currentProductId={product.id} 
+        />
+      )}
 
       {/* Reviews Section */}
       <section className="py-12 lg:py-16 bg-cream border-t border-detail/30">
