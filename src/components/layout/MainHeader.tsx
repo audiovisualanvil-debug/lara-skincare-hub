@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, User, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
+import { User, ShoppingBag, Menu, X, ChevronDown, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
+import SearchAutocomplete from "@/components/shop/SearchAutocomplete";
 
 // Import product images
 import niacineSerum from "@/assets/products/niacine-serum.jpg";
@@ -115,19 +116,12 @@ const menuItems = [
 ];
 
 const MainHeader = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const megaMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { totalItems, openCart } = useCart();
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/shop?busca=${encodeURIComponent(searchQuery)}`);
-    }
-  };
+  const { totalFavorites } = useFavorites();
 
   // Close mega menu when clicking outside
   useEffect(() => {
@@ -164,18 +158,10 @@ const MainHeader = () => {
             </Link>
 
             {/* Search Bar - Desktop */}
-            <form onSubmit={handleSearch} className="hidden md:flex flex-1 max-w-md mx-8">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Buscar produtos..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 h-10 bg-secondary border-0 focus-visible:ring-1 focus-visible:ring-primary"
-                />
-              </div>
-            </form>
+            <SearchAutocomplete 
+              className="hidden md:block flex-1 max-w-md mx-8"
+              inputClassName="h-10 bg-secondary border-0 focus-visible:ring-1 focus-visible:ring-primary"
+            />
 
             {/* Right Icons */}
             <div className="flex items-center gap-2 md:gap-4">
@@ -189,9 +175,16 @@ const MainHeader = () => {
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
 
-              {/* User Icon */}
-              <Button variant="ghost" size="icon" className="hidden md:flex">
-                <User className="h-5 w-5" />
+              {/* Favorites Icon */}
+              <Button variant="ghost" size="icon" className="relative hidden md:flex" asChild>
+                <Link to="/favoritos">
+                  <Heart className="h-5 w-5" />
+                  {totalFavorites > 0 && (
+                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-medium text-primary-foreground flex items-center justify-center">
+                      {totalFavorites > 9 ? "9+" : totalFavorites}
+                    </span>
+                  )}
+                </Link>
               </Button>
 
               {/* Cart Icon */}
@@ -207,18 +200,11 @@ const MainHeader = () => {
           </div>
 
           {/* Mobile Search */}
-          <form onSubmit={handleSearch} className="md:hidden pb-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder="Buscar produtos..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 h-10 bg-secondary border-0"
-              />
-            </div>
-          </form>
+          <div className="md:hidden pb-3">
+            <SearchAutocomplete 
+              inputClassName="h-10 bg-secondary border-0"
+            />
+          </div>
         </div>
       </div>
 

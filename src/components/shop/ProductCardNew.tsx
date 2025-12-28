@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Heart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import { toast } from "sonner";
 
 interface Product {
@@ -32,8 +33,10 @@ const extractPrice = (priceStr?: string): number | null => {
 const ProductCardNew = ({ product }: ProductCardNewProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const { addItem } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
   
   const placeholderImage = "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop";
+  const isProductFavorite = isFavorite(product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -56,6 +59,25 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
     toast.success(`${product.name} adicionado ao carrinho!`);
   };
 
+  const handleToggleFavorite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    toggleFavorite({
+      id: product.id,
+      name: product.name,
+      brand: product.brand,
+      price: product.price,
+      image: product.image,
+    });
+    
+    if (isProductFavorite) {
+      toast.success("Removido dos favoritos");
+    } else {
+      toast.success("Adicionado aos favoritos!");
+    }
+  };
+
   return (
     <div 
       className="group bg-card rounded-lg border border-border overflow-hidden hover-lift"
@@ -74,6 +96,17 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
             Profissional
           </Badge>
         )}
+        {/* Favorite Button */}
+        <button
+          onClick={handleToggleFavorite}
+          className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+            isProductFavorite 
+              ? "bg-primary text-primary-foreground" 
+              : "bg-background/80 text-muted-foreground hover:text-primary hover:bg-background"
+          }`}
+        >
+          <Heart className={`h-4 w-4 ${isProductFavorite ? "fill-current" : ""}`} />
+        </button>
       </Link>
 
       {/* Content */}
