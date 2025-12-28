@@ -7,11 +7,12 @@ interface Product {
   id: number;
   name: string;
   brand: string;
-  price: string;
+  price?: string;
   image?: string;
   imageHover?: string;
   isProfessional?: boolean;
   category?: string;
+  description?: string;
 }
 
 interface ProductCardNewProps {
@@ -55,7 +56,7 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
         </Link>
         <div className="mt-3 flex items-center justify-between">
           <span className="font-heading text-base font-semibold text-foreground">
-            {product.price === "Consultar" ? "Consultar" : `R$ ${product.price}`}
+            {product.price ? (product.price.startsWith("R$") ? product.price : `R$ ${product.price}`) : "Consultar"}
           </span>
         </div>
         <Button 
