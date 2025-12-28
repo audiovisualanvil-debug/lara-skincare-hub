@@ -152,6 +152,7 @@ const Shop = () => {
   });
 
   // Sync URL params with filters
+  // Sync URL params with filters
   useEffect(() => {
     const cat = searchParams.get("categoria");
     if (cat && cat !== "todos") {
@@ -160,6 +161,11 @@ const Shop = () => {
     const brand = searchParams.get("marca");
     if (brand) {
       setSelectedBrands([brand]);
+    }
+    // Handle search from URL
+    const busca = searchParams.get("busca");
+    if (busca) {
+      setSearchQuery(busca);
     }
   }, [searchParams]);
 

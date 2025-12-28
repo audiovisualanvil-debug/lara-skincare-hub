@@ -7,6 +7,7 @@ import ProductCardNew from "@/components/shop/ProductCardNew";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { useCart } from "@/contexts/CartContext";
+import { useFavorites } from "@/contexts/FavoritesContext";
 import { toast } from "sonner";
 
 // Merge all products
@@ -108,6 +109,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
   const { addItem } = useCart();
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   // Find the product from our real data
   const product = useMemo(() => {
@@ -305,9 +307,29 @@ const ProductDetail = () => {
 
               {/* Secondary Actions */}
               <div className="flex items-center gap-4 mb-8">
-                <button className="flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  <Heart className="w-4 h-4" />
-                  Adicionar à Lista
+                <button 
+                  onClick={() => {
+                    toggleFavorite({
+                      id: product.id,
+                      name: product.name,
+                      brand: product.brand,
+                      price: product.price,
+                      image: product.image,
+                    });
+                    if (isFavorite(product.id)) {
+                      toast.success("Removido dos favoritos");
+                    } else {
+                      toast.success("Adicionado aos favoritos!");
+                    }
+                  }}
+                  className={`flex items-center gap-2 font-body text-sm transition-colors ${
+                    isFavorite(product.id) 
+                      ? "text-primary" 
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Heart className={`w-4 h-4 ${isFavorite(product.id) ? "fill-current" : ""}`} />
+                  {isFavorite(product.id) ? "Nos Favoritos" : "Adicionar aos Favoritos"}
                 </button>
                 <button className="flex items-center gap-2 font-body text-sm text-muted-foreground hover:text-foreground transition-colors">
                   <Share2 className="w-4 h-4" />
