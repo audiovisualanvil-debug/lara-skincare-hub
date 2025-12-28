@@ -21,6 +21,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Favorites from "./pages/Favorites";
 import Compare from "./pages/Compare";
+import SkinQuiz from "./pages/SkinQuiz";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +43,7 @@ const App = () => (
                   <Route path="/favoritos" element={<Favorites />} />
                   <Route path="/comparar" element={<Compare />} />
                   <Route path="/monte-sua-rotina" element={<BuildRoutine />} />
+                  <Route path="/quiz-pele" element={<SkinQuiz />} />
                   <Route path="/consultoria" element={<Consultation />} />
                   <Route path="/sobre" element={<About />} />
                   <Route path="/contato" element={<Contact />} />
