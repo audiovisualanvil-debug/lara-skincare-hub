@@ -1,11 +1,13 @@
 import { useParams, Link } from "react-router-dom";
-import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2 } from "lucide-react";
+import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2, ShoppingCart } from "lucide-react";
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductCardNew from "@/components/shop/ProductCardNew";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
+import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 // Merge all products
 const allProducts = [...allMezzoWithImages, ...allExtratosWithImages];
@@ -94,10 +96,18 @@ const reviews = [
   },
 ];
 
+// Helper to extract numeric price from string
+const extractPrice = (priceStr?: string): number | null => {
+  if (!priceStr || priceStr === "Consultar") return null;
+  const match = priceStr.replace(/[^\d,]/g, "").replace(",", ".");
+  return parseFloat(match) || null;
+};
+
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { addItem } = useCart();
 
   // Find the product from our real data
   const product = useMemo(() => {
@@ -268,11 +278,28 @@ const ProductDetail = () => {
                   </button>
                 </div>
                 
-                <Button variant="gold" size="lg" className="flex-1" asChild>
-                  <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="w-4 h-4" />
-                    Comprar via WhatsApp
-                  </a>
+                <Button 
+                  variant="gold" 
+                  size="lg" 
+                  className="flex-1"
+                  onClick={() => {
+                    const price = extractPrice(product.price);
+                    if (price === null) {
+                      toast.error("Este produto não está disponível para compra online. Entre em contato para consultar.");
+                      return;
+                    }
+                    addItem({
+                      id: product.id,
+                      name: product.name,
+                      brand: product.brand,
+                      price: price,
+                      image: product.image,
+                    }, quantity);
+                    toast.success(`${quantity}x ${product.name} adicionado ao carrinho!`);
+                  }}
+                >
+                  <ShoppingCart className="w-4 h-4" />
+                  Adicionar ao Carrinho
                 </Button>
               </div>
 

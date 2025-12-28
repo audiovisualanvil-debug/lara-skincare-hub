@@ -117,12 +117,15 @@ const productPrices = allProducts.map(p => extractPrice(p.price)).filter((p): p 
 const minProductPrice = Math.min(...productPrices);
 const maxProductPrice = Math.max(...productPrices);
 
+const PRODUCTS_PER_PAGE = 12;
+
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [sortBy, setSortBy] = useState("relevancia");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [currentPage, setCurrentPage] = useState(1);
   
   // Get category from URL
   const categoryParam = searchParams.get("categoria") || "todos";
@@ -230,6 +233,35 @@ const Shop = () => {
 
     return result;
   }, [selectedObjectives, selectedBrands, selectedUsageTypes, searchQuery, selectedPriceRanges, sortBy]);
+
+  // Pagination
+  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
+  const paginatedProducts = useMemo(() => {
+    const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+    return filteredProducts.slice(startIndex, startIndex + PRODUCTS_PER_PAGE);
+  }, [filteredProducts, currentPage]);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedObjectives, selectedBrands, selectedUsageTypes, searchQuery, selectedPriceRanges, sortBy]);
+
+  // Pagination helpers
+  const getPageNumbers = () => {
+    const pages: (number | "...")[] = [];
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) pages.push(i);
+    } else {
+      if (currentPage <= 3) {
+        pages.push(1, 2, 3, 4, "...", totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1, "...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages);
+      } else {
+        pages.push(1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages);
+      }
+    }
+    return pages;
+  };
 
   // Filter section component
   const FilterSection = ({ 
@@ -650,16 +682,67 @@ const Shop = () => {
               )}
 
               {/* Products */}
-              {filteredProducts.length > 0 ? (
-                <div className={`grid gap-4 md:gap-6 ${
-                  viewMode === "grid" 
-                    ? "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3" 
-                    : "grid-cols-1"
-                }`}>
-                  {filteredProducts.map((product) => (
-                    <ProductCardNew key={product.id} product={product} />
-                  ))}
-                </div>
+              {paginatedProducts.length > 0 ? (
+                <>
+                  <div className={`grid gap-4 md:gap-6 ${
+                    viewMode === "grid" 
+                      ? "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3" 
+                      : "grid-cols-1"
+                  }`}>
+                    {paginatedProducts.map((product) => (
+                      <ProductCardNew key={product.id} product={product} />
+                    ))}
+                  </div>
+
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+                      <div className="flex items-center gap-1">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                          disabled={currentPage === 1}
+                          className="border-detail"
+                        >
+                          Anterior
+                        </Button>
+                        
+                        <div className="flex items-center gap-1 mx-2">
+                          {getPageNumbers().map((page, index) => (
+                            page === "..." ? (
+                              <span key={`ellipsis-${index}`} className="px-2 font-body text-muted-foreground">...</span>
+                            ) : (
+                              <Button
+                                key={page}
+                                variant={currentPage === page ? "gold" : "outline"}
+                                size="sm"
+                                onClick={() => setCurrentPage(page)}
+                                className={`w-9 h-9 ${currentPage !== page ? "border-detail" : ""}`}
+                              >
+                                {page}
+                              </Button>
+                            )
+                          ))}
+                        </div>
+                        
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                          disabled={currentPage === totalPages}
+                          className="border-detail"
+                        >
+                          Próxima
+                        </Button>
+                      </div>
+                      
+                      <p className="font-body text-sm text-muted-foreground">
+                        Mostrando {((currentPage - 1) * PRODUCTS_PER_PAGE) + 1}-{Math.min(currentPage * PRODUCTS_PER_PAGE, filteredProducts.length)} de {filteredProducts.length} produtos
+                      </p>
+                    </div>
+                  )}
+                </>
               ) : (
                 <div className="text-center py-20 bg-cream/50 border border-detail/30 rounded-lg">
                   <div className="max-w-sm mx-auto">
@@ -670,15 +753,6 @@ const Shop = () => {
                       Limpar Filtros
                     </Button>
                   </div>
-                </div>
-              )}
-
-              {/* Load More - Placeholder */}
-              {filteredProducts.length > 0 && filteredProducts.length >= 12 && (
-                <div className="mt-12 text-center">
-                  <Button variant="gold-outline" size="lg">
-                    Carregar mais produtos
-                  </Button>
                 </div>
               )}
             </div>

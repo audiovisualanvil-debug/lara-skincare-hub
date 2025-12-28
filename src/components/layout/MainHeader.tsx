@@ -4,7 +4,7 @@ import { Search, User, ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import CartDrawer from "@/components/shop/CartDrawer";
+import { useCart } from "@/contexts/CartContext";
 
 // Import product images
 import niacineSerum from "@/assets/products/niacine-serum.jpg";
@@ -116,11 +116,11 @@ const menuItems = [
 
 const MainHeader = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const megaMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const { totalItems, openCart } = useCart();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -194,20 +194,15 @@ const MainHeader = () => {
                 <User className="h-5 w-5" />
               </Button>
 
-              {/* Cart Icon with Drawer */}
-              <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="relative">
-                    <ShoppingBag className="h-5 w-5" />
-                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-medium text-primary-foreground flex items-center justify-center">
-                      0
-                    </span>
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="right" className="w-full sm:max-w-md p-0">
-                  <CartDrawer onClose={() => setIsCartOpen(false)} />
-                </SheetContent>
-              </Sheet>
+              {/* Cart Icon */}
+              <Button variant="ghost" size="icon" className="relative" onClick={openCart}>
+                <ShoppingBag className="h-5 w-5" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-medium text-primary-foreground flex items-center justify-center">
+                    {totalItems > 9 ? "9+" : totalItems}
+                  </span>
+                )}
+              </Button>
             </div>
           </div>
 
