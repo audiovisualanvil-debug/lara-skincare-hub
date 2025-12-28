@@ -2,9 +2,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Heart } from "lucide-react";
+import { ShoppingCart, Heart, Scale } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useCompare } from "@/contexts/CompareContext";
 import { toast } from "sonner";
 
 interface Product {
@@ -34,9 +35,11 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const { addItem } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
+  const { addToCompare, removeFromCompare, isInCompare, canAddMore } = useCompare();
   
   const placeholderImage = "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop";
   const isProductFavorite = isFavorite(product.id);
+  const isProductInCompare = isInCompare(product.id);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -78,6 +81,34 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
     }
   };
 
+  const handleToggleCompare = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    if (isProductInCompare) {
+      removeFromCompare(product.id);
+      toast.success("Removido da comparação");
+    } else {
+      if (!canAddMore) {
+        toast.error("Você pode comparar no máximo 3 produtos");
+        return;
+      }
+      const added = addToCompare({
+        id: product.id,
+        name: product.name,
+        brand: product.brand,
+        price: product.price,
+        image: product.image,
+        category: product.category,
+        description: product.description,
+        isProfessional: product.isProfessional,
+      });
+      if (added) {
+        toast.success("Adicionado para comparação!");
+      }
+    }
+  };
+
   return (
     <div 
       className="group bg-card rounded-lg border border-border overflow-hidden hover-lift"
@@ -96,17 +127,33 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
             Profissional
           </Badge>
         )}
-        {/* Favorite Button */}
-        <button
-          onClick={handleToggleFavorite}
-          className={`absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-            isProductFavorite 
-              ? "bg-primary text-primary-foreground" 
-              : "bg-background/80 text-muted-foreground hover:text-primary hover:bg-background"
-          }`}
-        >
-          <Heart className={`h-4 w-4 ${isProductFavorite ? "fill-current" : ""}`} />
-        </button>
+        
+        {/* Action buttons */}
+        <div className="absolute top-3 right-3 flex flex-col gap-2">
+          {/* Favorite Button */}
+          <button
+            onClick={handleToggleFavorite}
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+              isProductFavorite 
+                ? "bg-primary text-primary-foreground" 
+                : "bg-background/80 text-muted-foreground hover:text-primary hover:bg-background"
+            }`}
+          >
+            <Heart className={`h-4 w-4 ${isProductFavorite ? "fill-current" : ""}`} />
+          </button>
+          
+          {/* Compare Button */}
+          <button
+            onClick={handleToggleCompare}
+            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+              isProductInCompare 
+                ? "bg-primary text-primary-foreground" 
+                : "bg-background/80 text-muted-foreground hover:text-primary hover:bg-background"
+            }`}
+          >
+            <Scale className="h-4 w-4" />
+          </button>
+        </div>
       </Link>
 
       {/* Content */}
