@@ -7,6 +7,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import ProductCardNew from "@/components/shop/ProductCardNew";
+import MobileFiltersSheet from "@/components/shop/MobileFiltersSheet";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 
@@ -490,110 +491,30 @@ const Shop = () => {
                   placeholder="Buscar produtos..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 font-body text-sm border-detail bg-cream"
+                  className="pl-10 font-body text-sm border-border bg-secondary h-10"
                 />
               </div>
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={() => setIsFilterOpen(true)}
-                className="border-detail shrink-0"
-              >
-                <Filter className="w-4 h-4" />
-                Filtros
-                {hasActiveFilters && <span className="w-2 h-2 bg-primary rounded-full ml-1" />}
-              </Button>
+              <MobileFiltersSheet
+                skinObjectives={skinObjectives}
+                productTypes={productTypes}
+                brands={brands}
+                usageTypes={usageTypes}
+                priceRanges={priceRanges}
+                selectedObjectives={selectedObjectives}
+                selectedProductTypes={selectedProductTypes}
+                selectedBrands={selectedBrands}
+                selectedUsageTypes={selectedUsageTypes}
+                selectedPriceRanges={selectedPriceRanges}
+                setSelectedObjectives={setSelectedObjectives}
+                setSelectedProductTypes={setSelectedProductTypes}
+                setSelectedBrands={setSelectedBrands}
+                setSelectedUsageTypes={setSelectedUsageTypes}
+                setSelectedPriceRanges={setSelectedPriceRanges}
+                resultsCount={filteredProducts.length}
+                onClearFilters={clearFilters}
+                hasActiveFilters={hasActiveFilters}
+              />
             </div>
-
-            {/* Mobile Filter Panel */}
-            {isFilterOpen && (
-              <div className="fixed inset-0 z-50 lg:hidden">
-                <div className="absolute inset-0 bg-foreground/50 backdrop-blur-sm" onClick={() => setIsFilterOpen(false)} />
-                <div className="absolute right-0 top-0 bottom-0 w-[85%] max-w-sm bg-background shadow-xl overflow-y-auto">
-                  <div className="p-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <h2 className="font-display text-xl font-semibold">Filtrar por</h2>
-                      <button onClick={() => setIsFilterOpen(false)} className="p-2 hover:bg-cream rounded-full">
-                        <X className="w-5 h-5" />
-                      </button>
-                    </div>
-
-                    {hasActiveFilters && (
-                      <button onClick={clearFilters} className="font-body text-sm text-primary hover:underline mb-6">
-                        Limpar todos os filtros
-                      </button>
-                    )}
-
-                    <div className="space-y-2">
-                      <FilterSection title="Objetivo" isOpen={true} onToggle={() => {}}>
-                        {skinObjectives.map((item) => (
-                          <CheckboxItem
-                            key={item.slug}
-                            label={item.name}
-                            checked={selectedObjectives.includes(item.slug)}
-                            onChange={() => toggleFilter(item.slug, selectedObjectives, setSelectedObjectives)}
-                          />
-                        ))}
-                      </FilterSection>
-
-                      <FilterSection title="Tipo de Produto" isOpen={true} onToggle={() => {}}>
-                        {productTypes.map((item) => (
-                          <CheckboxItem
-                            key={item.slug}
-                            label={item.name}
-                            checked={selectedProductTypes.includes(item.slug)}
-                            onChange={() => toggleFilter(item.slug, selectedProductTypes, setSelectedProductTypes)}
-                          />
-                        ))}
-                      </FilterSection>
-
-                      <FilterSection title="Marca" isOpen={true} onToggle={() => {}}>
-                        {brands.map((item) => (
-                          <CheckboxItem
-                            key={item.slug}
-                            label={item.name}
-                            checked={selectedBrands.includes(item.slug)}
-                            onChange={() => toggleFilter(item.slug, selectedBrands, setSelectedBrands)}
-                          />
-                        ))}
-                      </FilterSection>
-
-                      <FilterSection title="Tipo de Uso" isOpen={true} onToggle={() => {}}>
-                        {usageTypes.map((item) => (
-                          <CheckboxItem
-                            key={item.slug}
-                            label={item.name}
-                            checked={selectedUsageTypes.includes(item.slug)}
-                            onChange={() => toggleFilter(item.slug, selectedUsageTypes, setSelectedUsageTypes)}
-                          />
-                        ))}
-                      </FilterSection>
-
-                      <FilterSection title="Faixa de Preço" isOpen={true} onToggle={() => {}}>
-                        {priceRanges.map((range, index) => (
-                          <CheckboxItem
-                            key={index}
-                            label={range.name}
-                            checked={selectedPriceRanges.includes(index)}
-                            onChange={() => {
-                              setSelectedPriceRanges(prev => 
-                                prev.includes(index) 
-                                  ? prev.filter(i => i !== index) 
-                                  : [...prev, index]
-                              );
-                            }}
-                          />
-                        ))}
-                      </FilterSection>
-                    </div>
-
-                    <Button variant="gold" className="w-full mt-8" onClick={() => setIsFilterOpen(false)}>
-                      Ver {filteredProducts.length} resultado{filteredProducts.length !== 1 ? "s" : ""}
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* Products Grid */}
             <div className="flex-1 min-w-0">
