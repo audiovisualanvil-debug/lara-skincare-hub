@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WhatsAppFloat from "@/components/layout/WhatsAppFloat";
 import CartDrawer from "@/components/shop/CartDrawer";
 import CompareBar from "@/components/shop/CompareBar";
+import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import { CartProvider } from "@/contexts/CartContext";
 import { FavoritesProvider } from "@/contexts/FavoritesContext";
 import { CompareProvider } from "@/contexts/CompareContext";
@@ -46,6 +47,7 @@ const App = () => (
                   <Route path="/contato" element={<Contact />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
+                <MobileBottomNav />
                 <WhatsAppFloat />
                 <CartDrawer />
                 <CompareBar />
