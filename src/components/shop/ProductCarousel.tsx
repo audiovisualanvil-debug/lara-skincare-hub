@@ -7,7 +7,7 @@ interface Product {
   id: number;
   name: string;
   brand: string;
-  price: string;
+  price?: string;
   image?: string;
   isProfessional?: boolean;
 }

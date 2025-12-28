@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import ProductCardNew from "@/components/shop/ProductCardNew";
-import { allMezzoProducts, allExtratosProducts } from "@/data/products";
+import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
+import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 
 // Category definitions with descriptions
 const categoryDefinitions: Record<string, { title: string; description: string }> = {
@@ -88,10 +89,10 @@ const usageTypes = [
   { name: "Profissional", slug: "profissional" },
 ];
 
-// Merge all products
+// Merge all products with images
 const allProducts = [
-  ...allMezzoProducts,
-  ...allExtratosProducts,
+  ...allMezzoWithImages,
+  ...allExtratosWithImages,
 ];
 
 const Shop = () => {
