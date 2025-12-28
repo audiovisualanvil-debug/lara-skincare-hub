@@ -6,87 +6,93 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CartDrawer from "@/components/shop/CartDrawer";
 
+// Import product images
+import niacineSerum from "@/assets/products/niacine-serum.jpg";
+import dermacosImmortalite from "@/assets/products/dermacos-immortalite.jpg";
+import blackSecretHydrogen from "@/assets/products/black-secret-hydrogen.jpg";
+import hidrasolDermacos from "@/assets/products/hidrasol-dermacos.jpg";
+
 // Menu items with mega menu content
 const menuItems = [
   { 
     label: "Ofertas", 
-    href: "/shop?filtro=ofertas",
+    href: "/loja?filtro=ofertas",
     hasMegaMenu: false 
   },
   { 
     label: "Lançamentos", 
-    href: "/shop?filtro=lancamentos",
+    href: "/loja?filtro=lancamentos",
     hasMegaMenu: false 
   },
   { 
     label: "Categorias", 
-    href: "/shop",
+    href: "/loja",
     hasMegaMenu: true,
     megaMenu: {
       subcategories: [
-        { label: "Facial", href: "/shop?categoria=facial" },
-        { label: "Corporal", href: "/shop?categoria=corpo" },
-        { label: "Labial", href: "/shop?categoria=labial" },
-        { label: "Área Íntima", href: "/shop?categoria=intima" },
-        { label: "Área dos Olhos", href: "/shop?categoria=olhos" },
-        { label: "Proteção Solar", href: "/shop?categoria=fotoprotecao" },
-        { label: "Capilar", href: "/shop?categoria=capilar" },
-        { label: "Ver todos os produtos", href: "/shop", highlight: true },
+        { label: "Facial", href: "/loja?categoria=facial" },
+        { label: "Corporal", href: "/loja?categoria=corpo" },
+        { label: "Labial", href: "/loja?categoria=labial" },
+        { label: "Área Íntima", href: "/loja?categoria=intima" },
+        { label: "Área dos Olhos", href: "/loja?categoria=olhos" },
+        { label: "Proteção Solar", href: "/loja?categoria=fotoprotecao" },
+        { label: "Capilar", href: "/loja?categoria=capilar" },
+        { label: "Ver todos os produtos", href: "/loja", highlight: true },
       ],
       banners: [
         {
-          title: "Queridinhos de Hidratação",
-          subtitle: "Para cuidar da pele no inverno",
-          image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=300&fit=crop",
-          href: "/shop?categoria=hidratacao",
+          title: "Niacine+ Sérum",
+          subtitle: "Controle de poros e uniformização",
+          image: niacineSerum,
+          href: "/loja?categoria=hidratacao",
         },
         {
-          title: "Proteção Solar",
-          subtitle: "Segurança durante todo o ano",
-          image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=300&fit=crop",
-          href: "/shop?categoria=fotoprotecao",
+          title: "Hidrasol Proteção",
+          subtitle: "FPS 30 e 60 para todos os dias",
+          image: hidrasolDermacos,
+          href: "/loja?categoria=fotoprotecao",
         },
         {
-          title: "Efeito Lifting Instantâneo",
-          subtitle: "Com sérum facial anti-idade",
-          image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=300&fit=crop",
-          href: "/shop?categoria=anti-idade",
+          title: "Dermacos & Immortalité",
+          subtitle: "Boosters rejuvenescedores",
+          image: dermacosImmortalite,
+          href: "/loja?categoria=anti-idade",
         },
       ],
     },
   },
   { 
     label: "Tratamento", 
-    href: "/shop?tipo=tratamento",
+    href: "/loja?tipo=tratamento",
     hasMegaMenu: true,
     megaMenu: {
       subcategories: [
-        { label: "Clareamento", href: "/shop?categoria=clareamento" },
-        { label: "Anti-idade", href: "/shop?categoria=anti-idade" },
-        { label: "Acne & Oleosidade", href: "/shop?categoria=acne" },
-        { label: "Hidratação", href: "/shop?categoria=hidratacao" },
-        { label: "Firmador", href: "/shop?categoria=corpo" },
-        { label: "Antiqueda Capilar", href: "/shop?categoria=capilar" },
-        { label: "Ver todos", href: "/shop", highlight: true },
+        { label: "Clareamento", href: "/loja?categoria=clareamento" },
+        { label: "Anti-idade", href: "/loja?categoria=anti-idade" },
+        { label: "Acne & Oleosidade", href: "/loja?categoria=acne-oleosidade" },
+        { label: "Hidratação", href: "/loja?categoria=hidratacao-reparacao" },
+        { label: "Firmador", href: "/loja?categoria=corpo" },
+        { label: "Antiqueda Capilar", href: "/loja?categoria=capilar" },
+        { label: "Ver todos", href: "/loja", highlight: true },
       ],
       banners: [
         {
-          title: "Clareamento de Manchas",
-          subtitle: "Resultados visíveis em semanas",
-          image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=400&h=300&fit=crop",
-          href: "/shop?categoria=clareamento",
+          title: "Black Secret",
+          subtitle: "Clareador concentrado potente",
+          image: blackSecretHydrogen,
+          href: "/loja?categoria=clareamento",
         },
         {
-          title: "Controle de Acne",
-          subtitle: "Pele limpa e equilibrada",
-          image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=300&fit=crop",
-          href: "/shop?categoria=acne",
+          title: "Hidrasol FPS",
+          subtitle: "Proteção solar diária",
+          image: hidrasolDermacos,
+          href: "/loja?categoria=fotoprotecao",
         },
         {
-          title: "Rejuvenescimento",
-          subtitle: "Firmeza e redução de rugas",
-          image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=400&h=300&fit=crop",
-          href: "/shop?categoria=anti-idade",
+          title: "Dermacos Booster",
+          subtitle: "Rejuvenescimento intensivo",
+          image: dermacosImmortalite,
+          href: "/loja?categoria=anti-idade",
         },
       ],
     },
