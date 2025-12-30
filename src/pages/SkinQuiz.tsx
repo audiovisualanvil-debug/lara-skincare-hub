@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, ChevronLeft, Sparkles, RotateCcw } from "lucide-react";
+import { ChevronRight, ChevronLeft, Sparkles, RotateCcw, Save, LogIn } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 interface QuizOption {
   id: string;
@@ -320,12 +323,39 @@ const skinTypeResults: Record<string, SkinTypeResult> = {
 
 const SkinQuiz = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
+  const { user } = useAuth();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState<SkinTypeResult | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   const progress = ((currentQuestion + 1) / quizQuestions.length) * 100;
+
+  // Load saved skin type on mount
+  useEffect(() => {
+    if (user) {
+      loadSavedSkinType();
+    }
+  }, [user]);
+
+  const loadSavedSkinType = async () => {
+    if (!user) return;
+
+    const { data } = await supabase
+      .from('profiles')
+      .select('skin_type')
+      .eq('id', user.id)
+      .single();
+
+    if (data?.skin_type && skinTypeResults[data.skin_type]) {
+      // User has a saved skin type, show it
+      setResult(skinTypeResults[data.skin_type]);
+      setSaved(true);
+    }
+  };
 
   const calculateResult = () => {
     const scores = { oleosa: 0, seca: 0, mista: 0, normal: 0, sensivel: 0 };
@@ -359,6 +389,7 @@ const SkinQuiz = () => {
       const skinResult = calculateResult();
       setResult(skinResult);
       setShowResult(true);
+      setSaved(false);
     }
   };
 
@@ -373,11 +404,60 @@ const SkinQuiz = () => {
     setAnswers({});
     setShowResult(false);
     setResult(null);
+    setSaved(false);
   };
 
   const handleViewProducts = () => {
     if (result) {
       navigate(`/loja?tipo-pele=${result.slug}`);
+    }
+  };
+
+  const handleSaveResult = async () => {
+    if (!user || !result) {
+      navigate('/auth', { state: { from: '/quiz-pele' } });
+      return;
+    }
+
+    setSaving(true);
+
+    try {
+      // Save to quiz_results history
+      const { error: historyError } = await supabase
+        .from('quiz_results')
+        .insert({
+          user_id: user.id,
+          skin_type: result.slug,
+          answers: answers,
+        });
+
+      if (historyError) throw historyError;
+
+      // Update profile with current skin type
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .update({
+          skin_type: result.slug,
+          skin_type_updated_at: new Date().toISOString(),
+        })
+        .eq('id', user.id);
+
+      if (profileError) throw profileError;
+
+      setSaved(true);
+      toast({
+        title: "Resultado salvo!",
+        description: "Seu tipo de pele foi salvo no seu perfil para recomendações futuras.",
+      });
+    } catch (error) {
+      console.error('Error saving quiz result:', error);
+      toast({
+        title: "Erro ao salvar",
+        description: "Não foi possível salvar o resultado. Tente novamente.",
+        variant: "destructive",
+      });
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -406,6 +486,11 @@ const SkinQuiz = () => {
                   <p className="text-muted-foreground">
                     Responda {quizQuestions.length} perguntas rápidas e receba recomendações personalizadas
                   </p>
+                  {user && (
+                    <p className="text-sm text-primary">
+                      Logado como {user.email} - seu resultado será salvo
+                    </p>
+                  )}
                 </div>
 
                 {/* Progress */}
@@ -487,6 +572,11 @@ const SkinQuiz = () => {
                   <p className="text-muted-foreground text-lg max-w-lg mx-auto">
                     {result?.description}
                   </p>
+                  {saved && (
+                    <p className="text-sm text-primary font-medium">
+                      ✓ Resultado salvo no seu perfil
+                    </p>
+                  )}
                 </div>
 
                 {/* Characteristics */}
@@ -531,6 +621,31 @@ const SkinQuiz = () => {
                     Ver Produtos Recomendados
                     <ChevronRight className="h-4 w-4" />
                   </Button>
+                  
+                  {!saved && (
+                    <Button
+                      variant="secondary"
+                      onClick={handleSaveResult}
+                      disabled={saving}
+                      className="gap-2"
+                      size="lg"
+                    >
+                      {saving ? (
+                        "Salvando..."
+                      ) : user ? (
+                        <>
+                          <Save className="h-4 w-4" />
+                          Salvar no Perfil
+                        </>
+                      ) : (
+                        <>
+                          <LogIn className="h-4 w-4" />
+                          Entrar para Salvar
+                        </>
+                      )}
+                    </Button>
+                  )}
+                  
                   <Button
                     variant="outline"
                     onClick={handleRestart}
