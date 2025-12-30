@@ -1,12 +1,20 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User, ShoppingBag, Menu, X, ChevronDown, Heart } from "lucide-react";
+import { User, ShoppingBag, Menu, X, ChevronDown, Heart, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useAuth } from "@/hooks/useAuth";
 import SearchAutocomplete from "@/components/shop/SearchAutocomplete";
-
+import { toast } from "sonner";
 // Import product images
 import niacineSerum from "@/assets/products/niacine-serum.jpg";
 import dermacosImmortalite from "@/assets/products/dermacos-immortalite.jpg";
@@ -117,6 +125,17 @@ const MainHeader = () => {
   const navigate = useNavigate();
   const { totalItems, openCart } = useCart();
   const { totalFavorites } = useFavorites();
+  const { user, signOut, loading } = useAuth();
+
+  const handleSignOut = async () => {
+    const { error } = await signOut();
+    if (error) {
+      toast.error("Erro ao sair da conta");
+    } else {
+      toast.success("Você saiu da conta");
+      navigate("/");
+    }
+  };
 
   // Close mega menu when clicking outside
   useEffect(() => {
@@ -169,6 +188,35 @@ const MainHeader = () => {
               >
                 {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </Button>
+
+              {/* User Menu */}
+              {!loading && (
+                user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon" className="hidden md:flex">
+                        <User className="h-5 w-5" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48">
+                      <div className="px-2 py-1.5">
+                        <p className="text-sm font-medium truncate">{user.email}</p>
+                      </div>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={handleSignOut} className="text-destructive focus:text-destructive">
+                        <LogOut className="h-4 w-4 mr-2" />
+                        Sair
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Button variant="ghost" size="icon" className="hidden md:flex" asChild>
+                    <Link to="/auth">
+                      <User className="h-5 w-5" />
+                    </Link>
+                  </Button>
+                )
+              )}
 
               {/* Favorites Icon */}
               <Button variant="ghost" size="icon" className="relative hidden md:flex" asChild>
