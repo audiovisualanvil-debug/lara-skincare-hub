@@ -165,10 +165,10 @@ const HomePage = () => {
         >
           <motion.div style={{ scale: heroScale }}>
             <HeroBanner
-              title="Sweet Lips — Cuidado labial profissional"
-              subtitle="Hidratação, preenchimento e rejuvenescimento labial com tecnologia avançada. Resultados visíveis desde a primeira aplicação."
-              ctaPrimary={{ label: "Conhecer Linha", href: "/loja?categoria=labial" }}
-              ctaSecondary={{ label: "Ver Todos Produtos", href: "/loja" }}
+              title="Sua pele merece o melhor tratamento"
+              subtitle="Dermocosméticos de alta performance para resultados visíveis. Descubra a rotina ideal para sua pele com Mezzo, Extratos da Terra e Tulipia."
+              ctaPrimary={{ label: "Monte sua Rotina", href: "/monte-sua-rotina" }}
+              ctaSecondary={{ label: "Ver Produtos", href: "/loja" }}
               image={sweetLipsLayane}
             />
           </motion.div>
@@ -179,10 +179,10 @@ const HomePage = () => {
           <div className="container-editorial">
             <AnimatedSection className="mb-8">
               <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
-                Destaques
+                Linha Tulipia
               </span>
               <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
-                Nossos lançamentos
+                Destaques Sweet Lips
               </h2>
             </AnimatedSection>
             
