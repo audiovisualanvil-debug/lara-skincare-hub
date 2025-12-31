@@ -1,0 +1,214 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { ArrowLeft, Sparkles, Leaf, FlaskConical, Star } from "lucide-react";
+import MainHeader from "@/components/layout/MainHeader";
+import MainFooter from "@/components/layout/MainFooter";
+import ProductGrid from "@/components/shop/ProductGrid";
+import AnimatedSection from "@/components/home/AnimatedSection";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  tulipiaSweetLips,
+  tulipiaVitaminaC,
+  tulipiaAreaOlhos,
+  tulipiaMascaras,
+  tulipiaAntiIdade,
+  allTulipiaWithImages,
+} from "@/data/tulipiaProductsWithImages";
+
+// Import banner images for hero
+import sweetLipsCereja from "@/assets/banners/sweet-lips-cereja.jpg";
+
+const categories = [
+  { id: "all", label: "Todos", count: allTulipiaWithImages.length },
+  { id: "labial", label: "Sweet Lips", count: tulipiaSweetLips.length, icon: Sparkles },
+  { id: "vitamina-c", label: "Vitamina C", count: tulipiaVitaminaC.length, icon: Star },
+  { id: "area-olhos", label: "Área dos Olhos", count: tulipiaAreaOlhos.length, icon: FlaskConical },
+  { id: "mascara", label: "Máscaras", count: tulipiaMascaras.length, icon: Leaf },
+  { id: "anti-idade", label: "Anti-idade", count: tulipiaAntiIdade.length, icon: Sparkles },
+];
+
+const TulipiaPage = () => {
+  const [activeCategory, setActiveCategory] = useState("all");
+
+  const filteredProducts = activeCategory === "all" 
+    ? allTulipiaWithImages 
+    : allTulipiaWithImages.filter(p => p.category === activeCategory);
+
+  return (
+    <>
+      <MainHeader />
+
+      <main className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img
+              src={sweetLipsCereja}
+              alt="Linha Tulipia - Dermocosméticos Premium"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+          </div>
+
+          {/* Hero Content */}
+          <div className="relative h-full container mx-auto px-4 flex items-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-2xl"
+            >
+              <Badge className="mb-4 bg-primary/20 text-primary border-primary/30 backdrop-blur-sm">
+                Linha Exclusiva
+              </Badge>
+              
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 tracking-tight">
+                <span className="font-semibold">Tulipia</span>
+                <br />
+                <span className="text-primary">Dermocosméticos</span>
+              </h1>
+              
+              <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
+                Tecnologia nano encapsulada e ingredientes premium para resultados 
+                profissionais. Desenvolvido por especialistas em dermocosmética.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <Button size="lg" className="bg-primary hover:bg-primary/90">
+                  Ver Produtos
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="border-white/30 text-white hover:bg-white/10"
+                  asChild
+                >
+                  <Link to="/consultoria">Consultoria Gratuita</Link>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Features Bar */}
+        <AnimatedSection direction="fade" className="bg-card border-y border-border">
+          <div className="container mx-auto px-4 py-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { icon: FlaskConical, label: "Tecnologia Nano", desc: "Ativos encapsulados" },
+                { icon: Leaf, label: "Ingredientes Premium", desc: "Alta concentração" },
+                { icon: Sparkles, label: "Resultados Visíveis", desc: "Desde a 1ª aplicação" },
+                { icon: Star, label: "Uso Profissional", desc: "Clínicas e estéticas" },
+              ].map((feature, index) => (
+                <motion.div
+                  key={feature.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 + index * 0.1 }}
+                  className="flex items-center gap-3"
+                >
+                  <div className="p-2 bg-primary/10 rounded-lg">
+                    <feature.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-foreground text-sm">{feature.label}</p>
+                    <p className="text-xs text-muted-foreground">{feature.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
+
+        {/* Products Section */}
+        <section className="container mx-auto px-4 py-12 md:py-16">
+          {/* Back Link */}
+          <Link 
+            to="/loja" 
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Voltar para a loja
+          </Link>
+
+          {/* Category Filter */}
+          <AnimatedSection direction="fade" className="mb-10">
+            <div className="flex flex-wrap gap-3">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`
+                    px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
+                    flex items-center gap-2
+                    ${activeCategory === cat.id 
+                      ? "bg-primary text-primary-foreground shadow-md" 
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                    }
+                  `}
+                >
+                  {cat.icon && <cat.icon className="w-4 h-4" />}
+                  {cat.label}
+                  <span className={`
+                    text-xs px-1.5 py-0.5 rounded-full
+                    ${activeCategory === cat.id 
+                      ? "bg-primary-foreground/20 text-primary-foreground" 
+                      : "bg-muted text-muted-foreground"
+                    }
+                  `}>
+                    {cat.count}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          {/* Products Grid */}
+          <AnimatedSection direction="up">
+            <ProductGrid 
+              products={filteredProducts} 
+              columns={4}
+            />
+          </AnimatedSection>
+
+          {/* Empty State */}
+          {filteredProducts.length === 0 && (
+            <div className="text-center py-16">
+              <p className="text-muted-foreground">
+                Nenhum produto encontrado nesta categoria.
+              </p>
+            </div>
+          )}
+        </section>
+
+        {/* CTA Section */}
+        <AnimatedSection direction="fade" className="bg-card border-t border-border">
+          <div className="container mx-auto px-4 py-16 text-center">
+            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
+              Precisa de ajuda para escolher?
+            </h2>
+            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+              Nossa equipe de especialistas pode recomendar os produtos ideais para seu tipo de pele e objetivos.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button size="lg" asChild>
+                <Link to="/quiz-pele">Fazer Quiz de Pele</Link>
+              </Button>
+              <Button variant="outline" size="lg" asChild>
+                <Link to="/consultoria">Agendar Consultoria</Link>
+              </Button>
+            </div>
+          </div>
+        </AnimatedSection>
+      </main>
+
+      <MainFooter />
+    </>
+  );
+};
+
+export default TulipiaPage;
