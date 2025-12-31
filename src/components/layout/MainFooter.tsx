@@ -20,11 +20,11 @@ const MainFooter = () => {
           <div className="lg:col-span-1">
             <Link to="/" className="inline-block">
               <h3 className="font-display text-2xl font-semibold text-background tracking-tight">
-                Multti Med
+                Tulipia
               </h3>
             </Link>
             <p className="mt-4 font-body text-sm text-background/60 leading-relaxed max-w-xs">
-              Dermocosméticos de alta performance para profissionais e pacientes que buscam resultados reais e duradouros.
+              Dermocosméticos profissionais de alta performance. Cuidados labiais, faciais e corporais com resultados comprovados.
             </p>
             
             {/* Social Links */}
@@ -114,7 +114,7 @@ const MainFooter = () => {
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                <span className="font-body text-sm text-background/60">contato@multtimed.com.br</span>
+                <span className="font-body text-sm text-background/60">contato@tulipia.com.br</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-primary mt-0.5 shrink-0" />
@@ -174,7 +174,7 @@ const MainFooter = () => {
         <div className="container-editorial py-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <p className="font-body text-xs text-background/40">
-              © {currentYear} Multti Med. Todos os direitos reservados.
+              © {currentYear} Tulipia Dermocosméticos. Todos os direitos reservados.
             </p>
             <div className="flex gap-6">
               <Link to="/privacidade" className="font-body text-xs text-background/40 hover:text-background/60 transition-colors">

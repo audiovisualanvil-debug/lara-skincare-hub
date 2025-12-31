@@ -16,6 +16,17 @@ import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
+// Import Tulipia banners
+import sweetLipsLayane from "@/assets/banners/sweet-lips-layane.jpg";
+import sweetLipsCereja from "@/assets/banners/sweet-lips-cereja.jpg";
+import sweetLipsEsfoliante from "@/assets/banners/sweet-lips-esfoliante.webp";
+import sweetLipsFluido from "@/assets/banners/sweet-lips-fluido.webp";
+import lifeCNano from "@/assets/banners/life-c-nano.webp";
+import miracleEyes1 from "@/assets/banners/miracle-eyes-1.webp";
+import glamourPele from "@/assets/banners/glamour-pele.webp";
+import primaveraMask from "@/assets/banners/primavera-mask.webp";
+import resilienceSerum from "@/assets/banners/resilience-serum.webp";
+
 // Featured products - mix from both brands
 const featuredProducts = [
   ...allMezzoWithImages.slice(0, 4),
@@ -56,28 +67,28 @@ const categories = [
   },
 ];
 
-// Kits data
+// Kits data with Tulipia banners
 const kits = [
   {
     id: 1,
-    name: "Kit Clareamento Diário",
-    description: "Uniformiza o tom e ilumina com proteção solar. Ideal para melasma e manchas.",
-    image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=450&fit=crop",
-    href: "/produto/701",
+    name: "Life C Nano Sabonete",
+    description: "Vitamina C estabilizada para luminosidade e uniformização do tom da pele.",
+    image: lifeCNano,
+    href: "/loja?categoria=facial",
   },
   {
     id: 2,
-    name: "Kit Anti-idade & Firmeza",
-    description: "Melhora firmeza e linhas com proteção diária. Resultados visíveis em semanas.",
-    image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600&h=450&fit=crop",
-    href: "/produto/703",
+    name: "Miracle Eyes Nano Gel",
+    description: "Tratamento intensivo para área dos olhos. Reduz olheiras e bolsas.",
+    image: miracleEyes1,
+    href: "/loja?categoria=olhos",
   },
   {
     id: 3,
-    name: "Kit Acne e Oleosidade",
-    description: "Reduz acne, controla oleosidade e trata pós-lesão com eficácia comprovada.",
-    image: "https://images.unsplash.com/photo-1556228994-8a45e5ddb81f?w=600&h=450&fit=crop",
-    href: "/produto/702",
+    name: "Primavera Mask",
+    description: "Máscara renovadora nanotecnológica para rejuvenescimento facial.",
+    image: primaveraMask,
+    href: "/loja?categoria=mascaras",
   },
 ];
 
@@ -154,14 +165,63 @@ const HomePage = () => {
         >
           <motion.div style={{ scale: heroScale }}>
             <HeroBanner
-              title="Sua pele merece o melhor tratamento"
-              subtitle="Dermocosméticos de alta performance para resultados visíveis. Descubra a rotina ideal para sua pele."
-              ctaPrimary={{ label: "Monte sua Rotina", href: "/monte-sua-rotina" }}
-              ctaSecondary={{ label: "Ver Clareamento", href: "/shop?categoria=clareamento" }}
-              image="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1920&h=1080&fit=crop"
+              title="Sweet Lips — Cuidado labial profissional"
+              subtitle="Hidratação, preenchimento e rejuvenescimento labial com tecnologia avançada. Resultados visíveis desde a primeira aplicação."
+              ctaPrimary={{ label: "Conhecer Linha", href: "/loja?categoria=labial" }}
+              ctaSecondary={{ label: "Ver Todos Produtos", href: "/loja" }}
+              image={sweetLipsLayane}
             />
           </motion.div>
         </motion.div>
+
+        {/* Featured Banners Carousel */}
+        <section className="section-editorial bg-secondary/20">
+          <div className="container-editorial">
+            <AnimatedSection className="mb-8">
+              <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+                Destaques
+              </span>
+              <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
+                Nossos lançamentos
+              </h2>
+            </AnimatedSection>
+            
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {[
+                { image: sweetLipsCereja, title: "Sweet Lips Cereja", subtitle: "Gloss labial hidratante", href: "/loja?categoria=labial" },
+                { image: sweetLipsEsfoliante, title: "Esfoliante Labial", subtitle: "Lábios hidratados e joviais", href: "/loja?categoria=labial" },
+                { image: sweetLipsFluido, title: "Fluido Microagulhamento", subtitle: "Preenche, hidrata e rejuvenesce", href: "/loja?categoria=labial" },
+              ].map((banner, index) => (
+                <motion.div key={index} variants={itemVariants}>
+                  <Link to={banner.href} className="group block img-editorial">
+                    <div className="aspect-[16/9] overflow-hidden bg-secondary relative">
+                      <img
+                        src={banner.image}
+                        alt={banner.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                    <div className="mt-4">
+                      <h4 className="font-display text-lg font-medium text-foreground group-hover:text-primary transition-colors">
+                        {banner.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground font-body mt-1">
+                        {banner.subtitle}
+                      </p>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
 
         {/* Categories Section - Editorial with Scroll Animation */}
         <section className="section-editorial">
