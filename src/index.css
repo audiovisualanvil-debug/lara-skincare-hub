@@ -2,103 +2,110 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
 @layer base {
   :root {
-    /* Multti Med - Design System Clean Clínico */
-    --background: 0 0% 100%; /* #FFFFFF */
-    --foreground: 0 0% 12%; /* #1E1E1E */
+    /* Editorial Moderno - Terracotta + Nude Premium */
+    --background: 30 20% 98%; /* Off-white quente */
+    --foreground: 20 15% 12%; /* Marrom escuro */
     
-    --card: 0 0% 100%; /* #FFFFFF */
-    --card-foreground: 0 0% 12%;
+    --card: 30 25% 97%;
+    --card-foreground: 20 15% 12%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 12%;
+    --popover: 30 20% 98%;
+    --popover-foreground: 20 15% 12%;
     
-    --primary: 30 35% 59%; /* #C29A6A - Dourado claro CTA */
-    --primary-foreground: 0 0% 100%;
+    --primary: 16 45% 55%; /* Terracotta */
+    --primary-foreground: 30 20% 98%;
     
-    --secondary: 36 47% 96%; /* #FAF7F2 - Bege claro */
-    --secondary-foreground: 0 0% 12%;
+    --secondary: 25 30% 92%; /* Nude claro */
+    --secondary-foreground: 20 15% 12%;
     
-    --muted: 36 47% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 25 20% 94%;
+    --muted-foreground: 20 10% 45%;
     
-    --accent: 34 26% 90%; /* #E8E3DB - Detalhes suaves */
-    --accent-foreground: 0 0% 12%;
+    --accent: 20 35% 88%; /* Nude rosado */
+    --accent-foreground: 20 15% 12%;
     
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 30 20% 98%;
     
-    --border: 34 26% 90%; /* #E8E3DB */
-    --input: 34 26% 90%;
-    --ring: 30 35% 59%;
+    --border: 25 20% 88%;
+    --input: 25 20% 90%;
+    --ring: 16 45% 55%;
     
-    --radius: 0.375rem;
+    --radius: 0.25rem;
     
-    /* Cores da marca */
-    --gold: 30 35% 59%; /* #C29A6A */
-    --gold-light: 30 35% 70%;
-    --gold-hover: 30 35% 50%;
-    --beige: 36 47% 96%; /* #FAF7F2 */
-    --beige-dark: 34 26% 90%; /* #E8E3DB */
-    --charcoal: 0 0% 12%; /* #1E1E1E */
-    --white: 0 0% 100%; /* #FFFFFF */
+    /* Cores da marca - Editorial */
+    --terracotta: 16 45% 55%;
+    --terracotta-light: 16 40% 65%;
+    --terracotta-dark: 16 50% 42%;
+    --nude: 25 30% 92%;
+    --nude-dark: 25 25% 85%;
+    --nude-rose: 20 35% 88%;
+    --espresso: 20 15% 12%;
+    --cream: 30 25% 97%;
+    --sand: 35 20% 80%;
     
     /* Sidebar */
-    --sidebar-background: 36 47% 96%;
-    --sidebar-foreground: 0 0% 12%;
-    --sidebar-primary: 30 35% 59%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 34 26% 90%;
-    --sidebar-accent-foreground: 0 0% 12%;
-    --sidebar-border: 34 26% 90%;
-    --sidebar-ring: 30 35% 59%;
+    --sidebar-background: 25 30% 92%;
+    --sidebar-foreground: 20 15% 12%;
+    --sidebar-primary: 16 45% 55%;
+    --sidebar-primary-foreground: 30 20% 98%;
+    --sidebar-accent: 20 35% 88%;
+    --sidebar-accent-foreground: 20 15% 12%;
+    --sidebar-border: 25 20% 85%;
+    --sidebar-ring: 16 45% 55%;
   }
 
   .dark {
-    --background: 0 0% 8%;
-    --foreground: 0 0% 95%;
+    --background: 20 15% 8%;
+    --foreground: 30 15% 92%;
     
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 95%;
+    --card: 20 15% 10%;
+    --card-foreground: 30 15% 92%;
     
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 20 15% 10%;
+    --popover-foreground: 30 15% 92%;
     
-    --primary: 30 35% 59%;
-    --primary-foreground: 0 0% 8%;
+    --primary: 16 45% 55%;
+    --primary-foreground: 20 15% 8%;
     
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 20 12% 16%;
+    --secondary-foreground: 30 15% 92%;
     
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 20 12% 16%;
+    --muted-foreground: 30 10% 55%;
     
-    --accent: 0 0% 18%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 20 20% 20%;
+    --accent-foreground: 30 15% 92%;
     
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 30 20% 98%;
     
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 30 35% 59%;
+    --border: 20 15% 18%;
+    --input: 20 15% 18%;
+    --ring: 16 45% 55%;
     
-    --gold: 30 35% 59%;
-    --gold-light: 30 35% 70%;
-    --gold-hover: 30 35% 50%;
-    --beige: 0 0% 14%;
-    --beige-dark: 0 0% 18%;
-    --charcoal: 0 0% 95%;
+    --terracotta: 16 45% 55%;
+    --terracotta-light: 16 40% 65%;
+    --terracotta-dark: 16 50% 42%;
+    --nude: 20 12% 16%;
+    --nude-dark: 20 15% 22%;
+    --nude-rose: 20 20% 20%;
+    --espresso: 30 15% 92%;
+    --cream: 20 15% 10%;
+    --sand: 20 15% 25%;
     
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 30 35% 59%;
-    --sidebar-primary-foreground: 0 0% 8%;
-    --sidebar-accent: 0 0% 14%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 30 35% 59%;
+    --sidebar-background: 20 15% 10%;
+    --sidebar-foreground: 30 15% 92%;
+    --sidebar-primary: 16 45% 55%;
+    --sidebar-primary-foreground: 20 15% 8%;
+    --sidebar-accent: 20 12% 16%;
+    --sidebar-accent-foreground: 30 15% 92%;
+    --sidebar-border: 20 15% 18%;
+    --sidebar-ring: 16 45% 55%;
   }
 }
 
@@ -109,105 +116,193 @@
   
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', sans-serif;
+  h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  
+  h4, h5, h6 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
     letter-spacing: -0.01em;
+    text-transform: uppercase;
   }
 }
 
 @layer utilities {
-  .font-heading {
-    font-family: 'Montserrat', sans-serif;
+  .font-display {
+    font-family: 'Cormorant Garamond', serif;
   }
   
   .font-body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
   
-  /* Sombra muito leve */
-  .shadow-soft {
-    box-shadow: 0 2px 8px -2px hsl(var(--charcoal) / 0.06);
+  /* Editorial shadows */
+  .shadow-editorial {
+    box-shadow: 0 4px 30px -8px hsl(var(--espresso) / 0.08);
   }
   
-  .shadow-card {
-    box-shadow: 0 4px 12px -4px hsl(var(--charcoal) / 0.08);
+  .shadow-editorial-hover {
+    box-shadow: 0 8px 40px -10px hsl(var(--espresso) / 0.15);
   }
   
-  .shadow-elevated {
-    box-shadow: 0 8px 24px -8px hsl(var(--charcoal) / 0.1);
+  .shadow-dramatic {
+    box-shadow: 0 20px 50px -15px hsl(var(--espresso) / 0.2);
   }
   
-  /* Borda dourada fina */
-  .border-gold {
-    border: 1px solid hsl(var(--gold));
+  /* Editorial borders */
+  .border-editorial {
+    border: 1px solid hsl(var(--terracotta) / 0.3);
   }
   
-  /* Hover lift suave */
-  .hover-lift {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Hover effects */
+  .hover-editorial {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  .hover-lift:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px -6px hsl(var(--charcoal) / 0.1);
+  .hover-editorial:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -10px hsl(var(--espresso) / 0.18);
   }
   
-  /* Underline hover para menu */
-  .menu-underline {
+  /* Editorial underline */
+  .editorial-underline {
     position: relative;
+    display: inline-block;
   }
   
-  .menu-underline::after {
+  .editorial-underline::after {
     content: '';
     position: absolute;
-    bottom: -2px;
+    bottom: 0;
     left: 0;
-    width: 0;
+    width: 100%;
     height: 2px;
-    background-color: hsl(var(--beige-dark));
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, hsl(var(--terracotta)), hsl(var(--terracotta-light)));
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  .menu-underline:hover::after {
-    width: 100%;
+  .editorial-underline:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  
+  /* Text gradient */
+  .text-gradient-editorial {
+    background: linear-gradient(135deg, hsl(var(--terracotta)), hsl(var(--terracotta-dark)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   
   /* Section spacing */
-  .section-padding {
-    @apply py-16 md:py-24;
+  .section-editorial {
+    @apply py-20 md:py-32;
   }
   
-  .section-padding-sm {
-    @apply py-12 md:py-16;
+  .section-editorial-sm {
+    @apply py-14 md:py-20;
+  }
+  
+  /* Editorial container */
+  .container-editorial {
+    @apply max-w-7xl mx-auto px-6 md:px-10;
+  }
+  
+  /* Asymmetric grid */
+  .grid-editorial {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    .grid-editorial {
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+    }
+  }
+  
+  /* Image treatment */
+  .img-editorial {
+    @apply overflow-hidden;
+  }
+  
+  .img-editorial img {
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .img-editorial:hover img {
+    transform: scale(1.05);
   }
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Editorial */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--beige));
+  background: hsl(var(--nude));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--gold) / 0.4);
-  border-radius: 3px;
+  background: hsl(var(--terracotta) / 0.4);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--gold) / 0.6);
+  background: hsl(var(--terracotta) / 0.6);
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* Editorial Animations */
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes fadeInLeft {
+  from { 
+    opacity: 0; 
+    transform: translateX(-40px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes scaleReveal {
+  from { 
+    opacity: 0; 
+    transform: scale(0.9); 
+  }
+  to { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+@keyframes lineExpand {
+  from { 
+    width: 0; 
+  }
+  to { 
+    width: 100%; 
+  }
 }
 
 @keyframes slideUp {
@@ -232,19 +327,20 @@
   }
 }
 
-@keyframes scaleIn {
-  from { 
-    opacity: 0; 
-    transform: scale(0.95); 
-  }
-  to { 
-    opacity: 1; 
-    transform: scale(1); 
-  }
+.animate-fade-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-out forwards;
+.animate-fade-left {
+  animation: fadeInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-scale-reveal {
+  animation: scaleReveal 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-line {
+  animation: lineExpand 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .animate-slide-up {
@@ -255,17 +351,13 @@
   animation: slideDown 0.4s ease-out forwards;
 }
 
-.animate-scale-in {
-  animation: scaleIn 0.3s ease-out forwards;
-}
-
 /* Staggered animations */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
-.stagger-6 { animation-delay: 0.6s; }
+.stagger-1 { animation-delay: 0.1s; opacity: 0; }
+.stagger-2 { animation-delay: 0.2s; opacity: 0; }
+.stagger-3 { animation-delay: 0.3s; opacity: 0; }
+.stagger-4 { animation-delay: 0.4s; opacity: 0; }
+.stagger-5 { animation-delay: 0.5s; opacity: 0; }
+.stagger-6 { animation-delay: 0.6s; opacity: 0; }
 
 /* Safe area for bottom navigation */
 .safe-area-bottom {
@@ -275,4 +367,11 @@
 /* Prevent body scroll when sheet is open */
 body[data-scroll-locked] {
   overflow: hidden !important;
+
+}
+
+/* Selection color */
+::selection {
+  background: hsl(var(--terracotta) / 0.2);
+  color: hsl(var(--espresso));
 }

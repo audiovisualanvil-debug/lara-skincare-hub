@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Heart, Scale, Check } from "lucide-react";
+import { ShoppingCart, Heart, Scale, Check, ArrowRight } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCompare } from "@/contexts/CompareContext";
@@ -118,12 +118,12 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
 
   return (
     <div 
-      className="group bg-card rounded-lg border border-border overflow-hidden hover-lift"
+      className="group bg-card border border-border/50 overflow-hidden hover-editorial"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Container */}
-      <Link to={`/produto/${product.id}`} className="block relative aspect-square overflow-hidden bg-secondary">
+      {/* Image Container - Editorial Style */}
+      <Link to={`/produto/${product.id}`} className="block relative aspect-[4/5] overflow-hidden bg-secondary">
         {/* Skeleton placeholder while loading */}
         {!imageLoaded && (
           <div className="absolute inset-0 bg-secondary animate-pulse" />
@@ -133,84 +133,95 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
           alt={product.name}
           onLoad={() => setImageLoaded(true)}
           className={cn(
-            "w-full h-full object-contain p-2 transition-all duration-500 group-hover:scale-105",
+            "w-full h-full object-contain p-4 transition-all duration-700",
+            isHovered && "scale-105",
             imageLoaded ? "opacity-100" : "opacity-0"
           )}
         />
+        
+        {/* Professional Badge */}
         {product.isProfessional && (
-          <Badge className="absolute top-3 left-3 bg-primary text-primary-foreground text-xs font-heading">
-            Profissional
-          </Badge>
+          <div className="absolute top-4 left-4">
+            <span className="text-[10px] uppercase tracking-wider font-body font-semibold text-primary bg-background/90 backdrop-blur-sm px-3 py-1.5">
+              Profissional
+            </span>
+          </div>
         )}
         
-        {/* Action buttons */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2">
+        {/* Action buttons - Editorial floating style */}
+        <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
           {/* Favorite Button */}
           <button
             onClick={handleToggleFavorite}
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+            className={cn(
+              "w-10 h-10 flex items-center justify-center transition-all duration-300 backdrop-blur-sm",
               isProductFavorite 
                 ? "bg-primary text-primary-foreground" 
                 : "bg-background/80 text-muted-foreground hover:text-primary hover:bg-background"
-            }`}
+            )}
           >
-            <Heart className={`h-4 w-4 ${isProductFavorite ? "fill-current" : ""}`} />
+            <Heart className={cn("h-4 w-4", isProductFavorite && "fill-current")} />
           </button>
           
           {/* Compare Button */}
           <button
             onClick={handleToggleCompare}
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+            className={cn(
+              "w-10 h-10 flex items-center justify-center transition-all duration-300 backdrop-blur-sm",
               isProductInCompare 
                 ? "bg-primary text-primary-foreground" 
                 : "bg-background/80 text-muted-foreground hover:text-primary hover:bg-background"
-            }`}
+            )}
           >
             <Scale className="h-4 w-4" />
           </button>
         </div>
-      </Link>
 
-      {/* Content */}
-      <div className="p-4">
-        <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide mb-1">
-          {product.brand}
-        </p>
-        <Link to={`/produto/${product.id}`}>
-          <h3 className="font-heading text-sm font-medium text-foreground line-clamp-2 min-h-[2.5rem] hover:text-primary transition-colors">
-            {product.name}
-          </h3>
-        </Link>
-        <div className="mt-3 flex items-center justify-between">
-          <span className="font-heading text-base font-semibold text-foreground">
-            {product.price ? (product.price.startsWith("R$") ? product.price : `R$ ${product.price}`) : "Consultar"}
-          </span>
-        </div>
-        <div className="flex gap-2 mt-3">
+        {/* Quick add overlay */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <Button 
-            asChild
-            variant="outline"
-            className="flex-1 h-9 text-sm font-heading font-medium border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
-          >
-            <Link to={`/produto/${product.id}`}>
-              Ver Detalhes
-            </Link>
-          </Button>
-          <Button 
-            variant="gold"
-            size="icon"
             className={cn(
-              "h-9 w-9 shrink-0 transition-all duration-300",
-              addedToCart && "bg-green-500 hover:bg-green-500 scale-110"
+              "w-full h-12 bg-primary hover:bg-terracotta-dark text-primary-foreground font-body font-semibold uppercase tracking-wider text-xs transition-all duration-300",
+              addedToCart && "bg-green-600 hover:bg-green-600"
             )}
             onClick={handleAddToCart}
           >
             {addedToCart ? (
-              <Check className="h-4 w-4 animate-scale-in" />
+              <span className="flex items-center gap-2">
+                <Check className="h-4 w-4" />
+                Adicionado
+              </span>
             ) : (
-              <ShoppingCart className="h-4 w-4" />
+              <span className="flex items-center gap-2">
+                <ShoppingCart className="h-4 w-4" />
+                Adicionar
+              </span>
             )}
           </Button>
+        </div>
+      </Link>
+
+      {/* Content - Editorial Typography */}
+      <div className="p-5">
+        <p className="text-[10px] uppercase tracking-[0.15em] text-muted-foreground font-body font-medium mb-2">
+          {product.brand}
+        </p>
+        <Link to={`/produto/${product.id}`}>
+          <h3 className="font-display text-lg font-medium text-foreground line-clamp-2 min-h-[3.5rem] hover:text-primary transition-colors">
+            {product.name}
+          </h3>
+        </Link>
+        <div className="mt-4 flex items-center justify-between">
+          <span className="font-display text-xl font-medium text-foreground">
+            {product.price ? (product.price.startsWith("R$") ? product.price : `R$ ${product.price}`) : "Consultar"}
+          </span>
+          <Link 
+            to={`/produto/${product.id}`}
+            className="text-xs uppercase tracking-wider text-primary font-body font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            Ver
+            <ArrowRight className="h-3 w-3" />
+          </Link>
         </div>
       </div>
     </div>

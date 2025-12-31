@@ -10,6 +10,8 @@ import QuizCTA from "@/components/home/QuizCTA";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 // Featured products - mix from both brands
 const featuredProducts = [
@@ -102,11 +104,11 @@ const HomePage = () => {
   const { recentProducts } = useRecentlyViewed();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <MainHeader />
       
       {/* Spacer for fixed header */}
-      <div className="h-[120px] md:h-[132px]" />
+      <div className="h-20 md:h-24" />
 
       <main className="flex-1">
         {/* Hero Banner */}
@@ -118,13 +120,29 @@ const HomePage = () => {
           image="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1920&h=1080&fit=crop"
         />
 
-        {/* Categories Section */}
-        <section className="section-padding">
-          <div className="container">
-            <h2 className="font-heading text-2xl md:text-3xl font-semibold text-foreground mb-8">
-              Categorias por preocupação
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {/* Categories Section - Editorial */}
+        <section className="section-editorial">
+          <div className="container-editorial">
+            {/* Section Header - Editorial Style */}
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+              <div>
+                <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+                  Explore
+                </span>
+                <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
+                  Categorias por preocupação
+                </h2>
+              </div>
+              <Link 
+                to="/loja" 
+                className="flex items-center gap-2 text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors font-body font-medium group"
+              >
+                Ver todos os produtos
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
               {categories.map((category) => (
                 <CategoryCardHome key={category.title} {...category} />
               ))}
@@ -138,12 +156,28 @@ const HomePage = () => {
         {/* Quiz CTA */}
         <QuizCTA />
 
-        {/* Featured Products */}
-        <section className="section-padding">
-          <div className="container">
+        {/* Featured Products - Editorial */}
+        <section className="section-editorial bg-secondary/30">
+          <div className="container-editorial">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+              <div>
+                <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+                  Best Sellers
+                </span>
+                <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
+                  Produtos mais procurados
+                </h2>
+              </div>
+              <Link 
+                to="/loja" 
+                className="flex items-center gap-2 text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors font-body font-medium group"
+              >
+                Ver catálogo completo
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </div>
             <ProductCarousel 
               products={featuredProducts} 
-              title="Produtos mais procurados" 
             />
           </div>
         </section>
@@ -156,22 +190,26 @@ const HomePage = () => {
         {/* Testimonials */}
         <TestimonialsSection testimonials={testimonials} />
 
-        {/* CTA Banner */}
-        <section className="bg-primary py-16">
-          <div className="container text-center">
-            <h2 className="font-heading text-2xl md:text-3xl font-semibold text-primary-foreground">
+        {/* CTA Banner - Editorial */}
+        <section className="bg-primary section-editorial">
+          <div className="container-editorial text-center max-w-3xl mx-auto">
+            <span className="text-xs uppercase tracking-[0.25em] text-primary-foreground/70 font-body font-semibold">
+              Consultoria Grátis
+            </span>
+            <h2 className="font-display text-display-sm md:text-display text-primary-foreground mt-4">
               Não sabe por onde começar?
             </h2>
-            <p className="mt-3 text-primary-foreground/80 max-w-xl mx-auto">
+            <p className="mt-6 text-lg text-primary-foreground/80 font-body">
               Faça uma consultoria gratuita e descubra os produtos ideais para sua pele.
             </p>
             <a 
               href="https://wa.me/5511999999999" 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex mt-6 h-12 px-8 items-center justify-center rounded-md bg-background text-foreground font-heading font-medium hover:bg-background/90 transition-colors"
+              className="inline-flex mt-10 h-14 px-10 items-center justify-center bg-background text-foreground font-body font-semibold uppercase tracking-wider text-sm hover:bg-background/90 transition-colors group"
             >
               Falar com Especialista
+              <ArrowRight className="ml-3 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
           </div>
         </section>
