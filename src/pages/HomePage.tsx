@@ -1,3 +1,5 @@
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import HeroBanner from "@/components/home/HeroBanner";
@@ -7,6 +9,7 @@ import TestimonialsSection from "@/components/home/TestimonialsSection";
 import ProductCarousel from "@/components/shop/ProductCarousel";
 import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
 import QuizCTA from "@/components/home/QuizCTA";
+import AnimatedSection from "@/components/home/AnimatedSection";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
@@ -100,35 +103,81 @@ const testimonials = [
   },
 ];
 
+// Stagger animation for grid items
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
 const HomePage = () => {
   const { recentProducts } = useRecentlyViewed();
+  const heroRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.5], [1, 0]);
+  const heroScale = useTransform(heroScrollProgress, [0, 0.5], [1, 1.1]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
       <MainHeader />
       
       {/* Spacer for fixed header */}
       <div className="h-20 md:h-24" />
 
       <main className="flex-1">
-        {/* Hero Banner */}
-        <HeroBanner
-          title="Sua pele merece o melhor tratamento"
-          subtitle="Dermocosméticos de alta performance para resultados visíveis. Descubra a rotina ideal para sua pele."
-          ctaPrimary={{ label: "Monte sua Rotina", href: "/monte-sua-rotina" }}
-          ctaSecondary={{ label: "Ver Clareamento", href: "/shop?categoria=clareamento" }}
-          image="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1920&h=1080&fit=crop"
-        />
+        {/* Hero Banner with Parallax */}
+        <motion.div 
+          ref={heroRef}
+          style={{ opacity: heroOpacity }}
+          className="relative"
+        >
+          <motion.div style={{ scale: heroScale }}>
+            <HeroBanner
+              title="Sua pele merece o melhor tratamento"
+              subtitle="Dermocosméticos de alta performance para resultados visíveis. Descubra a rotina ideal para sua pele."
+              ctaPrimary={{ label: "Monte sua Rotina", href: "/monte-sua-rotina" }}
+              ctaSecondary={{ label: "Ver Clareamento", href: "/shop?categoria=clareamento" }}
+              image="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=1920&h=1080&fit=crop"
+            />
+          </motion.div>
+        </motion.div>
 
-        {/* Categories Section - Editorial */}
+        {/* Categories Section - Editorial with Scroll Animation */}
         <section className="section-editorial">
           <div className="container-editorial">
-            {/* Section Header - Editorial Style */}
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            {/* Section Header - Animated */}
+            <AnimatedSection className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
               <div>
-                <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+                <motion.span 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
+                  className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold"
+                >
                   Explore
-                </span>
+                </motion.span>
                 <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
                   Categorias por preocupação
                 </h2>
@@ -140,26 +189,47 @@ const HomePage = () => {
                 Ver todos os produtos
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
-            </div>
+            </AnimatedSection>
             
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6">
-              {categories.map((category) => (
-                <CategoryCardHome key={category.title} {...category} />
+            {/* Categories Grid with Stagger */}
+            <motion.div 
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6"
+            >
+              {categories.map((category, index) => (
+                <motion.div key={category.title} variants={itemVariants}>
+                  <CategoryCardHome {...category} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Kits Section */}
-        <KitsSection kits={kits} />
+        {/* Kits Section - Animated */}
+        <AnimatedSection delay={0.1}>
+          <KitsSection kits={kits} />
+        </AnimatedSection>
 
-        {/* Quiz CTA */}
-        <QuizCTA />
+        {/* Quiz CTA - Animated */}
+        <AnimatedSection direction="fade" delay={0.1}>
+          <QuizCTA />
+        </AnimatedSection>
 
-        {/* Featured Products - Editorial */}
-        <section className="section-editorial bg-secondary/30">
-          <div className="container-editorial">
-            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        {/* Featured Products - Editorial with Parallax Background */}
+        <section className="section-editorial bg-secondary/30 relative overflow-hidden">
+          {/* Decorative parallax elements */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.1 }}
+            viewport={{ once: true }}
+            className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
+          />
+          
+          <div className="container-editorial relative z-10">
+            <AnimatedSection className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
               <div>
                 <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
                   Best Sellers
@@ -175,24 +245,45 @@ const HomePage = () => {
                 Ver catálogo completo
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
-            </div>
-            <ProductCarousel 
-              products={featuredProducts} 
-            />
+            </AnimatedSection>
+            
+            <AnimatedSection delay={0.2}>
+              <ProductCarousel products={featuredProducts} />
+            </AnimatedSection>
           </div>
         </section>
 
-        {/* Recently Viewed - Only show if there are products */}
+        {/* Recently Viewed - Animated */}
         {recentProducts.length > 0 && (
-          <RecentlyViewedSection products={recentProducts} />
+          <AnimatedSection delay={0.1}>
+            <RecentlyViewedSection products={recentProducts} />
+          </AnimatedSection>
         )}
 
-        {/* Testimonials */}
-        <TestimonialsSection testimonials={testimonials} />
+        {/* Testimonials - Animated */}
+        <AnimatedSection direction="up" delay={0.1}>
+          <TestimonialsSection testimonials={testimonials} />
+        </AnimatedSection>
 
-        {/* CTA Banner - Editorial */}
-        <section className="bg-primary section-editorial">
-          <div className="container-editorial text-center max-w-3xl mx-auto">
+        {/* CTA Banner - Editorial with Animation */}
+        <section className="bg-primary section-editorial overflow-hidden relative">
+          {/* Animated decorative elements */}
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 0.1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="absolute -top-20 -left-20 w-64 h-64 border border-primary-foreground/30 rounded-full"
+          />
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 0.1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            className="absolute -bottom-32 -right-32 w-96 h-96 border border-primary-foreground/30 rounded-full"
+          />
+          
+          <AnimatedSection className="container-editorial text-center max-w-3xl mx-auto relative z-10">
             <span className="text-xs uppercase tracking-[0.25em] text-primary-foreground/70 font-body font-semibold">
               Consultoria Grátis
             </span>
@@ -202,16 +293,18 @@ const HomePage = () => {
             <p className="mt-6 text-lg text-primary-foreground/80 font-body">
               Faça uma consultoria gratuita e descubra os produtos ideais para sua pele.
             </p>
-            <a 
+            <motion.a 
               href="https://wa.me/5511999999999" 
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex mt-10 h-14 px-10 items-center justify-center bg-background text-foreground font-body font-semibold uppercase tracking-wider text-sm hover:bg-background/90 transition-colors group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               Falar com Especialista
               <ArrowRight className="ml-3 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-          </div>
+            </motion.a>
+          </AnimatedSection>
         </section>
       </main>
 

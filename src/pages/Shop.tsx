@@ -1,13 +1,16 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Search, Filter, X, ChevronDown, ArrowRight, MessageCircle, ChevronRight, Grid3X3, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 import ProductCardNew from "@/components/shop/ProductCardNew";
 import MobileFiltersSheet from "@/components/shop/MobileFiltersSheet";
+import MainHeader from "@/components/layout/MainHeader";
+import MainFooter from "@/components/layout/MainFooter";
+import AnimatedSection from "@/components/home/AnimatedSection";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 
@@ -115,15 +118,36 @@ const allProducts = [
 
 // Get price statistics
 const productPrices = allProducts.map(p => extractPrice(p.price)).filter((p): p is number => p !== null);
-const minProductPrice = Math.min(...productPrices);
 const maxProductPrice = Math.max(...productPrices);
 
 const PRODUCTS_PER_PAGE = 12;
 
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
 const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [sortBy, setSortBy] = useState("relevancia");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [currentPage, setCurrentPage] = useState(1);
@@ -140,7 +164,6 @@ const Shop = () => {
     searchParams.get("marca") ? [searchParams.get("marca")!] : []
   );
   const [selectedUsageTypes, setSelectedUsageTypes] = useState<string[]>([]);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, maxProductPrice]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<number[]>([]);
 
   // Collapsible sections
@@ -153,7 +176,6 @@ const Shop = () => {
   });
 
   // Sync URL params with filters
-  // Sync URL params with filters
   useEffect(() => {
     const cat = searchParams.get("categoria");
     if (cat && cat !== "todos") {
@@ -163,7 +185,6 @@ const Shop = () => {
     if (brand) {
       setSelectedBrands([brand]);
     }
-    // Handle search from URL
     const busca = searchParams.get("busca");
     if (busca) {
       setSearchQuery(busca);
@@ -188,7 +209,6 @@ const Shop = () => {
     setSelectedBrands([]);
     setSelectedUsageTypes([]);
     setSelectedPriceRanges([]);
-    setPriceRange([0, maxProductPrice]);
     setSearchQuery("");
     setSearchParams({});
   };
@@ -282,16 +302,21 @@ const Shop = () => {
     onToggle: () => void; 
     children: React.ReactNode;
   }) => (
-    <div className="border-b border-detail/50 pb-4 mb-4">
+    <div className="border-b border-detail/30 pb-4 mb-4 last:border-b-0">
       <button onClick={onToggle} className="flex items-center justify-between w-full py-2 group">
         <h3 className="font-display text-sm font-medium text-foreground tracking-wide">
           {title}
         </h3>
-        <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+        <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
       </button>
-      <div className={`overflow-hidden transition-all duration-200 ${isOpen ? "max-h-96 pt-3" : "max-h-0"}`}>
-        <div className="space-y-2.5">{children}</div>
-      </div>
+      <motion.div 
+        initial={false}
+        animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        className="overflow-hidden"
+      >
+        <div className="pt-3 space-y-2.5">{children}</div>
+      </motion.div>
     </div>
   );
 
@@ -300,12 +325,10 @@ const Shop = () => {
     label, 
     checked, 
     onChange,
-    count
   }: { 
     label: string; 
     checked: boolean; 
     onChange: () => void;
-    count?: number;
   }) => (
     <label className="flex items-center gap-3 cursor-pointer group py-1">
       <Checkbox 
@@ -313,408 +336,456 @@ const Shop = () => {
         onCheckedChange={onChange}
         className="border-detail data-[state=checked]:bg-primary data-[state=checked]:border-primary"
       />
-      <span className="font-body text-sm text-foreground/80 group-hover:text-foreground transition-colors flex-1">
+      <span className="font-body text-sm text-foreground/70 group-hover:text-foreground transition-colors">
         {label}
       </span>
-      {count !== undefined && (
-        <span className="font-body text-xs text-muted-foreground">({count})</span>
-      )}
     </label>
   );
 
   return (
-    <main className="pt-[140px] lg:pt-[160px] min-h-screen bg-background">
-      {/* Breadcrumb Bar */}
-      <div className="bg-cream border-b border-detail/30">
-        <div className="container mx-auto px-4 lg:px-8 py-3">
-          <nav className="flex items-center gap-2 font-body text-xs text-muted-foreground">
-            <Link to="/" className="hover:text-primary transition-colors">Home</Link>
-            <ChevronRight className="w-3 h-3" />
-            <Link to="/loja" className="hover:text-primary transition-colors">Loja</Link>
-            {categoryParam !== "todos" && (
-              <>
-                <ChevronRight className="w-3 h-3" />
-                <span className="text-foreground">{currentCategory.title}</span>
-              </>
-            )}
-          </nav>
-        </div>
-      </div>
+    <div className="min-h-screen flex flex-col bg-background">
+      <MainHeader />
+      
+      {/* Spacer for fixed header */}
+      <div className="h-20 md:h-24" />
 
-      {/* Category Header */}
-      <section className="bg-cream border-b border-detail/30">
-        <div className="container mx-auto px-4 lg:px-8 py-8 lg:py-12">
-          <h1 className="font-display text-3xl md:text-4xl font-semibold text-foreground mb-3">
-            {currentCategory.title}
-          </h1>
-          <p className="font-body text-muted-foreground max-w-2xl">
-            {currentCategory.description}
-          </p>
-        </div>
-      </section>
+      <main className="flex-1">
+        {/* Category Header - Editorial Hero */}
+        <section className="relative bg-cream overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+          
+          <div className="container-editorial py-16 lg:py-24 relative z-10">
+            {/* Breadcrumb */}
+            <motion.nav 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-2 font-body text-xs text-muted-foreground mb-8"
+            >
+              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+              <ChevronRight className="w-3 h-3" />
+              <span className="text-foreground">Loja</span>
+              {categoryParam !== "todos" && (
+                <>
+                  <ChevronRight className="w-3 h-3" />
+                  <span className="text-primary">{currentCategory.title}</span>
+                </>
+              )}
+            </motion.nav>
 
-      {/* Main Content */}
-      <section className="py-8 lg:py-12">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-            
-            {/* Sidebar Filters - Desktop - FIXED */}
-            <aside className="hidden lg:block w-72 shrink-0">
-              <div className="sticky top-[180px]">
-                <div className="bg-cream/50 border border-detail/30 p-6">
-                  {/* Sidebar Header */}
-                  <div className="flex items-center justify-between mb-6 pb-4 border-b border-detail/50">
-                    <h2 className="font-display text-base font-semibold text-foreground">
-                      Filtrar por
-                    </h2>
-                    {hasActiveFilters && (
-                      <button 
-                        onClick={clearFilters} 
-                        className="font-body text-xs text-primary hover:underline"
-                      >
-                        Limpar tudo
-                      </button>
-                    )}
-                  </div>
+            <AnimatedSection>
+              <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+                Catálogo
+              </span>
+              <h1 className="font-display text-display-sm md:text-display text-foreground mt-3">
+                {currentCategory.title}
+              </h1>
+              <p className="font-body text-lg text-muted-foreground mt-4 max-w-2xl">
+                {currentCategory.description}
+              </p>
+            </AnimatedSection>
+          </div>
+        </section>
 
-                  {/* Objetivo da Pele */}
-                  <FilterSection 
-                    title="Objetivo" 
-                    isOpen={openSections.objectives}
-                    onToggle={() => toggleSection("objectives")}
+        {/* Main Content */}
+        <section className="section-editorial">
+          <div className="container-editorial">
+            <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+              
+              {/* Sidebar Filters - Desktop */}
+              <aside className="hidden lg:block w-72 shrink-0">
+                <div className="sticky top-32">
+                  <motion.div 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-cream/50 border border-detail/30 p-6"
                   >
-                    {skinObjectives.map((item) => (
-                      <CheckboxItem
-                        key={item.slug}
-                        label={item.name}
-                        checked={selectedObjectives.includes(item.slug)}
-                        onChange={() => toggleFilter(item.slug, selectedObjectives, setSelectedObjectives)}
-                      />
-                    ))}
-                  </FilterSection>
+                    {/* Sidebar Header */}
+                    <div className="flex items-center justify-between mb-6 pb-4 border-b border-detail/30">
+                      <h2 className="font-display text-base font-semibold text-foreground">
+                        Filtrar por
+                      </h2>
+                      {hasActiveFilters && (
+                        <button 
+                          onClick={clearFilters} 
+                          className="font-body text-xs text-primary hover:underline"
+                        >
+                          Limpar tudo
+                        </button>
+                      )}
+                    </div>
 
-                  {/* Tipo de Produto */}
-                  <FilterSection 
-                    title="Tipo de Produto" 
-                    isOpen={openSections.productTypes}
-                    onToggle={() => toggleSection("productTypes")}
-                  >
-                    {productTypes.map((item) => (
-                      <CheckboxItem
-                        key={item.slug}
-                        label={item.name}
-                        checked={selectedProductTypes.includes(item.slug)}
-                        onChange={() => toggleFilter(item.slug, selectedProductTypes, setSelectedProductTypes)}
-                      />
-                    ))}
-                  </FilterSection>
+                    {/* Objetivo da Pele */}
+                    <FilterSection 
+                      title="Objetivo" 
+                      isOpen={openSections.objectives}
+                      onToggle={() => toggleSection("objectives")}
+                    >
+                      {skinObjectives.map((item) => (
+                        <CheckboxItem
+                          key={item.slug}
+                          label={item.name}
+                          checked={selectedObjectives.includes(item.slug)}
+                          onChange={() => toggleFilter(item.slug, selectedObjectives, setSelectedObjectives)}
+                        />
+                      ))}
+                    </FilterSection>
 
-                  {/* Marca */}
-                  <FilterSection 
-                    title="Marca" 
-                    isOpen={openSections.brands}
-                    onToggle={() => toggleSection("brands")}
-                  >
-                    {brands.map((item) => (
-                      <CheckboxItem
-                        key={item.slug}
-                        label={item.name}
-                        checked={selectedBrands.includes(item.slug)}
-                        onChange={() => toggleFilter(item.slug, selectedBrands, setSelectedBrands)}
-                      />
-                    ))}
-                  </FilterSection>
+                    {/* Tipo de Produto */}
+                    <FilterSection 
+                      title="Tipo de Produto" 
+                      isOpen={openSections.productTypes}
+                      onToggle={() => toggleSection("productTypes")}
+                    >
+                      {productTypes.map((item) => (
+                        <CheckboxItem
+                          key={item.slug}
+                          label={item.name}
+                          checked={selectedProductTypes.includes(item.slug)}
+                          onChange={() => toggleFilter(item.slug, selectedProductTypes, setSelectedProductTypes)}
+                        />
+                      ))}
+                    </FilterSection>
 
-                  {/* Tipo de Uso */}
-                  <FilterSection 
-                    title="Tipo de Uso" 
-                    isOpen={openSections.usageTypes}
-                    onToggle={() => toggleSection("usageTypes")}
-                  >
-                    {usageTypes.map((item) => (
-                      <CheckboxItem
-                        key={item.slug}
-                        label={item.name}
-                        checked={selectedUsageTypes.includes(item.slug)}
-                        onChange={() => toggleFilter(item.slug, selectedUsageTypes, setSelectedUsageTypes)}
-                      />
-                    ))}
-                  </FilterSection>
+                    {/* Marca */}
+                    <FilterSection 
+                      title="Marca" 
+                      isOpen={openSections.brands}
+                      onToggle={() => toggleSection("brands")}
+                    >
+                      {brands.map((item) => (
+                        <CheckboxItem
+                          key={item.slug}
+                          label={item.name}
+                          checked={selectedBrands.includes(item.slug)}
+                          onChange={() => toggleFilter(item.slug, selectedBrands, setSelectedBrands)}
+                        />
+                      ))}
+                    </FilterSection>
 
-                  {/* Faixa de Preço */}
-                  <FilterSection 
-                    title="Faixa de Preço" 
-                    isOpen={openSections.price}
-                    onToggle={() => toggleSection("price")}
+                    {/* Tipo de Uso */}
+                    <FilterSection 
+                      title="Tipo de Uso" 
+                      isOpen={openSections.usageTypes}
+                      onToggle={() => toggleSection("usageTypes")}
+                    >
+                      {usageTypes.map((item) => (
+                        <CheckboxItem
+                          key={item.slug}
+                          label={item.name}
+                          checked={selectedUsageTypes.includes(item.slug)}
+                          onChange={() => toggleFilter(item.slug, selectedUsageTypes, setSelectedUsageTypes)}
+                        />
+                      ))}
+                    </FilterSection>
+
+                    {/* Faixa de Preço */}
+                    <FilterSection 
+                      title="Faixa de Preço" 
+                      isOpen={openSections.price}
+                      onToggle={() => toggleSection("price")}
+                    >
+                      {priceRanges.map((range, index) => (
+                        <CheckboxItem
+                          key={index}
+                          label={range.name}
+                          checked={selectedPriceRanges.includes(index)}
+                          onChange={() => {
+                            setSelectedPriceRanges(prev => 
+                              prev.includes(index) 
+                                ? prev.filter(i => i !== index) 
+                                : [...prev, index]
+                            );
+                          }}
+                        />
+                      ))}
+                    </FilterSection>
+                  </motion.div>
+
+                  {/* Sidebar CTA */}
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                    className="mt-6 p-6 bg-primary/5 border border-primary/20"
                   >
-                    {priceRanges.map((range, index) => (
-                      <CheckboxItem
-                        key={index}
-                        label={range.name}
-                        checked={selectedPriceRanges.includes(index)}
-                        onChange={() => {
-                          setSelectedPriceRanges(prev => 
-                            prev.includes(index) 
-                              ? prev.filter(i => i !== index) 
-                              : [...prev, index]
-                          );
-                        }}
-                      />
-                    ))}
-                  </FilterSection>
+                    <h3 className="font-display text-sm font-semibold text-foreground mb-2">
+                      Precisa de ajuda?
+                    </h3>
+                    <p className="font-body text-xs text-muted-foreground mb-4">
+                      Receba orientação profissional gratuita
+                    </p>
+                    <Button variant="gold" size="sm" className="w-full" asChild>
+                      <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+                        <MessageCircle className="w-4 h-4" />
+                        Falar com especialista
+                      </a>
+                    </Button>
+                  </motion.div>
                 </div>
+              </aside>
 
-                {/* Sidebar CTA */}
-                <div className="mt-6 p-6 bg-primary/5 border border-primary/20">
-                  <h3 className="font-display text-sm font-semibold text-foreground mb-2">
-                    Precisa de ajuda?
-                  </h3>
-                  <p className="font-body text-xs text-muted-foreground mb-4">
-                    Receba orientação profissional gratuita
-                  </p>
-                  <Button variant="gold" size="sm" className="w-full" asChild>
-                    <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
-                      <MessageCircle className="w-4 h-4" />
-                      Falar com especialista
-                    </a>
-                  </Button>
+              {/* Mobile Filter Button */}
+              <div className="lg:hidden flex items-center gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <Input
+                    type="text"
+                    placeholder="Buscar produtos..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="pl-10 font-body text-sm border-detail bg-cream h-11"
+                  />
                 </div>
-              </div>
-            </aside>
-
-            {/* Mobile Filter Button */}
-            <div className="lg:hidden flex items-center gap-3">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
-                  type="text"
-                  placeholder="Buscar produtos..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 font-body text-sm border-border bg-secondary h-10"
+                <MobileFiltersSheet
+                  skinObjectives={skinObjectives}
+                  productTypes={productTypes}
+                  brands={brands}
+                  usageTypes={usageTypes}
+                  priceRanges={priceRanges}
+                  selectedObjectives={selectedObjectives}
+                  selectedProductTypes={selectedProductTypes}
+                  selectedBrands={selectedBrands}
+                  selectedUsageTypes={selectedUsageTypes}
+                  selectedPriceRanges={selectedPriceRanges}
+                  setSelectedObjectives={setSelectedObjectives}
+                  setSelectedProductTypes={setSelectedProductTypes}
+                  setSelectedBrands={setSelectedBrands}
+                  setSelectedUsageTypes={setSelectedUsageTypes}
+                  setSelectedPriceRanges={setSelectedPriceRanges}
+                  resultsCount={filteredProducts.length}
+                  onClearFilters={clearFilters}
+                  hasActiveFilters={hasActiveFilters}
                 />
               </div>
-              <MobileFiltersSheet
-                skinObjectives={skinObjectives}
-                productTypes={productTypes}
-                brands={brands}
-                usageTypes={usageTypes}
-                priceRanges={priceRanges}
-                selectedObjectives={selectedObjectives}
-                selectedProductTypes={selectedProductTypes}
-                selectedBrands={selectedBrands}
-                selectedUsageTypes={selectedUsageTypes}
-                selectedPriceRanges={selectedPriceRanges}
-                setSelectedObjectives={setSelectedObjectives}
-                setSelectedProductTypes={setSelectedProductTypes}
-                setSelectedBrands={setSelectedBrands}
-                setSelectedUsageTypes={setSelectedUsageTypes}
-                setSelectedPriceRanges={setSelectedPriceRanges}
-                resultsCount={filteredProducts.length}
-                onClearFilters={clearFilters}
-                hasActiveFilters={hasActiveFilters}
-              />
-            </div>
 
-            {/* Products Grid */}
-            <div className="flex-1 min-w-0">
-              {/* Toolbar */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-detail/30">
-                <p className="font-body text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">{filteredProducts.length}</span> produto{filteredProducts.length !== 1 ? "s" : ""} encontrado{filteredProducts.length !== 1 ? "s" : ""}
-                </p>
-                
-                <div className="flex items-center gap-4">
-                  {/* Search - Desktop */}
-                  <div className="hidden lg:block relative w-56">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                    <Input
-                      type="text"
-                      placeholder="Buscar..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 font-body text-sm border-detail bg-cream h-9"
-                    />
-                  </div>
+              {/* Products Grid */}
+              <div className="flex-1 min-w-0">
+                {/* Toolbar */}
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-detail/30">
+                  <p className="font-body text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">{filteredProducts.length}</span> produto{filteredProducts.length !== 1 ? "s" : ""} encontrado{filteredProducts.length !== 1 ? "s" : ""}
+                  </p>
+                  
+                  <div className="flex items-center gap-4">
+                    {/* Search - Desktop */}
+                    <div className="hidden lg:block relative w-56">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                      <Input
+                        type="text"
+                        placeholder="Buscar..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="pl-10 font-body text-sm border-detail bg-cream h-10"
+                      />
+                    </div>
 
-                  {/* Sort */}
-                  <Select value={sortBy} onValueChange={setSortBy}>
-                    <SelectTrigger className="w-48 h-9 font-body text-sm border-detail bg-cream">
-                      <SelectValue placeholder="Ordenar por" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="relevancia">Relevância</SelectItem>
-                      <SelectItem value="nome-az">Nome A-Z</SelectItem>
-                      <SelectItem value="nome-za">Nome Z-A</SelectItem>
-                      <SelectItem value="preco-menor">Menor preço</SelectItem>
-                      <SelectItem value="preco-maior">Maior preço</SelectItem>
-                    </SelectContent>
-                  </Select>
+                    {/* Sort */}
+                    <Select value={sortBy} onValueChange={setSortBy}>
+                      <SelectTrigger className="w-48 h-10 font-body text-sm border-detail bg-cream">
+                        <SelectValue placeholder="Ordenar por" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="relevancia">Relevância</SelectItem>
+                        <SelectItem value="nome-az">Nome A-Z</SelectItem>
+                        <SelectItem value="nome-za">Nome Z-A</SelectItem>
+                        <SelectItem value="preco-menor">Menor preço</SelectItem>
+                        <SelectItem value="preco-maior">Maior preço</SelectItem>
+                      </SelectContent>
+                    </Select>
 
-                  {/* View Mode - Desktop */}
-                  <div className="hidden lg:flex items-center border border-detail rounded-md overflow-hidden">
-                    <button
-                      onClick={() => setViewMode("grid")}
-                      className={`p-2 ${viewMode === "grid" ? "bg-cream text-foreground" : "text-muted-foreground hover:text-foreground"}`}
-                    >
-                      <Grid3X3 className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => setViewMode("list")}
-                      className={`p-2 ${viewMode === "list" ? "bg-cream text-foreground" : "text-muted-foreground hover:text-foreground"}`}
-                    >
-                      <List className="w-4 h-4" />
-                    </button>
+                    {/* View Mode - Desktop */}
+                    <div className="hidden lg:flex items-center border border-detail overflow-hidden">
+                      <button
+                        onClick={() => setViewMode("grid")}
+                        className={`p-2.5 transition-colors ${viewMode === "grid" ? "bg-cream text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                      >
+                        <Grid3X3 className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => setViewMode("list")}
+                        className={`p-2.5 transition-colors ${viewMode === "list" ? "bg-cream text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                      >
+                        <List className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Active Filters Tags */}
-              {hasActiveFilters && (
-                <div className="flex flex-wrap items-center gap-2 mb-6">
-                  <span className="font-body text-xs text-muted-foreground">Filtros ativos:</span>
-                  {selectedObjectives.map(slug => (
-                    <span key={slug} className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream border border-detail text-foreground font-body text-xs rounded-full">
-                      {skinObjectives.find(o => o.slug === slug)?.name}
-                      <button onClick={() => toggleFilter(slug, selectedObjectives, setSelectedObjectives)} className="hover:text-primary">
-                        <X className="w-3 h-3" />
-                      </button>
-                    </span>
-                  ))}
-                  {selectedBrands.map(slug => (
-                    <span key={slug} className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream border border-detail text-foreground font-body text-xs rounded-full">
-                      {brands.find(b => b.slug === slug)?.name}
-                      <button onClick={() => toggleFilter(slug, selectedBrands, setSelectedBrands)} className="hover:text-primary">
-                        <X className="w-3 h-3" />
-                      </button>
-                    </span>
-                  ))}
-                  {selectedUsageTypes.map(slug => (
-                    <span key={slug} className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream border border-detail text-foreground font-body text-xs rounded-full">
-                      {usageTypes.find(u => u.slug === slug)?.name}
-                      <button onClick={() => toggleFilter(slug, selectedUsageTypes, setSelectedUsageTypes)} className="hover:text-primary">
-                        <X className="w-3 h-3" />
-                      </button>
-                    </span>
-                  ))}
-                  {selectedPriceRanges.map(index => (
-                    <span key={`price-${index}`} className="inline-flex items-center gap-1.5 px-3 py-1 bg-cream border border-detail text-foreground font-body text-xs rounded-full">
-                      {priceRanges[index]?.name}
-                      <button onClick={() => setSelectedPriceRanges(prev => prev.filter(i => i !== index))} className="hover:text-primary">
-                        <X className="w-3 h-3" />
-                      </button>
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              {/* Products */}
-              {paginatedProducts.length > 0 ? (
-                <>
-                  <div className={`grid gap-4 md:gap-6 ${
-                    viewMode === "grid" 
-                      ? "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3" 
-                      : "grid-cols-1"
-                  }`}>
-                    {paginatedProducts.map((product) => (
-                      <ProductCardNew key={product.id} product={product} />
+                {/* Active Filters Tags */}
+                {hasActiveFilters && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="flex flex-wrap items-center gap-2 mb-6"
+                  >
+                    <span className="font-body text-xs text-muted-foreground">Filtros ativos:</span>
+                    {selectedObjectives.map(slug => (
+                      <span key={slug} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/20 text-foreground font-body text-xs">
+                        {skinObjectives.find(o => o.slug === slug)?.name}
+                        <button onClick={() => toggleFilter(slug, selectedObjectives, setSelectedObjectives)} className="hover:text-primary">
+                          <X className="w-3 h-3" />
+                        </button>
+                      </span>
                     ))}
-                  </div>
+                    {selectedBrands.map(slug => (
+                      <span key={slug} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/20 text-foreground font-body text-xs">
+                        {brands.find(b => b.slug === slug)?.name}
+                        <button onClick={() => toggleFilter(slug, selectedBrands, setSelectedBrands)} className="hover:text-primary">
+                          <X className="w-3 h-3" />
+                        </button>
+                      </span>
+                    ))}
+                    {selectedUsageTypes.map(slug => (
+                      <span key={slug} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/20 text-foreground font-body text-xs">
+                        {usageTypes.find(u => u.slug === slug)?.name}
+                        <button onClick={() => toggleFilter(slug, selectedUsageTypes, setSelectedUsageTypes)} className="hover:text-primary">
+                          <X className="w-3 h-3" />
+                        </button>
+                      </span>
+                    ))}
+                    {selectedPriceRanges.map(index => (
+                      <span key={`price-${index}`} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 border border-primary/20 text-foreground font-body text-xs">
+                        {priceRanges[index]?.name}
+                        <button onClick={() => setSelectedPriceRanges(prev => prev.filter(i => i !== index))} className="hover:text-primary">
+                          <X className="w-3 h-3" />
+                        </button>
+                      </span>
+                    ))}
+                  </motion.div>
+                )}
 
-                  {/* Pagination */}
-                  {totalPages > 1 && (
-                    <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-                      <div className="flex items-center gap-1">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                          disabled={currentPage === 1}
-                          className="border-detail"
-                        >
-                          Anterior
-                        </Button>
-                        
-                        <div className="flex items-center gap-1 mx-2">
-                          {getPageNumbers().map((page, index) => (
-                            page === "..." ? (
-                              <span key={`ellipsis-${index}`} className="px-2 font-body text-muted-foreground">...</span>
-                            ) : (
-                              <Button
-                                key={page}
-                                variant={currentPage === page ? "gold" : "outline"}
-                                size="sm"
-                                onClick={() => setCurrentPage(page)}
-                                className={`w-9 h-9 ${currentPage !== page ? "border-detail" : ""}`}
-                              >
-                                {page}
-                              </Button>
-                            )
-                          ))}
+                {/* Products */}
+                {paginatedProducts.length > 0 ? (
+                  <>
+                    <motion.div 
+                      variants={containerVariants}
+                      initial="hidden"
+                      animate="visible"
+                      key={`${currentPage}-${sortBy}`}
+                      className={`grid gap-4 md:gap-6 ${
+                        viewMode === "grid" 
+                          ? "grid-cols-2 sm:grid-cols-2 lg:grid-cols-3" 
+                          : "grid-cols-1"
+                      }`}
+                    >
+                      {paginatedProducts.map((product) => (
+                        <motion.div key={product.id} variants={itemVariants}>
+                          <ProductCardNew product={product} />
+                        </motion.div>
+                      ))}
+                    </motion.div>
+
+                    {/* Pagination */}
+                    {totalPages > 1 && (
+                      <div className="mt-16 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                            disabled={currentPage === 1}
+                            className="border-detail"
+                          >
+                            Anterior
+                          </Button>
+                          
+                          <div className="flex items-center gap-1 mx-2">
+                            {getPageNumbers().map((page, index) => (
+                              page === "..." ? (
+                                <span key={`ellipsis-${index}`} className="px-2 font-body text-muted-foreground">...</span>
+                              ) : (
+                                <Button
+                                  key={page}
+                                  variant={currentPage === page ? "gold" : "outline"}
+                                  size="sm"
+                                  onClick={() => setCurrentPage(page)}
+                                  className={`w-10 h-10 ${currentPage !== page ? "border-detail" : ""}`}
+                                >
+                                  {page}
+                                </Button>
+                              )
+                            ))}
+                          </div>
+                          
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                            disabled={currentPage === totalPages}
+                            className="border-detail"
+                          >
+                            Próxima
+                          </Button>
                         </div>
                         
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                          disabled={currentPage === totalPages}
-                          className="border-detail"
-                        >
-                          Próxima
-                        </Button>
+                        <p className="font-body text-sm text-muted-foreground">
+                          Mostrando {((currentPage - 1) * PRODUCTS_PER_PAGE) + 1}-{Math.min(currentPage * PRODUCTS_PER_PAGE, filteredProducts.length)} de {filteredProducts.length} produtos
+                        </p>
                       </div>
-                      
-                      <p className="font-body text-sm text-muted-foreground">
-                        Mostrando {((currentPage - 1) * PRODUCTS_PER_PAGE) + 1}-{Math.min(currentPage * PRODUCTS_PER_PAGE, filteredProducts.length)} de {filteredProducts.length} produtos
+                    )}
+                  </>
+                ) : (
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="text-center py-20 bg-cream/50 border border-detail/30"
+                  >
+                    <div className="max-w-sm mx-auto">
+                      <p className="font-body text-muted-foreground mb-4">
+                        Nenhum produto encontrado com os filtros selecionados.
                       </p>
+                      <Button variant="gold-outline" onClick={clearFilters}>
+                        Limpar Filtros
+                      </Button>
                     </div>
-                  )}
-                </>
-              ) : (
-                <div className="text-center py-20 bg-cream/50 border border-detail/30 rounded-lg">
-                  <div className="max-w-sm mx-auto">
-                    <p className="font-body text-muted-foreground mb-4">
-                      Nenhum produto encontrado com os filtros selecionados.
-                    </p>
-                    <Button variant="gold-outline" onClick={clearFilters}>
-                      Limpar Filtros
-                    </Button>
-                  </div>
-                </div>
-              )}
+                  </motion.div>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-16 lg:py-20 bg-cream border-t border-detail/30">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-xl mx-auto text-center">
-            <h2 className="font-display text-2xl md:text-3xl font-semibold text-foreground mb-4">
-              Não sabe qual escolher?
-            </h2>
-            <p className="font-body text-muted-foreground mb-8">
-              Receba uma indicação personalizada de rotina para sua pele através de nossa consultoria gratuita.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Button variant="gold" size="lg" asChild>
-                <Link to="/monte-sua-rotina">
-                  Monte sua Rotina
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
-              <Button variant="gold-outline" size="lg" asChild>
-                <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="w-4 h-4" />
-                  Falar com especialista
-                </a>
-              </Button>
+        {/* CTA Section */}
+        <section className="bg-primary section-editorial overflow-hidden relative">
+          <div className="absolute -top-20 -left-20 w-64 h-64 border border-primary-foreground/10 rounded-full" />
+          <div className="absolute -bottom-32 -right-32 w-96 h-96 border border-primary-foreground/10 rounded-full" />
+          
+          <AnimatedSection className="container-editorial relative z-10">
+            <div className="max-w-xl mx-auto text-center">
+              <span className="text-xs uppercase tracking-[0.25em] text-primary-foreground/60 font-body font-semibold">
+                Consultoria
+              </span>
+              <h2 className="font-display text-display-sm md:text-display text-primary-foreground mt-3">
+                Não sabe qual escolher?
+              </h2>
+              <p className="font-body text-lg text-primary-foreground/70 mt-4">
+                Receba uma indicação personalizada de rotina para sua pele através de nossa consultoria gratuita.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center mt-10">
+                <Button variant="secondary" size="lg" asChild>
+                  <Link to="/monte-sua-rotina">
+                    Monte sua Rotina
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
+                  <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+                    <MessageCircle className="w-4 h-4" />
+                    Falar com especialista
+                  </a>
+                </Button>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
-    </main>
+          </AnimatedSection>
+        </section>
+      </main>
+
+      <MainFooter />
+    </div>
   );
 };
 
