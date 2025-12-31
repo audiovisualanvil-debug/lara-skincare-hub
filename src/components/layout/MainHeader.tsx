@@ -172,10 +172,10 @@ const MainHeader = () => {
               onClick={() => setActiveMegaMenu(null)}
             >
               <h1 className="font-display text-2xl md:text-3xl font-medium text-foreground tracking-tight transition-colors group-hover:text-primary">
-                Tulipia
+                Multti Med
               </h1>
               <span className="hidden md:block text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body mt-0.5">
-                Dermocosméticos Profissionais
+                Dermocosméticos
               </span>
             </Link>
 
