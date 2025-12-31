@@ -23,6 +23,7 @@ import Favorites from "./pages/Favorites";
 import Compare from "./pages/Compare";
 import SkinQuiz from "./pages/SkinQuiz";
 import Auth from "./pages/Auth";
+import TulipiaPage from "./pages/TulipiaPage";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ const App = () => (
                   <Route path="/" element={<HomePage />} />
                   <Route path="/shop" element={<Shop />} />
                   <Route path="/loja" element={<Shop />} />
+                  <Route path="/tulipia" element={<TulipiaPage />} />
                   <Route path="/produto/:id" element={<ProductDetail />} />
                   <Route path="/favoritos" element={<Favorites />} />
                   <Route path="/comparar" element={<Compare />} />
