@@ -10,16 +10,20 @@ const CategoryCardHome = ({ title, image, href }: CategoryCardHomeProps) => {
   return (
     <Link 
       to={href}
-      className="group relative aspect-[4/5] rounded-lg overflow-hidden bg-secondary hover-lift"
+      className="group relative aspect-[3/4] overflow-hidden bg-secondary img-editorial"
     >
       <img
         src={image}
         alt={title}
-        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/20 to-transparent" />
+      {/* Editorial gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/20 to-transparent" />
+      
+      {/* Content */}
       <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-        <h3 className="font-heading text-lg md:text-xl font-semibold text-white">
+        <div className="w-6 h-0.5 bg-primary mb-3 transition-all duration-500 group-hover:w-12" />
+        <h3 className="font-display text-lg md:text-xl font-medium text-white">
           {title}
         </h3>
       </div>

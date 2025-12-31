@@ -1,8 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User, ShoppingBag, Menu, X, ChevronDown, Heart, LogOut } from "lucide-react";
+import { User, ShoppingBag, Menu, X, ChevronDown, Heart, LogOut, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +14,7 @@ import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAuth } from "@/hooks/useAuth";
 import SearchAutocomplete from "@/components/shop/SearchAutocomplete";
 import { toast } from "sonner";
+
 // Import product images
 import niacineSerum from "@/assets/products/niacine-serum.jpg";
 import dermacosImmortalite from "@/assets/products/dermacos-immortalite.jpg";
@@ -121,6 +121,7 @@ const menuItems = [
 const MainHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
+  const [showSearch, setShowSearch] = useState(false);
   const megaMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { totalItems, openCart } = useCart();
@@ -159,34 +160,60 @@ const MainHeader = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background" ref={megaMenuRef}>
-      {/* Top Bar */}
-      <div className="border-b border-border">
-        <div className="container">
-          <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
-            <Link to="/" className="flex-shrink-0" onClick={() => setActiveMegaMenu(null)}>
-              <h1 className="font-heading text-xl md:text-2xl font-semibold text-foreground tracking-tight">
+    <header className="fixed top-0 left-0 right-0 z-50" ref={megaMenuRef}>
+      {/* Top Bar - Editorial Style */}
+      <div className="bg-background/95 backdrop-blur-md border-b border-border/50">
+        <div className="container-editorial">
+          <div className="flex items-center justify-between h-20 md:h-24">
+            {/* Logo - Editorial Typography */}
+            <Link 
+              to="/" 
+              className="flex-shrink-0 group" 
+              onClick={() => setActiveMegaMenu(null)}
+            >
+              <h1 className="font-display text-2xl md:text-3xl font-medium text-foreground tracking-tight transition-colors group-hover:text-primary">
                 Multti Med
               </h1>
+              <span className="hidden md:block text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body mt-0.5">
+                Dermocosméticos
+              </span>
             </Link>
 
-            {/* Search Bar - Desktop */}
-            <SearchAutocomplete 
-              className="hidden md:block flex-1 max-w-md mx-8"
-              inputClassName="h-10 bg-secondary border-0 focus-visible:ring-1 focus-visible:ring-primary"
-            />
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1">
+              {menuItems.map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => handleMenuClick(item)}
+                  className={`
+                    flex items-center gap-1.5 px-4 py-2 text-sm font-body font-medium 
+                    transition-all duration-300 relative
+                    ${activeMegaMenu === item.label 
+                      ? 'text-primary' 
+                      : 'text-foreground hover:text-primary'
+                    }
+                  `}
+                >
+                  <span className="editorial-underline">{item.label}</span>
+                  {item.hasMegaMenu && (
+                    <ChevronDown 
+                      className={`h-3.5 w-3.5 transition-transform duration-300 ${activeMegaMenu === item.label ? 'rotate-180' : ''}`} 
+                    />
+                  )}
+                </button>
+              ))}
+            </nav>
 
             {/* Right Icons */}
-            <div className="flex items-center gap-2 md:gap-4">
-              {/* Mobile Menu Toggle */}
+            <div className="flex items-center gap-1 md:gap-3">
+              {/* Search Toggle */}
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="h-10 w-10 hover:bg-accent/50"
+                onClick={() => setShowSearch(!showSearch)}
               >
-                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                <Search className="h-5 w-5" />
               </Button>
 
               {/* User Menu */}
@@ -194,23 +221,24 @@ const MainHeader = () => {
                 user ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="hidden md:flex">
+                      <Button variant="ghost" size="icon" className="hidden md:flex h-10 w-10 hover:bg-accent/50">
                         <User className="h-5 w-5" />
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-48">
-                      <div className="px-2 py-1.5">
-                        <p className="text-sm font-medium truncate">{user.email}</p>
+                    <DropdownMenuContent align="end" className="w-52 bg-background/95 backdrop-blur-md border-border/50">
+                      <div className="px-3 py-2">
+                        <p className="text-xs uppercase tracking-wider text-muted-foreground font-body">Minha conta</p>
+                        <p className="text-sm font-medium truncate mt-1">{user.email}</p>
                       </div>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={handleSignOut} className="text-destructive focus:text-destructive">
+                      <DropdownMenuSeparator className="bg-border/50" />
+                      <DropdownMenuItem onClick={handleSignOut} className="text-destructive focus:text-destructive focus:bg-destructive/10">
                         <LogOut className="h-4 w-4 mr-2" />
                         Sair
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <Button variant="ghost" size="icon" className="hidden md:flex" asChild>
+                  <Button variant="ghost" size="icon" className="hidden md:flex h-10 w-10 hover:bg-accent/50" asChild>
                     <Link to="/auth">
                       <User className="h-5 w-5" />
                     </Link>
@@ -219,11 +247,11 @@ const MainHeader = () => {
               )}
 
               {/* Favorites Icon */}
-              <Button variant="ghost" size="icon" className="relative hidden md:flex" asChild>
+              <Button variant="ghost" size="icon" className="relative hidden md:flex h-10 w-10 hover:bg-accent/50" asChild>
                 <Link to="/favoritos">
                   <Heart className="h-5 w-5" />
                   {totalFavorites > 0 && (
-                    <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-medium text-primary-foreground flex items-center justify-center">
+                    <span className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full bg-primary text-[10px] font-semibold text-primary-foreground flex items-center justify-center">
                       {totalFavorites > 9 ? "9+" : totalFavorites}
                     </span>
                   )}
@@ -231,67 +259,56 @@ const MainHeader = () => {
               </Button>
 
               {/* Cart Icon */}
-              <Button variant="ghost" size="icon" className="relative" onClick={openCart}>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="relative h-10 w-10 hover:bg-accent/50" 
+                onClick={openCart}
+              >
                 <ShoppingBag className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-medium text-primary-foreground flex items-center justify-center">
+                  <span className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full bg-primary text-[10px] font-semibold text-primary-foreground flex items-center justify-center">
                     {totalItems > 9 ? "9+" : totalItems}
                   </span>
                 )}
               </Button>
+
+              {/* Mobile Menu Toggle */}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden h-10 w-10 hover:bg-accent/50"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
             </div>
           </div>
 
-          {/* Mobile Search */}
-          <div className="md:hidden pb-3">
-            <SearchAutocomplete 
-              inputClassName="h-10 bg-secondary border-0"
-            />
-          </div>
+          {/* Search Bar - Expandable */}
+          {showSearch && (
+            <div className="pb-4 animate-fade-up">
+              <SearchAutocomplete 
+                className="max-w-2xl mx-auto"
+                inputClassName="h-12 bg-secondary/50 border border-border/50 focus-visible:ring-1 focus-visible:ring-primary font-body"
+              />
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Navigation Menu - Desktop */}
-      <nav className="hidden md:block border-b border-border bg-background">
-        <div className="container">
-          <ul className="flex items-center justify-center gap-1 h-12">
-            {menuItems.map((item) => (
-              <li key={item.label}>
-                <button
-                  onClick={() => handleMenuClick(item)}
-                  className={`
-                    flex items-center gap-1 px-4 py-2 font-heading text-sm font-medium 
-                    transition-colors rounded-md
-                    ${activeMegaMenu === item.label 
-                      ? 'text-primary bg-secondary' 
-                      : 'text-foreground hover:text-primary hover:bg-secondary/50'
-                    }
-                  `}
-                >
-                  {item.label}
-                  {item.hasMegaMenu && (
-                    <ChevronDown 
-                      className={`h-4 w-4 transition-transform ${activeMegaMenu === item.label ? 'rotate-180' : ''}`} 
-                    />
-                  )}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-
-      {/* Mega Menu */}
+      {/* Mega Menu - Editorial Style */}
       {activeMegaMenu && (
-        <div className="hidden md:block absolute left-0 right-0 bg-background border-b border-border shadow-elevated animate-slide-down z-50">
-          <div className="container py-8">
+        <div className="hidden lg:block absolute left-0 right-0 bg-background/98 backdrop-blur-md border-b border-border/50 shadow-dramatic animate-slide-down z-50">
+          <div className="container-editorial py-10">
             {menuItems.find(item => item.label === activeMegaMenu)?.megaMenu && (
-              <div className="flex gap-10">
+              <div className="flex gap-16">
                 {/* Subcategories Column */}
-                <div className="w-56 flex-shrink-0">
-                  <h3 className="font-heading text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-4">
+                <div className="w-64 flex-shrink-0">
+                  <h3 className="font-display text-2xl font-medium text-foreground mb-6">
                     {activeMegaMenu}
                   </h3>
+                  <div className="w-12 h-0.5 bg-primary mb-6" />
                   <ul className="space-y-1">
                     {menuItems.find(item => item.label === activeMegaMenu)?.megaMenu?.subcategories.map((sub) => (
                       <li key={sub.label}>
@@ -299,10 +316,10 @@ const MainHeader = () => {
                           to={sub.href}
                           onClick={() => setActiveMegaMenu(null)}
                           className={`
-                            block py-2 px-3 rounded-md font-heading text-sm transition-colors
+                            block py-2.5 font-body text-sm transition-all duration-300
                             ${sub.highlight 
-                              ? 'font-semibold text-primary hover:bg-primary/10' 
-                              : 'text-foreground hover:bg-secondary hover:text-primary'
+                              ? 'font-semibold text-primary hover:translate-x-2' 
+                              : 'text-muted-foreground hover:text-foreground hover:translate-x-2'
                             }
                           `}
                         >
@@ -313,27 +330,27 @@ const MainHeader = () => {
                   </ul>
                 </div>
 
-                {/* Banner Cards */}
-                <div className="flex-1 grid grid-cols-3 gap-4">
+                {/* Banner Cards - Editorial Layout */}
+                <div className="flex-1 grid grid-cols-3 gap-6">
                   {menuItems.find(item => item.label === activeMegaMenu)?.megaMenu?.banners.map((banner, index) => (
                     <Link
                       key={index}
                       to={banner.href}
                       onClick={() => setActiveMegaMenu(null)}
-                      className="group block rounded-lg overflow-hidden bg-secondary hover-lift"
+                      className="group block img-editorial"
                     >
-                      <div className="aspect-[4/3] overflow-hidden">
+                      <div className="aspect-[4/5] overflow-hidden bg-secondary">
                         <img
                           src={banner.image}
                           alt={banner.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="p-4">
-                        <h4 className="font-heading text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                      <div className="mt-4">
+                        <h4 className="font-display text-lg font-medium text-foreground group-hover:text-primary transition-colors">
                           {banner.title}
                         </h4>
-                        <p className="text-sm text-muted-foreground mt-1">
+                        <p className="text-sm text-muted-foreground font-body mt-1">
                           {banner.subtitle}
                         </p>
                       </div>
@@ -348,27 +365,48 @@ const MainHeader = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <nav className="md:hidden border-b border-border bg-background animate-slide-down">
-          <ul className="container py-4 space-y-1">
+        <nav className="lg:hidden bg-background/98 backdrop-blur-md border-b border-border/50 animate-slide-down">
+          <div className="container-editorial py-6 space-y-2">
             {menuItems.map((item) => (
-              <li key={item.label}>
-                <Link
-                  to={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block font-heading text-sm font-medium text-foreground py-3 px-2 rounded-md transition-colors hover:bg-secondary"
-                >
-                  {item.label}
-                </Link>
-              </li>
+              <Link
+                key={item.label}
+                to={item.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block font-body text-base font-medium text-foreground py-3 border-b border-border/30 transition-colors hover:text-primary"
+              >
+                {item.label}
+              </Link>
             ))}
-          </ul>
+            
+            {/* Mobile Auth & Favorites */}
+            <div className="pt-4 flex gap-4">
+              {!loading && !user && (
+                <Link
+                  to="/auth"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 text-sm font-medium text-primary"
+                >
+                  <User className="h-4 w-4" />
+                  Entrar
+                </Link>
+              )}
+              <Link
+                to="/favoritos"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                <Heart className="h-4 w-4" />
+                Favoritos ({totalFavorites})
+              </Link>
+            </div>
+          </div>
         </nav>
       )}
 
       {/* Overlay when mega menu is open */}
       {activeMegaMenu && (
         <div 
-          className="fixed inset-0 bg-charcoal/20 z-[-1]"
+          className="fixed inset-0 bg-espresso/10 backdrop-blur-sm z-[-1]"
           onClick={() => setActiveMegaMenu(null)}
         />
       )}
