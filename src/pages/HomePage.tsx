@@ -268,6 +268,87 @@ const HomePage = () => {
           </div>
         </section>
 
+        {/* Tulipia Promotional Banner */}
+        <section className="relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Image Side */}
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative h-[400px] lg:h-[600px]"
+            >
+              <img
+                src={sweetLipsLayane}
+                alt="Linha Tulipia - Dermocosméticos Premium"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20 lg:hidden" />
+            </motion.div>
+
+            {/* Content Side */}
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="bg-espresso flex items-center justify-center p-8 lg:p-16"
+            >
+              <div className="max-w-md text-center lg:text-left">
+                <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+                  Linha Exclusiva
+                </span>
+                <h2 className="font-display text-display-sm md:text-display text-white mt-4">
+                  Tulipia <br />
+                  <span className="text-primary">Dermocosméticos</span>
+                </h2>
+                <p className="mt-6 text-white/80 font-body leading-relaxed">
+                  Tecnologia nano encapsulada e ingredientes premium para resultados profissionais. 
+                  Sweet Lips, Life C Nano, Miracle Eyes e muito mais.
+                </p>
+                
+                {/* Feature highlights */}
+                <div className="grid grid-cols-2 gap-4 mt-8">
+                  {[
+                    { label: "Nano Tech", desc: "Ativos encapsulados" },
+                    { label: "Premium", desc: "Alta concentração" },
+                    { label: "Resultados", desc: "Desde 1ª aplicação" },
+                    { label: "Profissional", desc: "Clínicas e estéticas" },
+                  ].map((item) => (
+                    <div key={item.label} className="text-left">
+                      <p className="text-primary text-sm font-semibold">{item.label}</p>
+                      <p className="text-white/60 text-xs">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <motion.div 
+                  className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <Link 
+                    to="/tulipia"
+                    className="inline-flex h-12 px-8 items-center justify-center bg-primary text-primary-foreground font-body font-semibold uppercase tracking-wider text-sm hover:bg-primary/90 transition-colors group"
+                  >
+                    Explorar Linha
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                  <Link 
+                    to="/consultoria"
+                    className="inline-flex h-12 px-8 items-center justify-center border border-white/30 text-white font-body font-semibold uppercase tracking-wider text-sm hover:bg-white/10 transition-colors"
+                  >
+                    Consultoria Grátis
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Kits Section - Animated */}
         <AnimatedSection delay={0.1}>
           <KitsSection kits={kits} />
