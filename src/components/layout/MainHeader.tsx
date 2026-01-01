@@ -107,6 +107,12 @@ const menuItems = [
     },
   },
   { 
+    label: "Tulipia", 
+    href: "/tulipia",
+    hasMegaMenu: false,
+    isHighlight: true 
+  },
+  { 
     label: "Quiz de Pele", 
     href: "/quiz-pele",
     hasMegaMenu: false 
@@ -188,9 +194,11 @@ const MainHeader = () => {
                   className={`
                     flex items-center gap-1.5 px-4 py-2 text-sm font-body font-medium 
                     transition-all duration-300 relative
-                    ${activeMegaMenu === item.label 
-                      ? 'text-primary' 
-                      : 'text-foreground hover:text-primary'
+                    ${(item as any).isHighlight 
+                      ? 'text-primary font-semibold' 
+                      : activeMegaMenu === item.label 
+                        ? 'text-primary' 
+                        : 'text-foreground hover:text-primary'
                     }
                   `}
                 >
