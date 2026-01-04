@@ -6,25 +6,38 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // Import banner images
+import heroSkincare from "@/assets/hero-skincare.jpg";
 import sweetLipsCategoria from "@/assets/banners/sweet-lips-categoria.webp";
 import lifeCNano from "@/assets/banners/life-c-nano.webp";
 import miracleEyes from "@/assets/banners/miracle-eyes-1.webp";
-import resilienceSerum from "@/assets/banners/resilience-serum.webp";
 import glamourPele from "@/assets/banners/glamour-pele.webp";
 
 interface Slide {
   id: number;
   image: string;
   title: string;
+  titleHighlight?: string;
   subtitle: string;
   ctaText: string;
   ctaLink: string;
+  ctaSecondary?: { text: string; link: string };
   align?: "left" | "center" | "right";
 }
 
 const slides: Slide[] = [
   {
     id: 1,
+    image: heroSkincare,
+    title: "Tratamento para sua pele",
+    titleHighlight: "com resultados",
+    subtitle: "Consultoria especializada em dermocosméticos premium",
+    ctaText: "Conhecer produtos",
+    ctaLink: "/loja",
+    ctaSecondary: { text: "Monte sua rotina ideal", link: "/monte-sua-rotina" },
+    align: "left",
+  },
+  {
+    id: 2,
     image: sweetLipsCategoria,
     title: "Sweet Lips",
     subtitle: "Lábios hidratados e irresistíveis com nossa linha completa de cuidados labiais",
@@ -33,7 +46,7 @@ const slides: Slide[] = [
     align: "left",
   },
   {
-    id: 2,
+    id: 3,
     image: lifeCNano,
     title: "Life C Nano",
     subtitle: "Vitamina C de alta absorção para uma pele radiante e uniforme",
@@ -42,22 +55,13 @@ const slides: Slide[] = [
     align: "right",
   },
   {
-    id: 3,
+    id: 4,
     image: miracleEyes,
     title: "Miracle Eyes",
     subtitle: "Tratamento intensivo para a área dos olhos com resultados visíveis",
     ctaText: "Descobrir",
     ctaLink: "/loja",
     align: "left",
-  },
-  {
-    id: 4,
-    image: resilienceSerum,
-    title: "Resilience Serum",
-    subtitle: "Sérum anti-idade com tecnologia avançada de rejuvenescimento",
-    ctaText: "Saiba Mais",
-    ctaLink: "/loja",
-    align: "center",
   },
   {
     id: 5,
@@ -148,19 +152,35 @@ const HeroCarousel = () => {
                       slide.align === "right" && "ml-auto"
                     )}>
                       <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg">
-                        {slide.title}
+                        {slide.title}{" "}
+                        {slide.titleHighlight && (
+                          <span className="text-primary">{slide.titleHighlight}</span>
+                        )}
                       </h2>
                       <p className="text-white/90 text-base md:text-lg max-w-md drop-shadow-md">
                         {slide.subtitle}
                       </p>
-                      <Link to={slide.ctaLink}>
-                        <Button 
-                          size="lg" 
-                          className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-                        >
-                          {slide.ctaText}
-                        </Button>
-                      </Link>
+                      <div className="flex flex-col sm:flex-row gap-3 mt-2">
+                        <Link to={slide.ctaLink}>
+                          <Button 
+                            size="lg" 
+                            className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                          >
+                            {slide.ctaText}
+                          </Button>
+                        </Link>
+                        {slide.ctaSecondary && (
+                          <Link to={slide.ctaSecondary.link}>
+                            <Button 
+                              size="lg" 
+                              variant="outline"
+                              className="border-white/50 text-white hover:bg-white/10"
+                            >
+                              {slide.ctaSecondary.text}
+                            </Button>
+                          </Link>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
