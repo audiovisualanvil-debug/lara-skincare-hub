@@ -24,6 +24,7 @@ import sweetLipsEsfoliante from "@/assets/banners/sweet-lips-esfoliante.webp";
 import sweetLipsFluido from "@/assets/banners/sweet-lips-fluido.webp";
 import lifeCNano from "@/assets/banners/life-c-nano.webp";
 import miracleEyes1 from "@/assets/banners/miracle-eyes-1.webp";
+import miracleEyesHero from "@/assets/banners/miracle-eyes-hero.jpg";
 import glamourPele from "@/assets/banners/glamour-pele.webp";
 import primaveraMask from "@/assets/banners/primavera-mask.webp";
 import resilienceSerum from "@/assets/banners/resilience-serum.webp";
@@ -216,7 +217,7 @@ const HomePage = () => {
                   subtitle: "Reduza olheiras, bolsas e linhas finas ao redor dos olhos. Resultados comprovados em tratamentos profissionais.",
                   ctaPrimary: { label: "Explorar", href: "/tulipia" },
                   ctaSecondary: { label: "Ver Resultados", href: "/loja" },
-                  image: miracleEyes1,
+                  image: miracleEyesHero,
                   label: "Área dos Olhos",
                   stats: [
                     { value: "-60%", label: "Olheiras" },
