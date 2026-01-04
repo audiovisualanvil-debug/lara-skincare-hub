@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import HeroCarousel from "@/components/home/HeroCarousel";
@@ -140,15 +139,6 @@ const itemVariants = {
 
 const HomePage = () => {
   const { recentProducts } = useRecentlyViewed();
-  const heroRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress: heroScrollProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  
-  const heroOpacity = useTransform(heroScrollProgress, [0, 0.5], [1, 0]);
-  const heroScale = useTransform(heroScrollProgress, [0, 0.5], [1, 1.1]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
