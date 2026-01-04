@@ -1,7 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
-import HeroCarousel from "@/components/home/HeroCarousel";
+import HeroBanner from "@/components/home/HeroBanner";
 import CategoryCardHome from "@/components/home/CategoryCardHome";
 import KitsSection from "@/components/home/KitsSection";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
@@ -139,6 +140,15 @@ const itemVariants = {
 
 const HomePage = () => {
   const { recentProducts } = useRecentlyViewed();
+  const heroRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  
+  const heroOpacity = useTransform(heroScrollProgress, [0, 0.5], [1, 0]);
+  const heroScale = useTransform(heroScrollProgress, [0, 0.5], [1, 1.1]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
@@ -148,8 +158,22 @@ const HomePage = () => {
       <div className="h-20 md:h-24" />
 
       <main className="flex-1">
-        {/* Hero Carousel with 5 rotating banners */}
-        <HeroCarousel />
+        {/* Hero Banner with Parallax */}
+        <motion.div 
+          ref={heroRef}
+          style={{ opacity: heroOpacity }}
+          className="relative"
+        >
+          <motion.div style={{ scale: heroScale }}>
+            <HeroBanner
+              title="Sua pele merece o melhor tratamento"
+              subtitle="Dermocosméticos de alta performance para resultados visíveis. Descubra a rotina ideal para sua pele com Mezzo, Extratos da Terra e Tulipia."
+              ctaPrimary={{ label: "Monte sua Rotina", href: "/monte-sua-rotina" }}
+              ctaSecondary={{ label: "Ver Produtos", href: "/loja" }}
+              image={sweetLipsLayane}
+            />
+          </motion.div>
+        </motion.div>
 
         {/* Featured Banners Carousel */}
         <section className="section-editorial bg-secondary/20">
