@@ -1,43 +1,44 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import useEmblaCarousel from "embla-carousel-react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 // Import banner images
-import heroSkincare from "@/assets/hero-skincare.jpg";
+import heroImage from "@/assets/hero-skincare.jpg";
+import productsImage from "@/assets/products-display.jpg";
 import sweetLipsCategoria from "@/assets/banners/sweet-lips-categoria.webp";
 import lifeCNano from "@/assets/banners/life-c-nano.webp";
 import miracleEyes from "@/assets/banners/miracle-eyes-1.webp";
 import glamourPele from "@/assets/banners/glamour-pele.webp";
 
-interface Slide {
+interface BannerSlide {
   id: number;
+  type: "banner";
   image: string;
   title: string;
-  titleHighlight?: string;
   subtitle: string;
   ctaText: string;
   ctaLink: string;
-  ctaSecondary?: { text: string; link: string };
   align?: "left" | "center" | "right";
 }
+
+interface HeroSlide {
+  id: number;
+  type: "hero";
+}
+
+type Slide = BannerSlide | HeroSlide;
 
 const slides: Slide[] = [
   {
     id: 1,
-    image: heroSkincare,
-    title: "Tratamento para sua pele",
-    titleHighlight: "com resultados",
-    subtitle: "Consultoria especializada em dermocosméticos premium",
-    ctaText: "Conhecer produtos",
-    ctaLink: "/loja",
-    ctaSecondary: { text: "Monte sua rotina ideal", link: "/monte-sua-rotina" },
-    align: "left",
+    type: "hero",
   },
   {
     id: 2,
+    type: "banner",
     image: sweetLipsCategoria,
     title: "Sweet Lips",
     subtitle: "Lábios hidratados e irresistíveis com nossa linha completa de cuidados labiais",
@@ -47,6 +48,7 @@ const slides: Slide[] = [
   },
   {
     id: 3,
+    type: "banner",
     image: lifeCNano,
     title: "Life C Nano",
     subtitle: "Vitamina C de alta absorção para uma pele radiante e uniforme",
@@ -56,6 +58,7 @@ const slides: Slide[] = [
   },
   {
     id: 4,
+    type: "banner",
     image: miracleEyes,
     title: "Miracle Eyes",
     subtitle: "Tratamento intensivo para a área dos olhos com resultados visíveis",
@@ -65,6 +68,7 @@ const slides: Slide[] = [
   },
   {
     id: 5,
+    type: "banner",
     image: glamourPele,
     title: "Glamour Pele",
     subtitle: "Revele sua beleza natural com nossa linha premium de skincare",
@@ -74,11 +78,114 @@ const slides: Slide[] = [
   },
 ];
 
+const HeroSlideContent = () => (
+  <div className="bg-card min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh]">
+    <div className="container mx-auto px-4 lg:px-8 h-full">
+      <div className="grid lg:grid-cols-2 min-h-[60vh] md:min-h-[70vh] lg:min-h-[80vh]">
+        {/* Left - Model Image */}
+        <div className="relative h-[300px] lg:h-auto overflow-hidden order-2 lg:order-1">
+          <img 
+            src={heroImage} 
+            alt="Modelo com pele saudável"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        
+        {/* Right - Content + Product */}
+        <div className="relative flex items-center order-1 lg:order-2">
+          {/* Product background */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block overflow-hidden">
+            <img 
+              src={productsImage} 
+              alt="Produtos dermocosméticos"
+              className="w-full h-full object-cover opacity-20"
+            />
+          </div>
+          
+          <div className="relative z-10 p-8 lg:p-16 space-y-6">
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+              Tratamento para sua pele{" "}
+              <span className="text-primary">com resultados</span>
+            </h1>
+            <p className="font-body text-base lg:text-lg text-muted-foreground leading-relaxed max-w-md">
+              Consultoria especializada em dermocosméticos premium
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 pt-4">
+              <Button variant="gold-outline" size="lg" asChild>
+                <Link to="/loja">
+                  Conhecer produtos
+                  <ArrowRight className="w-4 h-4 stroke-[1.5]" />
+                </Link>
+              </Button>
+              <Button variant="ghost" size="lg" asChild className="text-foreground hover:text-primary">
+                <Link to="/monte-sua-rotina">
+                  Monte sua rotina ideal
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+const BannerSlideContent = ({ slide }: { slide: BannerSlide }) => {
+  const getAlignmentClasses = (align: string = "left") => {
+    switch (align) {
+      case "center":
+        return "items-center text-center";
+      case "right":
+        return "items-end text-right";
+      default:
+        return "items-start text-left";
+    }
+  };
+
+  return (
+    <div className="relative h-[60vh] md:h-[70vh] lg:h-[80vh] w-full">
+      <img
+        src={slide.image}
+        alt={slide.title}
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+      
+      {/* Content */}
+      <div className="absolute inset-0 flex items-end pb-16 md:pb-24">
+        <div className="container mx-auto px-4">
+          <div className={cn(
+            "flex flex-col max-w-xl gap-4",
+            getAlignmentClasses(slide.align),
+            slide.align === "center" && "mx-auto",
+            slide.align === "right" && "ml-auto"
+          )}>
+            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg">
+              {slide.title}
+            </h2>
+            <p className="text-white/90 text-base md:text-lg max-w-md drop-shadow-md">
+              {slide.subtitle}
+            </p>
+            <Link to={slide.ctaLink}>
+              <Button 
+                size="lg" 
+                className="mt-2 bg-primary hover:bg-primary/90 text-primary-foreground"
+              >
+                {slide.ctaText}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const HeroCarousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
@@ -87,8 +194,6 @@ const HeroCarousel = () => {
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
   }, [emblaApi]);
 
   useEffect(() => {
@@ -111,17 +216,6 @@ const HeroCarousel = () => {
     return () => clearInterval(interval);
   }, [emblaApi]);
 
-  const getAlignmentClasses = (align: string = "left") => {
-    switch (align) {
-      case "center":
-        return "items-center text-center";
-      case "right":
-        return "items-end text-right";
-      default:
-        return "items-start text-left";
-    }
-  };
-
   return (
     <section className="relative w-full overflow-hidden">
       <div ref={emblaRef} className="overflow-hidden">
@@ -131,60 +225,11 @@ const HeroCarousel = () => {
               key={slide.id}
               className="relative flex-[0_0_100%] min-w-0"
             >
-              {/* Background Image */}
-              <div className="relative h-[60vh] md:h-[70vh] lg:h-[80vh] w-full">
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                
-                {/* Content */}
-                <div className="absolute inset-0 flex items-end pb-16 md:pb-24">
-                  <div className="container mx-auto px-4">
-                    <div className={cn(
-                      "flex flex-col max-w-xl gap-4",
-                      getAlignmentClasses(slide.align),
-                      slide.align === "center" && "mx-auto",
-                      slide.align === "right" && "ml-auto"
-                    )}>
-                      <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-white drop-shadow-lg">
-                        {slide.title}{" "}
-                        {slide.titleHighlight && (
-                          <span className="text-primary">{slide.titleHighlight}</span>
-                        )}
-                      </h2>
-                      <p className="text-white/90 text-base md:text-lg max-w-md drop-shadow-md">
-                        {slide.subtitle}
-                      </p>
-                      <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                        <Link to={slide.ctaLink}>
-                          <Button 
-                            size="lg" 
-                            className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                          >
-                            {slide.ctaText}
-                          </Button>
-                        </Link>
-                        {slide.ctaSecondary && (
-                          <Link to={slide.ctaSecondary.link}>
-                            <Button 
-                              size="lg" 
-                              variant="outline"
-                              className="border-white/50 text-white hover:bg-white/10"
-                            >
-                              {slide.ctaSecondary.text}
-                            </Button>
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              {slide.type === "hero" ? (
+                <HeroSlideContent />
+              ) : (
+                <BannerSlideContent slide={slide} />
+              )}
             </div>
           ))}
         </div>
@@ -218,7 +263,7 @@ const HeroCarousel = () => {
             className={cn(
               "w-2 h-2 rounded-full transition-all duration-300",
               selectedIndex === index 
-                ? "bg-white w-8" 
+                ? "bg-primary w-8" 
                 : "bg-white/50 hover:bg-white/75"
             )}
             aria-label={`Ir para slide ${index + 1}`}
