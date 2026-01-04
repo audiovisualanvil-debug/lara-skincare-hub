@@ -54,7 +54,7 @@ const slides: Slide[] = [
     subtitle: "Vitamina C de alta absorção para uma pele radiante e uniforme",
     ctaText: "Ver Produto",
     ctaLink: "/loja",
-    align: "right",
+    align: "left",
   },
   {
     id: 4,
@@ -74,7 +74,7 @@ const slides: Slide[] = [
     subtitle: "Revele sua beleza natural com nossa linha premium de skincare",
     ctaText: "Explorar",
     ctaLink: "/loja",
-    align: "right",
+    align: "left",
   },
 ];
 
