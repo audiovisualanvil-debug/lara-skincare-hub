@@ -10,23 +10,42 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
   tulipiaSweetLips,
-  tulipiaVitaminaC,
-  tulipiaAreaOlhos,
+  tulipiaLifeC,
+  tulipiaImmortaliteC,
+  tulipiaCilsLashes,
   tulipiaMascaras,
   tulipiaAntiIdade,
+  tulipiaDermacos,
+  tulipiaLancamentos,
+  tulipiaBlackSecret,
+  tulipiaClareadores,
+  tulipiaSeruns,
+  tulipiaNiacine,
+  tulipiaKinelyn,
   allTulipiaWithImages,
+  tulipiaCategories,
 } from "@/data/tulipiaProductsWithImages";
 
 // Import banner images for hero
 import sweetLipsCereja from "@/assets/banners/sweet-lips-cereja.jpg";
 
+const vitaminaCCount = tulipiaLifeC.length + tulipiaImmortaliteC.length;
+const areaOlhosCount = tulipiaCilsLashes.length;
+const antiIdadeCount = tulipiaAntiIdade.length + tulipiaDermacos.length;
+const clareamentoCount = tulipiaBlackSecret.length + tulipiaClareadores.length;
+const serunsCount = tulipiaSeruns.length + tulipiaNiacine.length;
+
 const categories = [
   { id: "all", label: "Todos", count: allTulipiaWithImages.length },
+  { id: "lancamentos", label: "Lançamentos", count: tulipiaLancamentos.length, icon: Star },
   { id: "labial", label: "Sweet Lips", count: tulipiaSweetLips.length, icon: Sparkles },
-  { id: "vitamina-c", label: "Vitamina C", count: tulipiaVitaminaC.length, icon: Star },
-  { id: "area-olhos", label: "Área dos Olhos", count: tulipiaAreaOlhos.length, icon: FlaskConical },
+  { id: "vitamina-c", label: "Vitamina C", count: vitaminaCCount, icon: Star },
+  { id: "area-olhos", label: "Área dos Olhos", count: areaOlhosCount, icon: FlaskConical },
   { id: "mascara", label: "Máscaras", count: tulipiaMascaras.length, icon: Leaf },
-  { id: "anti-idade", label: "Anti-idade", count: tulipiaAntiIdade.length, icon: Sparkles },
+  { id: "anti-idade", label: "Anti-idade", count: antiIdadeCount, icon: Sparkles },
+  { id: "clareamento", label: "Clareamento", count: clareamentoCount, icon: FlaskConical },
+  { id: "serum", label: "Séruns", count: serunsCount, icon: FlaskConical },
+  { id: "antiacne", label: "Antiacne", count: tulipiaKinelyn.length, icon: Leaf },
 ];
 
 const TulipiaPage = () => {
