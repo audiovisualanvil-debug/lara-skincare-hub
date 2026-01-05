@@ -22,7 +22,7 @@ import sweetLipsLayane from "@/assets/banners/sweet-lips-layane.jpg";
 import sweetLipsCereja from "@/assets/banners/sweet-lips-cereja.jpg";
 import sweetLipsEsfoliante from "@/assets/banners/sweet-lips-esfoliante.webp";
 import sweetLipsFluido from "@/assets/banners/sweet-lips-fluido.webp";
-import lifeCNano from "@/assets/banners/life-c-nano.webp";
+import lifeCNano from "@/assets/banners/life-c-nano-hero.jpg";
 import miracleEyes1 from "@/assets/banners/miracle-eyes-1.webp";
 import miracleEyesHero from "@/assets/banners/miracle-eyes-hero.jpg";
 import glamourPele from "@/assets/banners/glamour-pele.webp";
