@@ -27,7 +27,7 @@ import miracleEyes1 from "@/assets/banners/miracle-eyes-1.webp";
 import miracleEyesHero from "@/assets/banners/miracle-eyes-hero.jpg";
 import glamourPele from "@/assets/banners/glamour-pele.webp";
 import primaveraMask from "@/assets/banners/primavera-mask.webp";
-import resilienceSerum from "@/assets/banners/resilience-serum.webp";
+import resilienceSerum from "@/assets/banners/resilience-serum-hero.jpg";
 
 // Featured products - mix from both brands
 const featuredProducts = [
