@@ -181,17 +181,17 @@ const HomePage = () => {
               mobileImage={heroMobile1}
               slides={[
                 {
-                  title: "Sua pele merece o melhor tratamento",
-                  subtitle: "Dermocosméticos de alta performance para resultados visíveis.",
-                  ctaPrimary: { label: "Monte sua Rotina", href: "/monte-sua-rotina" },
+                  title: "Life C+ Nano Mousse",
+                  subtitle: "Vitamina C estabilizada para máxima absorção e luminosidade.",
+                  ctaPrimary: { label: "Conhecer", href: "/tulipia" },
                   ctaSecondary: { label: "Ver Produtos", href: "/loja" },
-                  image: sweetLipsLayane,
+                  image: lifeCNano,
                   mobileImage: heroMobile1,
-                  label: "Dermocosméticos",
+                  label: "Linha Tulipia",
                   stats: [
-                    { value: "100+", label: "Produtos" },
-                    { value: "10k+", label: "Clientes" },
-                    { value: "5★", label: "Avaliação" }
+                    { value: "20%", label: "Vit C Pura" },
+                    { value: "Nano", label: "Absorção" },
+                    { value: "12h", label: "Ação" }
                   ]
                 },
                 {
@@ -214,7 +214,6 @@ const HomePage = () => {
                   ctaPrimary: { label: "Ver Coleção", href: "/tulipia" },
                   ctaSecondary: { label: "Saiba Mais", href: "/consultoria" },
                   image: sweetLipsCereja,
-                  mobileImage: heroMobile1,
                   label: "Linha Tulipia",
                   stats: [
                     { value: "Nano", label: "Tecnologia" },
@@ -223,17 +222,16 @@ const HomePage = () => {
                   ]
                 },
                 {
-                  title: "Life C Nano Vitamina C",
-                  subtitle: "Vitamina C estabilizada para máxima absorção.",
-                  ctaPrimary: { label: "Conhecer", href: "/tulipia" },
-                  ctaSecondary: { label: "Consultoria", href: "/consultoria" },
-                  image: lifeCNano,
-                  mobileImage: heroMobile1,
-                  label: "Anti-idade",
+                  title: "Sua pele merece o melhor",
+                  subtitle: "Dermocosméticos de alta performance para resultados visíveis.",
+                  ctaPrimary: { label: "Monte sua Rotina", href: "/monte-sua-rotina" },
+                  ctaSecondary: { label: "Ver Produtos", href: "/loja" },
+                  image: sweetLipsLayane,
+                  label: "Dermocosméticos",
                   stats: [
-                    { value: "20%", label: "Vit C Pura" },
-                    { value: "Nano", label: "Absorção" },
-                    { value: "12h", label: "Ação" }
+                    { value: "100+", label: "Produtos" },
+                    { value: "10k+", label: "Clientes" },
+                    { value: "5★", label: "Avaliação" }
                   ]
                 },
                 {
@@ -242,7 +240,6 @@ const HomePage = () => {
                   ctaPrimary: { label: "Comprar", href: "/tulipia" },
                   ctaSecondary: { label: "Ingredientes", href: "/loja" },
                   image: resilienceSerum,
-                  mobileImage: heroMobile2,
                   label: "Alta Performance",
                   stats: [
                     { value: "+80%", label: "Firmeza" },
