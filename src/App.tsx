@@ -24,6 +24,7 @@ import Compare from "./pages/Compare";
 import SkinQuiz from "./pages/SkinQuiz";
 import Auth from "./pages/Auth";
 import TulipiaPage from "./pages/TulipiaPage";
+import AdminImageProcessor from "./pages/AdminImageProcessor";
 
 const queryClient = new QueryClient();
 
@@ -51,6 +52,7 @@ const App = () => (
                   <Route path="/consultoria" element={<Consultation />} />
                   <Route path="/sobre" element={<About />} />
                   <Route path="/contato" element={<Contact />} />
+                  <Route path="/admin/processar-imagens" element={<AdminImageProcessor />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
                 <MobileBottomNav />
