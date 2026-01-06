@@ -31,6 +31,10 @@ import glamourPele from "@/assets/banners/glamour-pele.webp";
 import primaveraMask from "@/assets/banners/primavera-mask.webp";
 import resilienceSerum from "@/assets/banners/resilience-serum-hero.jpg";
 
+// Mobile hero images
+import heroMobile1 from "@/assets/banners/hero-mobile-1.png";
+import heroMobile2 from "@/assets/banners/hero-mobile-2.png";
+
 // Featured products - mix from both brands
 const featuredProducts = [
   ...allMezzoWithImages.slice(0, 4),
@@ -170,17 +174,19 @@ const HomePage = () => {
           <motion.div style={{ scale: heroScale }}>
             <HeroBanner
               title="Sua pele merece o melhor tratamento"
-              subtitle="Dermocosméticos de alta performance para resultados visíveis. Descubra a rotina ideal para sua pele com Mezzo, Extratos da Terra e Tulipia."
+              subtitle="Dermocosméticos de alta performance para resultados visíveis. Descubra a rotina ideal para sua pele."
               ctaPrimary={{ label: "Monte sua Rotina", href: "/monte-sua-rotina" }}
               ctaSecondary={{ label: "Ver Produtos", href: "/loja" }}
               image={sweetLipsLayane}
+              mobileImage={heroMobile1}
               slides={[
                 {
                   title: "Sua pele merece o melhor tratamento",
-                  subtitle: "Dermocosméticos de alta performance para resultados visíveis. Descubra a rotina ideal para sua pele com Mezzo, Extratos da Terra e Tulipia.",
+                  subtitle: "Dermocosméticos de alta performance para resultados visíveis.",
                   ctaPrimary: { label: "Monte sua Rotina", href: "/monte-sua-rotina" },
                   ctaSecondary: { label: "Ver Produtos", href: "/loja" },
                   image: sweetLipsLayane,
+                  mobileImage: heroMobile1,
                   label: "Dermocosméticos",
                   stats: [
                     { value: "100+", label: "Produtos" },
@@ -189,11 +195,26 @@ const HomePage = () => {
                   ]
                 },
                 {
+                  title: "Miracle Eyes Treatment",
+                  subtitle: "Tratamento intensivo para área dos olhos com resultados visíveis.",
+                  ctaPrimary: { label: "Explorar", href: "/tulipia" },
+                  ctaSecondary: { label: "Ver Resultados", href: "/loja" },
+                  image: miracleEyesHero,
+                  mobileImage: heroMobile2,
+                  label: "Área dos Olhos",
+                  stats: [
+                    { value: "-60%", label: "Olheiras" },
+                    { value: "-45%", label: "Bolsas" },
+                    { value: "4 sem", label: "Resultado" }
+                  ]
+                },
+                {
                   title: "Sweet Lips Collection",
-                  subtitle: "Lábios hidratados, macios e rejuvenescidos. Tecnologia nano encapsulada para resultados visíveis desde a primeira aplicação.",
+                  subtitle: "Lábios hidratados, macios e rejuvenescidos.",
                   ctaPrimary: { label: "Ver Coleção", href: "/tulipia" },
                   ctaSecondary: { label: "Saiba Mais", href: "/consultoria" },
                   image: sweetLipsCereja,
+                  mobileImage: heroMobile1,
                   label: "Linha Tulipia",
                   stats: [
                     { value: "Nano", label: "Tecnologia" },
@@ -203,10 +224,11 @@ const HomePage = () => {
                 },
                 {
                   title: "Life C Nano Vitamina C",
-                  subtitle: "Vitamina C estabilizada em nanocápsulas para máxima absorção. Ilumina, uniformiza e protege sua pele.",
-                  ctaPrimary: { label: "Conhecer Produto", href: "/tulipia" },
+                  subtitle: "Vitamina C estabilizada para máxima absorção.",
+                  ctaPrimary: { label: "Conhecer", href: "/tulipia" },
                   ctaSecondary: { label: "Consultoria", href: "/consultoria" },
                   image: lifeCNano,
+                  mobileImage: heroMobile1,
                   label: "Anti-idade",
                   stats: [
                     { value: "20%", label: "Vit C Pura" },
@@ -215,24 +237,12 @@ const HomePage = () => {
                   ]
                 },
                 {
-                  title: "Miracle Eyes Tratamento",
-                  subtitle: "Reduza olheiras, bolsas e linhas finas ao redor dos olhos. Resultados comprovados em tratamentos profissionais.",
-                  ctaPrimary: { label: "Explorar", href: "/tulipia" },
-                  ctaSecondary: { label: "Ver Resultados", href: "/loja" },
-                  image: miracleEyesHero,
-                  label: "Área dos Olhos",
-                  stats: [
-                    { value: "-60%", label: "Olheiras" },
-                    { value: "-45%", label: "Bolsas" },
-                    { value: "4 sem", label: "Resultado" }
-                  ]
-                },
-                {
                   title: "Resilience Serum Pro",
-                  subtitle: "Sérum anti-idade de alta potência com peptídeos e ácido hialurônico. Firmeza e elasticidade restauradas.",
-                  ctaPrimary: { label: "Comprar Agora", href: "/tulipia" },
+                  subtitle: "Sérum anti-idade com peptídeos e ácido hialurônico.",
+                  ctaPrimary: { label: "Comprar", href: "/tulipia" },
                   ctaSecondary: { label: "Ingredientes", href: "/loja" },
                   image: resilienceSerum,
+                  mobileImage: heroMobile2,
                   label: "Alta Performance",
                   stats: [
                     { value: "+80%", label: "Firmeza" },
