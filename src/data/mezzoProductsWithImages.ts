@@ -63,6 +63,18 @@ import gummieHair from "@/assets/products/mezzo/gummie-hair.jpg";
 import caffeinePower from "@/assets/products/mezzo/caffeine-power.jpg";
 import moroEvolution from "@/assets/products/mezzo/moro-evolution.jpg";
 import exossomasSerum from "@/assets/products/mezzo/exossomas-serum.jpg";
+// Novas imagens únicas para evitar duplicatas
+import exosomeBioestimulador from "@/assets/products/mezzo/exosome-bioestimulador.jpg";
+import exosomeRegenerativoPro from "@/assets/products/mezzo/exosome-regenerativo-pro.jpg";
+import skinFillXsomeFluido from "@/assets/products/mezzo/skin-fill-xsome-fluido.jpg";
+import eyesXsomeFluido from "@/assets/products/mezzo/eyes-xsome-fluido.jpg";
+import acneXsomeOnoff from "@/assets/products/mezzo/acne-xsome-onoff.jpg";
+import shampooSensiScalp from "@/assets/products/mezzo/shampoo-sensi-scalp.jpg";
+import trichologyShampoo from "@/assets/products/mezzo/trichology-shampoo.jpg";
+import trichologyLocao from "@/assets/products/mezzo/trichology-locao.jpg";
+import redensifyBody from "@/assets/products/mezzo/redensify-body.jpg";
+import espumaGluteos from "@/assets/products/mezzo/espuma-gluteos.jpg";
+import lipoXsomeFluido from "@/assets/products/mezzo/lipo-xsome-fluido.jpg";
 
 export interface MezzoProduct {
   id: number;
@@ -146,7 +158,7 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     category: "exossomas",
     description: "Bioestimulador concentrado com tecnologia de exossomas para tratamentos profissionais intensivos.",
     price: "R$ 350,00",
-    image: exossomasSerum,
+    image: exosomeBioestimulador,
     isProfessional: true,
   },
   {
@@ -156,7 +168,7 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     category: "exossomas",
     description: "Sérum regenerativo profissional com alta concentração de exossomas para reparação tecidual.",
     price: "R$ 280,00",
-    image: exossomasSerum,
+    image: exosomeRegenerativoPro,
     isProfessional: true,
   },
   {
@@ -166,7 +178,7 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     category: "exossomas",
     description: "Tecnologia Exossoma + PDRN. Bioestimulador fluido que atua na modulação do colágeno e hidratação da pele.",
     price: "R$ 226,00",
-    image: skinFillXsome,
+    image: skinFillXsomeFluido,
     isProfessional: false,
   },
   {
@@ -176,7 +188,7 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     category: "exossomas",
     description: "Fluido para lifting de pálpebras, redução de bolsas e olheiras com tecnologia Exossomas.",
     price: "R$ 195,00",
-    image: eyesXsome,
+    image: eyesXsomeFluido,
     isProfessional: false,
   },
   {
@@ -186,7 +198,7 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     category: "exossomas",
     description: "Ação pré e pós limpeza, regula sebáceas, controla inflamação e oleosidade com ação antimicrobiana.",
     price: "R$ 157,00",
-    image: acneXsome,
+    image: acneXsomeOnoff,
     isProfessional: false,
   },
 ];
@@ -252,7 +264,7 @@ export const mezzoCapilarWithImages: MezzoProduct[] = [
     category: "capilar",
     description: "Shampoo para couro cabeludo sensível, fortalece os fios e equilibra o microbioma capilar.",
     price: "R$ 129,00",
-    image: shampooAnticaspa,
+    image: shampooSensiScalp,
     isProfessional: false,
   },
   {
@@ -262,7 +274,7 @@ export const mezzoCapilarWithImages: MezzoProduct[] = [
     category: "capilar",
     description: "Shampoo para queda capilar, fortalecimento dos fios e modulação do couro cabeludo.",
     price: "R$ 129,00",
-    image: trichologyXsome,
+    image: trichologyShampoo,
     isProfessional: false,
   },
   {
@@ -272,7 +284,7 @@ export const mezzoCapilarWithImages: MezzoProduct[] = [
     category: "capilar",
     description: "Fortalece o aspecto e espessura dos fios, melhora a queda, reduz danos celulares do couro cabeludo.",
     price: "R$ 137,00",
-    image: tonicoAntiquedas,
+    image: trichologyLocao,
     isProfessional: false,
   },
 ];
@@ -358,7 +370,7 @@ export const mezzoCorpoWithImages: MezzoProduct[] = [
     category: "corpo",
     description: "Biomodulador corporal para redensificação da pele, melhora da flacidez e contorno corporal.",
     price: "R$ 152,00",
-    image: celluIntense,
+    image: redensifyBody,
     isProfessional: false,
   },
   {
@@ -368,7 +380,7 @@ export const mezzoCorpoWithImages: MezzoProduct[] = [
     category: "corpo",
     description: "Espuma bioestimuladora para lifting e firmeza dos glúteos com efeito volumizador.",
     price: "R$ 133,00",
-    image: mousseTermogenico,
+    image: espumaGluteos,
     isProfessional: false,
   },
   {
@@ -378,7 +390,7 @@ export const mezzoCorpoWithImages: MezzoProduct[] = [
     category: "corpo",
     description: "Tecnologia Exossoma para reduzir gordura e celulite, combate acúmulo de gordura com ação lipolítica.",
     price: "R$ 129,00",
-    image: lipoXsome,
+    image: lipoXsomeFluido,
     isProfessional: false,
   },
 ];
