@@ -14,6 +14,7 @@ import AnimatedSection from "@/components/home/AnimatedSection";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
+import { allSmartGRWithImages } from "@/data/smartGRProducts";
 
 // Category definitions with descriptions
 const categoryDefinitions: Record<string, { title: string; description: string }> = {
@@ -89,6 +90,7 @@ const brands = [
   { name: "Mezzo", slug: "mezzo" },
   { name: "Extratos da Terra", slug: "extratos da terra" },
   { name: "Tulipia", slug: "tulipia" },
+  { name: "Smart GR", slug: "smart gr" },
 ];
 
 const usageTypes = [
@@ -117,6 +119,7 @@ const allProducts = [
   ...allMezzoWithImages,
   ...allExtratosWithImages,
   ...allTulipiaWithImages,
+  ...allSmartGRWithImages,
 ];
 
 // Get price statistics
