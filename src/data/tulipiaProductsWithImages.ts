@@ -14,6 +14,56 @@ import primaveraMask from "@/assets/banners/primavera-mask.webp";
 import renotratGel from "@/assets/banners/renotrat-gel.webp";
 import resilienceSerum from "@/assets/banners/resilience-serum.webp";
 
+// Importações das novas imagens Tulipia
+import exogeneticPdrn from "@/assets/products/tulipia/exogenetic-pdrn.jpg";
+import niacineEspuma150ml from "@/assets/products/tulipia/niacine-espuma-150ml.jpg";
+import niacineEspuma50ml from "@/assets/products/tulipia/niacine-espuma-50ml.jpg";
+import blackSecretPeelingAntiacne from "@/assets/products/tulipia/black-secret-peeling-antiacne.jpg";
+import blackSecretPeeling2Fases from "@/assets/products/tulipia/black-secret-peeling-2-fases.jpg";
+import blackSecretSaboneteGlico from "@/assets/products/tulipia/black-secret-sabonete-glico.jpg";
+import blackSecretSolucaoPrePeeling from "@/assets/products/tulipia/black-secret-solucao-pre-peeling.jpg";
+import blackSecretClareador from "@/assets/products/tulipia/black-secret-clareador.jpg";
+import blackSecretMicroSpikes from "@/assets/products/tulipia/black-secret-micro-spikes.jpg";
+import blackBiowhiteLocao from "@/assets/products/tulipia/black-biowhite-locao.jpg";
+import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
+import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
+import proskinCreme from "@/assets/products/tulipia/proskin-creme.jpg";
+import dermoEsteticUltraemoliente from "@/assets/products/tulipia/dermo-estetic-ultraemoliente.jpg";
+import dermoEsteticPosExtracao from "@/assets/products/tulipia/dermo-estetic-pos-extracao.jpg";
+import niacineSerum from "@/assets/products/tulipia/niacine-serum.jpg";
+import dermacosBooster from "@/assets/products/tulipia/dermacos-booster.jpg";
+import dermacosEspuma from "@/assets/products/tulipia/dermacos-espuma.jpg";
+import immortaliteCSerum from "@/assets/products/tulipia/immortalite-c-serum.jpg";
+import hydrogenBruma from "@/assets/products/tulipia/hydrogen-bruma.jpg";
+import firmFlaccid300ml from "@/assets/products/tulipia/firm-flaccid-300ml.jpg";
+import firmFlaccid60ml from "@/assets/products/tulipia/firm-flaccid-60ml.jpg";
+import lifeCMascaraImg from "@/assets/products/tulipia/life-c-mascara.jpg";
+import lifeCPeelingImg from "@/assets/products/tulipia/life-c-peeling.jpg";
+import lifeCSerum20Img from "@/assets/products/tulipia/life-c-serum-20.jpg";
+import lifeCMonodoseImg from "@/assets/products/tulipia/life-c-monodose.jpg";
+import lifeCTonicoImg from "@/assets/products/tulipia/life-c-tonico.jpg";
+import lifeCsaboneteMouseImg from "@/assets/products/tulipia/life-c-sabonete-mousse.jpg";
+import sweetLipsEsfolianteImg from "@/assets/products/tulipia/sweet-lips-esfoliante.jpg";
+import sweetLipsGlossImg from "@/assets/products/tulipia/sweet-lips-gloss.jpg";
+import chokolaMascaraImg from "@/assets/products/tulipia/chokola-mascara.jpg";
+import ultimateEsteticMascaraImg from "@/assets/products/tulipia/ultimate-estetic-mascara.jpg";
+import outonoMaskImg from "@/assets/products/tulipia/outono-mask.jpg";
+import primaveraMaskImg from "@/assets/products/tulipia/primavera-mask.jpg";
+import veraoMaskImg from "@/assets/products/tulipia/verao-mask.jpg";
+import invernoMaskImg from "@/assets/products/tulipia/inverno-mask.jpg";
+import stellarMaskEnzimaticaImg from "@/assets/products/tulipia/stellar-mask-enzimatica.jpg";
+import stellarMaskMatificanteImg from "@/assets/products/tulipia/stellar-mask-matificante.jpg";
+import stellarMaskRejuvenescedoraImg from "@/assets/products/tulipia/stellar-mask-rejuvenescedora.jpg";
+import stellarMaskHidronutritivaImg from "@/assets/products/tulipia/stellar-mask-hidronutritiva.jpg";
+import miracleEyesImg from "@/assets/products/tulipia/miracle-eyes.jpg";
+import cilsLashesImg from "@/assets/products/tulipia/cils-lashes.jpg";
+import hialuxSaboneteImg from "@/assets/products/tulipia/hialux-sabonete.jpg";
+import hialuxSerumImg from "@/assets/products/tulipia/hialux-serum.jpg";
+import hialuxCremeImg from "@/assets/products/tulipia/hialux-creme.jpg";
+import hidrasolFps30Img from "@/assets/products/tulipia/hidrasol-fps30.jpg";
+import citrogelClareadorImg from "@/assets/products/tulipia/citrogel-clareador.jpg";
+import renotratGelImg from "@/assets/products/tulipia/renotrat-gel.jpg";
+
 // Placeholder para produtos sem imagem
 const placeholder = "/placeholder.svg";
 
@@ -30,7 +80,7 @@ export const tulipiaLancamentos: Product[] = [
     isProfessional: false,
     description: "Creme facial com tecnologia PDRN para regeneração celular profunda. Estimula a produção de colágeno e elastina",
     price: "R$ 139,90",
-    image: placeholder,
+    image: exogeneticPdrn,
   },
   {
     id: 7002,
@@ -40,7 +90,7 @@ export const tulipiaLancamentos: Product[] = [
     isProfessional: false,
     description: "Espuma de limpeza facial com niacinamida. Limpa profundamente e controla a oleosidade",
     price: "R$ 94,90",
-    image: placeholder,
+    image: niacineEspuma150ml,
   },
   {
     id: 7003,
@@ -50,7 +100,7 @@ export const tulipiaLancamentos: Product[] = [
     isProfessional: false,
     description: "Espuma de limpeza facial com niacinamida - versão travel size",
     price: "R$ 49,90",
-    image: placeholder,
+    image: niacineEspuma50ml,
   },
 ];
 
@@ -67,7 +117,7 @@ export const tulipiaBlackSecret: Product[] = [
     isProfessional: true,
     description: "Peeling profissional para tratamento de acne. Reduz inflamação e clareia manchas pós-inflamatórias",
     price: "R$ 199,86",
-    image: placeholder,
+    image: blackSecretPeelingAntiacne,
   },
   {
     id: 7011,
@@ -77,7 +127,7 @@ export const tulipiaBlackSecret: Product[] = [
     isProfessional: true,
     description: "Peeling profissional de duas fases para renovação celular intensa e clareamento progressivo",
     price: "R$ 714,14",
-    image: placeholder,
+    image: blackSecretPeeling2Fases,
   },
   {
     id: 7012,
@@ -87,7 +137,7 @@ export const tulipiaBlackSecret: Product[] = [
     isProfessional: false,
     description: "Sabonete facial com ácido glicólico para renovação celular e preparo da pele",
     price: "R$ 180,00",
-    image: placeholder,
+    image: blackSecretSaboneteGlico,
   },
   {
     id: 7013,
@@ -97,7 +147,7 @@ export const tulipiaBlackSecret: Product[] = [
     isProfessional: true,
     description: "Solução preparatória para peelings. Remove oleosidade e prepara a pele para tratamentos",
     price: "R$ 170,00",
-    image: placeholder,
+    image: blackSecretSolucaoPrePeeling,
   },
   {
     id: 7014,
@@ -107,7 +157,7 @@ export const tulipiaBlackSecret: Product[] = [
     isProfessional: false,
     description: "Sérum clareador concentrado para tratamento de manchas e uniformização do tom da pele",
     price: "R$ 199,00",
-    image: placeholder,
+    image: blackSecretClareador,
   },
   {
     id: 7015,
@@ -117,7 +167,7 @@ export const tulipiaBlackSecret: Product[] = [
     isProfessional: true,
     description: "Peeling com microagulhas naturais para renovação profunda e clareamento",
     price: "R$ 220,00",
-    image: placeholder,
+    image: blackSecretMicroSpikes,
   },
   {
     id: 7016,
@@ -127,7 +177,7 @@ export const tulipiaBlackSecret: Product[] = [
     isProfessional: false,
     description: "Loção clareadora com tecnologia nano para tratamento de manchas e melasma",
     price: "R$ 149,00",
-    image: placeholder,
+    image: blackBiowhiteLocao,
   },
 ];
 
@@ -144,7 +194,7 @@ export const tulipiaProskinRepair: Product[] = [
     isProfessional: false,
     description: "Sabonete suave para restauração da barreira cutânea. Ideal para peles sensibilizadas",
     price: "R$ 79,90",
-    image: placeholder,
+    image: proskinSabonete,
   },
   {
     id: 7021,
@@ -154,7 +204,7 @@ export const tulipiaProskinRepair: Product[] = [
     isProfessional: false,
     description: "Bruma hidratante para proteção e restauração da barreira cutânea",
     price: "R$ 119,90",
-    image: placeholder,
+    image: proskinBruma,
   },
   {
     id: 7022,
@@ -164,7 +214,7 @@ export const tulipiaProskinRepair: Product[] = [
     isProfessional: false,
     description: "Creme concentrado para fortalecimento e recuperação da barreira cutânea",
     price: "R$ 119,90",
-    image: placeholder,
+    image: proskinCreme,
   },
 ];
 
@@ -181,7 +231,7 @@ export const tulipiaDermoEstetic: Product[] = [
     isProfessional: true,
     description: "Solução emoliente profissional para procedimentos estéticos. Amacia e prepara a pele",
     price: "R$ 127,14",
-    image: placeholder,
+    image: dermoEsteticUltraemoliente,
   },
   {
     id: 7031,
@@ -191,7 +241,7 @@ export const tulipiaDermoEstetic: Product[] = [
     isProfessional: true,
     description: "Solução calmante e antisséptica para uso após procedimentos de extração",
     price: "R$ 100,00",
-    image: placeholder,
+    image: dermoEsteticPosExtracao,
   },
 ];
 
@@ -208,7 +258,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: false,
     description: "Máscara facial com tecnologia nano para reequilíbrio da pele. Ideal para peles mistas",
     price: "R$ 141,43",
-    image: placeholder,
+    image: outonoMaskImg,
   },
   {
     id: 7041,
@@ -218,7 +268,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: false,
     description: "Máscara energizante com vitaminas e antioxidantes. Revitaliza peles cansadas",
     price: "R$ 141,43",
-    image: placeholder,
+    image: veraoMaskImg,
   },
   {
     id: 7042,
@@ -228,7 +278,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: false,
     description: "Máscara ultra-hidratante para peles ressecadas. Nutrição profunda",
     price: "R$ 141,43",
-    image: placeholder,
+    image: invernoMaskImg,
   },
   {
     id: 7043,
@@ -238,7 +288,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: true,
     description: "Máscara renovadora com tecnologia nano. Promove renovação celular intensa e luminosidade",
     price: "Consultar",
-    image: primaveraMask,
+    image: primaveraMaskImg,
   },
   {
     id: 7044,
@@ -248,7 +298,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: false,
     description: "Máscara com enzimas naturais para esfoliação suave e renovação celular",
     price: "R$ 185,57",
-    image: placeholder,
+    image: stellarMaskEnzimaticaImg,
   },
   {
     id: 7045,
@@ -258,7 +308,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: false,
     description: "Máscara matificante para controle de oleosidade. Reduz brilho excessivo",
     price: "R$ 185,57",
-    image: placeholder,
+    image: stellarMaskMatificanteImg,
   },
   {
     id: 7046,
@@ -268,7 +318,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: false,
     description: "Máscara anti-idade com peptídeos para firmeza e redução de rugas",
     price: "R$ 185,57",
-    image: placeholder,
+    image: stellarMaskRejuvenescedoraImg,
   },
   {
     id: 7047,
@@ -278,7 +328,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: false,
     description: "Máscara nutritiva para hidratação profunda e recuperação da pele",
     price: "R$ 185,57",
-    image: placeholder,
+    image: stellarMaskHidronutritivaImg,
   },
   {
     id: 7048,
@@ -288,7 +338,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: false,
     description: "Máscara antioxidante de chocolate. Rica em flavonoides para proteção da pele",
     price: "R$ 157,00",
-    image: placeholder,
+    image: chokolaMascaraImg,
   },
   {
     id: 7049,
@@ -298,7 +348,7 @@ export const tulipiaMascaras: Product[] = [
     isProfessional: true,
     description: "Máscara tensora com partículas de ouro. Efeito lifting imediato e rejuvenescedor",
     price: "R$ 140,00",
-    image: placeholder,
+    image: ultimateEsteticMascaraImg,
   },
   {
     id: 7050,
@@ -325,7 +375,7 @@ export const tulipiaNiacine: Product[] = [
     isProfessional: false,
     description: "Sérum concentrado de niacinamida para controle de oleosidade, redução de poros e uniformização",
     price: "R$ 139,00",
-    image: placeholder,
+    image: niacineSerum,
   },
 ];
 
@@ -342,7 +392,7 @@ export const tulipiaDermacos: Product[] = [
     isProfessional: false,
     description: "Booster potencializador de tratamentos anti-idade. Intensifica resultados",
     price: "R$ 199,00",
-    image: placeholder,
+    image: dermacosBooster,
   },
   {
     id: 7071,
@@ -352,7 +402,7 @@ export const tulipiaDermacos: Product[] = [
     isProfessional: false,
     description: "Espuma de limpeza com ativos anti-idade. Limpa e trata simultaneamente",
     price: "R$ 120,00",
-    image: placeholder,
+    image: dermacosEspuma,
   },
 ];
 
@@ -369,7 +419,7 @@ export const tulipiaImmortaliteC: Product[] = [
     isProfessional: false,
     description: "Sérum potente de vitamina C estabilizada. Antioxidante e clareador",
     price: "R$ 159,00",
-    image: placeholder,
+    image: immortaliteCSerum,
   },
 ];
 
@@ -386,7 +436,7 @@ export const tulipiaHydrogen: Product[] = [
     isProfessional: false,
     description: "Bruma facial com hidrogênio molecular. Potente antioxidante para proteção celular",
     price: "R$ 109,00",
-    image: placeholder,
+    image: hydrogenBruma,
   },
 ];
 
@@ -403,7 +453,7 @@ export const tulipiaFirmFlaccid: Product[] = [
     isProfessional: false,
     description: "Fluido corporal para firmeza e combate à flacidez. Rico em minerais",
     price: "R$ 169,00",
-    image: placeholder,
+    image: firmFlaccid300ml,
   },
   {
     id: 7101,
@@ -413,7 +463,7 @@ export const tulipiaFirmFlaccid: Product[] = [
     isProfessional: false,
     description: "Fluido corporal para firmeza - versão facial/travel size",
     price: "R$ 69,00",
-    image: placeholder,
+    image: firmFlaccid60ml,
   },
 ];
 
@@ -430,7 +480,7 @@ export const tulipiaLifeC: Product[] = [
     isProfessional: false,
     description: "Sabonete mousse com vitamina C nano encapsulada. Limpa suavemente enquanto ilumina",
     price: "R$ 119,00",
-    image: lifeCNano,
+    image: lifeCsaboneteMouseImg,
   },
   {
     id: 7111,
@@ -440,7 +490,7 @@ export const tulipiaLifeC: Product[] = [
     isProfessional: false,
     description: "Máscara facial com vitamina C para iluminação e uniformização do tom",
     price: "R$ 180,00",
-    image: placeholder,
+    image: lifeCMascaraImg,
   },
   {
     id: 7112,
@@ -450,7 +500,7 @@ export const tulipiaLifeC: Product[] = [
     isProfessional: true,
     description: "Peeling físico com vitamina C para renovação celular e luminosidade",
     price: "R$ 170,00",
-    image: placeholder,
+    image: lifeCPeelingImg,
   },
   {
     id: 7113,
@@ -460,7 +510,7 @@ export const tulipiaLifeC: Product[] = [
     isProfessional: false,
     description: "Sérum clareador com 20% de vitamina C estabilizada. Potente ação antioxidante",
     price: "R$ 212,86",
-    image: placeholder,
+    image: lifeCSerum20Img,
   },
   {
     id: 7114,
@@ -470,7 +520,7 @@ export const tulipiaLifeC: Product[] = [
     isProfessional: true,
     description: "Ampolas de vitamina C pura para uso profissional. Máxima potência e eficácia",
     price: "R$ 257,00",
-    image: placeholder,
+    image: lifeCMonodoseImg,
   },
   {
     id: 7115,
@@ -480,7 +530,7 @@ export const tulipiaLifeC: Product[] = [
     isProfessional: false,
     description: "Tônico facial com vitamina C para preparação e potencialização de tratamentos",
     price: "R$ 89,00",
-    image: placeholder,
+    image: lifeCTonicoImg,
   },
 ];
 
@@ -497,7 +547,7 @@ export const tulipiaSweetLips: Product[] = [
     isProfessional: false,
     description: "Esfoliante labial com microesferas de cereja. Remove células mortas e prepara os lábios",
     price: "R$ 49,00",
-    image: sweetLipsEsfoliante,
+    image: sweetLipsEsfolianteImg,
   },
   {
     id: 7121,
@@ -507,7 +557,7 @@ export const tulipiaSweetLips: Product[] = [
     isProfessional: false,
     description: "Esfoliante labial sabor tutti frutti. Remove células mortas e suaviza os lábios",
     price: "R$ 79,00",
-    image: placeholder,
+    image: sweetLipsEsfolianteImg,
   },
   {
     id: 7122,
@@ -517,7 +567,7 @@ export const tulipiaSweetLips: Product[] = [
     isProfessional: false,
     description: "Gloss hidratante sabor cereja. Hidrata e dá brilho natural aos lábios",
     price: "R$ 69,00",
-    image: placeholder,
+    image: sweetLipsGlossImg,
   },
   {
     id: 7123,
@@ -527,7 +577,7 @@ export const tulipiaSweetLips: Product[] = [
     isProfessional: false,
     description: "Gloss hidratante sabor tutti frutti. Hidrata e dá brilho natural",
     price: "R$ 69,00",
-    image: placeholder,
+    image: sweetLipsGlossImg,
   },
   {
     id: 7124,
@@ -547,7 +597,7 @@ export const tulipiaSweetLips: Product[] = [
     isProfessional: true,
     description: "Ampolas concentradas para tratamento labial profissional. Preenchimento e rejuvenescimento",
     price: "R$ 347,00",
-    image: placeholder,
+    image: sweetLipsFluido,
   },
 ];
 
