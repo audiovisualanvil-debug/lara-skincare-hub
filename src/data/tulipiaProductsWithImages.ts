@@ -17,7 +17,7 @@ import resilienceSerum from "@/assets/banners/resilience-serum.webp";
 // Importações das novas imagens Tulipia
 import exogeneticPdrn from "@/assets/products/tulipia/exogenetic-pdrn.jpg";
 import niacineEspuma150ml from "@/assets/products/tulipia/niacine-espuma-150ml.jpg";
-import niacineEspuma50ml from "@/assets/products/tulipia/niacine-espuma-50ml.jpg";
+import niacineEspuma50ml from "@/assets/products/tulipia/niacine-espuma-150ml-new.jpg";
 import blackSecretPeelingAntiacne from "@/assets/products/tulipia/black-secret-peeling-antiacne.jpg";
 import blackSecretPeeling2Fases from "@/assets/products/tulipia/black-secret-peeling-2-fases.jpg";
 import blackSecretSaboneteGlico from "@/assets/products/tulipia/black-secret-sabonete-glico.jpg";
