@@ -10,10 +10,12 @@ import ProductCarousel from "@/components/shop/ProductCarousel";
 import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
 import QuizCTA from "@/components/home/QuizCTA";
 import AnimatedSection from "@/components/home/AnimatedSection";
+import BrandSection from "@/components/home/BrandSection";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
+import { allSmartGRWithImages } from "@/data/smartGRProducts";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
@@ -418,43 +420,49 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Tulipia Products Carousel Section */}
-        <section className="section-editorial bg-gradient-to-b from-secondary/20 to-background relative overflow-hidden">
-          {/* Decorative elements */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.08 }}
-            viewport={{ once: true }}
-            className="absolute bottom-0 left-0 w-80 h-80 bg-primary rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"
-          />
-          
-          <div className="container-editorial relative z-10">
-            <AnimatedSection className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-              <div>
-                <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
-                  Tulipia
-                </span>
-                <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
-                  Produtos em destaque
-                </h2>
-                <p className="text-muted-foreground font-body mt-4 max-w-lg">
-                  Tecnologia nano encapsulada para resultados profissionais. Descubra nossa linha exclusiva de dermocosméticos.
-                </p>
-              </div>
-              <Link 
-                to="/tulipia" 
-                className="flex items-center gap-2 text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors font-body font-medium group"
-              >
-                Ver toda a linha Tulipia
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </AnimatedSection>
-            
-            <AnimatedSection delay={0.2}>
-              <ProductCarousel products={allTulipiaWithImages} />
-            </AnimatedSection>
-          </div>
-        </section>
+        {/* Tulipia Products Section */}
+        <BrandSection
+          brand="Tulipia"
+          title="Nanotecnologia Premium"
+          subtitle="Tecnologia nano encapsulada para resultados profissionais. Descubra nossa linha exclusiva de dermocosméticos."
+          products={allTulipiaWithImages}
+          linkTo="/tulipia"
+          linkLabel="Ver toda a linha Tulipia"
+          bgVariant="gradient"
+        />
+
+        {/* Mezzo Products Section */}
+        <BrandSection
+          brand="Mezzo"
+          title="Alta Performance"
+          subtitle="Produtos profissionais para tratamentos estéticos avançados. Exossomas, clareamento, antiacne e muito mais."
+          products={allMezzoWithImages}
+          linkTo="/loja?marca=Mezzo"
+          linkLabel="Ver toda a linha Mezzo"
+          bgVariant="dark"
+        />
+
+        {/* Extratos da Terra Products Section */}
+        <BrandSection
+          brand="Extratos da Terra"
+          title="Natureza & Ciência"
+          subtitle="Dermocosméticos que unem ingredientes naturais à tecnologia cosmética. Resultados comprovados com fórmulas suaves."
+          products={allExtratosWithImages}
+          linkTo="/loja?marca=Extratos da Terra"
+          linkLabel="Ver toda a linha Extratos"
+          bgVariant="light"
+        />
+
+        {/* Smart GR Products Section */}
+        <BrandSection
+          brand="Smart GR"
+          title="Equipamentos Profissionais"
+          subtitle="Aparelhos de última geração para tratamentos estéticos. LED, radiofrequência, ultrassom e muito mais."
+          products={allSmartGRWithImages}
+          linkTo="/loja?marca=Smart GR"
+          linkLabel="Ver equipamentos Smart GR"
+          bgVariant="gradient"
+        />
 
         {/* Kits Section - Animated */}
         <AnimatedSection delay={0.1}>
