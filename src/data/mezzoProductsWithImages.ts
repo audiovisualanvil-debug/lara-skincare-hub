@@ -139,6 +139,26 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     image: exossomasSerum,
     isProfessional: false,
   },
+  {
+    id: 1409,
+    name: "Exosome Bioestimulador Concentrado | PRO",
+    brand: "Mezzo",
+    category: "exossomas",
+    description: "Bioestimulador concentrado com tecnologia de exossomas para tratamentos profissionais intensivos.",
+    price: "R$ 350,00",
+    image: exossomasSerum,
+    isProfessional: true,
+  },
+  {
+    id: 1410,
+    name: "Exosome Serum Regenerativo PRO",
+    brand: "Mezzo",
+    category: "exossomas",
+    description: "Sérum regenerativo profissional com alta concentração de exossomas para reparação tecidual.",
+    price: "R$ 280,00",
+    image: exossomasSerum,
+    isProfessional: true,
+  },
 ];
 
 // ============================================
@@ -194,6 +214,16 @@ export const mezzoCapilarWithImages: MezzoProduct[] = [
     price: "R$ 116,00",
     image: peelingCapilar,
     isProfessional: true,
+  },
+  {
+    id: 1308,
+    name: "Shampoo Sensi Scalp Force | Trichology",
+    brand: "Mezzo",
+    category: "capilar",
+    description: "Shampoo para couro cabeludo sensível, fortalece os fios e equilibra o microbioma capilar.",
+    price: "R$ 129,00",
+    image: shampooAnticaspa,
+    isProfessional: false,
   },
 ];
 
@@ -270,6 +300,26 @@ export const mezzoCorpoWithImages: MezzoProduct[] = [
     price: "R$ 179,00",
     image: mousseTermogenico,
     isProfessional: true,
+  },
+  {
+    id: 1213,
+    name: "Redensify Body | Biomodulador Corporal",
+    brand: "Mezzo",
+    category: "corpo",
+    description: "Biomodulador corporal para redensificação da pele, melhora da flacidez e contorno corporal.",
+    price: "R$ 152,00",
+    image: celluIntense,
+    isProfessional: false,
+  },
+  {
+    id: 1214,
+    name: "Espuma Bioestimuladora de Glúteos",
+    brand: "Mezzo",
+    category: "corpo",
+    description: "Espuma bioestimuladora para lifting e firmeza dos glúteos com efeito volumizador.",
+    price: "R$ 133,00",
+    image: mousseTermogenico,
+    isProfessional: false,
   },
 ];
 
@@ -443,6 +493,26 @@ export const mezzoHomeCareWithImages: MezzoProduct[] = [
     image: mellanRepair,
     isProfessional: false,
   },
+  {
+    id: 1608,
+    name: "Sérum Osmorregulador Lipossomado",
+    brand: "Mezzo",
+    category: "homecare",
+    description: "Sérum com tecnologia lipossomada para regulação osmótica e hidratação profunda da pele.",
+    price: "R$ 112,00",
+    image: hyaluronicSerumH9,
+    isProfessional: false,
+  },
+  {
+    id: 1609,
+    name: "Glyconol A | Máscara Iluminadora",
+    brand: "Mezzo",
+    category: "homecare",
+    description: "Máscara com ácido glicólico para renovação celular e iluminação da pele.",
+    price: "R$ 193,00",
+    image: maskCalmAntiStress,
+    isProfessional: false,
+  },
 ];
 
 // ============================================
@@ -545,6 +615,16 @@ export const mezzoVitaminaCWithImages: MezzoProduct[] = [
     image: microdermoabrasaoScrubC,
     isProfessional: false,
   },
+  {
+    id: 1804,
+    name: "Vitamina C Pura 20% | Sérum Antioxidante",
+    brand: "Mezzo",
+    category: "vitaminac",
+    description: "Sérum com 20% de vitamina C pura para máxima ação antioxidante e clareadora.",
+    price: "R$ 185,00",
+    image: pigmentControl,
+    isProfessional: false,
+  },
 ];
 
 // ============================================
@@ -605,6 +685,16 @@ export const mezzoMascarasWithImages: MezzoProduct[] = [
     description: "Acalma e suaviza a vermelhidão. Indicada para todos os tipos de pele.",
     price: "R$ 108,00",
     image: maskCalmAntiStress,
+    isProfessional: true,
+  },
+  {
+    id: 2003,
+    name: "Mask Infusion | Tratamento Intensivo PRO",
+    brand: "Mezzo",
+    category: "mascaras",
+    description: "Máscara de tratamento intensivo profissional para hidratação e regeneração da pele.",
+    price: "R$ 165,00",
+    image: maskXsomePdrn,
     isProfessional: true,
   },
 ];
@@ -725,6 +815,16 @@ export const mezzoAcnediolWithImages: MezzoProduct[] = [
     image: acnediolNoite,
     isProfessional: false,
   },
+  {
+    id: 2305,
+    name: "Acnediol Dia FPS 30 | Proteção Antiacne",
+    brand: "Mezzo",
+    category: "acnediol",
+    description: "Proteção solar com ação antiacne, controla oleosidade durante o dia.",
+    price: "R$ 145,00",
+    image: fluidAntiacneFps70,
+    isProfessional: false,
+  },
 ];
 
 // ============================================
@@ -789,6 +889,16 @@ export const mezzoNutraceuticosWithImages: MezzoProduct[] = [
     description: "Gerenciamento de peso com Morosil, Picnogenol e Carnitina para redução de gordura abdominal.",
     price: "R$ 94,00",
     image: moroEvolution,
+    isProfessional: false,
+  },
+  {
+    id: 2407,
+    name: "Aminoprotein | Aminoácidos Essenciais",
+    brand: "Mezzo",
+    category: "nutraceuticos",
+    description: "Blend de aminoácidos essenciais para recuperação muscular, fortalecimento e regeneração tecidual.",
+    price: "R$ 210,00",
+    image: collagenPro,
     isProfessional: false,
   },
 ];
