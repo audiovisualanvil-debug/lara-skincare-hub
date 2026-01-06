@@ -1,9 +1,9 @@
 // Imagens dos produtos Mezzo extraídas do catálogo oficial
-import mellanWhiteXsome from "@/assets/products/mezzo/mellan-white-xsome.jpg";
+import mellanWhiteXsome from "@/assets/routine/mellan-white-xsome.png";
 import skinFillXsome from "@/assets/products/mezzo/skin-fill-xsome.jpg";
-import maskXsomePdrn from "@/assets/products/mezzo/mask-xsome-pdrn.jpg";
+import maskXsomePdrn from "@/assets/routine/mask-xsome-pdrn.png";
 import eyesXsome from "@/assets/products/mezzo/eyes-xsome.jpg";
-import acneXsome from "@/assets/products/mezzo/acne-xsome.jpg";
+import acneXsome from "@/assets/routine/acne-xsome-kit.png";
 import trichologyXsome from "@/assets/products/mezzo/trichology-xsome.jpg";
 import lipoXsome from "@/assets/products/mezzo/lipo-xsome.jpg";
 import skinCoverFps50 from "@/assets/products/mezzo/skin-cover-fps50.jpg";
@@ -68,7 +68,7 @@ import exosomeBioestimulador from "@/assets/products/mezzo/exosome-bioestimulado
 import exosomeRegenerativoPro from "@/assets/products/mezzo/exosome-regenerativo-pro.jpg";
 import skinFillXsomeFluido from "@/assets/products/mezzo/skin-fill-xsome-fluido.jpg";
 import eyesXsomeFluido from "@/assets/products/mezzo/eyes-xsome-fluido.jpg";
-import acneXsomeOnoff from "@/assets/products/mezzo/acne-xsome-onoff.jpg";
+import acneXsomeOnoff from "@/assets/routine/acne-xsome-serum.png";
 import shampooSensiScalp from "@/assets/products/mezzo/shampoo-sensi-scalp.jpg";
 import trichologyShampoo from "@/assets/products/mezzo/trichology-shampoo.jpg";
 import trichologyLocao from "@/assets/products/mezzo/trichology-locao.jpg";
