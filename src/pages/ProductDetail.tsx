@@ -8,6 +8,8 @@ import ProductReviews from "@/components/shop/ProductReviews";
 import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
+import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
+import { allSmartGRWithImages } from "@/data/smartGRProducts";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCompare } from "@/contexts/CompareContext";
@@ -16,7 +18,7 @@ import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { toast } from "sonner";
 
 // Merge all products
-const allProducts = [...allMezzoWithImages, ...allExtratosWithImages];
+const allProducts = [...allMezzoWithImages, ...allExtratosWithImages, ...allTulipiaWithImages, ...allSmartGRWithImages];
 
 // Category name mapping
 const categoryNames: Record<string, string> = {
