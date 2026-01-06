@@ -159,6 +159,36 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     image: exossomasSerum,
     isProfessional: true,
   },
+  {
+    id: 1411,
+    name: "Skin Fill Xsome | Bioestimulador Fluido",
+    brand: "Mezzo",
+    category: "exossomas",
+    description: "Tecnologia Exossoma + PDRN. Bioestimulador fluido que atua na modulação do colágeno e hidratação da pele.",
+    price: "R$ 226,00",
+    image: skinFillXsome,
+    isProfessional: false,
+  },
+  {
+    id: 1412,
+    name: "Eyes Xsome | Fluido Biomodulador + PDRN",
+    brand: "Mezzo",
+    category: "exossomas",
+    description: "Fluido para lifting de pálpebras, redução de bolsas e olheiras com tecnologia Exossomas.",
+    price: "R$ 195,00",
+    image: eyesXsome,
+    isProfessional: false,
+  },
+  {
+    id: 1413,
+    name: "Acne Xsome | Sérum ON/OFF Oxidizing",
+    brand: "Mezzo",
+    category: "exossomas",
+    description: "Ação pré e pós limpeza, regula sebáceas, controla inflamação e oleosidade com ação antimicrobiana.",
+    price: "R$ 157,00",
+    image: acneXsome,
+    isProfessional: false,
+  },
 ];
 
 // ============================================
@@ -223,6 +253,26 @@ export const mezzoCapilarWithImages: MezzoProduct[] = [
     description: "Shampoo para couro cabeludo sensível, fortalece os fios e equilibra o microbioma capilar.",
     price: "R$ 129,00",
     image: shampooAnticaspa,
+    isProfessional: false,
+  },
+  {
+    id: 1309,
+    name: "Trichology Xsome | Shampoo Antiqueda Forças",
+    brand: "Mezzo",
+    category: "capilar",
+    description: "Shampoo para queda capilar, fortalecimento dos fios e modulação do couro cabeludo.",
+    price: "R$ 129,00",
+    image: trichologyXsome,
+    isProfessional: false,
+  },
+  {
+    id: 1310,
+    name: "Trichology Xsome | Loção Antiqueda",
+    brand: "Mezzo",
+    category: "capilar",
+    description: "Fortalece o aspecto e espessura dos fios, melhora a queda, reduz danos celulares do couro cabeludo.",
+    price: "R$ 137,00",
+    image: tonicoAntiquedas,
     isProfessional: false,
   },
 ];
@@ -319,6 +369,16 @@ export const mezzoCorpoWithImages: MezzoProduct[] = [
     description: "Espuma bioestimuladora para lifting e firmeza dos glúteos com efeito volumizador.",
     price: "R$ 133,00",
     image: mousseTermogenico,
+    isProfessional: false,
+  },
+  {
+    id: 1215,
+    name: "Lipo Xsome | Fluido Redutor de Medidas",
+    brand: "Mezzo",
+    category: "corpo",
+    description: "Tecnologia Exossoma para reduzir gordura e celulite, combate acúmulo de gordura com ação lipolítica.",
+    price: "R$ 129,00",
+    image: lipoXsome,
     isProfessional: false,
   },
 ];
@@ -904,6 +964,22 @@ export const mezzoNutraceuticosWithImages: MezzoProduct[] = [
 ];
 
 // ============================================
+// LINHA LANÇAMENTOS / ÁGUA DERMATOLÓGICA
+// ============================================
+export const mezzoLancamentosWithImages: MezzoProduct[] = [
+  {
+    id: 2501,
+    name: "Água Dermatológica Bio Inteligente",
+    brand: "Mezzo",
+    category: "lancamentos",
+    description: "Skincare do futuro com 1,5 bilhões de exossomas. Biotecnologia adaptativa que bio-hackeia a reparação do tecido. Hidratação 4D em 4 níveis.",
+    price: "R$ 112,00",
+    image: exossomasSerum,
+    isProfessional: false,
+  },
+];
+
+// ============================================
 // TODOS OS PRODUTOS MEZZO COM IMAGENS
 // ============================================
 export const allMezzoWithImages: MezzoProduct[] = [
@@ -920,4 +996,5 @@ export const allMezzoWithImages: MezzoProduct[] = [
   ...mezzoPeelingWithImages,
   ...mezzoAcnediolWithImages,
   ...mezzoNutraceuticosWithImages,
+  ...mezzoLancamentosWithImages,
 ];
