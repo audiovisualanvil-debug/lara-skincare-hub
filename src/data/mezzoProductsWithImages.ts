@@ -1,8 +1,8 @@
 // Imagens dos produtos Mezzo extraídas do catálogo oficial
 import mellanWhiteXsome from "@/assets/routine/mellan-white-xsome.png";
-import skinFillXsome from "@/assets/products/mezzo/skin-fill-xsome.jpg";
+import skinFillXsome from "@/assets/products/mezzo/skin-fill-xsome-new.png";
 import maskXsomePdrn from "@/assets/routine/mask-xsome-pdrn.png";
-import eyesXsome from "@/assets/products/mezzo/eyes-xsome.jpg";
+import eyesXsome from "@/assets/products/mezzo/eyes-xsome-new.png";
 import acneXsome from "@/assets/routine/acne-xsome-kit.png";
 import trichologyXsome from "@/assets/products/mezzo/trichology-xsome.jpg";
 import lipoXsome from "@/assets/products/mezzo/lipo-xsome.jpg";
