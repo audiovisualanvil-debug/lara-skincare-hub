@@ -164,7 +164,7 @@ const Shop = () => {
   );
   const [selectedProductTypes, setSelectedProductTypes] = useState<string[]>([]);
   const [selectedBrands, setSelectedBrands] = useState<string[]>(
-    searchParams.get("marca") ? [searchParams.get("marca")!] : []
+    searchParams.get("marca") ? [searchParams.get("marca")!.toLowerCase()] : []
   );
   const [selectedUsageTypes, setSelectedUsageTypes] = useState<string[]>([]);
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<number[]>([]);
@@ -186,7 +186,7 @@ const Shop = () => {
     }
     const brand = searchParams.get("marca");
     if (brand) {
-      setSelectedBrands([brand]);
+      setSelectedBrands([brand.toLowerCase()]);
     }
     const busca = searchParams.get("busca");
     if (busca) {
