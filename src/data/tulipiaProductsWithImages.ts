@@ -15,8 +15,8 @@ import renotratGel from "@/assets/banners/renotrat-gel.webp";
 import resilienceSerum from "@/assets/banners/resilience-serum.webp";
 
 // Importações das novas imagens Tulipia
-import exogeneticPdrn from "@/assets/products/tulipia/exogenetic-pdrn.jpg";
-import niacineEspuma150ml from "@/assets/products/tulipia/niacine-espuma-150ml.jpg";
+// exogeneticPdrn removido
+import niacineEspuma150ml from "@/assets/products/tulipia/niacine-espuma-150ml-hero.jpg";
 import niacineEspuma50ml from "@/assets/products/tulipia/niacine-espuma-150ml-new.jpg";
 import blackSecretPeelingAntiacne from "@/assets/products/tulipia/black-secret-peeling-antiacne.jpg";
 import blackSecretPeeling2Fases from "@/assets/products/tulipia/black-secret-peeling-2-fases.jpg";
@@ -72,16 +72,6 @@ const placeholder = "/placeholder.svg";
 // ============================================
 
 export const tulipiaLancamentos: Product[] = [
-  {
-    id: 7001,
-    name: "Exogenetic PDRN Creme Facial",
-    brand: "Tulipia",
-    category: "lancamentos",
-    isProfessional: false,
-    description: "Creme facial com tecnologia PDRN para regeneração celular profunda. Estimula a produção de colágeno e elastina",
-    price: "R$ 139,90",
-    image: exogeneticPdrn,
-  },
   {
     id: 7002,
     name: "Niacine+ Espuma de Limpeza de Niacinamida 150ml",
