@@ -114,7 +114,7 @@ const HeroBanner = ({
               <img
                 src={slide.mobileImage || slide.image}
                 alt=""
-                className="md:hidden w-full h-full object-cover object-[center_30%]"
+                className="md:hidden w-full h-full object-cover object-[center_25%]"
               />
               {/* Editorial gradient overlay - adjusted for mobile to show product */}
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent md:bg-gradient-to-r md:from-background md:via-background/70 md:to-transparent" />
