@@ -110,15 +110,15 @@ const HeroBanner = ({
                 alt=""
                 className="hidden md:block w-full h-full object-cover"
               />
-              {/* Mobile Image */}
+              {/* Mobile Image - Focused on product */}
               <img
                 src={slide.mobileImage || slide.image}
                 alt=""
-                className="md:hidden w-full h-full object-cover object-top"
+                className="md:hidden w-full h-full object-cover object-[center_30%]"
               />
-              {/* Editorial gradient overlay - adjusted for mobile */}
-              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-background via-background/80 md:via-background/70 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent md:from-background/30" />
+              {/* Editorial gradient overlay - adjusted for mobile to show product */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent md:bg-gradient-to-r md:from-background md:via-background/70 md:to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent to-transparent md:from-transparent" />
             </>
           )}
         </div>
@@ -128,10 +128,10 @@ const HeroBanner = ({
       <div className="absolute top-20 left-10 w-px h-32 bg-gradient-to-b from-transparent via-primary/30 to-transparent hidden lg:block" />
       <div className="absolute bottom-20 right-20 w-24 h-px bg-gradient-to-r from-primary/30 to-transparent hidden lg:block" />
 
-      {/* Content */}
-      <div className="container-editorial relative z-10 pt-16 pb-28 md:pt-32 md:pb-20">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-end md:items-center min-h-[60svh] md:min-h-0">
-          <div className="max-w-2xl mt-auto md:mt-0">
+      {/* Content - positioned at bottom on mobile to show product */}
+      <div className="container-editorial relative z-10 pt-8 pb-24 md:pt-32 md:pb-20 flex items-end md:items-center min-h-[100svh] md:min-h-[90vh]">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-end md:items-center w-full">
+          <div className="max-w-2xl">
             {/* Editorial Label */}
             <div className="flex items-center gap-3 mb-4 md:mb-8 animate-fade-up">
               <div className="w-6 md:w-8 h-px bg-primary" />
