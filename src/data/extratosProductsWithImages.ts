@@ -47,6 +47,9 @@ import serumEquilibrioTotal from "@/assets/products/extratos/serum-equilibrio-to
 import tranexPeel from "@/assets/products/extratos/tranex-peel.jpg";
 import melanTBlock from "@/assets/products/extratos/melan-t-block.jpg";
 import mascaraBioiluminadora from "@/assets/products/extratos/mascara-bioiluminadora.jpg";
+// Novas imagens únicas para evitar duplicatas
+import nanoVitC20 from "@/assets/products/extratos/nano-vit-c-20.jpg";
+import nanoLiftingOlhos from "@/assets/products/extratos/nano-lifting-olhos.jpg";
 
 // ============================================
 // PRODUTOS EXTRATOS DA TERRA - VITAMINA C
@@ -91,7 +94,7 @@ export const extratosVitaminaC: Product[] = [
     isProfessional: false,
     description: "Alta concentração de Vitamina C combinada com Niacinamida e Prebióticos. Reduz rugas, melhora firmeza e auxilia na redução de marcas escuras",
     price: "R$ 167,00",
-    image: serumVitC,
+    image: nanoVitC20,
   },
 ];
 
@@ -306,7 +309,7 @@ export const extratosAntiIdadeComImagem: Product[] = [
     isProfessional: false,
     description: "Trata rugas, linhas de expressão, bolsas e olheiras. Com cafeína e retinol",
     price: "R$ 99,00",
-    image: preenchedorPontualAH,
+    image: nanoLiftingOlhos,
   },
   {
     id: 4504,
