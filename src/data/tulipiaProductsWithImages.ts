@@ -5,6 +5,10 @@ import { Product } from "@/components/shop/ProductCard";
 // Linha exclusiva de dermocosméticos profissionais
 // ============================================
 
+// Imagens Oceanox e Essence
+import oceanoxKit from "@/assets/tulipia/oceanox-kit.png";
+import essenceCleansingOil from "@/assets/tulipia/essence-cleansing-oil.png";
+
 // Importações das imagens dos banners existentes
 import sweetLipsEsfoliante from "@/assets/banners/sweet-lips-esfoliante.webp";
 import sweetLipsFluido from "@/assets/banners/sweet-lips-fluido.webp";
@@ -2306,8 +2310,20 @@ export const tulipiaOceanox: Product[] = [
     category: "minerais",
     isProfessional: false,
     description: "Flocos de magnésio para banho ou uso tópico. Relaxante muscular e calmante",
+    fullDescription: "Kit com 3 sachês de 50g de Flocos de Magnésio Dérmico Ocean Ox. Fonte pura e concentrada de magnésio com alta absorção transdérmica. Auxilia no equilíbrio e na saúde geral da pele, proporciona relaxamento muscular profundo e alívio do estresse. Cloreto de Magnésio P.A. com certificação USP. Acompanha borrifador de brinde para uso tópico.",
     price: "R$ 127,14",
-    image: placeholder,
+    image: oceanoxKit,
+    activeIngredients: [
+      "Cloreto de Magnésio P.A.",
+      "Minerais marinhos",
+    ],
+    applicationIndications: [
+      "Relaxamento muscular",
+      "Redução do estresse",
+      "Melhora do sono",
+      "Cãibras e tensões",
+      "Saúde da pele",
+    ],
   },
 ];
 
@@ -2323,8 +2339,26 @@ export const tulipiaEssence: Product[] = [
     category: "limpeza",
     isProfessional: false,
     description: "Óleo de limpeza para remoção de maquiagem e impurezas. Limpa sem agredir",
+    fullDescription: "Essence Cleansing Oil é um óleo de limpeza premium que remove a maquiagem mais resistente e impurezas da pele de forma suave e eficaz. Formulado com óleos vegetais nobres como Girassol, Ômega Plus, Chia, Gergelim, Abacate, Macadâmia, Olive Skin Plus e Rosa Mosqueta. Dermatologicamente e oftalmologicamente testado. A pele fica limpa sem deixar resíduos.",
     price: "R$ 150,00",
-    image: placeholder,
+    image: essenceCleansingOil,
+    activeIngredients: [
+      "Óleo de Girassol",
+      "Ômega Plus",
+      "Óleo de Chia",
+      "Óleo de Gergelim",
+      "Óleo de Abacate",
+      "Óleo de Macadâmia",
+      "Olive Skin Plus",
+      "Óleo de Rosa Mosqueta",
+    ],
+    applicationIndications: [
+      "Remoção de maquiagem",
+      "Limpeza profunda",
+      "Todos os tipos de pele",
+      "Peles sensíveis",
+      "Double cleansing",
+    ],
   },
 ];
 
