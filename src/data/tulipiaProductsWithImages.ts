@@ -48,6 +48,7 @@ import blackSecretPeelingFase1Produto from "@/assets/products/tulipia/black-secr
 import blackSecretClareadorProduto from "@/assets/products/tulipia/black-secret-clareador-produto.jpg";
 import blackSecretPeelingFase2Produto from "@/assets/products/tulipia/black-secret-peeling-fase2-produto.jpg";
 import blackSecretSaboneteGlicoHero from "@/assets/products/tulipia/black-secret-sabonete-glico-hero.jpg";
+import blackSecretSolucaoPrePeelingHero from "@/assets/products/tulipia/black-secret-solucao-pre-peeling-hero.jpg";
 import blackBiowhiteLocao from "@/assets/products/tulipia/black-biowhite-locao.jpg";
 import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
 import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
@@ -287,9 +288,22 @@ export const tulipiaBlackSecret: Product[] = [
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: true,
-    description: "Solução preparatória para peelings. Remove oleosidade e prepara a pele para tratamentos",
+    description: "Concentrado de ativos purificantes e nanopartículas que remove oleosidade e potencializa a renovação celular.",
+    fullDescription: "Concentrado de ativos purificantes e nanopartículas, esta solução não somente remove a oleosidade e impurezas da pele, mas potencializa o processo de renovação celular, deixando-a profundamente limpa e com uma agradável sensação de frescor. Sua utilização, especialmente nas peles oleosas e seborreicas, permite um preparo perfeito para os procedimentos estéticos, aumentando significativamente a receptividade dos cosméticos de tratamento.",
     price: "R$ 170,00",
-    image: blackSecretSolucaoPrePeeling,
+    image: blackSecretSolucaoPrePeelingHero,
+    gallery: [
+      blackSecretSolucaoPrePeeling,
+      blackSecretSolucaoPrePeelingProduto,
+    ],
+    activeIngredients: [
+      "Ácido Glicólico 10%",
+      "Nano Acids",
+      "Ácido Cítrico",
+      "Ácido Láctico",
+      "Acetona",
+      "Mentol",
+    ],
   },
   {
     id: 7014,
