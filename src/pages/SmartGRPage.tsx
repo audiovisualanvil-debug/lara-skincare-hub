@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowLeft, Cpu, Zap, Radio, Shield } from "lucide-react";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
@@ -23,6 +23,10 @@ const categories = [
 
 const SmartGRPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
+  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
 
   const filteredProducts = activeCategory === "all" 
     ? allSmartGRWithImages 
@@ -33,18 +37,24 @@ const SmartGRPage = () => {
       <MainHeader />
 
       <main className="min-h-screen bg-background">
-        {/* Hero Section */}
+        {/* Hero Section with Parallax */}
         <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-          {/* Background Image */}
-          <div className="absolute inset-0">
+          {/* Background Image with Parallax */}
+          <motion.div 
+            className="absolute inset-0"
+            style={{ y, scale }}
+          >
             <img
               src={smartgrHero}
               alt="Smart GR - Equipamentos Profissionais"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-900/60 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-          </div>
+          </motion.div>
+          <motion.div 
+            className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-900/60 to-transparent"
+            style={{ opacity }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
           {/* Hero Content */}
           <div className="relative h-full container mx-auto px-4 flex items-center">
