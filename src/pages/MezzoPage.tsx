@@ -63,7 +63,7 @@ const MezzoPage = () => {
             />
           </motion.div>
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-espresso/80 via-espresso/60 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-rose-950/85 via-rose-900/60 to-transparent"
             style={{ opacity }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -76,14 +76,14 @@ const MezzoPage = () => {
               transition={{ duration: 0.8 }}
               className="max-w-2xl"
             >
-              <Badge className="mb-4 bg-accent/20 text-accent border-accent/30 backdrop-blur-sm">
+              <Badge className="mb-4 bg-rose-500/20 text-rose-300 border-rose-500/30 backdrop-blur-sm">
                 Alta Performance
               </Badge>
               
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 tracking-tight">
                 <span className="font-semibold">Mezzo</span>
                 <br />
-                <span className="text-accent">Dermocosméticos</span>
+                <span className="text-rose-400">Dermocosméticos</span>
               </h1>
               
               <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
@@ -92,7 +92,7 @@ const MezzoPage = () => {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
+                <Button size="lg" className="bg-rose-600 hover:bg-rose-700 text-white">
                   Ver Produtos
                 </Button>
                 <Button 
@@ -125,8 +125,8 @@ const MezzoPage = () => {
                   transition={{ delay: 0.2 + index * 0.1 }}
                   className="flex items-center gap-3"
                 >
-                  <div className="p-2 bg-accent/10 rounded-lg">
-                    <feature.icon className="w-5 h-5 text-accent" />
+                  <div className="p-2 bg-rose-500/10 rounded-lg">
+                    <feature.icon className="w-5 h-5 text-rose-600" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground text-sm">{feature.label}</p>
@@ -167,8 +167,8 @@ const MezzoPage = () => {
                       px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
                       flex items-center gap-2
                       ${activeCategory === cat.id 
-                        ? "bg-accent text-accent-foreground shadow-md" 
-                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                        ? "bg-rose-600 text-white shadow-md" 
+                        : "bg-secondary text-secondary-foreground hover:bg-rose-500/10"
                       }
                     `}
                   >
@@ -177,7 +177,7 @@ const MezzoPage = () => {
                     <span className={`
                       text-xs px-1.5 py-0.5 rounded-full
                       ${activeCategory === cat.id 
-                        ? "bg-accent-foreground/20 text-accent-foreground" 
+                        ? "bg-white/20 text-white" 
                         : "bg-muted text-muted-foreground"
                       }
                     `}>

@@ -53,7 +53,7 @@ const ExtratosPage = () => {
             />
           </motion.div>
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-green-900/80 via-green-900/60 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-purple-900/85 via-purple-900/60 to-transparent"
             style={{ opacity }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -66,14 +66,14 @@ const ExtratosPage = () => {
               transition={{ duration: 0.8 }}
               className="max-w-2xl"
             >
-              <Badge className="mb-4 bg-green-500/20 text-green-400 border-green-500/30 backdrop-blur-sm">
-                Natureza & Ciência
+              <Badge className="mb-4 bg-purple-500/20 text-purple-300 border-purple-500/30 backdrop-blur-sm">
+                Cosmetologia Avançada
               </Badge>
               
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 tracking-tight">
                 <span className="font-semibold">Extratos</span>
                 <br />
-                <span className="text-green-400">da Terra</span>
+                <span className="text-purple-400">da Terra</span>
               </h1>
               
               <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
@@ -82,7 +82,7 @@ const ExtratosPage = () => {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+                <Button size="lg" className="bg-purple-700 hover:bg-purple-800 text-white">
                   Ver Produtos
                 </Button>
                 <Button 
@@ -115,8 +115,8 @@ const ExtratosPage = () => {
                   transition={{ delay: 0.2 + index * 0.1 }}
                   className="flex items-center gap-3"
                 >
-                  <div className="p-2 bg-green-500/10 rounded-lg">
-                    <feature.icon className="w-5 h-5 text-green-600" />
+                  <div className="p-2 bg-purple-500/10 rounded-lg">
+                    <feature.icon className="w-5 h-5 text-purple-700" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground text-sm">{feature.label}</p>
@@ -157,8 +157,8 @@ const ExtratosPage = () => {
                       px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
                       flex items-center gap-2
                       ${activeCategory === cat.id 
-                        ? "bg-green-600 text-white shadow-md" 
-                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                        ? "bg-purple-700 text-white shadow-md" 
+                        : "bg-secondary text-secondary-foreground hover:bg-purple-500/10"
                       }
                     `}
                   >
