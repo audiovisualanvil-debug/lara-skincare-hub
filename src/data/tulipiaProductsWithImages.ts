@@ -148,6 +148,12 @@ import ultimateEsteticMascaraNew from "@/assets/products/tulipia/ultimate-esteti
 import citrogelClareadorNew from "@/assets/products/tulipia/citrogel-clareador-new.png";
 import sepiwhiteGelNew from "@/assets/products/tulipia/sepiwhite-gel-new.png";
 
+// Imagens oficiais do site Tulipia
+import stellarMaskRejuvenescedoraOfficial from "@/assets/products/tulipia/stellar-mask-rejuvenescedora.png";
+import chokolaMascaraOfficial from "@/assets/products/tulipia/chokola-mascara-chocolate.png";
+import ultimateEsteticOuroOfficial from "@/assets/products/tulipia/ultimate-estetic-mascara-ouro.png";
+import lifeCPeelingAbrasivoOfficial from "@/assets/products/tulipia/life-c-peeling-abrasivo.png";
+
 // Séruns - novas imagens
 import ageMatteSerumNew from "@/assets/products/tulipia/age-matte-serum-new.png";
 import dermacollSerumNew from "@/assets/products/tulipia/dermacoll-serum-new.png";
@@ -835,9 +841,24 @@ export const tulipiaMascaras: Product[] = [
     brand: "Tulipia",
     category: "mascara",
     isProfessional: true,
-    description: "Máscara anti-idade com peptídeos para firmeza e redução de rugas",
+    description: "Máscara rejuvenescedora que maximiza resultados em peles maduras. Previne envelhecimento precoce com alto poder de reparação.",
+    fullDescription: "Máscara rejuvenescedora desenvolvida para maximizar resultados em peles maduras. Previne o envelhecimento precoce, oferece alto poder de reparação, trata rugas e linhas finas, proporcionando efeito botox-like e alternativa segura ao retinol.",
     price: "R$ 185,57",
-    image: stellarMaskRejuvenescedoraImg,
+    image: stellarMaskRejuvenescedoraOfficial,
+    activeIngredients: [
+      "NanoTech-C",
+      "Extrato de Gengibre",
+      "Hypskin®",
+      "Revinage®",
+      "Nano BTX Solution",
+    ],
+    applicationIndications: [
+      "Anti-idade",
+      "Exclusivo para profissional",
+      "Facial",
+      "Não indicado para gestantes",
+      "Rugas",
+    ],
   },
   {
     id: 7047,
@@ -864,9 +885,26 @@ export const tulipiaMascaras: Product[] = [
     brand: "Tulipia",
     category: "mascara",
     isProfessional: false,
-    description: "Máscara antioxidante de chocolate. Rica em flavonoides para proteção da pele",
+    description: "Máscara multifuncional, nutritiva, antioxidante e firmadora. Rejuvenesce e retarda o envelhecimento com aroma agradável de chocolate.",
+    fullDescription: "Máscara multifuncional com extrato de cacau que nutre, protege e firma a pele. Rica em antioxidantes, rejuvenesce e retarda o processo de envelhecimento. Promove hidratação intensa e reequilibra o microbioma cutâneo com seu delicioso aroma de chocolate.",
     price: "R$ 157,00",
-    image: chokolaMascaraImg,
+    image: chokolaMascaraOfficial,
+    activeIngredients: [
+      "Ácido Ferúlico",
+      "Extrato de Cacau",
+      "Óleo de Amêndoas Doce",
+      "Ecoskin® (Pré/Probiótico)",
+      "NV Retinol",
+      "Nanovetor Q-10",
+    ],
+    applicationIndications: [
+      "Chocolate",
+      "Facial e Corporal",
+      "Indicado para todos os tipos de pele",
+      "Máscara",
+      "Nova fórmula",
+      "Nutrição",
+    ],
   },
   {
     id: 7049,
@@ -874,9 +912,30 @@ export const tulipiaMascaras: Product[] = [
     brand: "Tulipia",
     category: "mascara",
     isProfessional: true,
-    description: "Máscara tensora com partículas de ouro. Efeito lifting imediato e rejuvenescedor",
+    description: "Máscara tensora mágica com Ouro para revitalização cutânea. Efeito lifting imediato e produção de colágeno/elastina.",
+    fullDescription: "Uma máscara tensora mágica de alto impacto na revitalização cutânea e antienvelhecimento exclusiva. Formulada com Ouro, precioso elemento que catalisa o transporte dos nutrientes para o interior das células e tem papel importante na produção de colágeno e elastina. Enriquecida com Colágeno, Ginseng e Ginkgo Biloba para hidratação, nutrição e restauração da vitalidade da pele.",
     price: "R$ 140,00",
-    image: ultimateEsteticMascaraImg,
+    image: ultimateEsteticOuroOfficial,
+    activeIngredients: [
+      "Mica Dourada",
+      "Ginkgo Biloba",
+      "Extrato Glicólico de Hamamelis Virginiana L.",
+      "Colágeno Hidrolisado",
+      "Nanopartículas de Ouro",
+      "Extrato de Ginseng",
+      "Extrato de Sálvia",
+      "Alantoína",
+    ],
+    applicationIndications: [
+      "Anti-idade",
+      "Exclusivo para profissional",
+      "Facial",
+      "Hidratação",
+      "Indicado para todos os tipos de pele",
+      "Lifting",
+      "Nanotecnologia",
+      "Não indicado para gestantes",
+    ],
   },
   {
     id: 7050,
@@ -1106,13 +1165,28 @@ export const tulipiaLifeC: Product[] = [
     brand: "Tulipia",
     category: "vitamina-c",
     isProfessional: true,
-    description: "Peeling físico profissional com vitamina C para renovação celular intensa e luminosidade.",
+    description: "Peeling abrasivo de base argilosa que recupera textura uniforme e luminosidade. Esfoliação intensa com Vitamina C.",
+    fullDescription: "O Nano Peeling Abrasivo Life C+ é uma base argilosa de alto impacto para esfoliação, que recupera a textura uniforme e a luminosidade da pele através de intensa ação abrasiva, revelando uma pele visivelmente mais clara e revigorada. Remove camadas superiores de células danificadas sem ressecamento ou irritação.",
     price: "R$ 170,00",
-    image: lifeCPeelingImg,
+    image: lifeCPeelingAbrasivoOfficial,
     activeIngredients: [
-      "Vitamina C",
-      "Microesferas Esfoliantes",
       "Ácido Ferúlico",
+      "Ácido Glicólico",
+      "Argila Branca",
+      "Cristais de Quartzo",
+      "NanoTech-C",
+      "Óleo de Amêndoas Doce",
+      "Palmitato de Ascorbila",
+      "Phloretin",
+    ],
+    applicationIndications: [
+      "Creme",
+      "Esfoliação",
+      "Exclusivo para profissional",
+      "Facial",
+      "Indicado para todos os tipos de pele",
+      "Nanotecnologia",
+      "Não indicado para gestantes",
     ],
   },
   {
