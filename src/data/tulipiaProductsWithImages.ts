@@ -133,6 +133,33 @@ import lifeCSerum20New from "@/assets/products/tulipia/life-c-serum-20-new.png";
 import lifeCTonicoNew from "@/assets/products/tulipia/life-c-tonico-new.png";
 import lifeCMonodoseNew from "@/assets/products/tulipia/life-c-monodose-new.png";
 
+// Sweet Lips - novas imagens
+import sweetLipsEsfolianteCereja from "@/assets/products/tulipia/sweet-lips-esfoliante-cereja.png";
+import sweetLipsGlossCereja from "@/assets/products/tulipia/sweet-lips-gloss-cereja.png";
+
+// Stellar Mask - novas imagens
+import stellarMaskEnzimaticaNew from "@/assets/products/tulipia/stellar-mask-enzimatica-new.png";
+import stellarMaskRejuvenescedoraNew from "@/assets/products/tulipia/stellar-mask-rejuvenescedora-new.png";
+
+// Máscaras e clareadores - novas imagens
+import chokolaMascaraNew from "@/assets/products/tulipia/chokola-mascara-new.png";
+import ultimateEsteticMascaraNew from "@/assets/products/tulipia/ultimate-estetic-mascara-new.png";
+import citrogelClareadorNew from "@/assets/products/tulipia/citrogel-clareador-new.png";
+import sepiwhiteGelNew from "@/assets/products/tulipia/sepiwhite-gel-new.png";
+
+// Séruns - novas imagens
+import ageMatteSerumNew from "@/assets/products/tulipia/age-matte-serum-new.png";
+import dermacollSerumNew from "@/assets/products/tulipia/dermacoll-serum-new.png";
+
+// Body HD e corporais - novas imagens
+import bodyHdGelHiperemiante from "@/assets/products/tulipia/body-hd-gel-hiperemiante.png";
+import bodyHdGomaEsfoliante from "@/assets/products/tulipia/body-hd-goma-esfoliante.png";
+import bodyHdGelCrioterapico from "@/assets/products/tulipia/body-hd-gel-crioterapico.png";
+import moovyCremeOzonizado from "@/assets/products/tulipia/moovy-creme-ozonizado.png";
+
+// Capilar - novas imagens
+import tricoGeneticistTonico from "@/assets/products/tulipia/trico-geneticist-tonico.png";
+
 // Placeholder para produtos sem imagem
 const placeholder = "/placeholder.svg";
 
@@ -1057,13 +1084,21 @@ export const tulipiaLifeC: Product[] = [
 export const tulipiaSweetLips: Product[] = [
   {
     id: 7120,
-    name: "Sweet Lips Esfoliante Labial Cereja",
+    name: "Sweet Lips Esfoliante Labial Cereja 15g",
     brand: "Tulipia",
     category: "labial",
     isProfessional: false,
-    description: "Esfoliante labial com microesferas de cereja. Remove células mortas e prepara os lábios",
-    price: "R$ 49,00",
-    image: sweetLipsEsfolianteImg,
+    description: "Esfoliante labial anti-idade com vitamina E, manteiga de karité e óleos de coco e jojoba. Fragrância de cereja.",
+    fullDescription: "Esfoliante labial com ação rejuvenescedora e regeneradora. Remove células mortas sem lesionar, estimula a renovação celular e ativa a microcirculação. Com vitamina E antioxidante, manteiga de karité e óleos de coco e jojoba para hidratação intensa. Ideal para protocolos de microagulhamento e micropigmentação labial.",
+    price: "R$ 79,00",
+    image: sweetLipsEsfolianteCereja,
+    activeIngredients: [
+      "Vitamina E",
+      "Manteiga de Karité",
+      "Óleo de Coco",
+      "Óleo de Jojoba",
+      "Microesferas Esfoliantes",
+    ],
   },
   {
     id: 7121,
@@ -1073,7 +1108,7 @@ export const tulipiaSweetLips: Product[] = [
     isProfessional: false,
     description: "Esfoliante labial sabor tutti frutti. Remove células mortas e suaviza os lábios",
     price: "R$ 79,00",
-    image: sweetLipsEsfolianteImg,
+    image: sweetLipsEsfolianteCereja,
   },
   {
     id: 7122,
@@ -1081,9 +1116,17 @@ export const tulipiaSweetLips: Product[] = [
     brand: "Tulipia",
     category: "labial",
     isProfessional: false,
-    description: "Gloss hidratante sabor cereja. Hidrata e dá brilho natural aos lábios",
+    description: "Gloss com Dragon's Blood LP, DMAE e ácido hialurônico. Ultra hidratante e rejuvenescedor.",
+    fullDescription: "Gloss labial com ação ultra hidratante e rejuvenescedora. Dragon's Blood LP repara e suaviza, DMAE previne envelhecimento e reduz rugas verticais, ácido hialurônico hidrata intensamente. Restaura volume e textura aveludada dos lábios.",
     price: "R$ 69,00",
-    image: sweetLipsGlossImg,
+    image: sweetLipsGlossCereja,
+    activeIngredients: [
+      "Dragon's Blood LP",
+      "Drone EGF",
+      "Nano Ácido Hialurônico",
+      "Nano DMAE",
+      "Óleo de Amêndoas Doce",
+    ],
   },
   {
     id: 7123,
@@ -1093,7 +1136,7 @@ export const tulipiaSweetLips: Product[] = [
     isProfessional: false,
     description: "Gloss hidratante sabor tutti frutti. Hidrata e dá brilho natural",
     price: "R$ 69,00",
-    image: sweetLipsGlossImg,
+    image: sweetLipsGlossCereja,
   },
   {
     id: 7124,
@@ -1213,9 +1256,15 @@ export const tulipiaClareadores: Product[] = [
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: false,
-    description: "Gel clareador com tecnologia nano para tratamento de manchas localizadas",
+    description: "Gel clareador com ácido kójico, extrato de limão e Nano Acids para tratamento de manchas.",
+    fullDescription: "Gel clareador concentrado com tecnologia nano para tratamento de manchas localizadas. Ácido kójico e extrato de limão promovem clareamento eficaz, enquanto Nano Acids garantem permeação profunda dos ativos.",
     price: "R$ 149,00",
-    image: placeholder,
+    image: citrogelClareadorNew,
+    activeIngredients: [
+      "Ácido Kójico",
+      "Extrato de Limão",
+      "Nano Acids",
+    ],
   },
   {
     id: 7151,
@@ -1223,9 +1272,15 @@ export const tulipiaClareadores: Product[] = [
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: false,
-    description: "Gel clareador com Sepiwhite para uniformização e luminosidade da pele",
+    description: "Gel clareador com Sepiwhite™ MSH, ácido mandélico e niacinamida para uniformização.",
+    fullDescription: "Gel clareador premium com Sepiwhite™ MSH, tecnologia exclusiva que inibe a síntese de melanina. Formulado com ácido mandélico para renovação suave e niacinamida para uniformização do tom e controle de oleosidade.",
     price: "R$ 170,00",
-    image: placeholder,
+    image: sepiwhiteGelNew,
+    activeIngredients: [
+      "Sepiwhite™ MSH",
+      "Ácido Mandélico",
+      "Niacinamida",
+    ],
   },
 ];
 
@@ -1454,9 +1509,15 @@ export const tulipiaSeruns: Product[] = [
     brand: "Tulipia",
     category: "serum",
     isProfessional: false,
-    description: "Sérum matificante para controle de oleosidade com efeito anti-idade",
+    description: "Sérum matificante com ácido salicílico, zinco PCA e niacinamida para controle de oleosidade.",
+    fullDescription: "Sérum matificante que combina controle de oleosidade com ação anti-idade. Ácido salicílico desobstrui poros, zinco PCA regula a produção de sebo e niacinamida uniformiza o tom. Toque seco prolongado sem ressecar.",
     price: "R$ 149,00",
-    image: placeholder,
+    image: ageMatteSerumNew,
+    activeIngredients: [
+      "Ácido Salicílico",
+      "Zinco PCA",
+      "Niacinamida",
+    ],
   },
   {
     id: 7211,
@@ -1464,9 +1525,15 @@ export const tulipiaSeruns: Product[] = [
     brand: "Tulipia",
     category: "serum",
     isProfessional: false,
-    description: "Sérum firmador com colágeno bioativo para combate à flacidez",
+    description: "Sérum firmador com colágeno hidrolisado, peptídeos e ácido hialurônico.",
+    fullDescription: "Sérum firmador de alta performance com colágeno hidrolisado para restauração da matriz extracelular, peptídeos bioativos para estímulo de neocolagenase e ácido hialurônico para hidratação profunda. Combate flacidez e melhora a textura da pele.",
     price: "R$ 149,00",
-    image: placeholder,
+    image: dermacollSerumNew,
+    activeIngredients: [
+      "Colágeno Hidrolisado",
+      "Peptídeos Bioativos",
+      "Ácido Hialurônico",
+    ],
   },
   {
     id: 7212,
@@ -1474,9 +1541,9 @@ export const tulipiaSeruns: Product[] = [
     brand: "Tulipia",
     category: "serum",
     isProfessional: false,
-    description: "Sérum 4 em 1: hidrata, firma, clareia e protege. Tecnologia nano",
+    description: "Sérum 4 em 1: hidrata, firma, clareia e protege. Tecnologia 4D Hyaluronic Acid.",
     price: "R$ 169,00",
-    image: placeholder,
+    image: dermacollSerumNew,
   },
   {
     id: 7213,
@@ -1484,9 +1551,9 @@ export const tulipiaSeruns: Product[] = [
     brand: "Tulipia",
     category: "serum",
     isProfessional: false,
-    description: "Sérum antirrugas com oligoelementos. Suaviza linhas de expressão",
+    description: "Sérum antirrugas com oligoelementos e Argireline®. Suaviza linhas de expressão.",
     price: "R$ 169,00",
-    image: placeholder,
+    image: dermacollSerumNew,
   },
   {
     id: 7214,
@@ -1602,7 +1669,7 @@ export const tulipiaBodyHD: Product[] = [
     isProfessional: true,
     description: "Creme redutor para massagem modeladora. Auxilia na redução de medidas",
     price: "R$ 185,57",
-    image: placeholder,
+    image: bodyHdGelHiperemiante,
   },
   {
     id: 7231,
@@ -1610,9 +1677,18 @@ export const tulipiaBodyHD: Product[] = [
     brand: "Tulipia",
     category: "corporal",
     isProfessional: true,
-    description: "Gel hiperemiante para aquecimento da pele. Potencializa tratamentos corporais",
+    description: "Gel termogênico com Drone Celulite, Nano Caffeine e Pro Nano Capsaicin. Aquece e ativa metabolismo.",
+    fullDescription: "Gel hiperemiante com fórmula rica em ativos termogênicos que provocam aquecimento local e melhoram a circulação. Drone Celulite, Nano Caffeine, Nano Ozônio e Pro Nano Capsaicin atuam no combate à celulite e gordura localizada.",
     price: "R$ 157,00",
-    image: placeholder,
+    image: bodyHdGelHiperemiante,
+    activeIngredients: [
+      "Drone Celulite",
+      "Nano Caffeine",
+      "Nano Ozônio Corporal",
+      "Pro Nano Capsaicin",
+      "Extrato de Gengibre",
+      "Alga Fucus",
+    ],
   },
   {
     id: 7232,
@@ -1620,9 +1696,16 @@ export const tulipiaBodyHD: Product[] = [
     brand: "Tulipia",
     category: "corporal",
     isProfessional: true,
-    description: "Goma esfoliante corporal para renovação celular e preparo da pele",
+    description: "Esfoliante dual-action (face e corpo) com pó de casca de arroz e óleos ozonizados.",
+    fullDescription: "Goma esfoliante versátil que pode ser usada no corpo e na face. Com pó de casca de arroz para esfoliação suave, óleo de coco ozonizado para ação antimicrobiana e cafeína para ativação da circulação.",
     price: "R$ 157,00",
-    image: placeholder,
+    image: bodyHdGomaEsfoliante,
+    activeIngredients: [
+      "Pó de Casca de Arroz",
+      "Óleo de Coco Ozonizado",
+      "Cafeína",
+      "Óleo Essencial de Pimenta Preta",
+    ],
   },
   {
     id: 7233,
@@ -1630,9 +1713,16 @@ export const tulipiaBodyHD: Product[] = [
     brand: "Tulipia",
     category: "corporal",
     isProfessional: true,
-    description: "Gel crioterápico para tratamentos de celulite e gordura localizada",
+    description: "Gel crioterápico com mentol, cânfora e L-carnitina para drenagem e combate à celulite.",
+    fullDescription: "Gel com propriedades crioterápicas que promovem sensação de resfriamento. Estimula o sistema linfático, elimina toxinas e ácidos graxos. Potencializa a drenagem linfática e combate celulite e flacidez.",
     price: "R$ 199,00",
-    image: placeholder,
+    image: bodyHdGelCrioterapico,
+    activeIngredients: [
+      "Mentol",
+      "Cânfora",
+      "L-Carnitina",
+      "Nano Caffeine",
+    ],
   },
   {
     id: 7234,
@@ -1642,7 +1732,7 @@ export const tulipiaBodyHD: Product[] = [
     isProfessional: true,
     description: "Creme de massagem neutro para uso profissional. Base para associações",
     price: "R$ 141,43",
-    image: placeholder,
+    image: bodyHdGomaEsfoliante,
   },
 ];
 
@@ -1657,9 +1747,13 @@ export const tulipiaMoovy: Product[] = [
     brand: "Tulipia",
     category: "corporal",
     isProfessional: true,
-    description: "Creme de massagem com ozônio. Oxigena e revitaliza a pele",
+    description: "Creme de massagem com Nano Ozônio Corporal. Bioestimulante tecidual que oxigena e revitaliza.",
+    fullDescription: "Creme de massagem profissional enriquecido com Nano Ozônio Corporal, um bioestimulante tecidual que promove oxigenação celular, melhora a circulação e revitaliza a pele. Ideal para massagens modeladoras e tratamentos corporais.",
     price: "R$ 199,00",
-    image: placeholder,
+    image: moovyCremeOzonizado,
+    activeIngredients: [
+      "Nano Ozônio Corporal",
+    ],
   },
 ];
 
@@ -1674,9 +1768,15 @@ export const tulipiaTricoGeneticist: Product[] = [
     brand: "Tulipia",
     category: "capilar",
     isProfessional: false,
-    description: "Tônico capilar para prevenção e tratamento de queda de cabelos",
+    description: "Tônico capilar com Baicapil™, nano fatores de crescimento e biotina para tratamento de queda.",
+    fullDescription: "Tônico capilar antiqueda com Baicapil™, tecnologia que fortalece o bulbo capilar e prolonga a fase de crescimento. Nano fatores de crescimento estimulam a proliferação celular e biotina nutre os fios desde a raiz.",
     price: "R$ 159,00",
-    image: placeholder,
+    image: tricoGeneticistTonico,
+    activeIngredients: [
+      "Baicapil™",
+      "Nano Fatores de Crescimento",
+      "Biotina",
+    ],
   },
   {
     id: 7251,
