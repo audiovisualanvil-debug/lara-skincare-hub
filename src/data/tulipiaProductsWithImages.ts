@@ -53,6 +53,9 @@ import blackSecretClareadorHero from "@/assets/products/tulipia/black-secret-cla
 import blackSecretMicroSpikesHero from "@/assets/products/tulipia/black-secret-micro-spikes-hero.jpg";
 import blackSecretMicroSpikesPedra from "@/assets/products/tulipia/black-secret-micro-spikes-pedra.jpg";
 import blackBiowhiteLocao from "@/assets/products/tulipia/black-biowhite-locao.jpg";
+import biowhiteHero from "@/assets/products/tulipia/biowhite-hero.jpg";
+import biowhiteUso from "@/assets/products/tulipia/biowhite-uso.jpg";
+import biowhiteFrasco from "@/assets/products/tulipia/biowhite-frasco.jpg";
 import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
 import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
 import proskinCreme from "@/assets/products/tulipia/proskin-creme.jpg";
@@ -358,13 +361,33 @@ export const tulipiaBlackSecret: Product[] = [
   },
   {
     id: 7016,
-    name: "Black Biowhite Nano Loção Clareadora 60ml",
+    name: "Biowhite Nano Loção Clareadora 60ml",
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: false,
-    description: "Loção clareadora com tecnologia nano para tratamento de manchas e melasma",
+    description: "Loção com Nano Hydroxy Acids que estimula a síntese de colágeno, promove firmeza, clareia e uniformiza o tom da pele.",
+    fullDescription: "A Nano Loção Clareadora Biowhite possui ação rejuvenescedora e clareadora na pele. Com o ativo Nano Hydroxy Acids em sua composição, estimula a síntese de colágeno, promove firmeza e reduz rugas e linhas de expressão. Por seu efeito clareador prolongado, a Biowhite não só suaviza as marcas escurecidas como também ajuda a prevenir seu reaparecimento ao longo do tempo. Resultados comprovados: 85% de melhora no clareamento da pele, 80% na uniformização do tom e 75% na firmeza.",
     price: "R$ 149,00",
-    image: blackBiowhiteLocao,
+    image: biowhiteHero,
+    gallery: [
+      biowhiteUso,
+      biowhiteFrasco,
+      blackBiowhiteLocao,
+    ],
+    activeIngredients: [
+      "Nano Hydroxy Acids",
+      "Nano Up Lift",
+      "Ácido Kójico",
+      "Ácido Mandélico",
+      "Ácido Glicólico",
+      "Ácido Láctico",
+      "Ácido Cítrico",
+      "Ácido Fítico",
+      "Ácido Hialurônico",
+      "Extrato de Acácia do Senegal",
+      "Extrato de Alcaçuz",
+      "Óleo de Aveia",
+    ],
   },
 ];
 
