@@ -1,48 +1,130 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowLeft, FlaskConical, Sparkles, Zap, Shield } from "lucide-react";
+import { ArrowLeft, FlaskConical, Sparkles, Zap, Shield, Filter, X, ChevronDown } from "lucide-react";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import ProductGrid from "@/components/shop/ProductGrid";
 import AnimatedSection from "@/components/home/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuCheckboxItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 
 // Import banner for hero
 import mezzoHero from "@/assets/banners/mezzo-hero-wide.jpg";
 
-// Get unique categories from products
-const getCategories = () => {
-  const categorySet = new Set<string>();
-  allMezzoWithImages.forEach(p => {
-    if (p.category) categorySet.add(p.category);
-  });
-  return Array.from(categorySet);
-};
-
+// Categories with icons
 const categories = [
-  { id: "all", label: "Todos", count: allMezzoWithImages.length },
+  { id: "all", label: "Todos", icon: null },
   { id: "exossomas", label: "Exossomas", icon: FlaskConical },
-  { id: "clareamento", label: "Clareamento", icon: Sparkles },
-  { id: "antiacne", label: "Antiacne", icon: Shield },
-  { id: "anti-idade", label: "Anti-idade", icon: Zap },
-  { id: "corporal", label: "Corporal", icon: Sparkles },
-  { id: "capilar", label: "Capilar", icon: FlaskConical },
-  { id: "fotoprotecao", label: "Fotoproteção", icon: Shield },
+  { id: "capilar", label: "Capilar", icon: Sparkles },
+  { id: "corpo", label: "Corporal", icon: Zap },
+  { id: "fotoprotetor", label: "Fotoproteção", icon: Shield },
+  { id: "homecare", label: "Home Care", icon: Sparkles },
+  { id: "limpeza", label: "Limpeza", icon: FlaskConical },
+  { id: "vitaminac", label: "Vitamina C", icon: Zap },
+  { id: "esfoliacao", label: "Esfoliação", icon: Sparkles },
+  { id: "mascaras", label: "Máscaras", icon: FlaskConical },
+  { id: "hidratacao", label: "Hidratação", icon: Zap },
+  { id: "peeling", label: "Peeling Ácidos", icon: Shield },
+  { id: "acnediol", label: "Acnediol", icon: FlaskConical },
+  { id: "nutraceuticos", label: "Nutracêuticos", icon: Sparkles },
 ];
+
+// Skin type filters based on product indications
+const skinTypes = [
+  { id: "all", label: "Todos os tipos" },
+  { id: "oleosa", label: "Pele Oleosa" },
+  { id: "seca", label: "Pele Seca" },
+  { id: "sensivel", label: "Pele Sensível" },
+  { id: "acneica", label: "Pele Acneica" },
+  { id: "madura", label: "Pele Madura" },
+  { id: "manchas", label: "Com Manchas" },
+];
+
+// Helper to check if product matches skin type
+const matchesSkinType = (product: typeof allMezzoWithImages[0], skinType: string): boolean => {
+  if (skinType === "all") return true;
+  
+  const indications = product.applicationIndications || [];
+  const description = (product.description || "").toLowerCase();
+  const fullDescription = (product.fullDescription || "").toLowerCase();
+  const name = product.name.toLowerCase();
+  
+  const textToSearch = [...indications.map(i => i.toLowerCase()), description, fullDescription, name].join(" ");
+  
+  switch (skinType) {
+    case "oleosa":
+      return textToSearch.includes("oleosa") || textToSearch.includes("oleosidade") || 
+             textToSearch.includes("controle de sebo") || textToSearch.includes("matific");
+    case "seca":
+      return textToSearch.includes("seca") || textToSearch.includes("ressecad") || 
+             textToSearch.includes("hidratação") || textToSearch.includes("desidrat");
+    case "sensivel":
+      return textToSearch.includes("sensível") || textToSearch.includes("sensibiliz") || 
+             textToSearch.includes("calmante") || textToSearch.includes("irritação");
+    case "acneica":
+      return textToSearch.includes("acne") || textToSearch.includes("acneic") || 
+             textToSearch.includes("espinha") || textToSearch.includes("anti-acne");
+    case "madura":
+      return textToSearch.includes("anti-idade") || textToSearch.includes("rejuvenesc") || 
+             textToSearch.includes("rugas") || textToSearch.includes("flacidez") || 
+             textToSearch.includes("colágeno") || textToSearch.includes("madura");
+    case "manchas":
+      return textToSearch.includes("mancha") || textToSearch.includes("clarea") || 
+             textToSearch.includes("melasma") || textToSearch.includes("pigment") ||
+             textToSearch.includes("uniformiz");
+    default:
+      return true;
+  }
+};
 
 const MezzoPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [activeSkinType, setActiveSkinType] = useState("all");
+  const [showFilters, setShowFilters] = useState(false);
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
   const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
   const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
 
-  const filteredProducts = activeCategory === "all" 
-    ? allMezzoWithImages 
-    : allMezzoWithImages.filter(p => p.category === activeCategory);
+  // Filter products based on category and skin type
+  const filteredProducts = useMemo(() => {
+    return allMezzoWithImages.filter(product => {
+      const matchesCategory = activeCategory === "all" || product.category === activeCategory;
+      const matchesSkin = matchesSkinType(product, activeSkinType);
+      return matchesCategory && matchesSkin;
+    });
+  }, [activeCategory, activeSkinType]);
+
+  // Count products per skin type for current category
+  const skinTypeCounts = useMemo(() => {
+    const baseProducts = activeCategory === "all" 
+      ? allMezzoWithImages 
+      : allMezzoWithImages.filter(p => p.category === activeCategory);
+    
+    return skinTypes.reduce((acc, type) => {
+      acc[type.id] = type.id === "all" 
+        ? baseProducts.length 
+        : baseProducts.filter(p => matchesSkinType(p, type.id)).length;
+      return acc;
+    }, {} as Record<string, number>);
+  }, [activeCategory]);
+
+  const hasActiveFilters = activeCategory !== "all" || activeSkinType !== "all";
+
+  const clearFilters = () => {
+    setActiveCategory("all");
+    setActiveSkinType("all");
+  };
 
   return (
     <>
@@ -149,43 +231,102 @@ const MezzoPage = () => {
             Voltar para a loja
           </Link>
 
-          {/* Category Filter */}
+          {/* Filters Section */}
           <AnimatedSection direction="fade" className="mb-10">
-            <div className="flex flex-wrap gap-3">
-              {categories.map((cat) => {
-                const count = cat.id === "all" 
-                  ? allMezzoWithImages.length 
-                  : allMezzoWithImages.filter(p => p.category === cat.id).length;
-                
-                if (cat.id !== "all" && count === 0) return null;
-                
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    className={`
-                      px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
-                      flex items-center gap-2
-                      ${activeCategory === cat.id 
-                        ? "bg-rose-600 text-white shadow-md" 
-                        : "bg-secondary text-secondary-foreground hover:bg-rose-500/10"
-                      }
-                    `}
+            <div className="flex flex-col gap-4">
+              {/* Filter Header */}
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Filter className="w-5 h-5 text-muted-foreground" />
+                  <span className="font-medium text-foreground">Filtros</span>
+                  {hasActiveFilters && (
+                    <Badge variant="secondary" className="text-xs">
+                      {filteredProducts.length} produtos
+                    </Badge>
+                  )}
+                </div>
+                {hasActiveFilters && (
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={clearFilters}
+                    className="text-muted-foreground hover:text-foreground"
                   >
-                    {cat.icon && <cat.icon className="w-4 h-4" />}
-                    {cat.label}
-                    <span className={`
-                      text-xs px-1.5 py-0.5 rounded-full
-                      ${activeCategory === cat.id 
-                        ? "bg-white/20 text-white" 
-                        : "bg-muted text-muted-foreground"
-                      }
-                    `}>
-                      {count}
-                    </span>
-                  </button>
-                );
-              })}
+                    <X className="w-4 h-4 mr-1" />
+                    Limpar filtros
+                  </Button>
+                )}
+              </div>
+
+              {/* Skin Type Dropdown */}
+              <div className="flex flex-wrap items-center gap-3">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button 
+                      variant="outline" 
+                      className={`gap-2 ${activeSkinType !== "all" ? "border-rose-500 bg-rose-500/10 text-rose-600" : ""}`}
+                    >
+                      <span>Tipo de Pele: {skinTypes.find(s => s.id === activeSkinType)?.label}</span>
+                      <ChevronDown className="w-4 h-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="start" className="w-56 bg-popover z-50">
+                    <DropdownMenuLabel>Filtrar por tipo de pele</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    {skinTypes.map((type) => (
+                      <DropdownMenuCheckboxItem
+                        key={type.id}
+                        checked={activeSkinType === type.id}
+                        onCheckedChange={() => setActiveSkinType(type.id)}
+                        disabled={skinTypeCounts[type.id] === 0}
+                      >
+                        <span className="flex-1">{type.label}</span>
+                        <span className="text-xs text-muted-foreground ml-2">
+                          ({skinTypeCounts[type.id]})
+                        </span>
+                      </DropdownMenuCheckboxItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
+              {/* Category Pills */}
+              <div className="flex flex-wrap gap-2">
+                {categories.map((cat) => {
+                  const count = cat.id === "all" 
+                    ? allMezzoWithImages.length 
+                    : allMezzoWithImages.filter(p => p.category === cat.id).length;
+                  
+                  if (cat.id !== "all" && count === 0) return null;
+                  
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => setActiveCategory(cat.id)}
+                      className={`
+                        px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200
+                        flex items-center gap-1.5
+                        ${activeCategory === cat.id 
+                          ? "bg-rose-600 text-white shadow-md" 
+                          : "bg-secondary text-secondary-foreground hover:bg-rose-500/10"
+                        }
+                      `}
+                    >
+                      {cat.icon && <cat.icon className="w-3.5 h-3.5" />}
+                      {cat.label}
+                      <span className={`
+                        text-xs px-1.5 py-0.5 rounded-full
+                        ${activeCategory === cat.id 
+                          ? "bg-white/20 text-white" 
+                          : "bg-muted text-muted-foreground"
+                        }
+                      `}>
+                        {count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </AnimatedSection>
 
