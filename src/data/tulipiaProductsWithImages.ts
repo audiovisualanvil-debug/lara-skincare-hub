@@ -24,6 +24,12 @@ import niacineEspumaTextura from "@/assets/products/tulipia/niacine-espuma-textu
 import niacineEspumaProduto from "@/assets/products/tulipia/niacine-espuma-produto.jpg";
 import niacineEspumaMasculino from "@/assets/products/tulipia/niacine-espuma-masculino.jpg";
 import niacineEspumaFrasco from "@/assets/products/tulipia/niacine-espuma-frasco.jpg";
+// Galeria Black Secret Antiacne
+import blackSecretAntiacneAgua from "@/assets/products/tulipia/black-secret-antiacne-agua.jpg";
+import blackSecretAntiacneRobo from "@/assets/products/tulipia/black-secret-antiacne-robo.jpg";
+import blackSecretAntiacneAplicacao from "@/assets/products/tulipia/black-secret-antiacne-aplicacao.jpg";
+import blackSecretAntiacneFamilia from "@/assets/products/tulipia/black-secret-antiacne-familia.jpg";
+import blackSecretAntiacneFrasco from "@/assets/products/tulipia/black-secret-antiacne-frasco.jpg";
 import blackSecretPeelingAntiacne from "@/assets/products/tulipia/black-secret-peeling-antiacne.jpg";
 import blackSecretPeeling2Fases from "@/assets/products/tulipia/black-secret-peeling-2-fases.jpg";
 import blackSecretSaboneteGlico from "@/assets/products/tulipia/black-secret-sabonete-glico.jpg";
@@ -147,9 +153,28 @@ export const tulipiaBlackSecret: Product[] = [
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: true,
-    description: "Peeling profissional para tratamento de acne. Reduz inflamação e clareia manchas pós-inflamatórias",
+    description: "Peeling profissional para tratamento de acne com Azeloglicina®. Reduz inflamação, controla oleosidade e clareia manchas pós-inflamatórias.",
+    fullDescription: "Peeling profissional para tratamento de acne com Azeloglicina®. Reduz inflamação, controla oleosidade e clareia manchas pós-inflamatórias. Testado dermatologicamente.",
     price: "R$ 199,86",
     image: blackSecretPeelingAntiacne,
+    gallery: [
+      blackSecretAntiacneAgua,
+      blackSecretAntiacneRobo,
+      blackSecretAntiacneAplicacao,
+      blackSecretAntiacneFamilia,
+      blackSecretAntiacneFrasco,
+    ],
+    activeIngredients: [
+      "Azeloglicina®",
+      "Ácido Succínico",
+      "Ácido Chiquímico",
+      "Ácido Glicirrízico",
+      "Ácido Salicílico",
+      "Ácido Lático",
+      "Ácido Glicólico",
+      "Centella Asiática",
+      "Pantenol",
+    ],
   },
   {
     id: 7011,
