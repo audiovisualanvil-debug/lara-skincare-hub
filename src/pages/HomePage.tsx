@@ -11,6 +11,7 @@ import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
 import QuizCTA from "@/components/home/QuizCTA";
 import AnimatedSection from "@/components/home/AnimatedSection";
 import BrandSection from "@/components/home/BrandSection";
+import BrandsSection from "@/components/home/BrandsSection";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
@@ -252,6 +253,9 @@ const HomePage = () => {
           </motion.div>
         </motion.div>
 
+        {/* Brands Section - Highlighted */}
+        <BrandsSection />
+
         {/* Featured Banners Carousel */}
         <section className="section-editorial bg-secondary/20">
           <div className="container-editorial">
@@ -444,7 +448,7 @@ const HomePage = () => {
           title="Alta Performance"
           subtitle="Produtos profissionais para tratamentos estéticos avançados. Exossomas, clareamento, antiacne e muito mais."
           products={allMezzoWithImages}
-          linkTo="/loja?marca=Mezzo"
+          linkTo="/mezzo"
           linkLabel="Ver toda a linha Mezzo"
           bgVariant="dark"
         />
@@ -455,7 +459,7 @@ const HomePage = () => {
           title="Natureza & Ciência"
           subtitle="Dermocosméticos que unem ingredientes naturais à tecnologia cosmética. Resultados comprovados com fórmulas suaves."
           products={allExtratosWithImages}
-          linkTo="/loja?marca=Extratos da Terra"
+          linkTo="/extratos-da-terra"
           linkLabel="Ver toda a linha Extratos"
           bgVariant="light"
         />
@@ -466,7 +470,7 @@ const HomePage = () => {
           title="Equipamentos Profissionais"
           subtitle="Aparelhos de última geração para tratamentos estéticos. LED, radiofrequência, ultrassom e muito mais."
           products={allSmartGRWithImages}
-          linkTo="/loja?marca=Smart GR"
+          linkTo="/smart-gr"
           linkLabel="Ver equipamentos Smart GR"
           bgVariant="gradient"
         />

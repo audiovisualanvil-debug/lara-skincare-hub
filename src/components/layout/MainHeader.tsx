@@ -34,6 +34,40 @@ const menuItems = [
     hasMegaMenu: false 
   },
   { 
+    label: "Nossas Marcas", 
+    href: "/loja",
+    hasMegaMenu: true,
+    megaMenu: {
+      subcategories: [
+        { label: "Tulípia", href: "/tulipia", description: "Nanotecnologia Premium" },
+        { label: "Mezzo", href: "/mezzo", description: "Alta Performance" },
+        { label: "Extratos da Terra", href: "/extratos-da-terra", description: "Natureza & Ciência" },
+        { label: "Smart GR", href: "/smart-gr", description: "Equipamentos Profissionais" },
+        { label: "Ver todas as marcas", href: "/loja", highlight: true },
+      ],
+      banners: [
+        {
+          title: "Tulípia",
+          subtitle: "Tecnologia nano encapsulada",
+          image: niacineSerum,
+          href: "/tulipia",
+        },
+        {
+          title: "Mezzo",
+          subtitle: "Exossomas e peptídeos",
+          image: dermacosImmortalite,
+          href: "/mezzo",
+        },
+        {
+          title: "Extratos da Terra",
+          subtitle: "Ingredientes naturais",
+          image: hidrasolDermacos,
+          href: "/extratos-da-terra",
+        },
+      ],
+    },
+  },
+  { 
     label: "Categorias", 
     href: "/loja",
     hasMegaMenu: true,
@@ -42,7 +76,6 @@ const menuItems = [
         { label: "Facial", href: "/loja?categoria=facial" },
         { label: "Corporal", href: "/loja?categoria=corpo" },
         { label: "Labial", href: "/loja?categoria=labial" },
-        { label: "Área Íntima", href: "/loja?categoria=intima" },
         { label: "Área dos Olhos", href: "/loja?categoria=olhos" },
         { label: "Proteção Solar", href: "/loja?categoria=fotoprotecao" },
         { label: "Capilar", href: "/loja?categoria=capilar" },
@@ -105,12 +138,6 @@ const menuItems = [
         },
       ],
     },
-  },
-  { 
-    label: "Tulipia", 
-    href: "/tulipia",
-    hasMegaMenu: false,
-    isHighlight: true 
   },
   { 
     label: "Quiz de Pele", 

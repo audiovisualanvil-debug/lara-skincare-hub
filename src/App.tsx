@@ -24,6 +24,9 @@ import Compare from "./pages/Compare";
 import SkinQuiz from "./pages/SkinQuiz";
 import Auth from "./pages/Auth";
 import TulipiaPage from "./pages/TulipiaPage";
+import MezzoPage from "./pages/MezzoPage";
+import ExtratosPage from "./pages/ExtratosPage";
+import SmartGRPage from "./pages/SmartGRPage";
 import AdminImageProcessor from "./pages/AdminImageProcessor";
 
 const queryClient = new QueryClient();
@@ -43,6 +46,9 @@ const App = () => (
                   <Route path="/shop" element={<Shop />} />
                   <Route path="/loja" element={<Shop />} />
                   <Route path="/tulipia" element={<TulipiaPage />} />
+                  <Route path="/mezzo" element={<MezzoPage />} />
+                  <Route path="/extratos-da-terra" element={<ExtratosPage />} />
+                  <Route path="/smart-gr" element={<SmartGRPage />} />
                   <Route path="/produto/:id" element={<ProductDetail />} />
                   <Route path="/favoritos" element={<Favorites />} />
                   <Route path="/comparar" element={<Compare />} />
