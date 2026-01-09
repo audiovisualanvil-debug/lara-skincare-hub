@@ -1,11 +1,11 @@
 // Imagens dos produtos Mezzo extraídas do catálogo oficial
-import mellanWhiteXsome from "@/assets/products/mezzo/mellan-white-xsome-new.png";
-import skinFillXsome from "@/assets/products/mezzo/skin-fill-xsome-new.png";
-import maskXsomePdrn from "@/assets/products/mezzo/mask-xsome-pdrn-new.png";
-import eyesXsome from "@/assets/products/mezzo/eyes-xsome-new.png";
-import acneXsome from "@/assets/routine/acne-xsome-kit.png";
-import trichologyXsome from "@/assets/products/mezzo/trichology-xsome.jpg";
-import lipoXsome from "@/assets/products/mezzo/lipo-xsome.jpg";
+import mellanWhiteXsome from "@/assets/products/mezzo/mellan-white-xsome-official.png";
+import skinFillXsome from "@/assets/products/mezzo/skin-fill-xsome-official.png";
+import maskXsomePdrn from "@/assets/products/mezzo/mask-xsome-pdrn-official.png";
+import eyesXsome from "@/assets/products/mezzo/eyes-xsome-official.png";
+import acneXsome from "@/assets/products/mezzo/acne-xsome-official.png";
+import trichologyXsome from "@/assets/products/mezzo/trichology-xsome-official.png";
+import lipoXsome from "@/assets/products/mezzo/lipo-xsome-official.png";
 import skinCoverFps50 from "@/assets/products/mezzo/skin-cover-fps50-new.png";
 import skinCoverColorFps50 from "@/assets/products/mezzo/skin-cover-color-fps50.jpg";
 import fluidControlFps55 from "@/assets/products/mezzo/fluid-control-fps55.jpg";
@@ -82,9 +82,12 @@ export interface MezzoProduct {
   brand: string;
   category: string;
   description?: string;
+  fullDescription?: string;
   price: string;
   image: string;
   isProfessional?: boolean;
+  activeIngredients?: string[];
+  applicationIndications?: string[];
 }
 
 // ============================================
@@ -93,53 +96,133 @@ export interface MezzoProduct {
 export const mezzoExossomasWithImages: MezzoProduct[] = [
   {
     id: 1401,
-    name: "Mella White Xsome | Sérum Multicorretivo Clareador",
+    name: "Mellan White Xsome | Sérum Multicorretivo Clareador",
     brand: "Mezzo",
     category: "exossomas",
     description: "Atua diretamente no clareamento da pele com tecnologia de Exossomas e PDRN. Uniformiza os diferentes tipos de manchas.",
+    fullDescription: "Mellan White XSOME é um sérum multicorretivo que atua diretamente no clareamento da pele, com mecanismo único e inteligente, uniformiza os diferentes tipos de manchas. Com exclusiva tecnologia regenerativa de Exossomas e PDRN, atua de forma direcionada no melasma, estimula a produção de colágeno e elastina, modula a inflamação, melhorando a textura e a aparência da pele e reduz a pigmentação.",
     price: "R$ 399,00",
     image: mellanWhiteXsome,
     isProfessional: true,
+    activeIngredients: [
+      "Exossomas",
+      "PDRN (Polinucleotídeo)",
+      "Complexo Clareador",
+    ],
+    applicationIndications: [
+      "Clareamento",
+      "Melasma",
+      "Manchas",
+      "Exclusivo para profissional",
+      "Tecnologia Exossomas",
+    ],
   },
   {
     id: 1402,
     name: "Skin Fill Xsome | Concentrado Preenchedor",
     brand: "Mezzo",
     category: "exossomas",
-    description: "Tecnologia Exossoma para modular produção de colágeno, otimizar hidratação e evitar manchas.",
+    description: "Bioestimulador com ação regenerativa e redensificante que atua no envelhecimento celular.",
+    fullDescription: "Skin Fill XSOME é um bioestimulador com tecnologia de exossomas obtida por fermentação microbiana, oferecendo sete pilares de benefícios. Proporciona efeito preenchedor, biomodulador e retarda o envelhecimento da pele, sinalizando o desenvolvimento de fibroblastos e estimulando a regeneração celular.",
     price: "R$ 323,00",
     image: skinFillXsome,
     isProfessional: true,
+    activeIngredients: [
+      "Exossomas",
+      "Ácido Hialurônico",
+      "5 Minerais",
+      "10 Fatores de Crescimento",
+      "10 Peptídeos",
+      "20 Aminoácidos",
+    ],
+    applicationIndications: [
+      "Anti-idade",
+      "Preenchimento",
+      "Bioestimulação",
+      "Hidratação profunda",
+      "Exclusivo para profissional",
+    ],
   },
   {
     id: 1404,
     name: "Mask Xsome PDRN | Tratamento Multi Regenerativo",
     brand: "Mezzo",
     category: "exossomas",
-    description: "Tecnologia Exossoma + PDRN. Ação Detox purificante, hidratação 12h, correção multi-intensiva anti-envelhecimento.",
+    description: "Cuidado multi regenerativo inspirado nas técnicas mais avançadas de cosmiatria estética.",
+    fullDescription: "Mask Xsome PDRN é um cuidado multi regenerativo inspirado nas técnicas mais avançadas de cosmiatria estética, ideal para rejuvenescimento intensivo da pele madura e desvitalizada. Com Exossomas e PDRN, promove estímulo à regeneração, redução da inflamação e melhora na hidratação. Enriquecida com Ácido Hialurônico, Silício, Minerais, Bel-even e Carvão ativado para ação Detox anti-poluição.",
     price: "R$ 199,00",
     image: maskXsomePdrn,
     isProfessional: true,
+    activeIngredients: [
+      "Exossomas",
+      "PDRN",
+      "Ácido Hialurônico",
+      "Silício",
+      "Minerais",
+      "Bel-even",
+      "Carvão Ativado",
+    ],
+    applicationIndications: [
+      "Rejuvenescimento",
+      "Regeneração",
+      "Detox",
+      "Anti-poluição",
+      "Máscara facial",
+    ],
   },
   {
     id: 1405,
     name: "Eyes Xsome | Concentrado Biomodulador PRO",
     brand: "Mezzo",
     category: "exossomas",
-    description: "Lifting de pálpebras, rugas e olheiras. Trata olheiras e rugas periorbitais. Elevação da pálpebra caída.",
+    description: "Creme multireparador projetado para revitalizar a área delicada dos olhos com tecnologia Exossoma + PDRN.",
+    fullDescription: "Eyes Xsome é um creme multireparador projetado para revitalizar a área delicada dos olhos. Sua fórmula avançada inclui tecnologia Exossoma + PDRN para regeneração celular, com efeitos anti-inflamatórios, anti-envelhecimento e clareadores. Promove lifting de pálpebras, redução de olheiras, ação antirrugas, reafirmante e rejuvenescedora.",
     price: "R$ 329,00",
     image: eyesXsome,
     isProfessional: true,
+    activeIngredients: [
+      "Exossomas",
+      "PDRN",
+      "Taurina Vegetal",
+      "Meiview™",
+      "Dermochlorella",
+      "Eye'fective™",
+      "Ácido Tranexâmico",
+      "Bel-Even",
+    ],
+    applicationIndications: [
+      "Área dos olhos",
+      "Olheiras",
+      "Lifting pálpebras",
+      "Rugas",
+      "Exclusivo para profissional",
+    ],
   },
   {
     id: 1407,
     name: "Acne Xsome | Therapy Anti Acne Sérum ON/OFF",
     brand: "Mezzo",
     category: "exossomas",
-    description: "Eficácia comprovada no tratamento da acne e regeneração da pele. Tratamento 3 em 1: Antiacne, Microbiota e Regeneração.",
+    description: "Eficácia comprovada no tratamento da acne e regeneração da pele. Tratamento 3 em 1.",
+    fullDescription: "Acne Xsome Therapy é um tratamento 3 em 1: Antiacne, Microbiota da pele e Regeneração. Desenvolvido para minimizar imperfeições e marcas de acne, atua nos quatro principais fatores: inflamação, hiperqueratinização, superprodução de sebo e proliferação bacteriana. Eficácia comprovada no tratamento da acne e regeneração da pele.",
     price: "R$ 414,00",
     image: acneXsome,
     isProfessional: false,
+    activeIngredients: [
+      "Dendriclear",
+      "Óleo de Girassol Ozonizado",
+      "Quora Noni",
+      "EPS SEAPUR",
+      "Nelupure",
+      "Niacinamida",
+    ],
+    applicationIndications: [
+      "Acne",
+      "Controle de oleosidade",
+      "Regeneração",
+      "Microbiota",
+      "Home Care",
+    ],
   },
   {
     id: 1408,
@@ -147,9 +230,19 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     brand: "Mezzo",
     category: "exossomas",
     description: "Sérum com tecnologia de exossomas adaptativa. Bio-hackeia o processo natural de reparação do tecido.",
+    fullDescription: "Sérum com tecnologia de exossomas adaptativa que bio-hackeia o processo natural de reparação do tecido. Promove regeneração celular e rejuvenescimento da pele de forma inovadora.",
     price: "R$ 112,00",
     image: exossomasSerum,
     isProfessional: false,
+    activeIngredients: [
+      "Exossomas",
+      "Complexo Regenerador",
+    ],
+    applicationIndications: [
+      "Regeneração",
+      "Anti-idade",
+      "Home Care",
+    ],
   },
   {
     id: 1409,
@@ -160,6 +253,15 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     price: "R$ 350,00",
     image: exosomeBioestimulador,
     isProfessional: true,
+    activeIngredients: [
+      "Exossomas Concentrados",
+      "Bioestimuladores",
+    ],
+    applicationIndications: [
+      "Bioestimulação",
+      "Tratamento intensivo",
+      "Exclusivo para profissional",
+    ],
   },
   {
     id: 1410,
@@ -170,6 +272,14 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     price: "R$ 280,00",
     image: exosomeRegenerativoPro,
     isProfessional: true,
+    activeIngredients: [
+      "Exossomas",
+      "Complexo Regenerativo",
+    ],
+    applicationIndications: [
+      "Regeneração tecidual",
+      "Exclusivo para profissional",
+    ],
   },
   {
     id: 1411,
@@ -180,6 +290,16 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     price: "R$ 226,00",
     image: skinFillXsomeFluido,
     isProfessional: false,
+    activeIngredients: [
+      "Exossomas",
+      "PDRN",
+      "Ácido Hialurônico",
+    ],
+    applicationIndications: [
+      "Bioestimulação",
+      "Hidratação",
+      "Home Care",
+    ],
   },
   {
     id: 1412,
@@ -190,6 +310,16 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     price: "R$ 195,00",
     image: eyesXsomeFluido,
     isProfessional: false,
+    activeIngredients: [
+      "Exossomas",
+      "PDRN",
+    ],
+    applicationIndications: [
+      "Área dos olhos",
+      "Olheiras",
+      "Bolsas",
+      "Home Care",
+    ],
   },
   {
     id: 1413,
@@ -200,6 +330,16 @@ export const mezzoExossomasWithImages: MezzoProduct[] = [
     price: "R$ 157,00",
     image: acneXsomeOnoff,
     isProfessional: false,
+    activeIngredients: [
+      "Óleo Ozonizado",
+      "Ativos Antimicrobianos",
+    ],
+    applicationIndications: [
+      "Acne",
+      "Oleosidade",
+      "Pré/Pós limpeza",
+      "Home Care",
+    ],
   },
 ];
 
