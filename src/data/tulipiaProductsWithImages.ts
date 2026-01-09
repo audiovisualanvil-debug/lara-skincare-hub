@@ -47,6 +47,7 @@ import blackSecretSolucaoPrePeelingProduto from "@/assets/products/tulipia/black
 import blackSecretPeelingFase1Produto from "@/assets/products/tulipia/black-secret-peeling-fase1-produto.jpg";
 import blackSecretClareadorProduto from "@/assets/products/tulipia/black-secret-clareador-produto.jpg";
 import blackSecretPeelingFase2Produto from "@/assets/products/tulipia/black-secret-peeling-fase2-produto.jpg";
+import blackSecretSaboneteGlicoHero from "@/assets/products/tulipia/black-secret-sabonete-glico-hero.jpg";
 import blackBiowhiteLocao from "@/assets/products/tulipia/black-biowhite-locao.jpg";
 import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
 import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
@@ -260,9 +261,25 @@ export const tulipiaBlackSecret: Product[] = [
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: false,
-    description: "Sabonete facial com ácido glicólico para renovação celular e preparo da pele",
+    description: "Sabonete rico em Ácido Glicólico que promove limpeza profunda, esfoliação química leve e segura, revitalização e uniformização da pele.",
+    fullDescription: "O sabonete glico-renovador Black Secret é um sabonete rico em Ácido Glicólico que promove limpeza profunda, esfoliação química leve e segura, revitalização e uniformização da pele, para uma pele visivelmente mais macia e luminosa já nas primeiras aplicações. Promove uma limpeza profunda da pele, desobstruindo os poros e eliminando os detritos celulares e poluição. Realiza um importante afinamento da capa córnea, potencializando os tratamentos estéticos faciais e corporais.",
     price: "R$ 180,00",
-    image: blackSecretSaboneteGlico,
+    image: blackSecretSaboneteGlicoHero,
+    gallery: [
+      blackSecretSaboneteGlico,
+      blackSecretSaboneteGlicoProduto,
+    ],
+    activeIngredients: [
+      "Ácido Glicólico 10%",
+      "Gluconolactona",
+      "Ácido Lactobiônico",
+      "Extrato de Pepino",
+      "Lactato de Mentila",
+      "Nano Acids",
+      "Ácido Cítrico",
+      "Ácido Láctico",
+      "Extrato de Juá",
+    ],
   },
   {
     id: 7013,
