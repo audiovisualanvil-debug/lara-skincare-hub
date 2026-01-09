@@ -29,6 +29,7 @@ export interface Product {
   fullDescription?: string;
   beforeAfterImages?: BeforeAfterImage[];
   protocolSteps?: ProtocolStep[];
+  applicationIndications?: string[];
 }
 
 interface ProductCardProps {
