@@ -56,6 +56,10 @@ import blackBiowhiteLocao from "@/assets/products/tulipia/black-biowhite-locao.j
 import biowhiteHero from "@/assets/products/tulipia/biowhite-hero.jpg";
 import biowhiteUso from "@/assets/products/tulipia/biowhite-uso.jpg";
 import biowhiteFrasco from "@/assets/products/tulipia/biowhite-frasco.jpg";
+// ProSkin Repair galeria
+import proskinSaboneteTextura from "@/assets/products/tulipia/proskin-sabonete-textura.jpg";
+import proskinSaboneteUso from "@/assets/products/tulipia/proskin-sabonete-uso.jpg";
+import proskinSaboneteHero from "@/assets/products/tulipia/proskin-sabonete-hero.jpg";
 import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
 import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
 import proskinCreme from "@/assets/products/tulipia/proskin-creme.jpg";
@@ -402,9 +406,26 @@ export const tulipiaProskinRepair: Product[] = [
     brand: "Tulipia",
     category: "barreira-cutanea",
     isProfessional: false,
-    description: "Sabonete suave para restauração da barreira cutânea. Ideal para peles sensibilizadas",
+    description: "Limpa suavemente sem agredir a barreira cutânea, preservando a hidratação natural da pele.",
+    fullDescription: "Sabonete restaurador que limpa suavemente sem agredir a barreira cutânea, preservando a hidratação natural da pele. Ideal para peles sensibilizadas, fortalece e repara a barreira cutânea, previne sinais de envelhecimento e acalma a pele intensamente.",
     price: "R$ 79,90",
-    image: proskinSabonete,
+    image: proskinSaboneteHero,
+    gallery: [
+      proskinSaboneteUso,
+      proskinSaboneteTextura,
+      proskinSabonete,
+    ],
+    activeIngredients: [
+      "Hydra H+",
+      "Ácido Hialurônico",
+      "Extrato de Lótus",
+      "NanoCurcuma™",
+      "Symbiocaps LA",
+      "Ecodermist",
+      "BioEcolia®",
+      "Oligossacarídeo Alfa-Glucan",
+      "BisaboLife™",
+    ],
   },
   {
     id: 7021,
