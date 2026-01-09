@@ -26,8 +26,8 @@ import {
   tulipiaCategories,
 } from "@/data/tulipiaProductsWithImages";
 
-// Import banner images for hero
-import sweetLipsCereja from "@/assets/banners/sweet-lips-cereja.jpg";
+// Import hero banner
+import tulipiaHero from "@/assets/banners/tulipia-hero-wide.jpg";
 
 const vitaminaCCount = tulipiaLifeC.length + tulipiaImmortaliteC.length;
 const areaOlhosCount = tulipiaCilsLashes.length;
@@ -65,7 +65,7 @@ const TulipiaPage = () => {
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
-              src={sweetLipsCereja}
+              src={tulipiaHero}
               alt="Linha Tulipia - Dermocosméticos Premium"
               className="w-full h-full object-cover"
             />

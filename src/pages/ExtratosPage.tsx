@@ -10,9 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 
-// Import hero/product images
-import nanoVitC from "@/assets/products/extratos/nano-vit-c-20.jpg";
-import serumVitC from "@/assets/products/extratos/serum-vit-c.jpg";
+// Import hero banner
+import extratosHero from "@/assets/banners/extratos-hero-wide.jpg";
 
 const categories = [
   { id: "all", label: "Todos", count: allExtratosWithImages.length },
@@ -41,7 +40,7 @@ const ExtratosPage = () => {
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
-              src={nanoVitC}
+              src={extratosHero}
               alt="Extratos da Terra - Natureza & Ciência"
               className="w-full h-full object-cover"
             />

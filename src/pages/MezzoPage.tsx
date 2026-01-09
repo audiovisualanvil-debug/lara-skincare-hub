@@ -10,10 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 
-// Import banner and product images for hero
-import mezzoHero from "@/assets/banners/mezzo-hero.png";
-import mellanWhiteXsome from "@/assets/products/mezzo/mellan-white-xsome-new.png";
-import maskXsomePdrn from "@/assets/products/mezzo/mask-xsome-pdrn-new.png";
+// Import banner for hero
+import mezzoHero from "@/assets/banners/mezzo-hero-wide.jpg";
 
 // Get unique categories from products
 const getCategories = () => {
