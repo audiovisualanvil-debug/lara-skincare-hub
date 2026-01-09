@@ -10,9 +10,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { allSmartGRWithImages } from "@/data/smartGRProducts";
 
-// Import hero/product images
-import smartPdrnSkinPro from "@/assets/products/smartgr/smart-pdrn-skin-pro.jpg";
-import smartExoSkinPro from "@/assets/products/smartgr/smart-exo-skin-pro.jpg";
+// Import hero banner
+import smartgrHero from "@/assets/banners/smartgr-hero-wide.jpg";
 
 const categories = [
   { id: "all", label: "Todos", count: allSmartGRWithImages.length },
@@ -39,7 +38,7 @@ const SmartGRPage = () => {
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
-              src={smartPdrnSkinPro}
+              src={smartgrHero}
               alt="Smart GR - Equipamentos Profissionais"
               className="w-full h-full object-cover"
             />
