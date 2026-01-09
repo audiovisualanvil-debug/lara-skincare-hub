@@ -13,7 +13,7 @@ import fluidAntiacneFps70 from "@/assets/products/mezzo/fluid-antiacne-fps70.jpg
 import maximaProtecaoFps99 from "@/assets/products/mezzo/maxima-protecao-fps99.jpg";
 import whiteningFps80 from "@/assets/products/mezzo/whitening-fps80-new.png";
 import creanSecFps40 from "@/assets/products/mezzo/crean-sec-fps40.jpg";
-import shieldC12Fps80 from "@/assets/products/mezzo/shield-c12-fps80.jpg";
+import shieldC12Fps80 from "@/assets/products/mezzo/shield-c12-fps80-new.png";
 import bubblesGlassFps55 from "@/assets/products/mezzo/bubbles-glass-fps55.jpg";
 import lipPreenchedor from "@/assets/products/mezzo/lip-preenchedor.jpg";
 import lipGlow from "@/assets/products/mezzo/lip-glow-new.png";
@@ -52,7 +52,7 @@ import locaoSecativa from "@/assets/products/mezzo/locao-secativa-new.png";
 import acnediolNoite from "@/assets/products/mezzo/acnediol-noite-new.png";
 import cremeDeslizanteDetox from "@/assets/products/mezzo/creme-deslizante-detox.jpg";
 import mousseTermogenico from "@/assets/products/mezzo/mousse-termogenico.jpg";
-import celluIntense from "@/assets/products/mezzo/cellu-intense.jpg";
+import celluIntense from "@/assets/products/mezzo/cellu-intense-new.png";
 import maternity from "@/assets/products/mezzo/maternity.jpg";
 import lipoIntense from "@/assets/products/mezzo/lipo-intense.jpg";
 import gelTermogenico from "@/assets/products/mezzo/gel-termogenico.jpg";
