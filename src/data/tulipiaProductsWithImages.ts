@@ -137,9 +137,10 @@ import lifeCMonodoseNew from "@/assets/products/tulipia/life-c-monodose-new.png"
 import sweetLipsEsfolianteCereja from "@/assets/products/tulipia/sweet-lips-esfoliante-cereja.png";
 import sweetLipsGlossCereja from "@/assets/products/tulipia/sweet-lips-gloss-cereja.png";
 
-// Stellar Mask - novas imagens
-import stellarMaskEnzimaticaNew from "@/assets/products/tulipia/stellar-mask-enzimatica-new.png";
-import stellarMaskRejuvenescedoraNew from "@/assets/products/tulipia/stellar-mask-rejuvenescedora-new.png";
+// Stellar Mask - imagens oficiais do site
+import stellarMaskEnzimaticaOfficial from "@/assets/products/tulipia/stellar-mask-enzimatica.png";
+import stellarMaskMatificanteOfficial from "@/assets/products/tulipia/stellar-mask-matificante.png";
+import stellarMaskHidronutritivaOfficial from "@/assets/products/tulipia/stellar-mask-hidronutritiva.png";
 
 // Máscaras e clareadores - novas imagens
 import chokolaMascaraNew from "@/assets/products/tulipia/chokola-mascara-new.png";
@@ -785,27 +786,42 @@ export const tulipiaMascaras: Product[] = [
     name: "Stellar Mask Enzimática 100g",
     brand: "Tulipia",
     category: "mascara",
-    isProfessional: false,
-    description: "Máscara com enzimas naturais para esfoliação suave e renovação celular",
+    isProfessional: true,
+    description: "Uma fusão cósmica de benefícios que transformam a pele. Esfoliação eficaz com enzimas naturais.",
+    fullDescription: "A Máscara Enzimática foi desenvolvida para o uso profissional estético. Com a combinação de ativos naturais, essa máscara proporciona uma esfoliação eficaz, capaz de remover células mortas e preparar a pele para a absorção otimizada de ativos.",
     price: "R$ 185,57",
-    image: stellarMaskEnzimaticaImg,
+    image: stellarMaskEnzimaticaOfficial,
+    activeIngredients: [
+      "Nano Ozônio Corporal",
+      "Ácido Poliglutâmico",
+      "Extrato de Uva",
+      "Extrato de Bromelina (Abacaxi)",
+      "Extrato de Papaína (Mamão)",
+    ],
   },
   {
     id: 7045,
     name: "Stellar Mask Matificante 100g",
     brand: "Tulipia",
     category: "mascara",
-    isProfessional: false,
-    description: "Máscara matificante para controle de oleosidade. Reduz brilho excessivo",
+    isProfessional: true,
+    description: "Encontre a perfeita harmonia para uma pele suave e uniforme. Controle de oleosidade com ativo probiótico.",
+    fullDescription: "Desenvolvida especialmente para regular a produção de oleosidade com ativo probiótico, mantendo a pele equilibrada e matificada, revelando uma aparência fresca e sem brilho excessivo.",
     price: "R$ 185,57",
-    image: stellarMaskMatificanteImg,
+    image: stellarMaskMatificanteOfficial,
+    activeIngredients: [
+      "Extrato de Chá Verde",
+      "PCA de Zinco",
+      "Acne Less",
+      "Symbiocaps LA",
+    ],
   },
   {
     id: 7046,
     name: "Stellar Mask Rejuvenescedora 100g",
     brand: "Tulipia",
     category: "mascara",
-    isProfessional: false,
+    isProfessional: true,
     description: "Máscara anti-idade com peptídeos para firmeza e redução de rugas",
     price: "R$ 185,57",
     image: stellarMaskRejuvenescedoraImg,
@@ -815,10 +831,19 @@ export const tulipiaMascaras: Product[] = [
     name: "Stellar Mask Hidronutritiva 100g",
     brand: "Tulipia",
     category: "mascara",
-    isProfessional: false,
-    description: "Máscara nutritiva para hidratação profunda e recuperação da pele",
+    isProfessional: true,
+    description: "Mergulhe na hidratação profunda com ação prebiótica. Textura gélida que acalma e revitaliza a pele.",
+    fullDescription: "A Máscara Hidronutritiva é ideal para o uso profissional no pré e pós procedimento. Com experiência sensorial de uma textura gélida, ela acalma e garante uma pele revitalizada e equilibrada.",
     price: "R$ 185,57",
-    image: stellarMaskHidronutritivaImg,
+    image: stellarMaskHidronutritivaOfficial,
+    activeIngredients: [
+      "D-Pantenol",
+      "Extrato de Camomila",
+      "Nano Caviar",
+      "Moistshield™ HA",
+      "Actibiome",
+      "Pentavitin®",
+    ],
   },
   {
     id: 7048,
@@ -2011,7 +2036,7 @@ export const tulipiaKits: Product[] = [
     description: "Kit com 4 máscaras Stellar: Enzimática, Matificante, Rejuvenescedora e Hidronutritiva.",
     fullDescription: "Kit completo com as 4 máscaras da linha Stellar: Enzimática para renovação, Matificante para controle de oleosidade, Rejuvenescedora para anti-idade e Hidronutritiva para hidratação profunda.",
     price: "R$ 649,00",
-    image: stellarMaskEnzimaticaNew,
+    image: stellarMaskEnzimaticaOfficial,
   },
   {
     id: 7401,
