@@ -126,6 +126,13 @@ import citrataLocaoHero from "@/assets/products/tulipia/citrata-locao-hero.png";
 import hidrasolFps30Hero from "@/assets/products/tulipia/hidrasol-fps30-hero.png";
 import hidrasolFps60Hero from "@/assets/products/tulipia/hidrasol-fps60-hero.png";
 
+// Life C+ - novas imagens do site oficial
+import lifeCMascaraNew from "@/assets/products/tulipia/life-c-mascara-new.png";
+import lifeCsaboneteMouseNew from "@/assets/products/tulipia/life-c-sabonete-mousse-new.png";
+import lifeCSerum20New from "@/assets/products/tulipia/life-c-serum-20-new.png";
+import lifeCTonicoNew from "@/assets/products/tulipia/life-c-tonico-new.png";
+import lifeCMonodoseNew from "@/assets/products/tulipia/life-c-monodose-new.png";
+
 // Placeholder para produtos sem imagem
 const placeholder = "/placeholder.svg";
 
@@ -920,19 +927,61 @@ export const tulipiaLifeC: Product[] = [
     brand: "Tulipia",
     category: "vitamina-c",
     isProfessional: false,
-    description: "Sabonete mousse com vitamina C nano encapsulada. Limpa suavemente enquanto ilumina",
+    description: "Sabonete mousse com vitamina C nano encapsulada, Biofruits e ácido ferúlico. Aplicador com microcerdas para limpeza profunda.",
+    fullDescription: "Sabonete mousse inovador com vitamina C nano encapsulada para limpeza e iluminação simultâneas. Conta com Biofruits para renovação celular suave e ácido ferúlico para potencializar a ação antioxidante. O aplicador com microcerdas promove limpeza profunda sem agredir a pele.",
     price: "R$ 119,00",
-    image: lifeCsaboneteMouseImg,
+    image: lifeCsaboneteMouseNew,
+    activeIngredients: [
+      "Vitamina C Nano",
+      "Biofruits",
+      "Ácido Ferúlico",
+      "D-Pantenol",
+    ],
   },
   {
     id: 7111,
     name: "Life C+ Nano Máscara Iluminadora 150g",
     brand: "Tulipia",
     category: "vitamina-c",
-    isProfessional: false,
-    description: "Máscara facial com vitamina C para iluminação e uniformização do tom",
+    isProfessional: true,
+    description: "Máscara com tripla ação: conforto imediato, poder ultra clareador e alta hidratação com NanoTech-C e Resveratrol.",
+    fullDescription: "Máscara facial com tripla ação: conforto e maciez imediatos graças à manteiga de karité e óleo de amêndoas; poder ultra clareador e rejuvenescedor com vitamina C, ácido ferúlico e phloretin; e alta hidratação/nutrição com ceramidas e arginina. Restaura o brilho e a saúde da pele enquanto combate os radicais livres.",
     price: "R$ 180,00",
-    image: lifeCMascaraImg,
+    image: lifeCMascaraNew,
+    activeIngredients: [
+      "Ácido Ferúlico",
+      "D-Pantenol",
+      "Vitamina E",
+      "Phloretin",
+      "Manteiga de Karité",
+      "NanoTech-C",
+      "Palmitato de Ascorbila",
+      "Resveratrol",
+      "Óleo de Amêndoas Doce",
+      "Nano Acqua",
+      "Ceramidas",
+      "Arginina",
+      "PCA-Na",
+      "Inulina",
+      "Glicina",
+    ],
+    protocolSteps: [
+      {
+        step: 1,
+        title: "Aplicação",
+        description: "Aplique uma camada uniforme sobre toda a face limpa.",
+      },
+      {
+        step: 2,
+        title: "Tempo de Ação",
+        description: "Deixe agir por 20 minutos.",
+      },
+      {
+        step: 3,
+        title: "Remoção",
+        description: "Remova com algodão umedecido em água e seque delicadamente.",
+      },
+    ],
   },
   {
     id: 7112,
@@ -940,9 +989,14 @@ export const tulipiaLifeC: Product[] = [
     brand: "Tulipia",
     category: "vitamina-c",
     isProfessional: true,
-    description: "Peeling físico com vitamina C para renovação celular e luminosidade",
+    description: "Peeling físico profissional com vitamina C para renovação celular intensa e luminosidade.",
     price: "R$ 170,00",
     image: lifeCPeelingImg,
+    activeIngredients: [
+      "Vitamina C",
+      "Microesferas Esfoliantes",
+      "Ácido Ferúlico",
+    ],
   },
   {
     id: 7113,
@@ -950,9 +1004,17 @@ export const tulipiaLifeC: Product[] = [
     brand: "Tulipia",
     category: "vitamina-c",
     isProfessional: false,
-    description: "Sérum clareador com 20% de vitamina C estabilizada. Potente ação antioxidante",
+    description: "Sérum com alta concentração de vitamina C 20%, Hyaxel e Alpha-Arbutina para clareamento intensivo.",
+    fullDescription: "Sérum clareador de alta potência com 20% de vitamina C estabilizada. Formulado com Hyaxel para hidratação profunda e Alpha-Arbutina para uniformização do tom. Proporciona ação antioxidante intensa, clareamento de manchas e prevenção do envelhecimento precoce.",
     price: "R$ 212,86",
-    image: lifeCSerum20Img,
+    image: lifeCSerum20New,
+    activeIngredients: [
+      "Vitamina C 20%",
+      "Hyaxel",
+      "Alpha-Arbutina",
+      "Ácido Ferúlico",
+      "Vitamina E",
+    ],
   },
   {
     id: 7114,
@@ -960,9 +1022,16 @@ export const tulipiaLifeC: Product[] = [
     brand: "Tulipia",
     category: "vitamina-c",
     isProfessional: true,
-    description: "Ampolas de vitamina C pura para uso profissional. Máxima potência e eficácia",
+    description: "Ampolas profissionais com 10% de vitamina C e Nano Hydrolift para microagulhamento ou iontoforese.",
+    fullDescription: "Blend profissional concentrado com 10% de vitamina C estabilizada e Nano Hydrolift. Ideal para protocolos de microagulhamento, iontoforese ou eletroporação. Promove clareamento intensivo, estímulo de colágeno e rejuvenescimento visível.",
     price: "R$ 257,00",
-    image: lifeCMonodoseImg,
+    image: lifeCMonodoseNew,
+    activeIngredients: [
+      "Vitamina C 10%",
+      "Nano Hydrolift",
+      "Ácido Hialurônico",
+      "Peptídeos",
+    ],
   },
   {
     id: 7115,
@@ -970,9 +1039,14 @@ export const tulipiaLifeC: Product[] = [
     brand: "Tulipia",
     category: "vitamina-c",
     isProfessional: false,
-    description: "Tônico facial com vitamina C para preparação e potencialização de tratamentos",
+    description: "Tônico facial com vitamina C para preparação e potencialização de tratamentos clareadores.",
     price: "R$ 89,00",
-    image: lifeCTonicoImg,
+    image: lifeCTonicoNew,
+    activeIngredients: [
+      "Vitamina C Nano",
+      "Ácido Hialurônico",
+      "Alantoína",
+    ],
   },
 ];
 
