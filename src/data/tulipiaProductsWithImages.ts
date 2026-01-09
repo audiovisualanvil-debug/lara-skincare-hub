@@ -36,6 +36,17 @@ import blackSecretSaboneteGlico from "@/assets/products/tulipia/black-secret-sab
 import blackSecretSolucaoPrePeeling from "@/assets/products/tulipia/black-secret-solucao-pre-peeling.jpg";
 import blackSecretClareador from "@/assets/products/tulipia/black-secret-clareador.jpg";
 import blackSecretMicroSpikes from "@/assets/products/tulipia/black-secret-micro-spikes.jpg";
+// Galeria Black Secret Peeling 2 Fases
+import blackSecret2FasesHero from "@/assets/products/tulipia/black-secret-2fases-hero.jpg";
+import blackSecretAntes1 from "@/assets/products/tulipia/black-secret-antes-1.jpg";
+import blackSecretAntes2 from "@/assets/products/tulipia/black-secret-antes-2.jpg";
+import blackSecretDepois1 from "@/assets/products/tulipia/black-secret-depois-1.jpg";
+import blackSecretDepois2 from "@/assets/products/tulipia/black-secret-depois-2.jpg";
+import blackSecretSaboneteGlicoProduto from "@/assets/products/tulipia/black-secret-sabonete-glico-produto.jpg";
+import blackSecretSolucaoPrePeelingProduto from "@/assets/products/tulipia/black-secret-solucao-pre-peeling-produto.jpg";
+import blackSecretPeelingFase1Produto from "@/assets/products/tulipia/black-secret-peeling-fase1-produto.jpg";
+import blackSecretClareadorProduto from "@/assets/products/tulipia/black-secret-clareador-produto.jpg";
+import blackSecretPeelingFase2Produto from "@/assets/products/tulipia/black-secret-peeling-fase2-produto.jpg";
 import blackBiowhiteLocao from "@/assets/products/tulipia/black-biowhite-locao.jpg";
 import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
 import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
@@ -182,9 +193,66 @@ export const tulipiaBlackSecret: Product[] = [
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: true,
-    description: "Peeling profissional de duas fases para renovação celular intensa e clareamento progressivo",
+    description: "O segredo de profissional para profissional. A nova geração dos peelings profissionais com esfoliação química, física e enzimática.",
+    fullDescription: "O Black Secret Peeling Facial é a nova geração dos peelings profissionais. Com tecnologia e ativos consagrados pela ciência dermocosmética, sua fórmula inovadora traz o equilíbrio entre segurança e performance, unindo a esfoliação química, física e enzimática a um blend clareador de alta potência. Clareia com precisão, além de atuar sobre a textura irregular e sinais de envelhecimento, inclusive linhas finas e marcas. A descamação controlada garante segurança e eficácia, promovendo uma pele mais luminosa, uniforme, sem marcas e rejuvenescida em poucas sessões.",
     price: "R$ 714,14",
-    image: blackSecretPeeling2Fases,
+    image: blackSecret2FasesHero,
+    gallery: [
+      blackSecretPeeling2Fases,
+      blackSecretAntes1,
+      blackSecretDepois1,
+      blackSecretAntes2,
+      blackSecretDepois2,
+    ],
+    activeIngredients: [
+      "Epicuticle®",
+      "Papaína",
+      "Bromelina",
+      "Ácido Glicólico",
+      "Ácido Salicílico",
+      "Cristais de Quartzo",
+      "Retinol",
+      "Brightenyl®",
+      "Ácido Diglicosil Gálico",
+      "Cybright®",
+      "Ácido Kójico",
+    ],
+    beforeAfterImages: [
+      { before: blackSecretAntes1, after: blackSecretDepois1 },
+      { before: blackSecretAntes2, after: blackSecretDepois2 },
+    ],
+    protocolSteps: [
+      {
+        step: 1,
+        title: "Black Secret Sabonete Glico-Renovador",
+        description: "Aplique o produto na pele seca. Em seguida, massageie de 2 a 3 minutos. Remova com algodão umedecido em água.",
+        image: blackSecretSaboneteGlicoProduto,
+      },
+      {
+        step: 2,
+        title: "Black Secret Solução Pré-Peeling Desengordurante",
+        description: "Umedeça o algodão com o produto e aplique na face. Aguarde até a completa absorção e não remova. Para intensificar os resultados, o produto pode ser aplicado em duas camadas.",
+        image: blackSecretSolucaoPrePeelingProduto,
+      },
+      {
+        step: 3,
+        title: "Black Secret Peeling Facial Fase 1",
+        description: "Aplique a Fase 1 em toda a área, dividindo-a por quadrantes, e realize movimentos circulares até a completa absorção do produto. Deixe agir por 10 minutos e, em seguida, remova o excesso do filme formado suavemente com algodão umedecido em água.",
+        image: blackSecretPeelingFase1Produto,
+      },
+      {
+        step: 4,
+        title: "Black Secret Clareador Concentrado",
+        description: "Aplique o produto na face seca e aguarde até a completa absorção. Não remover.",
+        image: blackSecretClareadorProduto,
+      },
+      {
+        step: 5,
+        title: "Black Secret Peeling Fase 2",
+        description: "Com a área completamente seca, aplique uma camada da Fase 2 nas regiões desejadas. Deixe agir de 6 a 8 horas, respeitando a tolerância da pele.",
+        image: blackSecretPeelingFase2Produto,
+      },
+    ],
   },
   {
     id: 7012,
