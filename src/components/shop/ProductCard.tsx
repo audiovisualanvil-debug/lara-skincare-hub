@@ -11,6 +11,10 @@ export interface Product {
   description: string;
   image?: string;
   price?: string;
+  gallery?: string[];
+  video?: string;
+  activeIngredients?: string[];
+  fullDescription?: string;
 }
 
 interface ProductCardProps {

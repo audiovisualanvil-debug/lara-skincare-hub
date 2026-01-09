@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
-import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2, ShoppingCart, Scale } from "lucide-react";
-import { useState, useMemo, useEffect } from "react";
+import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2, ShoppingCart, Scale, Play, Pause } from "lucide-react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductCardNew from "@/components/shop/ProductCardNew";
@@ -115,6 +115,9 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [quantity, setQuantity] = useState(1);
   const [selectedImage, setSelectedImage] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { addItem } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { recentProducts, addToRecentlyViewed, getRecentlyViewed } = useRecentlyViewed();
@@ -124,6 +127,19 @@ const ProductDetail = () => {
     const productId = parseInt(id || "0");
     return allProducts.find(p => p.id === productId);
   }, [id]);
+
+  // Build gallery array: main image + gallery images
+  const allImages = useMemo(() => {
+    if (!product) return [];
+    const gallery = (product as any).gallery as string[] | undefined;
+    return [product.image, ...(gallery || [])].filter(Boolean) as string[];
+  }, [product]);
+
+  // Get product video if available
+  const productVideo = useMemo(() => {
+    if (!product) return null;
+    return (product as any).video as string | undefined;
+  }, [product]);
 
   // Get related products from the same brand
   const relatedProducts = useMemo(() => {
@@ -202,31 +218,80 @@ const ProductDetail = () => {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
             {/* Left - Product Images */}
             <div className="space-y-4">
-              {/* Main Image */}
-              <div className="aspect-square bg-cream border border-detail/30 flex items-center justify-center overflow-hidden rounded-lg">
-                <img 
-                  src={product.image} 
-                  alt={product.name}
-                  className="w-full h-full object-contain p-4"
-                />
+              {/* Main Image or Video */}
+              <div className="aspect-square bg-cream border border-detail/30 flex items-center justify-center overflow-hidden rounded-lg relative">
+                {showVideo && productVideo ? (
+                  <>
+                    <video 
+                      ref={videoRef}
+                      src={productVideo}
+                      className="w-full h-full object-cover"
+                      loop
+                      playsInline
+                      muted
+                      autoPlay
+                      onPlay={() => setIsVideoPlaying(true)}
+                      onPause={() => setIsVideoPlaying(false)}
+                    />
+                    <button
+                      onClick={() => {
+                        if (videoRef.current) {
+                          if (isVideoPlaying) {
+                            videoRef.current.pause();
+                          } else {
+                            videoRef.current.play();
+                          }
+                        }
+                      }}
+                      className="absolute bottom-4 right-4 w-12 h-12 bg-black/60 hover:bg-black/80 text-white rounded-full flex items-center justify-center transition-colors"
+                    >
+                      {isVideoPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
+                    </button>
+                  </>
+                ) : (
+                  <img 
+                    src={allImages[selectedImage] || product.image} 
+                    alt={product.name}
+                    className="w-full h-full object-contain p-4"
+                  />
+                )}
               </div>
               
-              {/* Thumbnail - just the main image for now */}
-              <div className="flex gap-3">
-                <button
-                  onClick={() => setSelectedImage(0)}
-                  className={`w-20 h-20 bg-cream border flex items-center justify-center transition-all overflow-hidden rounded ${
-                    selectedImage === 0 
-                      ? "border-primary ring-2 ring-primary/20" 
-                      : "border-detail/30 hover:border-primary/50"
-                  }`}
-                >
-                  <img 
-                    src={product.image} 
-                    alt={product.name}
-                    className="w-full h-full object-contain p-1"
-                  />
-                </button>
+              {/* Thumbnails */}
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {/* All images from gallery */}
+                {allImages.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => { setSelectedImage(idx); setShowVideo(false); }}
+                    className={`w-20 h-20 shrink-0 bg-cream border flex items-center justify-center transition-all overflow-hidden rounded ${
+                      selectedImage === idx && !showVideo
+                        ? "border-primary ring-2 ring-primary/20" 
+                        : "border-detail/30 hover:border-primary/50"
+                    }`}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${product.name} - imagem ${idx + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+
+                {/* Video thumbnail */}
+                {productVideo && (
+                  <button
+                    onClick={() => setShowVideo(true)}
+                    className={`w-20 h-20 shrink-0 bg-black border flex items-center justify-center transition-all overflow-hidden rounded relative ${
+                      showVideo
+                        ? "border-primary ring-2 ring-primary/20" 
+                        : "border-detail/30 hover:border-primary/50"
+                    }`}
+                  >
+                    <Play className="w-8 h-8 text-white" />
+                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px] text-white font-medium">Vídeo</span>
+                  </button>
+                )}
               </div>
             </div>
 
