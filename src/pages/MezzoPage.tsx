@@ -10,8 +10,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 
-// Import a banner image
-import resilienceSerum from "@/assets/banners/resilience-serum-hero.jpg";
+// Import banner and product images for hero
+import mezzoHero from "@/assets/banners/mezzo-hero.png";
+import mellanWhiteXsome from "@/assets/products/mezzo/mellan-white-xsome-new.png";
+import maskXsomePdrn from "@/assets/products/mezzo/mask-xsome-pdrn-new.png";
 
 // Get unique categories from products
 const getCategories = () => {
@@ -50,7 +52,7 @@ const MezzoPage = () => {
           {/* Background Image */}
           <div className="absolute inset-0">
             <img
-              src={resilienceSerum}
+              src={mezzoHero}
               alt="Linha Mezzo - Alta Performance"
               className="w-full h-full object-cover"
             />
