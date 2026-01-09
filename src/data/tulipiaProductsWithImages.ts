@@ -160,6 +160,27 @@ import moovyCremeOzonizado from "@/assets/products/tulipia/moovy-creme-ozonizado
 // Capilar - novas imagens
 import tricoGeneticistTonico from "@/assets/products/tulipia/trico-geneticist-tonico.png";
 
+// Floraty - novas imagens
+import floratyEmolienteHero from "@/assets/products/tulipia/floraty-emoliente-hero.png";
+import floratyEsfolianteHero from "@/assets/products/tulipia/floraty-esfoliante-hero.png";
+import floratyLocaoHero from "@/assets/products/tulipia/floraty-locao-hero.png";
+
+// Calmskin - nova imagem
+import calmskinPomadaHero from "@/assets/products/tulipia/calmskin-pomada-hero.png";
+
+// Marezi - loção
+import mareziLocaoHero from "@/assets/products/tulipia/marezi-locao-hero.png";
+
+// Corpus e Elegance Body - novas imagens
+import corpusArgilaHero from "@/assets/products/tulipia/corpus-argila-hero.png";
+import eleganceSprayHero from "@/assets/products/tulipia/elegance-spray-hero.png";
+
+// Ultimate Estetic - solução ultraemoliente
+import ultimateUltraemolienteHero from "@/assets/products/tulipia/ultimate-ultraemoliente-hero.png";
+
+// Kits - nova imagem
+import kitSweetLipsHero from "@/assets/products/tulipia/kit-sweet-lips-hero.png";
+
 // Placeholder para produtos sem imagem
 const placeholder = "/placeholder.svg";
 
@@ -1318,13 +1339,19 @@ export const tulipiaCilsLashes: Product[] = [
 export const tulipiaCorporalPro: Product[] = [
   {
     id: 7170,
-    name: "Corpus Máscara de Argila Amarela e Colágeno 1kg",
+    name: "Corpus Máscara Corporal Poliativa 1kg",
     brand: "Tulipia",
     category: "corporal",
     isProfessional: true,
-    description: "Máscara corporal de argila amarela com colágeno. Para firmeza e nutrição",
+    description: "Máscara corporal de argila amarela com colágeno para firmeza, nutrição e tratamentos redutores.",
+    fullDescription: "Máscara corporal profissional poliativa com argila amarela e colágeno. Promove firmeza, nutrição intensa e potencializa tratamentos redutores e anticelulite. Ideal para envolvimentos corporais e protocolos de cabine.",
     price: "R$ 199,00",
-    image: placeholder,
+    image: corpusArgilaHero,
+    activeIngredients: [
+      "Argila Amarela",
+      "Colágeno",
+      "Ativos Redutores",
+    ],
   },
   {
     id: 7171,
@@ -1332,9 +1359,15 @@ export const tulipiaCorporalPro: Product[] = [
     brand: "Tulipia",
     category: "corporal",
     isProfessional: true,
-    description: "Spray lipotérmico multifuncional. Aquece, tonifica e potencializa tratamentos",
+    description: "Spray lipotérmico 5 em 1: aquece, tonifica, ativa circulação, reduz medidas e potencializa tratamentos corporais.",
+    fullDescription: "Spray lipotérmico profissional 5 em 1 com ação térmica que aquece a região, ativa a microcirculação, tonifica os tecidos, auxilia na redução de medidas e potencializa a absorção de ativos em tratamentos corporais.",
     price: "R$ 212,86",
-    image: placeholder,
+    image: eleganceSprayHero,
+    activeIngredients: [
+      "Ativos Lipotérmicos",
+      "Cafeína",
+      "Mentol",
+    ],
   },
   {
     id: 7172,
@@ -1342,9 +1375,17 @@ export const tulipiaCorporalPro: Product[] = [
     brand: "Tulipia",
     category: "corporal",
     isProfessional: true,
-    description: "Esfoliante corporal dual-action para renovação e preparo da pele",
+    description: "Esfoliante 3 em 1: ação mecânica, química (10% Ácido Glicólico) e gomagem para renovação completa.",
+    fullDescription: "Gel esfoliante dermodinâmico multiação para preparação perfeita de diversos protocolos. Combina esfoliação mecânica com cristais de bambu e quartzo, esfoliação química com 10% de Ácido Glicólico e ação gomagem com cera de carnaúba.",
     price: "R$ 212,86",
-    image: placeholder,
+    image: eleganceSprayHero,
+    activeIngredients: [
+      "Ácido Glicólico 10%",
+      "Ácido Hialurônico",
+      "Cristais de Bambu",
+      "Cera de Carnaúba",
+      "Cristais de Quartzo",
+    ],
   },
 ];
 
@@ -1359,9 +1400,15 @@ export const tulipiaFloraty: Product[] = [
     brand: "Tulipia",
     category: "limpeza-pele",
     isProfessional: true,
-    description: "Loção profissional para amolecimento de cravos. Facilita a extração",
+    description: "Loção profissional para amolecimento de cravos, facilitando a extração sem agredir a pele.",
+    fullDescription: "Loção profissional desenvolvida para amolecimento eficaz de cravos e comedões. Facilita a extração durante procedimentos de limpeza de pele, sem irritar ou agredir os tecidos. Fórmula exclusiva para uso profissional.",
     price: "R$ 141,43",
-    image: placeholder,
+    image: floratyLocaoHero,
+    activeIngredients: [
+      "AMP Ultra PC 2000",
+      "Óleo de Gergelim",
+      "Óleo de Semente de Uva",
+    ],
   },
   {
     id: 7181,
@@ -1369,9 +1416,14 @@ export const tulipiaFloraty: Product[] = [
     brand: "Tulipia",
     category: "limpeza-pele",
     isProfessional: true,
-    description: "Creme esfoliante com partículas de apricot. Renovação suave e eficaz",
+    description: "Creme esfoliante mecânico com partículas de damasco para renovação celular suave.",
+    fullDescription: "Creme esfoliante profissional com micropartículas de semente de damasco (apricot) para esfoliação mecânica suave e eficaz. Remove células mortas, prepara a pele para tratamentos e deixa a superfície macia e renovada.",
     price: "R$ 141,43",
-    image: placeholder,
+    image: floratyEsfolianteHero,
+    activeIngredients: [
+      "Sementes de Damasco",
+      "Emolientes",
+    ],
   },
   {
     id: 7182,
@@ -1379,9 +1431,15 @@ export const tulipiaFloraty: Product[] = [
     brand: "Tulipia",
     category: "limpeza-pele",
     isProfessional: true,
-    description: "Creme emoliente para preparo da pele antes da extração de cravos",
+    description: "Creme emoliente sem trietanolamina para preparo perfeito da pele antes da extração.",
+    fullDescription: "Creme emoliente profissional formulado sem trietanolamina para amolecimento de cravos sem irritação ou coceira. Contém AMP Ultra PC 2000, um emoliente tão eficaz quanto a trietanolamina, mas sem efeitos indesejáveis.",
     price: "R$ 141,43",
-    image: placeholder,
+    image: floratyEmolienteHero,
+    activeIngredients: [
+      "AMP Ultra PC 2000",
+      "Óleo de Gergelim",
+      "Óleo de Semente de Uva",
+    ],
   },
 ];
 
@@ -1780,13 +1838,19 @@ export const tulipiaTricoGeneticist: Product[] = [
   },
   {
     id: 7251,
-    name: "Trico Geneticist Shampoo Esfoliante 250ml",
+    name: "Trico Geneticist Nano Shampoo Esfoliante 250ml",
     brand: "Tulipia",
     category: "capilar",
     isProfessional: false,
-    description: "Shampoo esfoliante para limpeza profunda do couro cabeludo",
+    description: "Shampoo esfoliante com Ácido Salicílico, cristais de quartzo e sementes de damasco para limpeza profunda.",
+    fullDescription: "Shampoo esfoliante que promove peeling do couro cabeludo com Ácido Salicílico, cristais de quartzo e sementes de damasco, removendo oleosidade e desobstruindo folículos. Enriquecido com extratos vegetais e células-tronco de maçã suíça.",
     price: "R$ 141,43",
-    image: placeholder,
+    image: tricoGeneticistTonico,
+    activeIngredients: [
+      "Ácido Salicílico",
+      "Cristais de Quartzo",
+      "Células-Tronco de Maçã Suíça",
+    ],
   },
   {
     id: 7252,
@@ -1794,9 +1858,9 @@ export const tulipiaTricoGeneticist: Product[] = [
     brand: "Tulipia",
     category: "capilar",
     isProfessional: false,
-    description: "Shampoo revitalizante para cabelos fracos e danificados",
+    description: "Shampoo revitalizante para cabelos fracos e danificados com ativos fortalecedores.",
     price: "R$ 129,00",
-    image: placeholder,
+    image: tricoGeneticistTonico,
   },
   {
     id: 7253,
@@ -1804,9 +1868,14 @@ export const tulipiaTricoGeneticist: Product[] = [
     brand: "Tulipia",
     category: "capilar",
     isProfessional: true,
-    description: "Ampolas de plasma capilar para tratamento intensivo de queda",
+    description: "Concentrado nanotecnológico com Redensyl para regeneração capilar e combate à queda.",
+    fullDescription: "Concentrado nanotecnológico para regeneração capilar. Com Redensyl, estimula novo ciclo de crescimento, aumentando comprimento e densidade dos fios. Ativos nanoencapsulados penetram profundamente no couro cabeludo.",
     price: "R$ 227,14",
-    image: placeholder,
+    image: tricoGeneticistTonico,
+    activeIngredients: [
+      "Redensyl",
+      "Nano Ativos Biotecnológicos",
+    ],
   },
   {
     id: 7254,
@@ -1814,9 +1883,16 @@ export const tulipiaTricoGeneticist: Product[] = [
     brand: "Tulipia",
     category: "capilar",
     isProfessional: false,
-    description: "Máscara regeneradora para recuperação de fios danificados",
+    description: "Máscara regeneradora com óleo de jojoba, aminoácidos, ceramidas e ácido hialurônico.",
+    fullDescription: "Máscara que nutre comprimentos e pontas expostos à poluição e tratamentos químicos. Base emoliente com óleo de jojoba envolve os fios, enquanto aminoácidos, ceramidas e ácido hialurônico preenchem a fibra capilar.",
     price: "R$ 141,43",
-    image: placeholder,
+    image: tricoGeneticistTonico,
+    activeIngredients: [
+      "Óleo de Jojoba",
+      "Aminoácidos",
+      "Ceramidas",
+      "Ácido Hialurônico",
+    ],
   },
 ];
 
@@ -1844,13 +1920,19 @@ export const tulipiaDermoGeneticist: Product[] = [
 export const tulipiaCalmskin: Product[] = [
   {
     id: 7270,
-    name: "Calmskin Pomada Multirreparadora 30g",
+    name: "Calmskin Nano Pomada Ultracalmante 30g",
     brand: "Tulipia",
     category: "calmante",
     isProfessional: false,
-    description: "Pomada multiuso para reparação de peles irritadas e pós-procedimentos",
+    description: "Pomada multirreparadora para peles sensíveis, irritadas e pós-procedimentos estéticos.",
+    fullDescription: "Pomada facial ultracalmante multirreparadora desenvolvida para acalmar, proteger e regenerar peles sensíveis, irritadas ou em processo de recuperação pós-procedimentos estéticos. Forma uma barreira protetora que auxilia na cicatrização.",
     price: "R$ 69,00",
-    image: placeholder,
+    image: calmskinPomadaHero,
+    activeIngredients: [
+      "Ativos Calmantes",
+      "Regeneradores",
+      "Emolientes",
+    ],
   },
 ];
 
@@ -1926,19 +2008,21 @@ export const tulipiaKits: Product[] = [
     brand: "Tulipia",
     category: "kit",
     isProfessional: false,
-    description: "Kit com 4 máscaras Stellar: Enzimática, Matificante, Rejuvenescedora e Hidronutritiva",
+    description: "Kit com 4 máscaras Stellar: Enzimática, Matificante, Rejuvenescedora e Hidronutritiva.",
+    fullDescription: "Kit completo com as 4 máscaras da linha Stellar: Enzimática para renovação, Matificante para controle de oleosidade, Rejuvenescedora para anti-idade e Hidronutritiva para hidratação profunda.",
     price: "R$ 649,00",
-    image: placeholder,
+    image: stellarMaskEnzimaticaNew,
   },
   {
     id: 7401,
-    name: "Kit Sweet Lips Completo",
+    name: "Kit Sweet Lips Tutti Frutti Professional",
     brand: "Tulipia",
     category: "kit",
-    isProfessional: false,
-    description: "Kit labial com esfoliante e gloss. Cuidado completo para os lábios",
+    isProfessional: true,
+    description: "Kit profissional completo para cuidado labial com esfoliante, gloss e fluido hidratante.",
+    fullDescription: "Kit profissional Sweet Lips sabor Tutti Frutti com esfoliante labial para renovação, gloss hidratante com cor e brilho, e fluido nutritivo para tratamento intensivo dos lábios.",
     price: "R$ 139,00",
-    image: placeholder,
+    image: kitSweetLipsHero,
   },
   {
     id: 7402,
@@ -1946,9 +2030,10 @@ export const tulipiaKits: Product[] = [
     brand: "Tulipia",
     category: "kit",
     isProfessional: false,
-    description: "Kit de vitamina C com sabonete, tônico e sérum para uso diário",
+    description: "Kit de vitamina C para uso domiciliar com sabonete mousse, tônico e sérum 20%.",
+    fullDescription: "Kit completo da linha Life C+ para uso domiciliar. Inclui Sabonete Mousse para limpeza iluminadora, Tônico Facial antioxidante e Sérum 20% de Vitamina C para tratamento anti-idade e clareador.",
     price: "R$ 389,00",
-    image: placeholder,
+    image: lifeCMascaraNew,
   },
   {
     id: 7403,
@@ -1956,9 +2041,28 @@ export const tulipiaKits: Product[] = [
     brand: "Tulipia",
     category: "kit",
     isProfessional: false,
-    description: "Kit completo para tratamento de acne: sabonete, loção e gel seborregulador",
+    description: "Kit completo para tratamento de acne: gel seborregulador, loção tônica e máscara secativa.",
+    fullDescription: "Kit completo da linha Kinelyn para controle da acne e oleosidade. Inclui Nano Gel Facial seborregulador, Loção Tônica Adstringente e Máscara Facial Secativa para tratamento intensivo.",
     price: "R$ 269,00",
-    image: placeholder,
+    image: kinelynGelHero,
+  },
+  {
+    id: 7404,
+    name: "Kit Trico Geneticist Professional",
+    brand: "Tulipia",
+    category: "kit",
+    isProfessional: true,
+    description: "Kit capilar completo: Nano Plasma, Shampoo Esfoliante, Tônico Antiqueda e Máscara Regeneradora.",
+    fullDescription: "Kit profissional completo para tratamento de queda capilar. Inclui Nano Plasma Capilar (5 ampolas) para regeneração intensa, Shampoo Esfoliante para limpeza do couro cabeludo, Tônico Antiqueda com Redensyl e Máscara Regeneradora com aminoácidos e ceramidas.",
+    price: "R$ 549,00",
+    image: tricoGeneticistTonico,
+    activeIngredients: [
+      "Redensyl",
+      "Kopexyl",
+      "Fatores de Crescimento",
+      "Ceramidas",
+      "Ácido Hialurônico",
+    ],
   },
 ];
 
