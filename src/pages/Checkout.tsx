@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Lock, CreditCard, Truck, Check, ShoppingBag, Minus, Plus, X, Shield } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
-import { useBrandTheme, BrandThemeProvider } from "@/contexts/BrandThemeContext";
+import { useBrandTheme, BrandThemeProvider, getBrandTheme, BrandName } from "@/contexts/BrandThemeContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,7 @@ import { toast } from "sonner";
 const CheckoutContent = () => {
   const navigate = useNavigate();
   const { items, subtotal, discount, total, appliedCoupon, updateQuantity, removeItem, applyCoupon, removeCoupon } = useCart();
-  const { currentTheme, dominantBrand, allBrands } = useBrandTheme();
+  const { currentTheme, dominantBrand, allBrands, brandCounts } = useBrandTheme();
   
   const [couponCode, setCouponCode] = useState("");
   const [step, setStep] = useState<"cart" | "shipping" | "payment">("cart");
@@ -103,19 +103,66 @@ const CheckoutContent = () => {
         </div>
       </header>
 
-      {/* Brand indicator */}
+      {/* Brand indicator - Shows all brands in cart */}
       {allBrands.length > 0 && dominantBrand !== "neutral" && (
         <motion.div 
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="py-2 text-center text-sm"
+          className="py-3 px-4"
           style={{ 
             backgroundColor: `hsl(${currentTheme.colors.accent})`,
-            color: `hsl(${currentTheme.colors.foreground})`,
           }}
         >
-          <span className="opacity-70">Checkout</span>{" "}
-          <span className="font-semibold">{currentTheme.displayName}</span>
+          <div className="container max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-3">
+            <span 
+              className="text-sm opacity-70"
+              style={{ color: `hsl(${currentTheme.colors.foreground})` }}
+            >
+              Marcas no carrinho:
+            </span>
+            <div className="flex flex-wrap items-center gap-2">
+              {allBrands.map((brand) => {
+                const theme = getBrandTheme(brand);
+                const count = brandCounts[brand] || 0;
+                const isDominant = brand === dominantBrand;
+                
+                return (
+                  <motion.div
+                    key={brand}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    className={`
+                      flex items-center gap-2 px-3 py-1.5 rounded-full text-sm
+                      ${isDominant ? 'ring-2 ring-offset-1' : ''}
+                    `}
+                    style={{
+                      backgroundColor: theme.colors.primaryHex,
+                      color: 'white',
+                      '--tw-ring-color': isDominant ? theme.colors.primaryHex : 'transparent',
+                    } as React.CSSProperties}
+                  >
+                    <span className="font-medium">{theme.displayName}</span>
+                    <span 
+                      className="bg-white/20 px-1.5 py-0.5 rounded-full text-xs font-semibold"
+                    >
+                      {count}
+                    </span>
+                    {isDominant && (
+                      <Check className="w-3 h-3" />
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
+            {allBrands.length > 1 && (
+              <span 
+                className="text-xs opacity-60 ml-2"
+                style={{ color: `hsl(${currentTheme.colors.foreground})` }}
+              >
+                Tema: {currentTheme.displayName}
+              </span>
+            )}
+          </div>
         </motion.div>
       )}
 
