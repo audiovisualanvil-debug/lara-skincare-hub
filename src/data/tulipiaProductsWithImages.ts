@@ -187,6 +187,13 @@ import firmFlaccid300mlHero from "@/assets/products/tulipia/firm-flaccid-300ml-h
 
 // Calmskin - nova imagem
 import calmskinPomadaHero from "@/assets/products/tulipia/calmskin-pomada-hero.png";
+import calmskinPomadaOfficial from "@/assets/products/tulipia/calmskin-pomada-official.png";
+
+// Miracle Eyes - imagem oficial
+import miracleEyesOfficial from "@/assets/products/tulipia/miracle-eyes-official.png";
+
+// Floraty - imagem oficial esfoliante
+import floratyEsfolianteApricot from "@/assets/products/tulipia/floraty-esfoliante-apricot.png";
 
 // Marezi - loção
 import mareziLocaoHero from "@/assets/products/tulipia/marezi-locao-hero.png";
@@ -1465,13 +1472,40 @@ export const tulipiaCilsLashes: Product[] = [
   },
   {
     id: 7161,
-    name: "Miracle Eyes Nano Gel Área dos Olhos",
+    name: "Miracle Eyes Nano Gel Área dos Olhos 13g",
     brand: "Tulipia",
     category: "area-olhos",
     isProfessional: false,
-    description: "Gel com tecnologia nano para área dos olhos. Reduz olheiras, bolsas e linhas",
+    description: "Dermocosmético completo para sinais de estresse e idade ao redor dos olhos. Reduz olheiras e proporciona efeito lifting imediato.",
+    fullDescription: "Dermocosmético completo para combater os sinais de estresse e idade ao redor dos olhos. Reduz olheiras melânicas e vasculares, melhora a microcirculação e possui efeito lifting imediato. Fórmula testada oftalmologicamente e hipoalergênica.",
     price: "R$ 129,00",
-    image: miracleEyes,
+    image: miracleEyesOfficial,
+    activeIngredients: [
+      "CoffeeSkin®",
+      "DMAE",
+      "Matrixyl™",
+      "Vitamina E",
+      "Nanovetor Vitamina C",
+      "Alantoína",
+      "Palmitato de Ascorbila",
+      "Nano Up Lift",
+      "Silício Orgânico",
+      "Óleos Essenciais",
+      "Ácido Hialurônico",
+    ],
+    applicationIndications: [
+      "Anti-idade",
+      "Eficácia comprovada",
+      "Gel",
+      "Hidratação",
+      "Hipoalergênico",
+      "Home care",
+      "Peles sensíveis",
+      "Lifting",
+      "Olheiras",
+      "Rugas",
+      "Testado Oftalmologicamente",
+    ],
   },
 ];
 
@@ -1559,13 +1593,25 @@ export const tulipiaFloraty: Product[] = [
     brand: "Tulipia",
     category: "limpeza-pele",
     isProfessional: true,
-    description: "Creme esfoliante mecânico com partículas de damasco para renovação celular suave.",
-    fullDescription: "Creme esfoliante profissional com micropartículas de semente de damasco (apricot) para esfoliação mecânica suave e eficaz. Remove células mortas, prepara a pele para tratamentos e deixa a superfície macia e renovada.",
+    description: "Esfoliante físico de textura suave e cremosa. Microesferas removem impurezas deixando a pele sedosa e radiante.",
+    fullDescription: "O Creme Esfoliante Apricot possui textura suave e cremosa, que desliza facilmente sobre a pele, deixando-a visivelmente mais macia, iluminada e com toque aveludado. Suas microesferas promovem uma esfoliação gentil, auxiliando na remoção de células mortas e impurezas, sem causar irritações. Rico em ácidos graxos essenciais Ômega 9 e Ômega 6, oferece emoliência intensa.",
     price: "R$ 141,43",
-    image: floratyEsfolianteHero,
+    image: floratyEsfolianteApricot,
     activeIngredients: [
-      "Sementes de Damasco",
-      "Emolientes",
+      "Semente de Apricot (Damasco)",
+      "Ômega 9 (Ácido Oleico)",
+      "Ômega 6 (Ácido Linoleico)",
+      "Vitamina B",
+    ],
+    applicationIndications: [
+      "Creme",
+      "Esfoliação",
+      "Exclusivo para profissional",
+      "Facial e Corporal",
+      "Higienização",
+      "Indicado para todos os tipos de pele",
+      "Livre de Parabeno",
+      "Vegano",
     ],
   },
   {
@@ -2067,14 +2113,33 @@ export const tulipiaCalmskin: Product[] = [
     brand: "Tulipia",
     category: "calmante",
     isProfessional: false,
-    description: "Pomada multirreparadora para peles sensíveis, irritadas e pós-procedimentos estéticos.",
-    fullDescription: "Pomada facial ultracalmante multirreparadora desenvolvida para acalmar, proteger e regenerar peles sensíveis, irritadas ou em processo de recuperação pós-procedimentos estéticos. Forma uma barreira protetora que auxilia na cicatrização.",
+    description: "Pomada não oleosa com hidratação intensa e efeito calmante. Fortalece a barreira cutânea e alivia vermelhidão.",
+    fullDescription: "Pomada não oleosa para uso facial e corporal, com hidratação intensa e efeito calmante. Fortalece a barreira cutânea, melhora a aparência da pele, alivia vermelhidão e desconfortos. Nutre, protege e revitaliza a pele ressecada e fragilizada, auxiliando na reparação e proporcionando maciez. Ideal para áreas ressecadas como cotovelos, mãos e pés.",
     price: "R$ 69,00",
-    image: calmskinPomadaHero,
+    image: calmskinPomadaOfficial,
     activeIngredients: [
-      "Ativos Calmantes",
-      "Regeneradores",
-      "Emolientes",
+      "Ácido Hialurônico",
+      "Alpha Bisabolol",
+      "Beta-Glucan",
+      "Calmaline",
+      "Colágeno Hidrolisado",
+      "Glicirrizinato de Potássio",
+      "Manteiga de Cupuaçu",
+      "Nano Hydrolift",
+      "Palmitato de Ascorbila",
+      "Pantenol",
+      "Pró-TG3",
+    ],
+    applicationIndications: [
+      "Calmante",
+      "Eficácia comprovada",
+      "Facial e Corporal",
+      "Fatores de Crescimento",
+      "Hidratação",
+      "Home care",
+      "Indicado para todos os tipos de pele",
+      "Pós Depilação",
+      "Unhas",
     ],
   },
 ];
