@@ -61,6 +61,9 @@ import proskinSaboneteTextura from "@/assets/products/tulipia/proskin-sabonete-t
 import proskinSaboneteUso from "@/assets/products/tulipia/proskin-sabonete-uso.jpg";
 import proskinSaboneteHero from "@/assets/products/tulipia/proskin-sabonete-hero.jpg";
 import proskinBrumaHero from "@/assets/products/tulipia/proskin-bruma-hero.jpg";
+import proskinCremeHero from "@/assets/products/tulipia/proskin-creme-hero.jpg";
+import proskinSaboneteNovo from "@/assets/products/tulipia/proskin-sabonete-novo.jpg";
+import proskinSaboneteLifestyle from "@/assets/products/tulipia/proskin-sabonete-lifestyle.jpg";
 import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
 import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
 import proskinCreme from "@/assets/products/tulipia/proskin-creme.jpg";
@@ -410,8 +413,9 @@ export const tulipiaProskinRepair: Product[] = [
     description: "Limpa suavemente sem agredir a barreira cutânea, preservando a hidratação natural da pele.",
     fullDescription: "Sabonete restaurador que limpa suavemente sem agredir a barreira cutânea, preservando a hidratação natural da pele. Ideal para peles sensibilizadas, fortalece e repara a barreira cutânea, previne sinais de envelhecimento e acalma a pele intensamente.",
     price: "R$ 79,90",
-    image: proskinSaboneteHero,
+    image: proskinSaboneteNovo,
     gallery: [
+      proskinSaboneteLifestyle,
       proskinSaboneteUso,
       proskinSaboneteTextura,
       proskinSabonete,
@@ -459,9 +463,25 @@ export const tulipiaProskinRepair: Product[] = [
     brand: "Tulipia",
     category: "barreira-cutanea",
     isProfessional: false,
-    description: "Creme concentrado para fortalecimento e recuperação da barreira cutânea",
+    description: "Purifica e hidrata a pele, acalma e reforça a barreira cutânea. Nutre, rejuvenesce e melhora linhas de expressão.",
+    fullDescription: "Creme concentrado para fortalecimento e recuperação da barreira cutânea. Purifica e hidrata a pele, acalma e reforça a barreira cutânea. Nutre, rejuvenesce e melhora as linhas de expressão. Testado dermatologicamente com nanotecnologia.",
     price: "R$ 119,90",
-    image: proskinCreme,
+    image: proskinCremeHero,
+    gallery: [
+      proskinCreme,
+    ],
+    activeIngredients: [
+      "Epinutrix",
+      "Nano Olive Upcycling",
+      "Água de Lótus",
+      "NanoCurcuma™",
+      "Symbiocaps LA",
+      "Lactobacillus",
+      "BioEcolia®",
+      "Oligossacarídeo Alpha-Glucan",
+      "Hydroviton® PLUS 2290",
+      "BisaboLife™",
+    ],
   },
 ];
 
