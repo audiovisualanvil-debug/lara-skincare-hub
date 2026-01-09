@@ -28,6 +28,7 @@ import MezzoPage from "./pages/MezzoPage";
 import ExtratosPage from "./pages/ExtratosPage";
 import SmartGRPage from "./pages/SmartGRPage";
 import AdminImageProcessor from "./pages/AdminImageProcessor";
+import Checkout from "./pages/Checkout";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +60,7 @@ const App = () => (
                   <Route path="/sobre" element={<About />} />
                   <Route path="/contato" element={<Contact />} />
                   <Route path="/admin/processar-imagens" element={<AdminImageProcessor />} />
+                  <Route path="/checkout" element={<Checkout />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
                 <MobileBottomNav />

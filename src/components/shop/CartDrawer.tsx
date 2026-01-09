@@ -220,9 +220,9 @@ const CartDrawer = () => {
             </div>
 
             <Button variant="gold" className="w-full h-12 font-display font-medium" asChild>
-              <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
-                Finalizar via WhatsApp
-              </a>
+              <Link to="/checkout" onClick={closeCart}>
+                Finalizar Compra
+              </Link>
             </Button>
             <Button 
               variant="ghost" 
