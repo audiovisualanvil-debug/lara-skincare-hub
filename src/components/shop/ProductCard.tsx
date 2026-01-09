@@ -2,6 +2,18 @@ import { Link } from "react-router-dom";
 import { ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+export interface ProtocolStep {
+  step: number;
+  title: string;
+  description: string;
+  image?: string;
+}
+
+export interface BeforeAfterImage {
+  before: string;
+  after: string;
+}
+
 export interface Product {
   id: number;
   name: string;
@@ -15,6 +27,8 @@ export interface Product {
   video?: string;
   activeIngredients?: string[];
   fullDescription?: string;
+  beforeAfterImages?: BeforeAfterImage[];
+  protocolSteps?: ProtocolStep[];
 }
 
 interface ProductCardProps {
