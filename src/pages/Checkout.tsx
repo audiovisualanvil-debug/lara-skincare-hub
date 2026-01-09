@@ -74,34 +74,59 @@ const CheckoutContent = () => {
   } as React.CSSProperties;
 
   return (
-    <div 
-      className="min-h-screen transition-colors duration-500"
+    <motion.div 
+      key={dominantBrand}
+      initial={{ opacity: 0.8 }}
+      animate={{ 
+        opacity: 1,
+        backgroundColor: `hsl(${currentTheme.colors.background})`,
+      }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="min-h-screen"
       style={{
         ...themeStyles,
-        backgroundColor: `hsl(${currentTheme.colors.background})`,
         fontFamily: currentTheme.typography.headingFont,
       }}
     >
       {/* Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-md border-b" style={{ borderColor: `hsl(${currentTheme.colors.primary} / 0.1)` }}>
+      <motion.header 
+        className="sticky top-0 z-50 backdrop-blur-md border-b"
+        initial={false}
+        animate={{ 
+          borderColor: `hsl(${currentTheme.colors.primary} / 0.1)`,
+          backgroundColor: `hsl(${currentTheme.colors.background} / 0.9)`,
+        }}
+        transition={{ duration: 0.4 }}
+      >
         <div className="container max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
           <button 
             onClick={() => navigate(-1)} 
-            className="flex items-center gap-2 text-sm hover:opacity-70 transition-opacity"
+            className="flex items-center gap-2 text-sm hover:opacity-70 transition-all duration-300"
             style={{ color: `hsl(${currentTheme.colors.foreground})` }}
           >
             <ArrowLeft className="w-4 h-4" />
             Voltar
           </button>
           
-          <div className="flex items-center gap-3">
-            <Lock className="w-4 h-4" style={{ color: currentTheme.colors.primaryHex }} />
-            <span className="text-xs font-medium" style={{ color: `hsl(${currentTheme.colors.foreground} / 0.7)` }}>
+          <motion.div 
+            className="flex items-center gap-3"
+            initial={false}
+            animate={{ color: currentTheme.colors.primaryHex }}
+            transition={{ duration: 0.4 }}
+          >
+            <Lock className="w-4 h-4" />
+            <motion.span 
+              key={currentTheme.microcopy.securityNote}
+              initial={{ opacity: 0, y: -5 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-xs font-medium"
+              style={{ color: `hsl(${currentTheme.colors.foreground} / 0.7)` }}
+            >
               {currentTheme.microcopy.securityNote}
-            </span>
-          </div>
+            </motion.span>
+          </motion.div>
         </div>
-      </header>
+      </motion.header>
 
       {/* Brand indicator - Shows all brands in cart */}
       {allBrands.length > 0 && dominantBrand !== "neutral" && (
@@ -316,12 +341,19 @@ const CheckoutContent = () => {
                     </div>
                   )}
 
-                  <Button
-                    onClick={() => setStep("shipping")}
-                    className={`w-full h-12 ${currentTheme.button.className}`}
+                  <motion.div
+                    key={`cta-${dominantBrand}`}
+                    initial={{ scale: 0.98, opacity: 0.8 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
                   >
-                    Continuar para Entrega
-                  </Button>
+                    <Button
+                      onClick={() => setStep("shipping")}
+                      className={`w-full h-12 transition-all duration-300 ${currentTheme.button.className}`}
+                    >
+                      Continuar para Entrega
+                    </Button>
+                  </motion.div>
                 </motion.div>
               )}
 
@@ -639,9 +671,15 @@ const CheckoutContent = () => {
 
               <div className="flex justify-between text-lg font-semibold">
                 <span>Total</span>
-                <span style={{ color: currentTheme.colors.primaryHex }}>
+                <motion.span 
+                  key={`total-${dominantBrand}`}
+                  initial={{ scale: 1.1, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                  style={{ color: currentTheme.colors.primaryHex }}
+                >
                   R$ {total.toFixed(2)}
-                </span>
+                </motion.span>
               </div>
 
               {/* Security badges */}
@@ -659,7 +697,7 @@ const CheckoutContent = () => {
           </div>
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 };
 
