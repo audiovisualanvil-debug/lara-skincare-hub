@@ -60,6 +60,7 @@ import biowhiteFrasco from "@/assets/products/tulipia/biowhite-frasco.jpg";
 import proskinSaboneteTextura from "@/assets/products/tulipia/proskin-sabonete-textura.jpg";
 import proskinSaboneteUso from "@/assets/products/tulipia/proskin-sabonete-uso.jpg";
 import proskinSaboneteHero from "@/assets/products/tulipia/proskin-sabonete-hero.jpg";
+import proskinBrumaHero from "@/assets/products/tulipia/proskin-bruma-hero.jpg";
 import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
 import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
 import proskinCreme from "@/assets/products/tulipia/proskin-creme.jpg";
@@ -433,9 +434,24 @@ export const tulipiaProskinRepair: Product[] = [
     brand: "Tulipia",
     category: "barreira-cutanea",
     isProfessional: false,
-    description: "Bruma hidratante para proteção e restauração da barreira cutânea",
+    description: "Hidrata, acalma e fortalece a barreira cutânea. Equilibra a microbiota, reduz vermelhidão e proporciona conforto duradouro.",
+    fullDescription: "Hidrata, acalma e fortalece a barreira cutânea. Equilibra a microbiota, reduz vermelhidão e proporciona conforto duradouro, ideal para peles sensibilizadas no dia a dia ou em rotinas profissionais, oferecendo reparação a qualquer hora com frescor e hidratação visível.",
     price: "R$ 119,90",
-    image: proskinBruma,
+    image: proskinBrumaHero,
+    gallery: [
+      proskinBruma,
+    ],
+    activeIngredients: [
+      "Água de Lótus",
+      "BioEcolia®",
+      "Bisabolife™",
+      "Hydroviton® PLUS 2290",
+      "Lactobacillus",
+      "Nano Olive Upcycling",
+      "NanoCurcuma™",
+      "Oligossacarídeo Alpha-Glucan",
+      "Symbiocaps LA",
+    ],
   },
   {
     id: 7022,
