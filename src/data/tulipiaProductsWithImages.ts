@@ -112,6 +112,20 @@ import hidrasolFps30Img from "@/assets/products/tulipia/hidrasol-fps30.jpg";
 import citrogelClareadorImg from "@/assets/products/tulipia/citrogel-clareador.jpg";
 import renotratGelImg from "@/assets/products/tulipia/renotrat-gel.jpg";
 
+// Novas imagens baixadas - Fase 1 (Hialux, Kinelyn, Marezi, Citrata, Hidrasol)
+import hialuxSerumHero from "@/assets/products/tulipia/hialux-serum-hero.png";
+import hialuxSaboneteHero from "@/assets/products/tulipia/hialux-sabonete-hero.png";
+import hialuxCremeHero from "@/assets/products/tulipia/hialux-creme-hero.png";
+import kinelynGelHero from "@/assets/products/tulipia/kinelyn-gel-hero.png";
+import kinelynLocaoHero from "@/assets/products/tulipia/kinelyn-locao-hero.png";
+import kinelynMascaraHero from "@/assets/products/tulipia/kinelyn-mascara-hero.png";
+import mareziSaboneteHero from "@/assets/products/tulipia/marezi-sabonete-hero.png";
+import mareziMascaraHero from "@/assets/products/tulipia/marezi-mascara-hero.png";
+import citrataSaboneteHero from "@/assets/products/tulipia/citrata-sabonete-hero.png";
+import citrataLocaoHero from "@/assets/products/tulipia/citrata-locao-hero.png";
+import hidrasolFps30Hero from "@/assets/products/tulipia/hidrasol-fps30-hero.png";
+import hidrasolFps60Hero from "@/assets/products/tulipia/hidrasol-fps60-hero.png";
+
 // Placeholder para produtos sem imagem
 const placeholder = "/placeholder.svg";
 
@@ -776,10 +790,17 @@ export const tulipiaMascaras: Product[] = [
     name: "Marezi Nano Máscara Hidrocalmante 200g",
     brand: "Tulipia",
     category: "mascara",
-    isProfessional: false,
-    description: "Máscara calmante para peles sensíveis e irritadas. Reduz vermelhidão",
+    isProfessional: true,
+    description: "Máscara calmante profissional com Drone EGF, ácido hialurônico e beta-glucana para peles sensíveis.",
     price: "R$ 141,43",
-    image: placeholder,
+    image: mareziMascaraHero,
+    activeIngredients: [
+      "Drone EGF",
+      "Ácido Hialurônico",
+      "Calmaline",
+      "Beta-Glucana",
+      "Algas Marinhas",
+    ],
   },
 ];
 
@@ -1035,7 +1056,7 @@ export const tulipiaHidrasol: Product[] = [
     isProfessional: false,
     description: "Fotoprotetor facial FPS 30 com textura leve. Proteção UVA/UVB",
     price: "R$ 119,00",
-    image: placeholder,
+    image: hidrasolFps30Hero,
   },
   {
     id: 7131,
@@ -1045,7 +1066,7 @@ export const tulipiaHidrasol: Product[] = [
     isProfessional: false,
     description: "Fotoprotetor facial FPS 60 de alta proteção. Ideal para exposição intensa",
     price: "R$ 129,00",
-    image: placeholder,
+    image: hidrasolFps60Hero,
   },
 ];
 
@@ -1060,9 +1081,15 @@ export const tulipiaHialux: Product[] = [
     brand: "Tulipia",
     category: "acido-hialuronico",
     isProfessional: false,
-    description: "Sabonete clareador com ácido hialurônico. Limpa e hidrata simultaneamente",
+    description: "Sabonete clareador com ácido hialurônico e ácido tranexâmico. Limpa, hidrata e clareia simultaneamente.",
+    fullDescription: "Sabonete clareador com ácido hialurônico, ácido tranexâmico e Nano Up Lift. Promove limpeza suave enquanto clareia manchas e uniformiza o tom da pele. Ideal para todos os tipos de pele, especialmente aquelas com manchas e hiperpigmentação.",
     price: "R$ 99,00",
-    image: placeholder,
+    image: hialuxSaboneteHero,
+    activeIngredients: [
+      "Ácido Tranexâmico",
+      "Ácido Hialurônico",
+      "Nano Up Lift",
+    ],
   },
   {
     id: 7141,
@@ -1070,19 +1097,34 @@ export const tulipiaHialux: Product[] = [
     brand: "Tulipia",
     category: "acido-hialuronico",
     isProfessional: false,
-    description: "Sérum com ácido hialurônico de múltiplos pesos moleculares. Preenchimento e hidratação",
+    description: "Sérum preenchedor com 6 tipos de ácido hialurônico e 4 bioestimuladores. Hidratação profunda e preenchimento de linhas.",
+    fullDescription: "Sérum concentrado com 6 tipos de ácido hialurônico de diferentes pesos moleculares que atuam em todas as camadas da pele. Conta com 4 bioestimuladores, vitamina E, alantoína e D-pantenol para nutrição completa. Promove preenchimento visível, hidratação profunda e rejuvenescimento.",
     price: "R$ 199,00",
-    image: placeholder,
+    image: hialuxSerumHero,
+    activeIngredients: [
+      "6 Tipos de Ácido Hialurônico",
+      "4 Bioestimuladores",
+      "Vitamina E",
+      "Alantoína",
+      "D-Pantenol",
+    ],
   },
   {
     id: 7142,
     name: "Hialux Creme Preenchedor 150g",
     brand: "Tulipia",
     category: "acido-hialuronico",
-    isProfessional: false,
-    description: "Creme facial com ácido hialurônico para preenchimento de linhas e rugas",
+    isProfessional: true,
+    description: "Creme preenchedor profissional com 6 tipos de ácido hialurônico e 4 bioestimuladores para tratamentos intensivos.",
+    fullDescription: "Creme profissional com alta concentração de 6 tipos de ácido hialurônico, 4 bioestimuladores, Epidermosil e Nano Up Lift. Ideal para protocolos de hidratação intensiva, preenchimento e rejuvenescimento facial. Proporciona firmeza, elasticidade e volume à pele.",
     price: "R$ 170,00",
-    image: placeholder,
+    image: hialuxCremeHero,
+    activeIngredients: [
+      "6 Tipos de Ácido Hialurônico",
+      "4 Bioestimuladores",
+      "Epidermosil",
+      "Nano Up Lift",
+    ],
   },
 ];
 
@@ -1221,23 +1263,48 @@ export const tulipiaFloraty: Product[] = [
 export const tulipiaMarezi: Product[] = [
   {
     id: 7190,
-    name: "Marezi Nano Sabonete Hidratante 300ml",
+    name: "Marezi Nano Sabonete Hidratante 110ml",
     brand: "Tulipia",
     category: "pele-sensivel",
-    isProfessional: true,
-    description: "Sabonete hidratante suave para peles sensíveis e reativas",
-    price: "R$ 141,43",
-    image: placeholder,
+    isProfessional: false,
+    description: "Sabonete hidratante com algas marinhas, água de coco, aloe vera e arginina para peles sensíveis.",
+    fullDescription: "Sabonete líquido hidratante formulado especialmente para peles sensíveis e reativas. Contém algas marinhas, água de coco, aloe vera e arginina que promovem limpeza suave, hidratação e conforto sem agredir a barreira cutânea.",
+    price: "R$ 69,00",
+    image: mareziSaboneteHero,
+    activeIngredients: [
+      "Algas Marinhas",
+      "Água de Coco",
+      "Aloe Vera",
+      "Arginina",
+    ],
   },
   {
     id: 7191,
+    name: "Marezi Nano Máscara Hidrocalmante 200g",
+    brand: "Tulipia",
+    category: "pele-sensivel",
+    isProfessional: true,
+    description: "Máscara profissional com Drone EGF, ácido hialurônico, Calmaline, beta-glucana e algas marinhas.",
+    fullDescription: "Máscara hidrocalmante profissional para peles sensíveis, irritadas e pós-procedimentos. Formulada com Drone EGF para regeneração, ácido hialurônico para hidratação, Calmaline para ação calmante, beta-glucana para fortalecimento da barreira e algas marinhas para nutrição.",
+    price: "R$ 141,43",
+    image: mareziMascaraHero,
+    activeIngredients: [
+      "Drone EGF",
+      "Ácido Hialurônico",
+      "Calmaline",
+      "Beta-Glucana",
+      "Algas Marinhas",
+    ],
+  },
+  {
+    id: 7192,
     name: "Marezi Nano Loção Tônica Remineralizante 110ml",
     brand: "Tulipia",
     category: "pele-sensivel",
     isProfessional: false,
     description: "Loção tônica com minerais para fortalecimento de peles sensíveis",
     price: "R$ 79,00",
-    image: placeholder,
+    image: mareziSaboneteHero,
   },
 ];
 
@@ -1252,9 +1319,16 @@ export const tulipiaCitrata: Product[] = [
     brand: "Tulipia",
     category: "pele-oleosa",
     isProfessional: false,
-    description: "Loção tônica adstringente para controle de oleosidade e fechamento de poros",
+    description: "Loção tônica com hamamelis, gluconolactona, lactato de mentila e Nano Mat para controle de oleosidade.",
+    fullDescription: "Loção tônica adstringente para peles oleosas e mistas. Formulada com hamamelis para ação adstringente, gluconolactona para renovação suave, lactato de mentila para frescor e Nano Mat para controle do brilho e fechamento de poros.",
     price: "R$ 70,00",
-    image: placeholder,
+    image: citrataLocaoHero,
+    activeIngredients: [
+      "Hamamelis",
+      "Gluconolactona",
+      "Lactato de Mentila",
+      "Nano Mat",
+    ],
   },
   {
     id: 7201,
@@ -1264,7 +1338,7 @@ export const tulipiaCitrata: Product[] = [
     isProfessional: true,
     description: "Loção tônica adstringente - versão profissional",
     price: "R$ 129,00",
-    image: placeholder,
+    image: citrataLocaoHero,
   },
   {
     id: 7202,
@@ -1272,9 +1346,16 @@ export const tulipiaCitrata: Product[] = [
     brand: "Tulipia",
     category: "pele-oleosa",
     isProfessional: false,
-    description: "Sabonete equilibrante para peles oleosas. Controla sem ressecar",
+    description: "Sabonete equilibrante com zinco PCA, ácido salicílico, extrato de tangerina e grapefruit.",
+    fullDescription: "Sabonete líquido equilibrante para peles oleosas. Contém zinco PCA para regulação sebácea, ácido salicílico para desobstrução de poros, extratos de tangerina e grapefruit para frescor e controle de oleosidade sem ressecar.",
     price: "R$ 70,00",
-    image: placeholder,
+    image: citrataSaboneteHero,
+    activeIngredients: [
+      "Zinco PCA",
+      "Ácido Salicílico",
+      "Extrato de Tangerina",
+      "Extrato de Grapefruit",
+    ],
   },
   {
     id: 7203,
@@ -1284,7 +1365,7 @@ export const tulipiaCitrata: Product[] = [
     isProfessional: true,
     description: "Sabonete equilibrante - versão profissional",
     price: "R$ 129,00",
-    image: placeholder,
+    image: citrataSaboneteHero,
   },
 ];
 
@@ -1356,9 +1437,16 @@ export const tulipiaKinelyn: Product[] = [
     brand: "Tulipia",
     category: "antiacne",
     isProfessional: false,
-    description: "Gel regulador de sebo para controle da acne e oleosidade",
+    description: "Gel regulador de sebo com ácido salicílico, zinco PCA, niacinamida e Nano Vit A para controle da acne e oleosidade.",
+    fullDescription: "Gel seborregulador que atua no controle da produção de sebo e tratamento da acne. Com ácido salicílico para desobstrução dos poros, zinco PCA para regulação sebácea, niacinamida para uniformização e Nano Vit A para renovação celular.",
     price: "R$ 99,00",
-    image: placeholder,
+    image: kinelynGelHero,
+    activeIngredients: [
+      "Ácido Salicílico",
+      "Zinco PCA",
+      "Niacinamida",
+      "Nano Vit A",
+    ],
   },
   {
     id: 7221,
@@ -1366,19 +1454,34 @@ export const tulipiaKinelyn: Product[] = [
     brand: "Tulipia",
     category: "antiacne",
     isProfessional: false,
-    description: "Loção secativa para tratamento de acne ativa. Reduz inflamação",
+    description: "Loção secativa com ácido glicólico, enxofre, óxido de zinco e mentol para tratamento de acne ativa.",
+    fullDescription: "Loção ultrassecativa para tratamento intensivo de acne. Combina ácido glicólico para renovação, enxofre para ação antibacteriana, óxido de zinco para cicatrização e mentol para sensação refrescante e alívio.",
     price: "R$ 99,00",
-    image: placeholder,
+    image: kinelynLocaoHero,
+    activeIngredients: [
+      "Ácido Glicólico",
+      "Enxofre",
+      "Óxido de Zinco",
+      "Mentol",
+    ],
   },
   {
     id: 7222,
     name: "Kinelyn Nano Máscara Ultrassecativa 200g",
     brand: "Tulipia",
     category: "antiacne",
-    isProfessional: false,
-    description: "Máscara secativa para tratamento intensivo de acne e oleosidade",
+    isProfessional: true,
+    description: "Máscara profissional secativa com enxofre biossolúvel, niacinamida, argila branca e ácido glicólico.",
+    fullDescription: "Máscara ultrassecativa profissional para tratamento intensivo de peles acneicas e oleosas. Formulada com enxofre biossolúvel, niacinamida, argila branca para absorção de oleosidade, ácido glicólico para renovação e palmitato de retinila para regeneração.",
     price: "R$ 157,00",
-    image: placeholder,
+    image: kinelynMascaraHero,
+    activeIngredients: [
+      "Enxofre Biossolúvel",
+      "Niacinamida",
+      "Argila Branca",
+      "Ácido Glicólico",
+      "Palmitato de Retinila",
+    ],
   },
   {
     id: 7223,
@@ -1388,7 +1491,7 @@ export const tulipiaKinelyn: Product[] = [
     isProfessional: false,
     description: "Sabonete para peles acneicas. Limpa profundamente e controla oleosidade",
     price: "R$ 99,00",
-    image: placeholder,
+    image: kinelynGelHero,
   },
   {
     id: 7224,
@@ -1398,7 +1501,7 @@ export const tulipiaKinelyn: Product[] = [
     isProfessional: true,
     description: "Sabonete seborregulador - versão profissional",
     price: "R$ 170,00",
-    image: placeholder,
+    image: kinelynGelHero,
   },
   {
     id: 7225,
@@ -1408,7 +1511,7 @@ export const tulipiaKinelyn: Product[] = [
     isProfessional: false,
     description: "Loção secativa com proteção solar e cobertura tonalizante. Trata e disfarça",
     price: "R$ 149,90",
-    image: placeholder,
+    image: kinelynLocaoHero,
   },
 ];
 
