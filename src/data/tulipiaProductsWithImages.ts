@@ -15,7 +15,12 @@ import renotratGel from "@/assets/banners/renotrat-gel.webp";
 import resilienceSerum from "@/assets/banners/resilience-serum.webp";
 
 // Importações das novas imagens Tulipia
-// exogeneticPdrn removido
+// Exogenetic PDRN
+import exogeneticPdrnHero from "@/assets/products/tulipia/exogenetic-pdrn-hero.jpg";
+import exogeneticPdrnUso from "@/assets/products/tulipia/exogenetic-pdrn-uso.jpg";
+import exogeneticPdrnTextura from "@/assets/products/tulipia/exogenetic-pdrn-textura.jpg";
+import exogeneticPdrnTampa from "@/assets/products/tulipia/exogenetic-pdrn-tampa.jpg";
+import exogeneticPdrn from "@/assets/products/tulipia/exogenetic-pdrn.jpg";
 import niacineEspuma150ml from "@/assets/products/tulipia/niacine-espuma-150ml-hero.jpg";
 import niacineEspuma50ml from "@/assets/products/tulipia/niacine-espuma-150ml-new.jpg";
 // Galeria Niacine+
@@ -111,6 +116,32 @@ const placeholder = "/placeholder.svg";
 // ============================================
 
 export const tulipiaLancamentos: Product[] = [
+  {
+    id: 7001,
+    name: "Exogenetic PDRN Creme Facial 30g",
+    brand: "Tulipia",
+    category: "lancamentos",
+    isProfessional: false,
+    description: "Creme facial que combina biotecnologia de ponta e ativos inovadores para manter a pele revitalizada, firme e luminosa, ajudando a retardar os sinais do tempo de forma contínua.",
+    fullDescription: "Creme facial que combina biotecnologia de ponta e ativos inovadores para manter a pele revitalizada, firme e luminosa, ajudando a retardar os sinais do tempo de forma contínua. Promove a longevidade da pele, recupera a energia celular e reduz linhas de expressão e rugas. Testado dermatologicamente com biotecnologia avançada. Rendimento: ± 37 aplicações.",
+    price: undefined,
+    image: exogeneticPdrnHero,
+    gallery: [
+      exogeneticPdrnUso,
+      exogeneticPdrnTextura,
+      exogeneticPdrnTampa,
+      exogeneticPdrn,
+    ],
+    activeIngredients: [
+      "PDRN",
+      "Exossomas",
+      "Peptídeos",
+      "NAD+",
+      "NMN",
+      "Ácido Hialurônico",
+      "Niacinamida",
+    ],
+  },
   {
     id: 7002,
     name: "Niacine+ Espuma de Limpeza de Niacinamida 150ml",
