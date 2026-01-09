@@ -165,6 +165,19 @@ import tricoGeneticistTonico from "@/assets/products/tulipia/trico-geneticist-to
 import floratyEmolienteHero from "@/assets/products/tulipia/floraty-emoliente-hero.png";
 import floratyEsfolianteHero from "@/assets/products/tulipia/floraty-esfoliante-hero.png";
 import floratyLocaoHero from "@/assets/products/tulipia/floraty-locao-hero.png";
+import floratyAmolecedorCravos from "@/assets/products/tulipia/floraty-amolecedor-cravos.png";
+
+// Dermacos - novas imagens oficiais
+import dermacosEspumaHero from "@/assets/products/tulipia/dermacos-espuma-hero.png";
+import dermacosEspumaLifestyle from "@/assets/products/tulipia/dermacos-espuma-lifestyle.png";
+import dermacosEspumaUso from "@/assets/products/tulipia/dermacos-espuma-uso.png";
+
+// Immortalite-C - novas imagens oficiais
+import immortaliteCHero from "@/assets/products/tulipia/immortalite-c-hero.png";
+import immortaliteCLaranja from "@/assets/products/tulipia/immortalite-c-laranja.png";
+
+// Firm Flaccid - nova imagem oficial
+import firmFlaccid300mlHero from "@/assets/products/tulipia/firm-flaccid-300ml-hero.png";
 
 // Calmskin - nova imagem
 import calmskinPomadaHero from "@/assets/products/tulipia/calmskin-pomada-hero.png";
@@ -922,9 +935,21 @@ export const tulipiaDermacos: Product[] = [
     brand: "Tulipia",
     category: "anti-idade",
     isProfessional: false,
-    description: "Espuma de limpeza com ativos anti-idade. Limpa e trata simultaneamente",
+    description: "Possui ação antioxidante, limpa e purifica a pele. Reduz e previne sinais de envelhecimento.",
+    fullDescription: "Espuma de limpeza rejuvenescedora com ação antioxidante que limpa profundamente e purifica a pele. Sua fórmula avançada reduz e previne sinais de envelhecimento, deixando a pele renovada e revitalizada.",
     price: "R$ 120,00",
-    image: dermacosEspuma,
+    image: dermacosEspumaHero,
+    gallery: [dermacosEspumaHero, dermacosEspumaLifestyle, dermacosEspumaUso],
+    activeIngredients: [
+      "Niacinamida 10%",
+      "NV Hydratech (Lactato de Amônio)",
+      "Óleo de Arula Nanoemulsão",
+      "Revysol (Extrato de Framboesa)",
+      "Extrato de Unia e Laranja",
+      "NV Resveratrol ECO",
+      "Óleo de Rosa Mosqueta",
+      "Alantoína",
+    ],
   },
 ];
 
@@ -939,9 +964,17 @@ export const tulipiaImmortaliteC: Product[] = [
     brand: "Tulipia",
     category: "vitamina-c",
     isProfessional: false,
-    description: "Sérum potente de vitamina C estabilizada. Antioxidante e clareador",
+    description: "Possui ação clareadora e firmadora. Promove preenchimento e hidratação.",
+    fullDescription: "Nano Sérum de Vitamina C com ação clareadora e firmadora. Sua nanotecnologia permite que os ativos penetrem profundamente na pele, promovendo preenchimento visível e hidratação intensa. Combate sinais de envelhecimento e uniformiza o tom da pele.",
     price: "R$ 159,00",
-    image: immortaliteCSerum,
+    image: immortaliteCHero,
+    gallery: [immortaliteCHero, immortaliteCLaranja],
+    activeIngredients: [
+      "Ácido Hialurônico",
+      "Algisium C® (Ácido Mandélico e Silício Orgânico)",
+      "Nano Vitamina C (Palmitato de Ascorbila)",
+      "Óleo de Romã",
+    ],
   },
 ];
 
@@ -973,9 +1006,20 @@ export const tulipiaFirmFlaccid: Product[] = [
     brand: "Tulipia",
     category: "firmeza",
     isProfessional: false,
-    description: "Fluido corporal para firmeza e combate à flacidez. Rico em minerais",
+    description: "Combate a flacidez com ação firmadora e hidratante. Assinatura Ana Paula Graf.",
+    fullDescription: "Nano Fluido Remineralizante desenvolvido com a assinatura de Ana Paula Graf. Combate a flacidez com potente ação firmadora e hidratante. Sua tecnologia nano permite penetração profunda dos ativos, promovendo firmeza visível e pele revitalizada.",
     price: "R$ 169,00",
-    image: firmFlaccid300ml,
+    image: firmFlaccid300mlHero,
+    activeIngredients: [
+      "Adenosina®",
+      "Nano Hydra Lift (Ácido Hialurônico)",
+      "Colágeno Hidrolisado",
+      "Algisium C® (Ácido Mandélico e Silício Orgânico)",
+      "Sulfato de Zinco",
+      "Óleo de Sódio",
+      "Aloe Vera",
+      "Algas Marinhas",
+    ],
   },
   {
     id: 7101,
@@ -1425,14 +1469,14 @@ export const tulipiaFloraty: Product[] = [
     brand: "Tulipia",
     category: "limpeza-pele",
     isProfessional: true,
-    description: "Loção profissional para amolecimento de cravos, facilitando a extração sem agredir a pele.",
-    fullDescription: "Loção profissional desenvolvida para amolecimento eficaz de cravos e comedões. Facilita a extração durante procedimentos de limpeza de pele, sem irritar ou agredir os tecidos. Fórmula exclusiva para uso profissional.",
+    description: "Um dos grandes segredos de uma limpeza de pele perfeita é a emoliência bem realizada. Emoliente eficaz sem efeitos indesejáveis.",
+    fullDescription: "Floraty Amolecedor de Cravos contém AMP, um emoliente tão eficaz quanto a trietanolamina, porém sem os efeitos indesejáveis, tais como irritação e pinicação. Hidrata profundamente, promove emoliência e evita o ressecamento da pele. Indicado para todos os tipos de pele, inclusive sensíveis. Fórmula vegana e zero glúten.",
     price: "R$ 141,43",
-    image: floratyLocaoHero,
+    image: floratyAmolecedorCravos,
     activeIngredients: [
+      "Alantoína",
       "AMP Ultra PC 2000",
-      "Óleo de Gergelim",
-      "Óleo de Semente de Uva",
+      "Extrato de Camomila",
     ],
   },
   {
