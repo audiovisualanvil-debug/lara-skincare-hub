@@ -92,6 +92,7 @@ import sweetLipsGlossImg from "@/assets/products/tulipia/sweet-lips-gloss.jpg";
 import chokolaMascaraImg from "@/assets/products/tulipia/chokola-mascara.jpg";
 import ultimateEsteticMascaraImg from "@/assets/products/tulipia/ultimate-estetic-mascara.jpg";
 import outonoMaskImg from "@/assets/products/tulipia/outono-mask.jpg";
+import outonoMaskHero from "@/assets/products/tulipia/outono-mask-hero.png";
 import primaveraMaskImg from "@/assets/products/tulipia/primavera-mask.jpg";
 import veraoMaskImg from "@/assets/products/tulipia/verao-mask.jpg";
 import invernoMaskImg from "@/assets/products/tulipia/inverno-mask.jpg";
@@ -553,10 +554,41 @@ export const tulipiaMascaras: Product[] = [
     name: "Outono Mask Nano Máscara Reequilibrante 150g",
     brand: "Tulipia",
     category: "mascara",
-    isProfessional: false,
-    description: "Máscara facial com tecnologia nano para reequilíbrio da pele. Ideal para peles mistas",
+    isProfessional: true,
+    description: "Sinta o alento renovador dessa máscara, que liberta a pele de radicais livres, assim como o cair das folhas secas no outono.",
+    fullDescription: "Máscara nutritiva, retexturizadora, detox e antioxidante que fortalece e condiciona a pele, proporcionando textura suave e aparência descansada. Ideal para todos os tipos de pele, especialmente aquelas afetadas por poluição ou tabagismo. Rendimento: ± 30 aplicações.",
     price: "R$ 141,43",
-    image: outonoMaskImg,
+    image: outonoMaskHero,
+    gallery: [outonoMaskImg],
+    activeIngredients: [
+      "Ácido Hialurônico",
+      "Alantoína",
+      "Algisium C2",
+      "Cera de Carnaúba",
+      "Colágeno Hidrolisado",
+      "Extrato de Chá Verde",
+      "Extrato de Figo",
+      "Manteiga de Cupuaçu",
+      "Nano Hydrolift",
+      "Óleo de Semente de Uva",
+    ],
+    protocolSteps: [
+      {
+        step: 1,
+        title: "Aplicação",
+        description: "Aplique uma camada uniforme sobre a pele limpa e deixe agir por 20 minutos.",
+      },
+      {
+        step: 2,
+        title: "Remoção",
+        description: "Remova após o tempo de ação com água morna ou algodão umedecido.",
+      },
+      {
+        step: 3,
+        title: "Dica Profissional",
+        description: "Use a linha completa '4 Estações' para melhores resultados.",
+      },
+    ],
   },
   {
     id: 7041,
