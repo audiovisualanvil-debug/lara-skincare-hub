@@ -49,6 +49,9 @@ import blackSecretClareadorProduto from "@/assets/products/tulipia/black-secret-
 import blackSecretPeelingFase2Produto from "@/assets/products/tulipia/black-secret-peeling-fase2-produto.jpg";
 import blackSecretSaboneteGlicoHero from "@/assets/products/tulipia/black-secret-sabonete-glico-hero.jpg";
 import blackSecretSolucaoPrePeelingHero from "@/assets/products/tulipia/black-secret-solucao-pre-peeling-hero.jpg";
+import blackSecretClareadorHero from "@/assets/products/tulipia/black-secret-clareador-hero.jpg";
+import blackSecretMicroSpikesHero from "@/assets/products/tulipia/black-secret-micro-spikes-hero.jpg";
+import blackSecretMicroSpikesPedra from "@/assets/products/tulipia/black-secret-micro-spikes-pedra.jpg";
 import blackBiowhiteLocao from "@/assets/products/tulipia/black-biowhite-locao.jpg";
 import proskinSabonete from "@/assets/products/tulipia/proskin-sabonete.jpg";
 import proskinBruma from "@/assets/products/tulipia/proskin-bruma.jpg";
@@ -311,9 +314,23 @@ export const tulipiaBlackSecret: Product[] = [
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: false,
-    description: "Sérum clareador concentrado para tratamento de manchas e uniformização do tom da pele",
+    description: "Concentrado com blend de ácidos clareadores que auxilia na uniformização do tom da pele e suaviza áreas escurecidas.",
+    fullDescription: "Com uma combinação sinérgica de ácidos, este concentrado auxilia no clareamento e na uniformização do tom da pele, contribuindo para a melhora da aparência de áreas escurecidas. Proporciona textura suavizada, luminosidade e conforto, promovendo o equilíbrio cutâneo. Ideal para protocolos de manutenção da pele e para cuidados com áreas escurecidas, sem causar descamação ou vermelhidão perceptível.",
     price: "R$ 199,00",
-    image: blackSecretClareador,
+    image: blackSecretClareadorHero,
+    gallery: [
+      blackSecretClareador,
+      blackSecretClareadorProduto,
+    ],
+    activeIngredients: [
+      "Ácido Fítico",
+      "Ácido Glicólico",
+      "Ácido Kójico",
+      "Ácido Mandélico",
+      "Ácido Tranexâmico",
+      "Alantoína",
+      "Nicotinamida",
+    ],
   },
   {
     id: 7015,
@@ -321,9 +338,23 @@ export const tulipiaBlackSecret: Product[] = [
     brand: "Tulipia",
     category: "clareamento",
     isProfessional: true,
-    description: "Peeling com microagulhas naturais para renovação profunda e clareamento",
+    description: "Peeling com microespículas naturais que potencializa a permeação de ativos, esfolia, regenera e ilumina o tom da pele.",
+    fullDescription: "Peeling profissional com microespículas naturais de esponja que potencializam a permeação de ativos, esfoliam, regeneram e iluminam o tom da pele. Uniformiza e promove renovação celular intensa com tecnologia Drone Copper e ativos de alta performance.",
     price: "R$ 220,00",
-    image: blackSecretMicroSpikes,
+    image: blackSecretMicroSpikesHero,
+    gallery: [
+      blackSecretMicroSpikesPedra,
+      blackSecretMicroSpikes,
+    ],
+    activeIngredients: [
+      "Micro Spikes",
+      "Drone Copper",
+      "Nano Ácido Tranexâmico",
+      "Esqualano Vegetal",
+      "Ácido Poliglutâmico",
+      "Manteiga de Tucumã",
+      "Vitamina E",
+    ],
   },
   {
     id: 7016,
