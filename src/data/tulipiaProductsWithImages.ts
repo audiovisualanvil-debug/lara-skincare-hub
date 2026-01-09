@@ -94,8 +94,11 @@ import ultimateEsteticMascaraImg from "@/assets/products/tulipia/ultimate-esteti
 import outonoMaskImg from "@/assets/products/tulipia/outono-mask.jpg";
 import outonoMaskHero from "@/assets/products/tulipia/outono-mask-hero.png";
 import primaveraMaskImg from "@/assets/products/tulipia/primavera-mask.jpg";
+import primaveraMaskHero from "@/assets/products/tulipia/primavera-mask-hero.png";
 import veraoMaskImg from "@/assets/products/tulipia/verao-mask.jpg";
+import veraoMaskHero from "@/assets/products/tulipia/verao-mask-hero.png";
 import invernoMaskImg from "@/assets/products/tulipia/inverno-mask.jpg";
+import invernoMaskHero from "@/assets/products/tulipia/inverno-mask-hero.png";
 import stellarMaskEnzimaticaImg from "@/assets/products/tulipia/stellar-mask-enzimatica.jpg";
 import stellarMaskMatificanteImg from "@/assets/products/tulipia/stellar-mask-matificante.jpg";
 import stellarMaskRejuvenescedoraImg from "@/assets/products/tulipia/stellar-mask-rejuvenescedora.jpg";
@@ -595,20 +598,80 @@ export const tulipiaMascaras: Product[] = [
     name: "Verão Mask Nano Máscara Energizante 150g",
     brand: "Tulipia",
     category: "mascara",
-    isProfessional: false,
-    description: "Máscara energizante com vitaminas e antioxidantes. Revitaliza peles cansadas",
+    isProfessional: true,
+    description: "Coquetel refrescante de frutas tropicais e algas marinhas que despertam a energia celular, devolvendo vigor, maciez e brilho.",
+    fullDescription: "Verão, a estação da vida! Alegre convite para um banho de hidratação com um coquetel de nutrientes que despertam a energia celular, devolvendo à pele seu vigor, maciez e brilho. Uma face resplandecente como um dia ensolarado. Ideal para todos os tipos de pele e coadjuvante em protocolos de hidratação e revitalização pós-sol. Rendimento: ± 30 aplicações.",
     price: "R$ 141,43",
-    image: veraoMaskImg,
+    image: veraoMaskHero,
+    gallery: [veraoMaskImg],
+    activeIngredients: [
+      "Extrato de Manga",
+      "Extrato de Maracujá",
+      "Extrato de Grapefruit",
+      "Algas Marinhas",
+      "Ácido Hialurônico",
+      "Nano Lift",
+      "Óleo de Coco",
+      "Óleo de Girassol",
+    ],
+    protocolSteps: [
+      {
+        step: 1,
+        title: "Aplicação",
+        description: "Aplique uma camada uniforme sobre a pele limpa e deixe agir por 15-20 minutos.",
+      },
+      {
+        step: 2,
+        title: "Potencialização",
+        description: "Pode ser potencializada com máscara de TNT umedecida em tônico facial.",
+      },
+      {
+        step: 3,
+        title: "Remoção",
+        description: "Remova com água morna ou algodão umedecido. Use a linha completa '4 Estações' para melhores resultados.",
+      },
+    ],
   },
   {
     id: 7042,
     name: "Inverno Mask Nano Máscara Hidronutritiva 150g",
     brand: "Tulipia",
     category: "mascara",
-    isProfessional: false,
-    description: "Máscara ultra-hidratante para peles ressecadas. Nutrição profunda",
+    isProfessional: true,
+    description: "Desfrute do aconchego dessa máscara, que abraça a pele como um manto protetor, permitindo-a restaurar sua barreira de proteção natural.",
+    fullDescription: "Inverno, tempo de repousar! Desfrute do aconchego dessa máscara, que abraça a pele como um manto protetor, permitindo-a restaurar sua barreira de proteção natural. Com ativos que recriam as reservas hídricas e nutricionais no interior da pele enquanto protegem a superfície, trazendo conforto e maciez. Ideal para todos os tipos de pele e coadjuvante em tratamentos de peles expostas a mudanças climáticas. Rendimento: ± 30 aplicações.",
     price: "R$ 141,43",
-    image: invernoMaskImg,
+    image: invernoMaskHero,
+    gallery: [invernoMaskImg],
+    activeIngredients: [
+      "Mica",
+      "Calcidone®",
+      "Colágeno Hidrolisado",
+      "Manteiga de Cupuaçu",
+      "Cera de Carnaúba",
+      "Nano Lift",
+      "Extrato de Aveia",
+      "Óleo de Gérmen de Trigo",
+      "Extrato de Levedo",
+      "Ácido Hialurônico",
+    ],
+    protocolSteps: [
+      {
+        step: 1,
+        title: "Aplicação",
+        description: "Aplique uma camada uniforme sobre a pele limpa e deixe agir por 20 minutos.",
+      },
+      {
+        step: 2,
+        title: "Uso Profissional",
+        description: "Pode ser usada como pré-emoliente em limpezas de pele profissionais.",
+      },
+      {
+        step: 3,
+        title: "Remoção",
+        description: "Remova com água morna ou algodão umedecido. Use a linha completa '4 Estações' para melhores resultados.",
+      },
+    ],
   },
   {
     id: 7043,
@@ -616,9 +679,37 @@ export const tulipiaMascaras: Product[] = [
     brand: "Tulipia",
     category: "mascara",
     isProfessional: true,
-    description: "Máscara renovadora com tecnologia nano. Promove renovação celular intensa e luminosidade",
-    price: "Consultar",
-    image: primaveraMaskImg,
+    description: "Presenteie sua pele com uma fusão de ingredientes que revitalizam e transformam a textura e radiância, deixando-a macia e aveludada como uma pétala de rosa.",
+    fullDescription: "Primavera, a estação dos recomeços! Presenteie sua pele com uma fusão de ingredientes que revitalizam e transformam a textura e radiância, deixando-a macia e aveludada como uma pétala de rosa. Um novo rosto se revela, mais claro, luminoso, resplandecente. Ideal para todos os tipos de pele como coadjuvante em protocolos de hidratação e clareamento. Rendimento: ± 30 aplicações.",
+    price: "R$ 141,43",
+    image: primaveraMaskHero,
+    gallery: [primaveraMaskImg],
+    activeIngredients: [
+      "Extrato Hidroglicólico de Hibiscus",
+      "Ácido Hialurônico",
+      "Colágeno Hidrolisado",
+      "Nano Hydrolift",
+      "Extrato de Orquídea",
+      "Extrato de Maracujá",
+      "Proteína do Leite",
+    ],
+    protocolSteps: [
+      {
+        step: 1,
+        title: "Aplicação",
+        description: "Aplique uma camada uniforme sobre a pele limpa e deixe agir por 20 minutos.",
+      },
+      {
+        step: 2,
+        title: "Remoção",
+        description: "Remova com água morna ou algodão umedecido.",
+      },
+      {
+        step: 3,
+        title: "Dica Profissional",
+        description: "Use a linha completa '4 Estações' para melhores resultados em protocolos de hidratação e clareamento.",
+      },
+    ],
   },
   {
     id: 7044,
