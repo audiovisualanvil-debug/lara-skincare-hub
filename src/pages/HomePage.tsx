@@ -12,6 +12,7 @@ import QuizCTA from "@/components/home/QuizCTA";
 import AnimatedSection from "@/components/home/AnimatedSection";
 import BrandSection from "@/components/home/BrandSection";
 import BrandsSection from "@/components/home/BrandsSection";
+import BrandCollectionsSection from "@/components/home/BrandCollectionsSection";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
@@ -255,6 +256,9 @@ const HomePage = () => {
 
         {/* Brands Section - Highlighted */}
         <BrandsSection />
+        
+        {/* Brand Collections Section - Sub-lines */}
+        <BrandCollectionsSection />
 
         {/* Featured Banners Carousel */}
         <section className="section-editorial bg-secondary/20">
