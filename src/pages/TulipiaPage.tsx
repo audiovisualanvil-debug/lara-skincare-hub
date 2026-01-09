@@ -78,7 +78,7 @@ const TulipiaPage = () => {
             />
           </motion.div>
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"
             style={{ opacity }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -91,14 +91,14 @@ const TulipiaPage = () => {
               transition={{ duration: 0.8 }}
               className="max-w-2xl"
             >
-              <Badge className="mb-4 bg-primary/20 text-primary border-primary/30 backdrop-blur-sm">
-                Linha Exclusiva
+              <Badge className="mb-4 bg-white/20 text-white border-white/30 backdrop-blur-sm">
+                Linha Premium
               </Badge>
               
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 tracking-tight">
-                <span className="font-semibold">Tulipia</span>
+                <span className="font-semibold tracking-widest">TULÍPIA</span>
                 <br />
-                <span className="text-primary">Dermocosméticos</span>
+                <span className="text-white/80 text-2xl md:text-3xl font-light">Dermocosméticos Premium</span>
               </h1>
               
               <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
@@ -107,7 +107,7 @@ const TulipiaPage = () => {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-primary hover:bg-primary/90">
+                <Button size="lg" className="bg-black hover:bg-black/80 text-white border border-white/20">
                   Ver Produtos
                 </Button>
                 <Button 
@@ -140,8 +140,8 @@ const TulipiaPage = () => {
                   transition={{ delay: 0.2 + index * 0.1 }}
                   className="flex items-center gap-3"
                 >
-                  <div className="p-2 bg-primary/10 rounded-lg">
-                    <feature.icon className="w-5 h-5 text-primary" />
+                  <div className="p-2 bg-black/5 rounded-lg border border-black/10">
+                    <feature.icon className="w-5 h-5 text-black" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground text-sm">{feature.label}</p>
@@ -175,8 +175,8 @@ const TulipiaPage = () => {
                     px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
                     flex items-center gap-2
                     ${activeCategory === cat.id 
-                      ? "bg-primary text-primary-foreground shadow-md" 
-                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                      ? "bg-black text-white shadow-md" 
+                      : "bg-secondary text-secondary-foreground hover:bg-black/10"
                     }
                   `}
                 >
@@ -185,7 +185,7 @@ const TulipiaPage = () => {
                   <span className={`
                     text-xs px-1.5 py-0.5 rounded-full
                     ${activeCategory === cat.id 
-                      ? "bg-primary-foreground/20 text-primary-foreground" 
+                      ? "bg-white/20 text-white" 
                       : "bg-muted text-muted-foreground"
                     }
                   `}>
