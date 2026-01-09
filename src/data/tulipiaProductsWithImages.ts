@@ -18,6 +18,12 @@ import resilienceSerum from "@/assets/banners/resilience-serum.webp";
 // exogeneticPdrn removido
 import niacineEspuma150ml from "@/assets/products/tulipia/niacine-espuma-150ml-hero.jpg";
 import niacineEspuma50ml from "@/assets/products/tulipia/niacine-espuma-150ml-new.jpg";
+// Galeria Niacine+
+import niacineEspumaUso from "@/assets/products/tulipia/niacine-espuma-uso.jpg";
+import niacineEspumaTextura from "@/assets/products/tulipia/niacine-espuma-textura.jpg";
+import niacineEspumaProduto from "@/assets/products/tulipia/niacine-espuma-produto.jpg";
+import niacineEspumaMasculino from "@/assets/products/tulipia/niacine-espuma-masculino.jpg";
+import niacineEspumaFrasco from "@/assets/products/tulipia/niacine-espuma-frasco.jpg";
 import blackSecretPeelingAntiacne from "@/assets/products/tulipia/black-secret-peeling-antiacne.jpg";
 import blackSecretPeeling2Fases from "@/assets/products/tulipia/black-secret-peeling-2-fases.jpg";
 import blackSecretSaboneteGlico from "@/assets/products/tulipia/black-secret-sabonete-glico.jpg";
@@ -78,9 +84,27 @@ export const tulipiaLancamentos: Product[] = [
     brand: "Tulipia",
     category: "lancamentos",
     isProfessional: false,
-    description: "Espuma de limpeza facial com niacinamida. Limpa profundamente e controla a oleosidade",
+    description: "Uma espuma suave com Niacinamida, ativos hidratantes e pH fisiológico para uma limpeza delicada e precisa. Com ação probiótica, ajuda hidratar a pele, remove impurezas, oleosidade e mantém o conforto desde o primeiro uso.",
+    fullDescription: "Uma espuma suave com Niacinamida, ativos hidratantes e pH fisiológico para uma limpeza delicada e precisa. Com ação probiótica, ajuda hidratar a pele, remove impurezas, oleosidade e mantém o conforto desde o primeiro uso.",
     price: "R$ 94,90",
     image: niacineEspuma150ml,
+    gallery: [
+      niacineEspumaTextura,
+      niacineEspumaProduto,
+      niacineEspumaUso,
+      niacineEspumaMasculino,
+      niacineEspumaFrasco,
+    ],
+    video: "/videos/niacine-espuma-video.mp4",
+    activeIngredients: [
+      "Alantoína",
+      "D-Pantenol",
+      "Lactobacillus",
+      "Nano Ácido Hialurônico",
+      "Nano Niacinamida",
+      "PCA de Sódio",
+      "Pullulan",
+    ],
   },
   {
     id: 7003,
@@ -88,9 +112,27 @@ export const tulipiaLancamentos: Product[] = [
     brand: "Tulipia",
     category: "lancamentos",
     isProfessional: false,
-    description: "Espuma de limpeza facial com niacinamida - versão travel size",
+    description: "Uma espuma suave com Niacinamida, ativos hidratantes e pH fisiológico para uma limpeza delicada e precisa. Versão travel size com ± 20 aplicações.",
+    fullDescription: "Uma espuma suave com Niacinamida, ativos hidratantes e pH fisiológico para uma limpeza delicada e precisa. Com ação probiótica, ajuda hidratar a pele, remove impurezas, oleosidade e mantém o conforto desde o primeiro uso.",
     price: "R$ 49,90",
     image: niacineEspuma50ml,
+    gallery: [
+      niacineEspumaTextura,
+      niacineEspumaProduto,
+      niacineEspumaUso,
+      niacineEspumaMasculino,
+      niacineEspumaFrasco,
+    ],
+    video: "/videos/niacine-espuma-video.mp4",
+    activeIngredients: [
+      "Alantoína",
+      "D-Pantenol",
+      "Lactobacillus",
+      "Nano Ácido Hialurônico",
+      "Nano Niacinamida",
+      "PCA de Sódio",
+      "Pullulan",
+    ],
   },
 ];
 
