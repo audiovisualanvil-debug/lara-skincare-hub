@@ -265,8 +265,8 @@ export const tulipiaBlackSecret: Product[] = [
       "Ácido Kójico",
     ],
     beforeAfterImages: [
-      { before: blackSecretAntes1, after: blackSecretDepois1 },
-      { before: blackSecretAntes2, after: blackSecretDepois2 },
+      { before: blackSecretAntes1, after: blackSecretAntes2 },
+      { before: blackSecretDepois2, after: blackSecretDepois1 },
     ],
     protocolSteps: [
       {
