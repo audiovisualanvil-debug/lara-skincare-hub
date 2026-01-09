@@ -59,6 +59,19 @@ import blackSecretMicroSpikesHero from "@/assets/products/tulipia/black-secret-m
 import blackSecretMicroSpikesPedra from "@/assets/products/tulipia/black-secret-micro-spikes-pedra.jpg";
 import blackBiowhiteLocao from "@/assets/products/tulipia/black-biowhite-locao.jpg";
 import biowhiteHero from "@/assets/products/tulipia/biowhite-hero.jpg";
+// Novas imagens oficiais Tulipia CDN
+import exogeneticPdrnOfficial from "@/assets/products/tulipia/exogenetic-pdrn-official.png";
+import niacineEspumaOfficial from "@/assets/products/tulipia/niacine-espuma-official.png";
+import blackSecretAntiacneOfficial from "@/assets/products/tulipia/black-secret-antiacne-official.png";
+import blackSecret2FasesOfficial from "@/assets/products/tulipia/black-secret-2fases-official.png";
+import blackSecretSaboneteOfficial from "@/assets/products/tulipia/black-secret-sabonete-official.png";
+import blackSecretPrePeelingOfficial from "@/assets/products/tulipia/black-secret-prepeeling-official.png";
+import blackSecretClareadorOfficial from "@/assets/products/tulipia/black-secret-clareador-official.png";
+import immortaliteSerumOfficial from "@/assets/products/tulipia/immortalite-serum-official.png";
+import lifeCSerumClareadorOfficial from "@/assets/products/tulipia/life-c-serum-clareador-official.png";
+import sweetLipsTuttiFruttiOfficial from "@/assets/products/tulipia/sweet-lips-tutti-frutti-official.png";
+import firmFlaccid300mlOfficial from "@/assets/products/tulipia/firm-flaccid-300ml-official.png";
+import hialuxSerumOfficial from "@/assets/products/tulipia/hialux-serum-official.png";
 import biowhiteUso from "@/assets/products/tulipia/biowhite-uso.jpg";
 import biowhiteFrasco from "@/assets/products/tulipia/biowhite-frasco.jpg";
 // ProSkin Repair galeria
@@ -225,7 +238,18 @@ export const tulipiaLancamentos: Product[] = [
     description: "Creme facial que combina biotecnologia de ponta e ativos inovadores para manter a pele revitalizada, firme e luminosa, ajudando a retardar os sinais do tempo de forma contínua.",
     fullDescription: "Creme facial que combina biotecnologia de ponta e ativos inovadores para manter a pele revitalizada, firme e luminosa, ajudando a retardar os sinais do tempo de forma contínua. Promove a longevidade da pele, recupera a energia celular e reduz linhas de expressão e rugas. Testado dermatologicamente com biotecnologia avançada. Rendimento: ± 37 aplicações.",
     price: undefined,
-    image: exogeneticPdrnHero,
+    image: exogeneticPdrnOfficial,
+    applicationIndications: [
+      "Anti-idade",
+      "Biotecnologia",
+      "Eficácia comprovada",
+      "Facial",
+      "Hidratação",
+      "Indicado para todos os tipos de pele",
+      "Nanotecnologia",
+      "Rugas",
+      "Testado Dermatologicamente",
+    ],
     gallery: [
       exogeneticPdrnUso,
       exogeneticPdrnTextura,
@@ -251,7 +275,16 @@ export const tulipiaLancamentos: Product[] = [
     description: "Uma espuma suave com Niacinamida, ativos hidratantes e pH fisiológico para uma limpeza delicada e precisa. Com ação probiótica, ajuda hidratar a pele, remove impurezas, oleosidade e mantém o conforto desde o primeiro uso.",
     fullDescription: "Uma espuma suave com Niacinamida, ativos hidratantes e pH fisiológico para uma limpeza delicada e precisa. Com ação probiótica, ajuda hidratar a pele, remove impurezas, oleosidade e mantém o conforto desde o primeiro uso.",
     price: "R$ 94,90",
-    image: niacineEspuma150ml,
+    image: niacineEspumaOfficial,
+    applicationIndications: [
+      "Controle da oleosidade",
+      "Eficácia comprovada",
+      "Espuma de limpeza",
+      "Facial",
+      "Indicado para todos os tipos de pele",
+      "Nanotecnologia",
+      "Pré-biótico",
+    ],
     gallery: [
       niacineEspumaTextura,
       niacineEspumaProduto,
@@ -314,7 +347,20 @@ export const tulipiaBlackSecret: Product[] = [
     description: "Peeling profissional para tratamento de acne com Azeloglicina®. Reduz inflamação, controla oleosidade e clareia manchas pós-inflamatórias.",
     fullDescription: "Peeling profissional para tratamento de acne com Azeloglicina®. Reduz inflamação, controla oleosidade e clareia manchas pós-inflamatórias. Testado dermatologicamente.",
     price: "R$ 199,86",
-    image: blackSecretPeelingAntiacne,
+    image: blackSecretAntiacneOfficial,
+    applicationIndications: [
+      "Acne",
+      "Calmante",
+      "Cicatrizes de acne",
+      "Clareamento e uniformização da pele",
+      "Controle da oleosidade",
+      "Eficácia comprovada",
+      "Exclusivo para profissional",
+      "Facial",
+      "Indicado para todos os tipos de pele",
+      "Nanotecnologia",
+      "Testado Dermatologicamente",
+    ],
     gallery: [
       blackSecretAntiacneAgua,
       blackSecretAntiacneRobo,
@@ -343,7 +389,17 @@ export const tulipiaBlackSecret: Product[] = [
     description: "O segredo de profissional para profissional. A nova geração dos peelings profissionais com esfoliação química, física e enzimática.",
     fullDescription: "O Black Secret Peeling Facial é a nova geração dos peelings profissionais. Com tecnologia e ativos consagrados pela ciência dermocosmética, sua fórmula inovadora traz o equilíbrio entre segurança e performance, unindo a esfoliação química, física e enzimática a um blend clareador de alta potência. Clareia com precisão, além de atuar sobre a textura irregular e sinais de envelhecimento, inclusive linhas finas e marcas. A descamação controlada garante segurança e eficácia, promovendo uma pele mais luminosa, uniforme, sem marcas e rejuvenescida em poucas sessões.",
     price: "R$ 714,14",
-    image: blackSecret2FasesHero,
+    image: blackSecret2FasesOfficial,
+    applicationIndications: [
+      "Clareamento e uniformização da pele",
+      "Eficácia comprovada",
+      "Esfoliação",
+      "Exclusivo para profissional",
+      "Facial",
+      "Nanotecnologia",
+      "Peeling",
+      "Rugas",
+    ],
     gallery: [
       blackSecretPeeling2Fases,
       blackSecretAntes1,
@@ -410,7 +466,15 @@ export const tulipiaBlackSecret: Product[] = [
     description: "Sabonete rico em Ácido Glicólico que promove limpeza profunda, esfoliação química leve e segura, revitalização e uniformização da pele.",
     fullDescription: "O sabonete glico-renovador Black Secret é um sabonete rico em Ácido Glicólico que promove limpeza profunda, esfoliação química leve e segura, revitalização e uniformização da pele, para uma pele visivelmente mais macia e luminosa já nas primeiras aplicações. Promove uma limpeza profunda da pele, desobstruindo os poros e eliminando os detritos celulares e poluição. Realiza um importante afinamento da capa córnea, potencializando os tratamentos estéticos faciais e corporais.",
     price: "R$ 180,00",
-    image: blackSecretSaboneteGlicoHero,
+    image: blackSecretSaboneteOfficial,
+    applicationIndications: [
+      "Clareamento e uniformização da pele",
+      "Esfoliação",
+      "Facial e Corporal",
+      "Indicado para todos os tipos de pele",
+      "Limpeza profunda",
+      "Nanotecnologia",
+    ],
     gallery: [
       blackSecretSaboneteGlico,
       blackSecretSaboneteGlicoProduto,
@@ -436,7 +500,15 @@ export const tulipiaBlackSecret: Product[] = [
     description: "Concentrado de ativos purificantes e nanopartículas que remove oleosidade e potencializa a renovação celular.",
     fullDescription: "Concentrado de ativos purificantes e nanopartículas, esta solução não somente remove a oleosidade e impurezas da pele, mas potencializa o processo de renovação celular, deixando-a profundamente limpa e com uma agradável sensação de frescor. Sua utilização, especialmente nas peles oleosas e seborreicas, permite um preparo perfeito para os procedimentos estéticos, aumentando significativamente a receptividade dos cosméticos de tratamento.",
     price: "R$ 170,00",
-    image: blackSecretSolucaoPrePeelingHero,
+    image: blackSecretPrePeelingOfficial,
+    applicationIndications: [
+      "Controle da oleosidade",
+      "Exclusivo para profissional",
+      "Facial",
+      "Limpeza profunda",
+      "Nanotecnologia",
+      "Pré-Peeling",
+    ],
     gallery: [
       blackSecretSolucaoPrePeeling,
       blackSecretSolucaoPrePeelingProduto,
@@ -459,7 +531,14 @@ export const tulipiaBlackSecret: Product[] = [
     description: "Concentrado com blend de ácidos clareadores que auxilia na uniformização do tom da pele e suaviza áreas escurecidas.",
     fullDescription: "Com uma combinação sinérgica de ácidos, este concentrado auxilia no clareamento e na uniformização do tom da pele, contribuindo para a melhora da aparência de áreas escurecidas. Proporciona textura suavizada, luminosidade e conforto, promovendo o equilíbrio cutâneo. Ideal para protocolos de manutenção da pele e para cuidados com áreas escurecidas, sem causar descamação ou vermelhidão perceptível.",
     price: "R$ 199,00",
-    image: blackSecretClareadorHero,
+    image: blackSecretClareadorOfficial,
+    applicationIndications: [
+      "Clareamento e uniformização da pele",
+      "Facial e Corporal",
+      "Indicado para todos os tipos de pele",
+      "Manchas",
+      "Nanotecnologia",
+    ],
     gallery: [
       blackSecretClareador,
       blackSecretClareadorProduto,
@@ -1033,7 +1112,17 @@ export const tulipiaImmortaliteC: Product[] = [
     description: "Possui ação clareadora e firmadora. Promove preenchimento e hidratação.",
     fullDescription: "Nano Sérum de Vitamina C com ação clareadora e firmadora. Sua nanotecnologia permite que os ativos penetrem profundamente na pele, promovendo preenchimento visível e hidratação intensa. Combate sinais de envelhecimento e uniformiza o tom da pele.",
     price: "R$ 159,00",
-    image: immortaliteCHero,
+    image: immortaliteSerumOfficial,
+    applicationIndications: [
+      "Anti-idade",
+      "Clareamento e uniformização da pele",
+      "Eficácia comprovada",
+      "Facial",
+      "Hidratação",
+      "Indicado para todos os tipos de pele",
+      "Nanotecnologia",
+      "Vitamina C",
+    ],
     gallery: [immortaliteCHero, immortaliteCLaranja],
     activeIngredients: [
       "Ácido Hialurônico",
@@ -1075,7 +1164,15 @@ export const tulipiaFirmFlaccid: Product[] = [
     description: "Combate a flacidez com ação firmadora e hidratante. Assinatura Ana Paula Graf.",
     fullDescription: "Nano Fluido Remineralizante desenvolvido com a assinatura de Ana Paula Graf. Combate a flacidez com potente ação firmadora e hidratante. Sua tecnologia nano permite penetração profunda dos ativos, promovendo firmeza visível e pele revitalizada.",
     price: "R$ 169,00",
-    image: firmFlaccid300mlHero,
+    image: firmFlaccid300mlOfficial,
+    applicationIndications: [
+      "Facial e Corporal",
+      "Firmeza",
+      "Flacidez",
+      "Hidratação",
+      "Indicado para todos os tipos de pele",
+      "Nanotecnologia",
+    ],
     activeIngredients: [
       "Adenosina®",
       "Nano Hydra Lift (Ácido Hialurônico)",
@@ -1205,7 +1302,16 @@ export const tulipiaLifeC: Product[] = [
     description: "Sérum com alta concentração de vitamina C 20%, Hyaxel e Alpha-Arbutina para clareamento intensivo.",
     fullDescription: "Sérum clareador de alta potência com 20% de vitamina C estabilizada. Formulado com Hyaxel para hidratação profunda e Alpha-Arbutina para uniformização do tom. Proporciona ação antioxidante intensa, clareamento de manchas e prevenção do envelhecimento precoce.",
     price: "R$ 212,86",
-    image: lifeCSerum20New,
+    image: lifeCSerumClareadorOfficial,
+    applicationIndications: [
+      "Clareamento e uniformização da pele",
+      "Eficácia comprovada",
+      "Facial",
+      "Indicado para todos os tipos de pele",
+      "Manchas",
+      "Nanotecnologia",
+      "Vitamina C",
+    ],
     activeIngredients: [
       "Vitamina C 20%",
       "Hyaxel",
@@ -1305,9 +1411,23 @@ export const tulipiaSweetLips: Product[] = [
     brand: "Tulipia",
     category: "labial",
     isProfessional: false,
-    description: "Gloss hidratante sabor tutti frutti. Hidrata e dá brilho natural",
+    description: "Gloss labial com Dragon's Blood LP, DMAE e ácido hialurônico. Ultra hidratante e rejuvenescedor com sabor tutti frutti.",
+    fullDescription: "Gloss labial com ação ultra hidratante e rejuvenescedora. Dragon's Blood LP repara e suaviza, DMAE previne envelhecimento e reduz rugas verticais, ácido hialurônico hidrata intensamente. Restaura volume e textura aveludada dos lábios com delicioso sabor tutti frutti.",
     price: "R$ 69,00",
-    image: sweetLipsGlossCereja,
+    image: sweetLipsTuttiFruttiOfficial,
+    activeIngredients: [
+      "Dragon's Blood LP",
+      "Drone EGF",
+      "Nano Ácido Hialurônico",
+      "Nano DMAE",
+      "Óleo de Amêndoas Doce",
+    ],
+    applicationIndications: [
+      "Hidratação",
+      "Labial",
+      "Rejuvenescimento",
+      "Volume",
+    ],
   },
   {
     id: 7124,
@@ -1388,7 +1508,15 @@ export const tulipiaHialux: Product[] = [
     description: "Sérum preenchedor com 6 tipos de ácido hialurônico e 4 bioestimuladores. Hidratação profunda e preenchimento de linhas.",
     fullDescription: "Sérum concentrado com 6 tipos de ácido hialurônico de diferentes pesos moleculares que atuam em todas as camadas da pele. Conta com 4 bioestimuladores, vitamina E, alantoína e D-pantenol para nutrição completa. Promove preenchimento visível, hidratação profunda e rejuvenescimento.",
     price: "R$ 199,00",
-    image: hialuxSerumHero,
+    image: hialuxSerumOfficial,
+    applicationIndications: [
+      "Anti-idade",
+      "Facial",
+      "Hidratação",
+      "Indicado para todos os tipos de pele",
+      "Nanotecnologia",
+      "Preenchimento",
+    ],
     activeIngredients: [
       "6 Tipos de Ácido Hialurônico",
       "4 Bioestimuladores",
