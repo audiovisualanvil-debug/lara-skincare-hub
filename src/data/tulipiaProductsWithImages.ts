@@ -179,6 +179,8 @@ import moovyCremeOzonizado from "@/assets/products/tulipia/moovy-creme-ozonizado
 
 // Capilar - novas imagens
 import tricoGeneticistTonico from "@/assets/products/tulipia/trico-geneticist-tonico.png";
+import tricoGeneticistShampooRevitalizante from "@/assets/products/tulipia/trico-geneticist-shampoo-revitalizante.png";
+import tricoGeneticistShampooEsfoliante from "@/assets/products/tulipia/trico-geneticist-shampoo-esfoliante.png";
 
 // Floraty - novas imagens
 import floratyEmolienteHero from "@/assets/products/tulipia/floraty-emoliente-hero.png";
@@ -2159,14 +2161,26 @@ export const tulipiaTricoGeneticist: Product[] = [
     brand: "Tulipia",
     category: "capilar",
     isProfessional: false,
-    description: "Shampoo esfoliante com Ácido Salicílico, cristais de quartzo e sementes de damasco para limpeza profunda.",
-    fullDescription: "Shampoo esfoliante que promove peeling do couro cabeludo com Ácido Salicílico, cristais de quartzo e sementes de damasco, removendo oleosidade e desobstruindo folículos. Enriquecido com extratos vegetais e células-tronco de maçã suíça.",
+    description: "Shampoo esfoliante com ação antiqueda e pró-elasticidade. Reequilíbrio e nutrição do couro cabeludo.",
+    fullDescription: "Shampoo esfoliante que promove peeling do couro cabeludo com Ácido Salicílico, PhytoCellTec™ Malus, Nanoxenel e Semente de Apricot. Combate a queda e estimula o crescimento dos cabelos sadios. Melhora a flexibilidade e a resistência dos fios. Testado dermatologicamente com Nanotecnologia Vegetal.",
     price: "R$ 141,43",
-    image: tricoGeneticistTonico,
+    image: tricoGeneticistShampooEsfoliante,
     activeIngredients: [
+      "Jaborandi",
       "Ácido Salicílico",
-      "Cristais de Quartzo",
-      "Células-Tronco de Maçã Suíça",
+      "PhytoCellTec™ Malus",
+      "Nanoxenel",
+      "Semente de Apricot",
+      "Quartzo",
+      "Pantenol",
+    ],
+    applicationIndications: [
+      "Antiqueda",
+      "Capilar",
+      "Esfoliação",
+      "Nanotecnologia",
+      "Nutrição",
+      "Testado Dermatologicamente",
     ],
   },
   {
@@ -2175,9 +2189,17 @@ export const tulipiaTricoGeneticist: Product[] = [
     brand: "Tulipia",
     category: "capilar",
     isProfessional: false,
-    description: "Shampoo revitalizante para cabelos fracos e danificados com ativos fortalecedores.",
+    description: "Shampoo revitalizante que fortalece os fios e devolve a vitalidade. Com ação antiqueda e pró-elasticidade.",
+    fullDescription: "Nano Shampoo Revitalizante que fortalece os fios e devolve a vitalidade aos cabelos fracos e danificados. Com ativos fortalecedores e tecnologia nano para maior penetração e eficácia. Assinatura Taís Pedroso.",
     price: "R$ 129,00",
-    image: tricoGeneticistTonico,
+    image: tricoGeneticistShampooRevitalizante,
+    applicationIndications: [
+      "Antiqueda",
+      "Capilar",
+      "Fortalecimento",
+      "Nanotecnologia",
+      "Revitalização",
+    ],
   },
   {
     id: 7253,
