@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowLeft, Cpu, Zap, Radio, Shield } from "lucide-react";
+import { ArrowLeft, Droplets, Sparkles, Beaker, Leaf, Heart } from "lucide-react";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import ProductGrid from "@/components/shop/ProductGrid";
@@ -15,10 +15,11 @@ import smartgrHero from "@/assets/banners/smartgr-hero-wide.jpg";
 
 const categories = [
   { id: "all", label: "Todos", count: allSmartGRWithImages.length },
-  { id: "led", label: "LED Terapia", icon: Zap },
-  { id: "radiofrequencia", label: "Radiofrequência", icon: Radio },
-  { id: "ultrassom", label: "Ultrassom", icon: Cpu },
-  { id: "boosters", label: "Boosters", icon: Shield },
+  { id: "skin-pro", label: "Skin Pro", icon: Droplets },
+  { id: "boosters", label: "Boosters", icon: Beaker },
+  { id: "especialidades", label: "Especialidades", icon: Sparkles },
+  { id: "labios", label: "Lábios", icon: Heart },
+  { id: "capilar", label: "Capilar", icon: Leaf },
 ];
 
 const SmartGRPage = () => {
@@ -46,12 +47,12 @@ const SmartGRPage = () => {
           >
             <img
               src={smartgrHero}
-              alt="Smart GR - Equipamentos Profissionais"
+              alt="Smart GR - Ativos Inteligentes"
               className="w-full h-full object-cover"
             />
           </motion.div>
           <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-900/60 to-transparent"
+            className="absolute inset-0 bg-gradient-to-r from-teal-900/85 via-teal-900/60 to-transparent"
             style={{ opacity }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
@@ -64,24 +65,36 @@ const SmartGRPage = () => {
               transition={{ duration: 0.8 }}
               className="max-w-2xl"
             >
-              <Badge className="mb-4 bg-blue-500/20 text-blue-400 border-blue-500/30 backdrop-blur-sm">
-                Equipamentos Profissionais
+              <Badge className="mb-4 bg-teal-500/20 text-teal-300 border-teal-500/30 backdrop-blur-sm">
+                Soluções Dermatológicas
               </Badge>
               
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 tracking-tight">
                 <span className="font-semibold">Smart GR</span>
                 <br />
-                <span className="text-blue-400">Tecnologia</span>
+                <span className="text-teal-400">Ativos Inteligentes</span>
               </h1>
               
-              <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
-                Aparelhos de última geração para clínicas e profissionais da estética. 
-                LED, radiofrequência, ultrassom e muito mais.
+              <p className="text-lg md:text-xl text-white/80 mb-6 leading-relaxed max-w-lg">
+                Tecnologia Bio Green e Octahidro para resultados profissionais. 
+                Ativos de alta performance para protocolos clínicos avançados.
               </p>
 
+              {/* Eco Badges */}
+              <div className="flex gap-3 mb-8">
+                <Badge variant="outline" className="border-teal-400/50 text-teal-300 bg-teal-500/10">
+                  <Leaf className="w-3 h-3 mr-1" />
+                  Eco Friendly
+                </Badge>
+                <Badge variant="outline" className="border-teal-400/50 text-teal-300 bg-teal-500/10">
+                  <Heart className="w-3 h-3 mr-1" />
+                  Cruelty Free
+                </Badge>
+              </div>
+
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                  Ver Equipamentos
+                <Button size="lg" className="bg-teal-600 hover:bg-teal-700 text-white">
+                  Ver Ativos
                 </Button>
                 <Button 
                   variant="outline" 
@@ -89,7 +102,7 @@ const SmartGRPage = () => {
                   className="border-white/30 text-white hover:bg-white/10"
                   asChild
                 >
-                  <Link to="/contato">Solicitar Orçamento</Link>
+                  <Link to="/contato">Fale Conosco</Link>
                 </Button>
               </div>
             </motion.div>
@@ -101,10 +114,10 @@ const SmartGRPage = () => {
           <div className="container mx-auto px-4 py-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { icon: Cpu, label: "Tecnologia Avançada", desc: "Última geração" },
-                { icon: Zap, label: "Alta Potência", desc: "Resultados rápidos" },
-                { icon: Radio, label: "Múltiplas Funções", desc: "Versatilidade" },
-                { icon: Shield, label: "Garantia Estendida", desc: "Suporte técnico" },
+                { icon: Beaker, label: "Bio Green", desc: "Tecnologia sustentável" },
+                { icon: Droplets, label: "Octahidro", desc: "Máxima penetração" },
+                { icon: Sparkles, label: "Skin Pro", desc: "Resultados profissionais" },
+                { icon: Leaf, label: "Eco Friendly", desc: "Formulações verdes" },
               ].map((feature, index) => (
                 <motion.div
                   key={feature.label}
@@ -113,8 +126,8 @@ const SmartGRPage = () => {
                   transition={{ delay: 0.2 + index * 0.1 }}
                   className="flex items-center gap-3"
                 >
-                  <div className="p-2 bg-blue-500/10 rounded-lg">
-                    <feature.icon className="w-5 h-5 text-blue-600" />
+                  <div className="p-2 bg-teal-500/10 rounded-lg">
+                    <feature.icon className="w-5 h-5 text-teal-600" />
                   </div>
                   <div>
                     <p className="font-medium text-foreground text-sm">{feature.label}</p>
@@ -155,8 +168,8 @@ const SmartGRPage = () => {
                       px-4 py-2 rounded-full text-sm font-medium transition-all duration-200
                       flex items-center gap-2
                       ${activeCategory === cat.id 
-                        ? "bg-blue-600 text-white shadow-md" 
-                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                        ? "bg-teal-600 text-white shadow-md" 
+                        : "bg-secondary text-secondary-foreground hover:bg-teal-500/10"
                       }
                     `}
                   >
@@ -196,20 +209,21 @@ const SmartGRPage = () => {
         </section>
 
         {/* CTA Section */}
-        <AnimatedSection direction="fade" className="bg-card border-t border-border">
+        <AnimatedSection direction="fade" className="bg-teal-600">
           <div className="container mx-auto px-4 py-16 text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
-              Quer saber mais sobre nossos equipamentos?
+            <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
+              Quer conhecer nossos ativos inteligentes?
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Entre em contato com nossa equipe técnica para uma demonstração ou orçamento personalizado.
+            <p className="text-white/80 mb-8 max-w-xl mx-auto">
+              Entre em contato para saber mais sobre as tecnologias Bio Green e Octahidro 
+              e como aplicá-las em seus protocolos.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" asChild>
+              <Button size="lg" className="bg-white text-teal-700 hover:bg-white/90" asChild>
                 <Link to="/contato">Entrar em Contato</Link>
               </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/consultoria">Agendar Demonstração</Link>
+              <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white/10" asChild>
+                <Link to="/consultoria">Agendar Consultoria</Link>
               </Button>
             </div>
           </div>
