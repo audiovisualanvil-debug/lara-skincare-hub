@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, ReactNode } from "react";
+import React, { createContext, useContext, useMemo, ReactNode } from "react";
 import { useCart } from "./CartContext";
 
 // Brand theme types
