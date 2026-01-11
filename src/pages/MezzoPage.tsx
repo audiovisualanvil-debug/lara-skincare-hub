@@ -9,6 +9,7 @@ import {
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import ProductGrid from "@/components/shop/ProductGrid";
+import { BrandPageLayout } from "@/components/brand";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -157,10 +158,10 @@ const MezzoPage = () => {
   };
 
   return (
-    <>
+    <BrandPageLayout overrideBackground="#FFFFFF">
       <MainHeader />
 
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-white font-poppins">
         {/* Mezzo Sub-Header */}
         <div className="border-b border-gray-100 bg-white sticky top-16 z-40">
           <div className="container mx-auto px-4">
@@ -391,7 +392,7 @@ const MezzoPage = () => {
       </main>
 
       <MainFooter />
-    </>
+    </BrandPageLayout>
   );
 };
 
