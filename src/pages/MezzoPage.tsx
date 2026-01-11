@@ -1,13 +1,17 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowLeft, FlaskConical, Sparkles, Zap, Shield, Filter, X, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
+import { 
+  Heart, ShoppingBag, User, Search, 
+  Sparkles, Droplets, Sun, FlaskConical, Leaf, Percent,
+  ChevronDown, X, Filter
+} from "lucide-react";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import ProductGrid from "@/components/shop/ProductGrid";
-import AnimatedSection from "@/components/home/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,28 +22,33 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 
-// Import banner for hero
-import mezzoHero from "@/assets/banners/mezzo-hero-wide.jpg";
+// Import banners
+import obiomeBanner from "@/assets/banners/mezzo-obiome-banner.png";
+import lhaExoBanner from "@/assets/banners/mezzo-lha-exo-banner.png";
 
-// Categories with icons
-const categories = [
-  { id: "all", label: "Todos", icon: null },
-  { id: "exossomas", label: "Exossomas", icon: FlaskConical },
-  { id: "capilar", label: "Capilar", icon: Sparkles },
-  { id: "corpo", label: "Corporal", icon: Zap },
-  { id: "fotoprotetor", label: "Fotoproteção", icon: Shield },
-  { id: "homecare", label: "Home Care", icon: Sparkles },
-  { id: "limpeza", label: "Limpeza", icon: FlaskConical },
-  { id: "vitaminac", label: "Vitamina C", icon: Zap },
-  { id: "esfoliacao", label: "Esfoliação", icon: Sparkles },
-  { id: "mascaras", label: "Máscaras", icon: FlaskConical },
-  { id: "hidratacao", label: "Hidratação", icon: Zap },
-  { id: "peeling", label: "Peeling Ácidos", icon: Shield },
-  { id: "acnediol", label: "Acnediol", icon: FlaskConical },
-  { id: "nutraceuticos", label: "Nutracêuticos", icon: Sparkles },
+// Mezzo brand color
+const MEZZO_PINK = "#C91E5B";
+
+// Navigation categories matching the official site
+const navCategories = [
+  { id: "all", label: "Todos" },
+  { id: "corpo", label: "Corporal" },
+  { id: "capilar", label: "Capilar" },
+  { id: "exossomas", label: "Exossomas e PDRN" },
+  { id: "fotoprotetor", label: "Proteção Solar" },
+  { id: "vitaminac", label: "Vitamina C" },
+  { id: "peeling", label: "Anti-Idade" },
+  { id: "lancamentos", label: "Lançamento" },
 ];
 
-// Skin type filters based on product indications
+// Main category buttons with icons
+const mainCategories = [
+  { id: "corpo", label: "Corporal", icon: Sparkles, color: MEZZO_PINK },
+  { id: "all", label: "Facial", icon: Droplets, color: "#2D3748" },
+  { id: "promocoes", label: "Promoções", icon: Percent, color: "#2D3748" },
+];
+
+// Skin type filters
 const skinTypes = [
   { id: "all", label: "Todos os tipos" },
   { id: "oleosa", label: "Pele Oleosa" },
@@ -48,6 +57,24 @@ const skinTypes = [
   { id: "acneica", label: "Pele Acneica" },
   { id: "madura", label: "Pele Madura" },
   { id: "manchas", label: "Com Manchas" },
+];
+
+// All filter categories
+const allCategories = [
+  { id: "all", label: "Todos", icon: null },
+  { id: "exossomas", label: "Exossomas" },
+  { id: "capilar", label: "Capilar" },
+  { id: "corpo", label: "Corporal" },
+  { id: "fotoprotetor", label: "Fotoproteção" },
+  { id: "homecare", label: "Home Care" },
+  { id: "limpeza", label: "Limpeza" },
+  { id: "vitaminac", label: "Vitamina C" },
+  { id: "esfoliacao", label: "Esfoliação" },
+  { id: "mascaras", label: "Máscaras" },
+  { id: "hidratacao", label: "Hidratação" },
+  { id: "peeling", label: "Peeling Ácidos" },
+  { id: "acnediol", label: "Acnediol" },
+  { id: "nutraceuticos", label: "Nutracêuticos" },
 ];
 
 // Helper to check if product matches skin type
@@ -90,22 +117,24 @@ const matchesSkinType = (product: typeof allMezzoWithImages[0], skinType: string
 const MezzoPage = () => {
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeSkinType, setActiveSkinType] = useState("all");
-  const [showFilters, setShowFilters] = useState(false);
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0.3]);
-  const scale = useTransform(scrollY, [0, 500], [1, 1.1]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentBanner, setCurrentBanner] = useState(0);
 
-  // Filter products based on category and skin type
+  const banners = [obiomeBanner, lhaExoBanner];
+
+  // Filter products
   const filteredProducts = useMemo(() => {
     return allMezzoWithImages.filter(product => {
       const matchesCategory = activeCategory === "all" || product.category === activeCategory;
       const matchesSkin = matchesSkinType(product, activeSkinType);
-      return matchesCategory && matchesSkin;
+      const matchesSearch = searchQuery === "" || 
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (product.description || "").toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSkin && matchesSearch;
     });
-  }, [activeCategory, activeSkinType]);
+  }, [activeCategory, activeSkinType, searchQuery]);
 
-  // Count products per skin type for current category
+  // Count products per skin type
   const skinTypeCounts = useMemo(() => {
     const baseProducts = activeCategory === "all" 
       ? allMezzoWithImages 
@@ -119,254 +148,246 @@ const MezzoPage = () => {
     }, {} as Record<string, number>);
   }, [activeCategory]);
 
-  const hasActiveFilters = activeCategory !== "all" || activeSkinType !== "all";
+  const hasActiveFilters = activeCategory !== "all" || activeSkinType !== "all" || searchQuery !== "";
 
   const clearFilters = () => {
     setActiveCategory("all");
     setActiveSkinType("all");
+    setSearchQuery("");
   };
 
   return (
     <>
       <MainHeader />
 
-      <main className="min-h-screen bg-background">
-        {/* Hero Section with Parallax */}
-        <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-          {/* Background Image with Parallax */}
-          <motion.div 
-            className="absolute inset-0"
-            style={{ y, scale }}
+      <main className="min-h-screen bg-white">
+        {/* Mezzo Sub-Header */}
+        <div className="border-b border-gray-100 bg-white sticky top-16 z-40">
+          <div className="container mx-auto px-4">
+            {/* Category Navigation */}
+            <nav className="flex items-center justify-center gap-6 py-3 overflow-x-auto scrollbar-hide">
+              {navCategories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`
+                    whitespace-nowrap text-sm font-medium transition-colors
+                    ${activeCategory === cat.id 
+                      ? "text-[#C91E5B]" 
+                      : "text-gray-600 hover:text-[#C91E5B]"
+                    }
+                  `}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+
+        {/* Hero Banner Carousel */}
+        <section className="relative overflow-hidden">
+          <motion.div
+            key={currentBanner}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="w-full"
           >
             <img
-              src={mezzoHero}
-              alt="Linha Mezzo - Alta Performance"
-              className="w-full h-full object-cover"
+              src={banners[currentBanner]}
+              alt="Mezzo Banner"
+              className="w-full h-auto object-cover"
             />
           </motion.div>
-          <motion.div 
-            className="absolute inset-0 bg-gradient-to-r from-rose-950/85 via-rose-900/60 to-transparent"
-            style={{ opacity }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
-
-          {/* Hero Content */}
-          <div className="relative h-full container mx-auto px-4 flex items-center">
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="max-w-2xl"
-            >
-              <Badge className="mb-4 bg-rose-500/20 text-rose-300 border-rose-500/30 backdrop-blur-sm">
-                Alta Performance
-              </Badge>
-              
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 tracking-tight">
-                <span className="font-semibold">Mezzo</span>
-                <br />
-                <span className="text-rose-400">Dermocosméticos</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl text-white/80 mb-8 leading-relaxed max-w-lg">
-                Tratamentos estéticos avançados com exossomas, peptídeos e ativos 
-                de última geração. Resultados profissionais garantidos.
-              </p>
-
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-rose-600 hover:bg-rose-700 text-white">
-                  Ver Produtos
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  className="border-white/30 text-white hover:bg-white/10"
-                  asChild
-                >
-                  <Link to="/consultoria">Consultoria Gratuita</Link>
-                </Button>
-              </div>
-            </motion.div>
+          
+          {/* Banner Navigation Dots */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+            {banners.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentBanner(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  currentBanner === index ? "bg-[#C91E5B] w-6" : "bg-white/60"
+                }`}
+              />
+            ))}
           </div>
         </section>
 
-        {/* Features Bar */}
-        <AnimatedSection direction="fade" className="bg-card border-y border-border">
-          <div className="container mx-auto px-4 py-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { icon: FlaskConical, label: "Exossomas", desc: "Regeneração celular" },
-                { icon: Zap, label: "Peptídeos", desc: "Bioestimulação" },
-                { icon: Sparkles, label: "Alta Concentração", desc: "Resultados rápidos" },
-                { icon: Shield, label: "Uso Profissional", desc: "Clínicas e estéticas" },
-              ].map((feature, index) => (
-                <motion.div
-                  key={feature.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 + index * 0.1 }}
-                  className="flex items-center gap-3"
+        {/* Por Categoria Section */}
+        <section className="py-12 bg-gray-50">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl font-serif text-gray-800 mb-3">
+              Por categoria
+            </h2>
+            <p className="text-gray-500 mb-8">
+              Encontre os produtos que deseja através de nossas categorias
+            </p>
+
+            {/* Main Category Buttons */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {mainCategories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id === "promocoes" ? "all" : cat.id)}
+                  className={`
+                    flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all
+                    ${cat.id === "corpo" 
+                      ? "bg-[#C91E5B] text-white hover:bg-[#A91850]" 
+                      : "bg-gray-800 text-white hover:bg-gray-700"
+                    }
+                  `}
                 >
-                  <div className="p-2 bg-rose-500/10 rounded-lg">
-                    <feature.icon className="w-5 h-5 text-rose-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground text-sm">{feature.label}</p>
-                    <p className="text-xs text-muted-foreground">{feature.desc}</p>
-                  </div>
-                </motion.div>
+                  <cat.icon className="w-5 h-5" />
+                  {cat.label}
+                </button>
               ))}
             </div>
           </div>
-        </AnimatedSection>
+        </section>
 
         {/* Products Section */}
-        <section className="container mx-auto px-4 py-12 md:py-16">
-          {/* Back Link */}
-          <Link 
-            to="/loja" 
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Voltar para a loja
-          </Link>
+        <section className="container mx-auto px-4 py-12">
+          {/* Section Title */}
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-serif text-gray-800 mb-2">
+              Nossos Produtos
+            </h2>
+            <p className="text-gray-500">
+              {filteredProducts.length} produtos disponíveis
+            </p>
+          </div>
 
-          {/* Filters Section */}
-          <AnimatedSection direction="fade" className="mb-10">
-            <div className="flex flex-col gap-4">
-              {/* Filter Header */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Filter className="w-5 h-5 text-muted-foreground" />
-                  <span className="font-medium text-foreground">Filtros</span>
-                  {hasActiveFilters && (
-                    <Badge variant="secondary" className="text-xs">
-                      {filteredProducts.length} produtos
-                    </Badge>
-                  )}
-                </div>
-                {hasActiveFilters && (
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={clearFilters}
-                    className="text-muted-foreground hover:text-foreground"
+          {/* Filters Row */}
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-gray-100">
+            {/* Left: Category Pills */}
+            <div className="flex flex-wrap gap-2">
+              {allCategories.slice(0, 8).map((cat) => {
+                const count = cat.id === "all" 
+                  ? allMezzoWithImages.length 
+                  : allMezzoWithImages.filter(p => p.category === cat.id).length;
+                
+                if (cat.id !== "all" && count === 0) return null;
+                
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`
+                      px-4 py-2 rounded-full text-sm font-medium transition-all
+                      ${activeCategory === cat.id 
+                        ? "bg-[#C91E5B] text-white" 
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                      }
+                    `}
                   >
-                    <X className="w-4 h-4 mr-1" />
-                    Limpar filtros
-                  </Button>
-                )}
-              </div>
-
-              {/* Skin Type Dropdown */}
-              <div className="flex flex-wrap items-center gap-3">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button 
-                      variant="outline" 
-                      className={`gap-2 ${activeSkinType !== "all" ? "border-rose-500 bg-rose-500/10 text-rose-600" : ""}`}
-                    >
-                      <span>Tipo de Pele: {skinTypes.find(s => s.id === activeSkinType)?.label}</span>
-                      <ChevronDown className="w-4 h-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-56 bg-popover z-50">
-                    <DropdownMenuLabel>Filtrar por tipo de pele</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    {skinTypes.map((type) => (
-                      <DropdownMenuCheckboxItem
-                        key={type.id}
-                        checked={activeSkinType === type.id}
-                        onCheckedChange={() => setActiveSkinType(type.id)}
-                        disabled={skinTypeCounts[type.id] === 0}
-                      >
-                        <span className="flex-1">{type.label}</span>
-                        <span className="text-xs text-muted-foreground ml-2">
-                          ({skinTypeCounts[type.id]})
-                        </span>
-                      </DropdownMenuCheckboxItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-
-              {/* Category Pills */}
-              <div className="flex flex-wrap gap-2">
-                {categories.map((cat) => {
-                  const count = cat.id === "all" 
-                    ? allMezzoWithImages.length 
-                    : allMezzoWithImages.filter(p => p.category === cat.id).length;
-                  
-                  if (cat.id !== "all" && count === 0) return null;
-                  
-                  return (
-                    <button
-                      key={cat.id}
-                      onClick={() => setActiveCategory(cat.id)}
-                      className={`
-                        px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200
-                        flex items-center gap-1.5
-                        ${activeCategory === cat.id 
-                          ? "bg-rose-600 text-white shadow-md" 
-                          : "bg-secondary text-secondary-foreground hover:bg-rose-500/10"
-                        }
-                      `}
-                    >
-                      {cat.icon && <cat.icon className="w-3.5 h-3.5" />}
-                      {cat.label}
-                      <span className={`
-                        text-xs px-1.5 py-0.5 rounded-full
-                        ${activeCategory === cat.id 
-                          ? "bg-white/20 text-white" 
-                          : "bg-muted text-muted-foreground"
-                        }
-                      `}>
-                        {count}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+                    {cat.label}
+                  </button>
+                );
+              })}
             </div>
-          </AnimatedSection>
+
+            {/* Right: Skin Type & Clear */}
+            <div className="flex items-center gap-3">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    className={`gap-2 border-gray-200 ${
+                      activeSkinType !== "all" 
+                        ? "border-[#C91E5B] bg-pink-50 text-[#C91E5B]" 
+                        : ""
+                    }`}
+                  >
+                    <span>Tipo de Pele</span>
+                    <ChevronDown className="w-4 h-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-white">
+                  <DropdownMenuLabel>Filtrar por tipo de pele</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  {skinTypes.map((type) => (
+                    <DropdownMenuCheckboxItem
+                      key={type.id}
+                      checked={activeSkinType === type.id}
+                      onCheckedChange={() => setActiveSkinType(type.id)}
+                      disabled={skinTypeCounts[type.id] === 0}
+                    >
+                      <span className="flex-1">{type.label}</span>
+                      <span className="text-xs text-gray-400 ml-2">
+                        ({skinTypeCounts[type.id]})
+                      </span>
+                    </DropdownMenuCheckboxItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {hasActiveFilters && (
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={clearFilters}
+                  className="text-gray-500 hover:text-[#C91E5B]"
+                >
+                  <X className="w-4 h-4 mr-1" />
+                  Limpar
+                </Button>
+              )}
+            </div>
+          </div>
 
           {/* Products Grid */}
-          <AnimatedSection direction="up">
-            <ProductGrid 
-              products={filteredProducts} 
-              columns={4}
-            />
-          </AnimatedSection>
+          <ProductGrid 
+            products={filteredProducts} 
+            columns={4}
+          />
 
           {/* Empty State */}
           {filteredProducts.length === 0 && (
             <div className="text-center py-16">
-              <p className="text-muted-foreground">
-                Nenhum produto encontrado nesta categoria.
+              <p className="text-gray-500 mb-4">
+                Nenhum produto encontrado.
               </p>
+              <Button 
+                variant="outline" 
+                onClick={clearFilters}
+                className="border-[#C91E5B] text-[#C91E5B] hover:bg-pink-50"
+              >
+                Limpar filtros
+              </Button>
             </div>
           )}
         </section>
 
         {/* CTA Section */}
-        <AnimatedSection direction="fade" className="bg-card border-t border-border">
-          <div className="container mx-auto px-4 py-16 text-center">
-            <h2 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">
+        <section className="bg-gradient-to-r from-[#C91E5B] to-[#E84A7F] py-16">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-2xl md:text-3xl font-serif text-white mb-4">
               Precisa de ajuda para escolher?
             </h2>
-            <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
-              Nossa equipe de especialistas pode recomendar os produtos ideais para seu tipo de pele e objetivos.
+            <p className="text-white/80 mb-8 max-w-xl mx-auto">
+              Nossa equipe de especialistas pode recomendar os produtos ideais para seu tipo de pele.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" asChild>
+              <Button 
+                size="lg" 
+                className="bg-white text-[#C91E5B] hover:bg-gray-100"
+                asChild
+              >
                 <Link to="/quiz-pele">Fazer Quiz de Pele</Link>
               </Button>
-              <Button variant="outline" size="lg" asChild>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-white text-white hover:bg-white/10"
+                asChild
+              >
                 <Link to="/consultoria">Agendar Consultoria</Link>
               </Button>
             </div>
           </div>
-        </AnimatedSection>
+        </section>
       </main>
 
       <MainFooter />
