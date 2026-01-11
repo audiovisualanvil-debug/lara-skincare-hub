@@ -54,16 +54,16 @@ const MobileBottomNav = () => {
                 >
                   <div className="relative">
                     <Icon 
-                      className={`h-5 w-5 transition-colors duration-300 ${active ? "stroke-[2.5]" : ""}`}
+                      className={`h-5 w-5 brand-icon ${active ? "stroke-[2.5]" : ""}`}
                       style={{ color: active && isOnBrandPage ? currentTheme.cart.iconColor : undefined }}
                       strokeWidth={currentTheme.icon.strokeWidth}
                     />
                     {item.badge !== undefined && item.badge > 0 && (
                       <span 
-                        className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full text-[10px] font-bold flex items-center justify-center transition-colors duration-300"
+                        className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full text-[10px] font-bold flex items-center justify-center brand-badge"
                         style={{ 
-                          backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : undefined,
-                          color: isOnBrandPage ? currentTheme.cart.badgeText : undefined,
+                          backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : 'hsl(var(--primary))',
+                          color: isOnBrandPage ? currentTheme.cart.badgeText : 'hsl(var(--primary-foreground))',
                         }}
                       >
                         {item.badge > 9 ? "9+" : item.badge}
@@ -88,16 +88,16 @@ const MobileBottomNav = () => {
               >
                 <div className="relative">
                   <Icon 
-                    className="h-5 w-5 transition-colors duration-300" 
+                    className="h-5 w-5 brand-icon" 
                     style={{ color: isOnBrandPage ? currentTheme.cart.iconColor : undefined }}
                     strokeWidth={currentTheme.icon.strokeWidth}
                   />
                   {item.badge !== undefined && item.badge > 0 && (
                     <span 
-                      className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full text-[10px] font-bold flex items-center justify-center transition-colors duration-300"
+                      className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full text-[10px] font-bold flex items-center justify-center brand-badge"
                       style={{ 
-                        backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : undefined,
-                        color: isOnBrandPage ? currentTheme.cart.badgeText : undefined,
+                        backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : 'hsl(var(--primary))',
+                        color: isOnBrandPage ? currentTheme.cart.badgeText : 'hsl(var(--primary-foreground))',
                       }}
                     >
                       {item.badge > 9 ? "9+" : item.badge}

@@ -284,19 +284,19 @@ const MainHeader = () => {
               )}
 
               {/* Favorites Icon - Adaptive to brand theme */}
-              <Button variant="ghost" size="icon" className="relative hidden md:flex h-10 w-10 hover:bg-accent/50 transition-colors duration-300" asChild>
+              <Button variant="ghost" size="icon" className="relative hidden md:flex h-10 w-10 hover:bg-accent/50" asChild>
                 <Link to="/favoritos">
                   <Heart 
-                    className="h-5 w-5 transition-colors duration-300" 
+                    className="h-5 w-5 brand-icon" 
                     style={{ color: isOnBrandPage ? currentTheme.cart.iconColor : undefined }}
                     strokeWidth={currentTheme.icon.strokeWidth}
                   />
                   {totalFavorites > 0 && (
                     <span 
-                      className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full text-[10px] font-semibold flex items-center justify-center transition-colors duration-300"
+                      className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full text-[10px] font-semibold flex items-center justify-center brand-badge"
                       style={{ 
-                        backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : undefined,
-                        color: isOnBrandPage ? currentTheme.cart.badgeText : undefined,
+                        backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : 'hsl(var(--primary))',
+                        color: isOnBrandPage ? currentTheme.cart.badgeText : 'hsl(var(--primary-foreground))',
                       }}
                     >
                       {totalFavorites > 9 ? "9+" : totalFavorites}
@@ -309,20 +309,20 @@ const MainHeader = () => {
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="relative h-10 w-10 hover:bg-accent/50 transition-colors duration-300" 
+                className="relative h-10 w-10 hover:bg-accent/50" 
                 onClick={openCart}
               >
                 <ShoppingBag 
-                  className="h-5 w-5 transition-colors duration-300" 
+                  className="h-5 w-5 brand-icon" 
                   style={{ color: isOnBrandPage ? currentTheme.cart.iconColor : undefined }}
                   strokeWidth={currentTheme.icon.strokeWidth}
                 />
                 {totalItems > 0 && (
                   <span 
-                    className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full text-[10px] font-semibold flex items-center justify-center transition-colors duration-300"
+                    className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full text-[10px] font-semibold flex items-center justify-center brand-badge"
                     style={{ 
-                      backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : undefined,
-                      color: isOnBrandPage ? currentTheme.cart.badgeText : undefined,
+                      backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : 'hsl(var(--primary))',
+                      color: isOnBrandPage ? currentTheme.cart.badgeText : 'hsl(var(--primary-foreground))',
                     }}
                   >
                     {totalItems > 9 ? "9+" : totalItems}
