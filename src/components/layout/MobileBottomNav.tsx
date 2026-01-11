@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Search, Heart, ShoppingBag, User } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
+import { useBrandTheme } from "@/contexts/BrandThemeContext";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import SearchAutocomplete from "@/components/shop/SearchAutocomplete";
@@ -10,6 +11,7 @@ const MobileBottomNav = () => {
   const location = useLocation();
   const { totalItems, openCart } = useCart();
   const { totalFavorites } = useFavorites();
+  const { currentTheme, isOnBrandPage } = useBrandTheme();
   const [searchOpen, setSearchOpen] = useState(false);
 
   const navItems = [
@@ -51,9 +53,19 @@ const MobileBottomNav = () => {
                   }`}
                 >
                   <div className="relative">
-                    <Icon className={`h-5 w-5 ${active ? "stroke-[2.5]" : ""}`} />
+                    <Icon 
+                      className={`h-5 w-5 transition-colors duration-300 ${active ? "stroke-[2.5]" : ""}`}
+                      style={{ color: active && isOnBrandPage ? currentTheme.cart.iconColor : undefined }}
+                      strokeWidth={currentTheme.icon.strokeWidth}
+                    />
                     {item.badge !== undefined && item.badge > 0 && (
-                      <span className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center">
+                      <span 
+                        className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full text-[10px] font-bold flex items-center justify-center transition-colors duration-300"
+                        style={{ 
+                          backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : undefined,
+                          color: isOnBrandPage ? currentTheme.cart.badgeText : undefined,
+                        }}
+                      >
                         {item.badge > 9 ? "9+" : item.badge}
                       </span>
                     )}
@@ -75,9 +87,19 @@ const MobileBottomNav = () => {
                 className="flex flex-col items-center justify-center flex-1 h-full text-muted-foreground active:text-primary transition-colors"
               >
                 <div className="relative">
-                  <Icon className="h-5 w-5" />
+                  <Icon 
+                    className="h-5 w-5 transition-colors duration-300" 
+                    style={{ color: isOnBrandPage ? currentTheme.cart.iconColor : undefined }}
+                    strokeWidth={currentTheme.icon.strokeWidth}
+                  />
                   {item.badge !== undefined && item.badge > 0 && (
-                    <span className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center">
+                    <span 
+                      className="absolute -top-1.5 -right-1.5 h-4 min-w-4 px-1 rounded-full text-[10px] font-bold flex items-center justify-center transition-colors duration-300"
+                      style={{ 
+                        backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : undefined,
+                        color: isOnBrandPage ? currentTheme.cart.badgeText : undefined,
+                      }}
+                    >
                       {item.badge > 9 ? "9+" : item.badge}
                     </span>
                   )}

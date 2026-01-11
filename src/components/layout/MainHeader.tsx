@@ -12,6 +12,7 @@ import {
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useBrandTheme } from "@/contexts/BrandThemeContext";
 import SearchAutocomplete from "@/components/shop/SearchAutocomplete";
 import { toast } from "sonner";
 
@@ -160,6 +161,7 @@ const MainHeader = () => {
   const { totalItems, openCart } = useCart();
   const { totalFavorites } = useFavorites();
   const { user, signOut, loading } = useAuth();
+  const { currentTheme, isOnBrandPage } = useBrandTheme();
 
   const handleSignOut = async () => {
     const { error } = await signOut();
@@ -281,28 +283,48 @@ const MainHeader = () => {
                 )
               )}
 
-              {/* Favorites Icon */}
-              <Button variant="ghost" size="icon" className="relative hidden md:flex h-10 w-10 hover:bg-accent/50" asChild>
+              {/* Favorites Icon - Adaptive to brand theme */}
+              <Button variant="ghost" size="icon" className="relative hidden md:flex h-10 w-10 hover:bg-accent/50 transition-colors duration-300" asChild>
                 <Link to="/favoritos">
-                  <Heart className="h-5 w-5" />
+                  <Heart 
+                    className="h-5 w-5 transition-colors duration-300" 
+                    style={{ color: isOnBrandPage ? currentTheme.cart.iconColor : undefined }}
+                    strokeWidth={currentTheme.icon.strokeWidth}
+                  />
                   {totalFavorites > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full bg-primary text-[10px] font-semibold text-primary-foreground flex items-center justify-center">
+                    <span 
+                      className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full text-[10px] font-semibold flex items-center justify-center transition-colors duration-300"
+                      style={{ 
+                        backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : undefined,
+                        color: isOnBrandPage ? currentTheme.cart.badgeText : undefined,
+                      }}
+                    >
                       {totalFavorites > 9 ? "9+" : totalFavorites}
                     </span>
                   )}
                 </Link>
               </Button>
 
-              {/* Cart Icon */}
+              {/* Cart Icon - Adaptive to brand theme */}
               <Button 
                 variant="ghost" 
                 size="icon" 
-                className="relative h-10 w-10 hover:bg-accent/50" 
+                className="relative h-10 w-10 hover:bg-accent/50 transition-colors duration-300" 
                 onClick={openCart}
               >
-                <ShoppingBag className="h-5 w-5" />
+                <ShoppingBag 
+                  className="h-5 w-5 transition-colors duration-300" 
+                  style={{ color: isOnBrandPage ? currentTheme.cart.iconColor : undefined }}
+                  strokeWidth={currentTheme.icon.strokeWidth}
+                />
                 {totalItems > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full bg-primary text-[10px] font-semibold text-primary-foreground flex items-center justify-center">
+                  <span 
+                    className="absolute -top-0.5 -right-0.5 h-5 w-5 rounded-full text-[10px] font-semibold flex items-center justify-center transition-colors duration-300"
+                    style={{ 
+                      backgroundColor: isOnBrandPage ? currentTheme.cart.badgeBg : undefined,
+                      color: isOnBrandPage ? currentTheme.cart.badgeText : undefined,
+                    }}
+                  >
                     {totalItems > 9 ? "9+" : totalItems}
                   </span>
                 )}

@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useMemo, ReactNode } from "react";
 import { useCart } from "./CartContext";
+import { useLocation } from "react-router-dom";
 
 // Brand theme types
 export type BrandName = "tulipia" | "mezzo" | "extratos" | "smartgr" | "neutral";
@@ -17,10 +18,26 @@ export interface BrandTheme {
   typography: {
     headingFont: string;
     headingClass: string;
+    bodyClass: string;
   };
   button: {
     style: "elegant" | "bold" | "organic" | "technical";
     className: string;
+  };
+  icon: {
+    style: "elegant" | "rounded" | "organic" | "sharp";
+    strokeWidth: number;
+  };
+  cart: {
+    iconColor: string;
+    badgeBg: string;
+    badgeText: string;
+    drawerAccent: string;
+  };
+  navigation: {
+    style: "clean" | "gradient" | "bordered" | "minimal";
+    activeClassName: string;
+    hoverClassName: string;
   };
   microcopy: {
     ctaText: string;
@@ -45,10 +62,26 @@ const BRAND_THEMES: Record<BrandName, BrandTheme> = {
     typography: {
       headingFont: "'Montserrat', sans-serif",
       headingClass: "font-montserrat",
+      bodyClass: "font-sans",
     },
     button: {
       style: "elegant",
       className: "bg-[#C97C8A] hover:bg-[#B86B79] text-white font-medium tracking-wide transition-all duration-300 shadow-sm hover:shadow-md",
+    },
+    icon: {
+      style: "elegant",
+      strokeWidth: 1.5,
+    },
+    cart: {
+      iconColor: "#C97C8A",
+      badgeBg: "#C97C8A",
+      badgeText: "#FFFFFF",
+      drawerAccent: "#C97C8A",
+    },
+    navigation: {
+      style: "minimal",
+      activeClassName: "text-[#C97C8A] border-b-2 border-[#C97C8A]",
+      hoverClassName: "hover:text-[#C97C8A] transition-colors",
     },
     microcopy: {
       ctaText: "Finalizar Compra",
@@ -61,19 +94,35 @@ const BRAND_THEMES: Record<BrandName, BrandTheme> = {
     name: "mezzo",
     displayName: "Mezzo",
     colors: {
-      primary: "34 40% 59%", // #C29A6A dourado claro
-      primaryHex: "#C29A6A",
-      accent: "34 50% 92%",
-      background: "30 20% 98%",
-      foreground: "30 10% 15%",
+      primary: "338 75% 45%", // #C91E5B magenta/rosa
+      primaryHex: "#C91E5B",
+      accent: "338 50% 92%",
+      background: "0 0% 100%",
+      foreground: "0 0% 15%",
     },
     typography: {
       headingFont: "'Poppins', sans-serif",
       headingClass: "font-poppins",
+      bodyClass: "font-poppins",
     },
     button: {
       style: "bold",
-      className: "bg-[#C29A6A] hover:bg-[#A88456] text-white font-semibold uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg hover:scale-[1.02]",
+      className: "bg-[#C91E5B] hover:bg-[#A8184D] text-white font-semibold uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg hover:scale-[1.02]",
+    },
+    icon: {
+      style: "rounded",
+      strokeWidth: 2,
+    },
+    cart: {
+      iconColor: "#C91E5B",
+      badgeBg: "#C91E5B",
+      badgeText: "#FFFFFF",
+      drawerAccent: "#C91E5B",
+    },
+    navigation: {
+      style: "clean",
+      activeClassName: "text-[#C91E5B] font-semibold",
+      hoverClassName: "hover:text-[#C91E5B] transition-colors",
     },
     microcopy: {
       ctaText: "Garantir Resultados",
@@ -95,10 +144,26 @@ const BRAND_THEMES: Record<BrandName, BrandTheme> = {
     typography: {
       headingFont: "'Inter', sans-serif",
       headingClass: "font-inter",
+      bodyClass: "font-inter",
     },
     button: {
       style: "organic",
       className: "bg-[#6FAF8E] hover:bg-[#5D9A7B] text-white font-medium rounded-full transition-all duration-300 shadow-sm hover:shadow-md",
+    },
+    icon: {
+      style: "organic",
+      strokeWidth: 1.75,
+    },
+    cart: {
+      iconColor: "#6FAF8E",
+      badgeBg: "#6FAF8E",
+      badgeText: "#FFFFFF",
+      drawerAccent: "#6FAF8E",
+    },
+    navigation: {
+      style: "bordered",
+      activeClassName: "text-[#6FAF8E] border-b-2 border-[#6FAF8E]",
+      hoverClassName: "hover:text-[#6FAF8E] transition-colors",
     },
     microcopy: {
       ctaText: "Completar Pedido",
@@ -120,10 +185,26 @@ const BRAND_THEMES: Record<BrandName, BrandTheme> = {
     typography: {
       headingFont: "'Roboto', sans-serif",
       headingClass: "font-roboto",
+      bodyClass: "font-roboto",
     },
     button: {
       style: "technical",
       className: "bg-[#2F5DA9] hover:bg-[#254A8A] text-white font-medium rounded-none transition-colors duration-150",
+    },
+    icon: {
+      style: "sharp",
+      strokeWidth: 2,
+    },
+    cart: {
+      iconColor: "#2F5DA9",
+      badgeBg: "#2F5DA9",
+      badgeText: "#FFFFFF",
+      drawerAccent: "#2F5DA9",
+    },
+    navigation: {
+      style: "gradient",
+      activeClassName: "text-[#2F5DA9] font-medium",
+      hoverClassName: "hover:text-[#2F5DA9] transition-colors",
     },
     microcopy: {
       ctaText: "Confirmar Pedido",
@@ -145,10 +226,26 @@ const BRAND_THEMES: Record<BrandName, BrandTheme> = {
     typography: {
       headingFont: "'Cormorant Garamond', serif",
       headingClass: "font-display",
+      bodyClass: "font-body",
     },
     button: {
       style: "elegant",
       className: "bg-primary hover:bg-primary/90 text-primary-foreground font-medium transition-all duration-300",
+    },
+    icon: {
+      style: "elegant",
+      strokeWidth: 1.5,
+    },
+    cart: {
+      iconColor: "#C2785C",
+      badgeBg: "#C2785C",
+      badgeText: "#FFFFFF",
+      drawerAccent: "#C2785C",
+    },
+    navigation: {
+      style: "minimal",
+      activeClassName: "text-primary font-medium",
+      hoverClassName: "hover:text-primary transition-colors",
     },
     microcopy: {
       ctaText: "Finalizar Compra",
@@ -172,17 +269,39 @@ const BRAND_MAP: Record<string, BrandName> = {
   "smartgr": "smartgr",
 };
 
+// Route to brand mapping
+const ROUTE_BRAND_MAP: Record<string, BrandName> = {
+  "/mezzo": "mezzo",
+  "/tulipia": "tulipia",
+  "/extratos-da-terra": "extratos",
+  "/smart-gr": "smartgr",
+};
+
 interface BrandThemeContextType {
   currentTheme: BrandTheme;
+  routeTheme: BrandTheme | null;
   dominantBrand: BrandName;
   brandCounts: Record<string, number>;
   allBrands: BrandName[];
+  isOnBrandPage: boolean;
 }
 
 const BrandThemeContext = createContext<BrandThemeContextType | undefined>(undefined);
 
 export const BrandThemeProvider = ({ children }: { children: ReactNode }) => {
   const { items } = useCart();
+  const location = useLocation();
+
+  // Detect brand from current route
+  const routeBrand = useMemo(() => {
+    const pathname = location.pathname;
+    for (const [route, brand] of Object.entries(ROUTE_BRAND_MAP)) {
+      if (pathname.startsWith(route)) {
+        return brand;
+      }
+    }
+    return null;
+  }, [location.pathname]);
 
   const { dominantBrand, brandCounts, allBrands } = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -212,10 +331,20 @@ export const BrandThemeProvider = ({ children }: { children: ReactNode }) => {
     };
   }, [items]);
 
-  const currentTheme = BRAND_THEMES[dominantBrand];
+  // Use route brand if on a brand page, otherwise use dominant brand from cart
+  const activeThemeName = routeBrand || dominantBrand;
+  const currentTheme = BRAND_THEMES[activeThemeName];
+  const routeTheme = routeBrand ? BRAND_THEMES[routeBrand] : null;
 
   return (
-    <BrandThemeContext.Provider value={{ currentTheme, dominantBrand, brandCounts, allBrands }}>
+    <BrandThemeContext.Provider value={{ 
+      currentTheme, 
+      routeTheme,
+      dominantBrand, 
+      brandCounts, 
+      allBrands,
+      isOnBrandPage: routeBrand !== null,
+    }}>
       {children}
     </BrandThemeContext.Provider>
   );
