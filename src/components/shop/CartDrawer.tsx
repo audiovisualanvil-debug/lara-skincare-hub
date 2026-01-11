@@ -3,6 +3,7 @@ import { Minus, Plus, ShoppingBag, Trash2, Tag, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCart } from "@/contexts/CartContext";
+import { useBrandTheme } from "@/contexts/BrandThemeContext";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -25,6 +26,7 @@ const CartDrawer = () => {
     totalItems 
   } = useCart();
   const { toast } = useToast();
+  const { currentTheme } = useBrandTheme();
   const [couponCode, setCouponCode] = useState("");
   const remainingForFreeShipping = Math.max(0, freeShippingThreshold - total);
 
@@ -54,8 +56,14 @@ const CartDrawer = () => {
   return (
     <Sheet open={isCartOpen} onOpenChange={(open) => !open && closeCart()}>
       <SheetContent className="w-full sm:max-w-md flex flex-col p-0">
-        <SheetHeader className="p-6 border-b border-detail">
-          <SheetTitle className="font-display text-lg font-semibold text-foreground">
+        <SheetHeader 
+          className="p-6 border-b transition-colors duration-300"
+          style={{ borderColor: `${currentTheme.cart.drawerAccent}30` }}
+        >
+          <SheetTitle 
+            className="font-display text-lg font-semibold transition-colors duration-300"
+            style={{ color: currentTheme.cart.drawerAccent }}
+          >
             Seu Carrinho ({totalItems})
           </SheetTitle>
         </SheetHeader>
