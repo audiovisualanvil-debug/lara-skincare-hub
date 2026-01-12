@@ -254,17 +254,14 @@ const HomePage = () => {
           </motion.div>
         </motion.div>
 
-        {/* Brands Section - Highlighted */}
-        <BrandsSection />
-        
-        {/* Brand Collections Section - Sub-lines */}
-        <BrandCollectionsSection />
+        {/* 1. Quiz CTA - Primeiro engajamento após hero */}
+        <AnimatedSection direction="fade" delay={0.1}>
+          <QuizCTA />
+        </AnimatedSection>
 
-
-        {/* Categories Section - Editorial Luxo */}
+        {/* 2. Categorias por Preocupação - Navegação rápida */}
         <section className="section-editorial bg-background">
           <div className="container-editorial">
-            {/* Section Header */}
             <AnimatedSection className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-10 md:mb-14">
               <div>
                 <motion.span 
@@ -277,7 +274,7 @@ const HomePage = () => {
                   Explore
                 </motion.span>
                 <h2 className="font-display text-2xl md:text-display-sm lg:text-display text-foreground mt-3">
-                  Categorias por Preocupação
+                  Qual sua Preocupação?
                 </h2>
                 <div className="w-12 h-px bg-gold/50 mt-4" />
               </div>
@@ -290,7 +287,6 @@ const HomePage = () => {
               </Link>
             </AnimatedSection>
             
-            {/* Categories Grid */}
             <motion.div 
               variants={containerVariants}
               initial="hidden"
@@ -307,166 +303,31 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Tulipia Promotional Banner - Luxo */}
-        <section className="relative overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-2">
-            {/* Image Side */}
-            <motion.div 
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative h-[350px] md:h-[450px] lg:h-[600px]"
-            >
-              <img
-                src={sweetLipsLayane}
-                alt="Linha Tulipia - Dermocosméticos Premium"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-noir/60 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-noir/30" />
-            </motion.div>
-
-            {/* Content Side - Luxo */}
-            <motion.div 
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-noir flex items-center justify-center p-8 md:p-12 lg:p-16"
-            >
-              <div className="max-w-md text-center lg:text-left">
-                <span className="text-xs uppercase tracking-[0.3em] text-gold font-body font-medium">
-                  Linha Exclusiva
-                </span>
-                <h2 className="font-display text-3xl md:text-display-sm lg:text-display text-ivory mt-4">
-                  Tulipia <br />
-                  <span className="text-gold">Dermocosméticos</span>
-                </h2>
-                <div className="w-12 h-px bg-gold/50 mt-6 mb-6 mx-auto lg:mx-0" />
-                <p className="text-ivory/70 font-body leading-relaxed">
-                  Tecnologia nano encapsulada e ingredientes premium para resultados profissionais.
-                </p>
-                
-                {/* Feature highlights - Luxo */}
-                <div className="grid grid-cols-2 gap-4 mt-8">
-                  {[
-                    { label: "Nano Tech", desc: "Ativos encapsulados" },
-                    { label: "Premium", desc: "Alta concentração" },
-                    { label: "Resultados", desc: "Desde 1ª aplicação" },
-                    { label: "Profissional", desc: "Clínicas e estéticas" },
-                  ].map((item) => (
-                    <div key={item.label} className="text-left">
-                      <p className="text-gold text-sm font-medium">{item.label}</p>
-                      <p className="text-ivory/50 text-xs mt-0.5">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <motion.div 
-                  className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <Link 
-                    to="/tulipia"
-                    className="inline-flex h-12 md:h-14 px-8 items-center justify-center bg-gold text-noir font-body font-medium uppercase tracking-widest text-xs md:text-sm hover:bg-gold-light transition-colors group"
-                  >
-                    Explorar Linha
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                  <Link 
-                    to="/consultoria"
-                    className="inline-flex h-12 md:h-14 px-8 items-center justify-center border border-ivory/30 text-ivory font-body font-medium uppercase tracking-widest text-xs md:text-sm hover:bg-ivory/10 transition-colors"
-                  >
-                    Consultoria
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Tulipia Products Section */}
-        <BrandSection
-          brand="Tulipia"
-          title="Nanotecnologia Premium"
-          subtitle="Tecnologia nano encapsulada para resultados profissionais. Descubra nossa linha exclusiva de dermocosméticos."
-          products={allTulipiaWithImages}
-          linkTo="/tulipia"
-          linkLabel="Ver toda a linha Tulipia"
-          bgVariant="gradient"
-        />
-
-        {/* Mezzo Products Section */}
-        <BrandSection
-          brand="Mezzo"
-          title="Alta Performance"
-          subtitle="Produtos profissionais para tratamentos estéticos avançados. Exossomas, clareamento, antiacne e muito mais."
-          products={allMezzoWithImages}
-          linkTo="/mezzo"
-          linkLabel="Ver toda a linha Mezzo"
-          bgVariant="dark"
-        />
-
-        {/* Extratos da Terra Products Section */}
-        <BrandSection
-          brand="Extratos da Terra"
-          title="Natureza & Ciência"
-          subtitle="Dermocosméticos que unem ingredientes naturais à tecnologia cosmética. Resultados comprovados com fórmulas suaves."
-          products={allExtratosWithImages}
-          linkTo="/extratos-da-terra"
-          linkLabel="Ver toda a linha Extratos"
-          bgVariant="light"
-        />
-
-        {/* Smart GR Products Section */}
-        <BrandSection
-          brand="Smart GR"
-          title="Equipamentos Profissionais"
-          subtitle="Aparelhos de última geração para tratamentos estéticos. LED, radiofrequência, ultrassom e muito mais."
-          products={allSmartGRWithImages}
-          linkTo="/smart-gr"
-          linkLabel="Ver equipamentos Smart GR"
-          bgVariant="gradient"
-        />
-
-        {/* Kits Section - Animated */}
-        <AnimatedSection delay={0.1}>
-          <KitsSection kits={kits} />
-        </AnimatedSection>
-
-        {/* Quiz CTA - Animated */}
-        <AnimatedSection direction="fade" delay={0.1}>
-          <QuizCTA />
-        </AnimatedSection>
-
-        {/* Featured Products - Editorial with Parallax Background */}
-        <section className="section-editorial bg-secondary/30 relative overflow-hidden">
-          {/* Decorative parallax elements */}
+        {/* 3. Best Sellers - Prova social */}
+        <section className="section-editorial bg-champagne relative overflow-hidden">
           <motion.div
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 0.1 }}
+            whileInView={{ opacity: 0.08 }}
             viewport={{ once: true }}
-            className="absolute top-0 right-0 w-96 h-96 bg-primary rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
+            className="absolute top-0 right-0 w-96 h-96 bg-gold rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"
           />
           
           <div className="container-editorial relative z-10">
-            <AnimatedSection className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <AnimatedSection className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14">
               <div>
-                <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+                <span className="text-xs uppercase tracking-[0.3em] text-gold font-body font-medium">
                   Best Sellers
                 </span>
-                <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
-                  Produtos mais procurados
+                <h2 className="font-display text-2xl md:text-display-sm lg:text-display text-foreground mt-3">
+                  Mais Procurados
                 </h2>
+                <div className="w-12 h-px bg-gold/50 mt-4" />
               </div>
               <Link 
                 to="/loja" 
-                className="flex items-center gap-2 text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors font-body font-medium group"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-foreground hover:text-gold transition-colors font-body font-medium group"
               >
-                Ver catálogo completo
+                Ver catálogo
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </AnimatedSection>
@@ -477,51 +338,164 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Recently Viewed - Animated */}
+        {/* 4. Banner Tulipia - Destaque de marca */}
+        <section className="relative overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <motion.div 
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="relative h-[320px] md:h-[400px] lg:h-[550px]"
+            >
+              <img
+                src={sweetLipsLayane}
+                alt="Linha Tulipia - Dermocosméticos Premium"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-noir/60 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-noir/30" />
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="bg-noir flex items-center justify-center p-6 md:p-10 lg:p-16"
+            >
+              <div className="max-w-md text-center lg:text-left">
+                <span className="text-xs uppercase tracking-[0.3em] text-gold font-body font-medium">
+                  Linha Exclusiva
+                </span>
+                <h2 className="font-display text-2xl md:text-display-sm lg:text-display text-ivory mt-4">
+                  Tulipia <span className="text-gold">Nano</span>
+                </h2>
+                <div className="w-12 h-px bg-gold/50 mt-5 mb-5 mx-auto lg:mx-0" />
+                <p className="text-ivory/70 font-body text-sm md:text-base leading-relaxed">
+                  Tecnologia nano encapsulada para resultados profissionais.
+                </p>
+                
+                <div className="grid grid-cols-2 gap-3 mt-6">
+                  {[
+                    { label: "Nano Tech", desc: "Ativos encapsulados" },
+                    { label: "Premium", desc: "Alta concentração" },
+                  ].map((item) => (
+                    <div key={item.label} className="text-left">
+                      <p className="text-gold text-sm font-medium">{item.label}</p>
+                      <p className="text-ivory/50 text-xs mt-0.5">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <motion.div 
+                  className="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <Link 
+                    to="/tulipia"
+                    className="inline-flex h-12 px-6 md:px-8 items-center justify-center bg-gold text-noir font-body font-medium uppercase tracking-widest text-xs hover:bg-gold-light transition-colors group"
+                  >
+                    Explorar
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 5. Marcas Principais */}
+        <BrandsSection />
+
+        {/* 6. Seções de Produtos por Marca */}
+        <BrandSection
+          brand="Tulipia"
+          title="Nanotecnologia Premium"
+          subtitle="Tecnologia nano encapsulada para resultados profissionais."
+          products={allTulipiaWithImages}
+          linkTo="/tulipia"
+          linkLabel="Ver linha Tulipia"
+          bgVariant="gradient"
+        />
+
+        <BrandSection
+          brand="Mezzo"
+          title="Alta Performance"
+          subtitle="Produtos profissionais para tratamentos estéticos avançados."
+          products={allMezzoWithImages}
+          linkTo="/mezzo"
+          linkLabel="Ver linha Mezzo"
+          bgVariant="dark"
+        />
+
+        <BrandSection
+          brand="Extratos da Terra"
+          title="Natureza & Ciência"
+          subtitle="Dermocosméticos com ingredientes naturais e tecnologia cosmética."
+          products={allExtratosWithImages}
+          linkTo="/extratos-da-terra"
+          linkLabel="Ver linha Extratos"
+          bgVariant="light"
+        />
+
+        <BrandSection
+          brand="Smart GR"
+          title="Equipamentos Profissionais"
+          subtitle="Aparelhos de última geração para tratamentos estéticos."
+          products={allSmartGRWithImages}
+          linkTo="/smart-gr"
+          linkLabel="Ver Smart GR"
+          bgVariant="gradient"
+        />
+
+        {/* 7. Recentemente Visualizados */}
         {recentProducts.length > 0 && (
           <AnimatedSection delay={0.1}>
             <RecentlyViewedSection products={recentProducts} />
           </AnimatedSection>
         )}
 
-        {/* Testimonials - Animated */}
+        {/* 8. Depoimentos - Prova social final */}
         <AnimatedSection direction="up" delay={0.1}>
           <TestimonialsSection testimonials={testimonials} />
         </AnimatedSection>
 
-        {/* CTA Banner - Editorial with Animation */}
-        <section className="bg-primary section-editorial overflow-hidden relative">
-          {/* Animated decorative elements */}
+        {/* 9. CTA Final - Consultoria */}
+        <section className="bg-noir section-editorial overflow-hidden relative">
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 0.1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="absolute -top-20 -left-20 w-64 h-64 border border-primary-foreground/30 rounded-full"
+            className="absolute -top-20 -left-20 w-64 h-64 border border-gold/30 rounded-full"
           />
           <motion.div
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 0.1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="absolute -bottom-32 -right-32 w-96 h-96 border border-primary-foreground/30 rounded-full"
+            className="absolute -bottom-32 -right-32 w-96 h-96 border border-gold/30 rounded-full"
           />
           
           <AnimatedSection className="container-editorial text-center max-w-3xl mx-auto relative z-10">
-            <span className="text-xs uppercase tracking-[0.25em] text-primary-foreground/70 font-body font-semibold">
+            <span className="text-xs uppercase tracking-[0.3em] text-gold font-body font-medium">
               Consultoria Grátis
             </span>
-            <h2 className="font-display text-display-sm md:text-display text-primary-foreground mt-4">
+            <h2 className="font-display text-2xl md:text-display-sm lg:text-display text-ivory mt-4">
               Não sabe por onde começar?
             </h2>
-            <p className="mt-6 text-lg text-primary-foreground/80 font-body">
+            <div className="w-12 h-px bg-gold/50 mx-auto mt-6 mb-6" />
+            <p className="text-base md:text-lg text-ivory/70 font-body">
               Faça uma consultoria gratuita e descubra os produtos ideais para sua pele.
             </p>
             <motion.a 
               href="https://wa.me/5511999999999" 
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex mt-10 h-14 px-10 items-center justify-center bg-background text-foreground font-body font-semibold uppercase tracking-wider text-sm hover:bg-background/90 transition-colors group"
+              className="inline-flex mt-8 md:mt-10 h-12 md:h-14 px-8 md:px-10 items-center justify-center bg-gold text-noir font-body font-medium uppercase tracking-widest text-xs md:text-sm hover:bg-gold-light transition-colors group"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
