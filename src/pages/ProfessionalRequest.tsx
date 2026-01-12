@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, Building2, User, Phone, FileText, CheckCircle, Clock, XCircle, Loader2 } from "lucide-react";
+import { ArrowLeft, Building2, User, Phone, FileText, CheckCircle, Clock, XCircle, Loader2, Upload, X, FileImage, File } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -30,10 +30,14 @@ const formatCNPJ = (value: string) => {
     .substring(0, 18);
 };
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
+
 const ProfessionalRequest = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
   const { request, loading: statusLoading, submitRequest, hasExistingRequest } = useProfessionalStatus();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   
   const [formData, setFormData] = useState({
     company_name: "",
@@ -42,6 +46,8 @@ const ProfessionalRequest = () => {
     phone: "",
     reason: "",
   });
+  const [certificateFile, setCertificateFile] = useState<File | null>(null);
+  const [certificatePreview, setCertificatePreview] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -67,9 +73,55 @@ const ProfessionalRequest = () => {
     if (formData.cnpj && formData.cnpj.replace(/\D/g, "").length !== 14) {
       newErrors.cnpj = "CNPJ inválido";
     }
+
+    if (!certificateFile) {
+      newErrors.certificate = "É obrigatório enviar um certificado ou documento comprobatório";
+    }
     
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+      toast.error("Formato não suportado. Use JPG, PNG, WebP ou PDF.");
+      return;
+    }
+
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      toast.error("Arquivo muito grande. Máximo 10MB.");
+      return;
+    }
+
+    setCertificateFile(file);
+
+    // Create preview for images
+    if (file.type.startsWith("image/")) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setCertificatePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setCertificatePreview(null);
+    }
+
+    if (errors.certificate) {
+      setErrors({ ...errors, certificate: "" });
+    }
+  };
+
+  const removeFile = () => {
+    setCertificateFile(null);
+    setCertificatePreview(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -85,10 +137,11 @@ const ProfessionalRequest = () => {
     try {
       await submitRequest({
         company_name: formData.company_name || undefined,
-        cnpj: formData.cnpj.replace(/\D/g, "") || undefined,
+        cnpj: formData.cnpj || undefined,
         contact_name: formData.contact_name,
         phone: formData.phone,
         reason: formData.reason || undefined,
+        certificate_file: certificateFile || undefined,
       });
       
       toast.success("Solicitação enviada com sucesso! Aguarde a análise.");
@@ -288,6 +341,85 @@ const ProfessionalRequest = () => {
                       </p>
                     </div>
                     
+                    {/* Certificate Upload */}
+                    <div className="space-y-3">
+                      <Label className="flex items-center gap-2">
+                        <Upload className="w-4 h-4" />
+                        Certificado Profissional *
+                      </Label>
+                      <p className="text-xs text-muted-foreground">
+                        Envie uma foto ou PDF do seu certificado, diploma ou documento que comprove sua atuação na área de estética.
+                      </p>
+                      
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept=".jpg,.jpeg,.png,.webp,.pdf"
+                        onChange={handleFileChange}
+                        className="hidden"
+                        id="certificate"
+                      />
+                      
+                      {!certificateFile ? (
+                        <label
+                          htmlFor="certificate"
+                          className={`flex flex-col items-center justify-center w-full h-40 border-2 border-dashed rounded-xl cursor-pointer transition-all hover:border-primary hover:bg-primary/5 ${
+                            errors.certificate ? "border-destructive bg-destructive/5" : "border-muted-foreground/30"
+                          }`}
+                        >
+                          <Upload className="w-10 h-10 text-muted-foreground mb-3" />
+                          <span className="text-sm font-medium text-muted-foreground">
+                            Clique para enviar
+                          </span>
+                          <span className="text-xs text-muted-foreground mt-1">
+                            JPG, PNG, WebP ou PDF (máx. 10MB)
+                          </span>
+                        </label>
+                      ) : (
+                        <div className="relative border-2 border-primary/30 rounded-xl p-4 bg-primary/5">
+                          <button
+                            type="button"
+                            onClick={removeFile}
+                            className="absolute top-2 right-2 p-1.5 bg-destructive text-white rounded-full hover:bg-destructive/80 transition-colors"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                          
+                          {certificatePreview ? (
+                            <div className="flex items-center gap-4">
+                              <img 
+                                src={certificatePreview} 
+                                alt="Preview" 
+                                className="w-24 h-24 object-cover rounded-lg"
+                              />
+                              <div>
+                                <p className="font-medium text-sm">{certificateFile.name}</p>
+                                <p className="text-xs text-muted-foreground">
+                                  {(certificateFile.size / 1024 / 1024).toFixed(2)} MB
+                                </p>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex items-center gap-4">
+                              <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
+                                <File className="w-8 h-8 text-primary" />
+                              </div>
+                              <div>
+                                <p className="font-medium text-sm">{certificateFile.name}</p>
+                                <p className="text-xs text-muted-foreground">
+                                  PDF • {(certificateFile.size / 1024 / 1024).toFixed(2)} MB
+                                </p>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      
+                      {errors.certificate && (
+                        <p className="text-sm text-destructive">{errors.certificate}</p>
+                      )}
+                    </div>
+
                     <div>
                       <Label htmlFor="reason" className="flex items-center gap-2">
                         <FileText className="w-4 h-4" />

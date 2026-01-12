@@ -14,7 +14,10 @@ import {
   Phone,
   Mail,
   Calendar,
-  Percent
+  Percent,
+  FileText,
+  Download,
+  ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -43,6 +46,7 @@ interface ProfessionalRequest {
   discount_percentage: number;
   reviewed_at: string | null;
   admin_notes: string | null;
+  certificate_url: string | null;
   created_at: string;
   user_email?: string;
 }
@@ -56,6 +60,7 @@ const AdminProfessionalRequests = () => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("pending");
+  const [downloadingCertificate, setDownloadingCertificate] = useState<string | null>(null);
   
   // Modal state
   const [selectedRequest, setSelectedRequest] = useState<ProfessionalRequest | null>(null);
@@ -173,6 +178,24 @@ const AdminProfessionalRequests = () => {
     setActionType(null);
     setDiscountPercentage([15]);
     setAdminNotes("");
+  };
+
+  const handleDownloadCertificate = async (certificateUrl: string, requestId: string) => {
+    setDownloadingCertificate(requestId);
+    try {
+      const { data, error } = await supabase.storage
+        .from("professional-certificates")
+        .createSignedUrl(certificateUrl, 3600);
+
+      if (error) throw error;
+
+      window.open(data.signedUrl, "_blank");
+    } catch (error) {
+      console.error("Error downloading certificate:", error);
+      toast.error("Erro ao abrir certificado");
+    } finally {
+      setDownloadingCertificate(null);
+    }
   };
 
   const filteredRequests = requests.filter(r => {
@@ -351,6 +374,27 @@ const AdminProfessionalRequests = () => {
                               <div className="mt-4 flex items-center gap-2 text-green-600">
                                 <Percent className="w-4 h-4" />
                                 <span className="font-medium">{request.discount_percentage}% de desconto</span>
+                              </div>
+                            )}
+                            
+                            {/* Certificate Button */}
+                            {request.certificate_url && (
+                              <div className="mt-4">
+                                <Button
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => handleDownloadCertificate(request.certificate_url!, request.id)}
+                                  disabled={downloadingCertificate === request.id}
+                                  className="gap-2"
+                                >
+                                  {downloadingCertificate === request.id ? (
+                                    <Loader2 className="w-4 h-4 animate-spin" />
+                                  ) : (
+                                    <FileText className="w-4 h-4" />
+                                  )}
+                                  Ver Certificado
+                                  <ExternalLink className="w-3 h-3" />
+                                </Button>
                               </div>
                             )}
                             
