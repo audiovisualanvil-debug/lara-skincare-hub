@@ -151,6 +151,11 @@ const menuItems = [
     href: "/monte-sua-rotina",
     hasMegaMenu: false 
   },
+  { 
+    label: "FAQ", 
+    href: "/faq",
+    hasMegaMenu: false 
+  },
 ];
 
 const MainHeader = () => {
