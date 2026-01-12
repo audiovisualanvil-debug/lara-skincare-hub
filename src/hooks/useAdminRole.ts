@@ -16,15 +16,14 @@ export const useAdminRole = () => {
       }
 
       try {
-        const { data, error } = await supabase
-          .from("user_roles")
-          .select("role")
-          .eq("user_id", user.id)
-          .eq("role", "admin")
-          .maybeSingle();
+        // Use the security definer function to check role
+        const { data, error } = await supabase.rpc("has_role", {
+          _user_id: user.id,
+          _role: "admin",
+        });
 
         if (error) throw error;
-        setIsAdmin(!!data);
+        setIsAdmin(data === true);
       } catch (error) {
         console.error("Error checking admin role:", error);
         setIsAdmin(false);
