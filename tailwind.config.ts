@@ -67,6 +67,14 @@ export default {
           dark: "hsl(var(--nude-dark))",
           rose: "hsl(var(--nude-rose))",
         },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+          dark: "hsl(var(--gold-dark))",
+        },
+        champagne: "hsl(var(--champagne))",
+        noir: "hsl(var(--noir))",
+        ivory: "hsl(var(--ivory))",
         espresso: "hsl(var(--espresso))",
         cream: "hsl(var(--cream))",
         sand: "hsl(var(--sand))",
@@ -85,10 +93,11 @@ export default {
         '22': '5.5rem',
       },
       fontSize: {
-        'display-xl': ['5rem', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
-        'display-lg': ['4rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        'display': ['3rem', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
-        'display-sm': ['2.25rem', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'display-xl': ['6rem', { lineHeight: '1', letterSpacing: '-0.04em' }],
+        'display-lg': ['4.5rem', { lineHeight: '1.02', letterSpacing: '-0.03em' }],
+        'display': ['3.5rem', { lineHeight: '1.08', letterSpacing: '-0.025em' }],
+        'display-sm': ['2.5rem', { lineHeight: '1.12', letterSpacing: '-0.02em' }],
+        'editorial-body': ['1.125rem', { lineHeight: '1.7', letterSpacing: '0.01em' }],
       },
       keyframes: {
         "accordion-down": {

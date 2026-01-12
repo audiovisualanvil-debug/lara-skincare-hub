@@ -106,84 +106,90 @@ const testimonials = [
 const Index = () => {
   return (
     <main className="pt-[104px] lg:pt-[136px]">
-      {/* SEÇÃO 2 — BANNER PRINCIPAL (HERO) */}
-      <section className="bg-card">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 min-h-[500px] lg:min-h-[600px]">
-            {/* Left - Model Image */}
-            <div className="relative h-[300px] lg:h-auto overflow-hidden order-2 lg:order-1">
-              <img 
-                src={heroImage} 
-                alt="Modelo com pele saudável"
-                className="w-full h-full object-cover"
-              />
-            </div>
+      {/* HERO - Editorial Luxo */}
+      <section className="relative bg-noir overflow-hidden min-h-[85vh] flex items-center">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Modelo com pele saudável"
+            className="w-full h-full object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-noir/90 via-noir/70 to-transparent" />
+        </div>
+        
+        {/* Content */}
+        <div className="container-editorial relative z-10">
+          <div className="max-w-2xl py-20 lg:py-0">
+            {/* Eyebrow */}
+            <span className="inline-block font-body text-xs font-medium tracking-[0.3em] uppercase text-gold mb-8">
+              Dermocosméticos Premium
+            </span>
             
-            {/* Right - Content + Product */}
-            <div className="relative flex items-center order-1 lg:order-2">
-              {/* Product background */}
-              <div className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block overflow-hidden">
-                <img 
-                  src={productsImage} 
-                  alt="Produtos dermocosméticos"
-                  className="w-full h-full object-cover opacity-20"
-                />
-              </div>
-              
-              <div className="relative z-10 p-8 lg:p-16 space-y-6">
-                <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                  Tratamento para sua pele{" "}
-                  <span className="text-primary">com resultados</span>
-                </h1>
-                <p className="font-body text-base lg:text-lg text-muted-foreground leading-relaxed max-w-md">
-                  Consultoria especializada em dermocosméticos premium
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 pt-4">
-                  <Button variant="gold-outline" size="lg" asChild>
-                    <Link to="/loja">
-                      Conhecer produtos
-                      <ArrowRight className="w-4 h-4 stroke-[1.5]" />
-                    </Link>
-                  </Button>
-                  <Button variant="ghost" size="lg" asChild className="text-foreground hover:text-primary">
-                    <Link to="/monte-sua-rotina">
-                      Monte sua rotina ideal
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+            {/* Headline */}
+            <h1 className="text-display-sm md:text-display lg:text-display-lg text-ivory mb-8">
+              Resultados visíveis.
+              <br />
+              <span className="text-gold">Pele transformada.</span>
+            </h1>
+            
+            {/* Divider */}
+            <div className="divider-luxo mb-8" />
+            
+            {/* Description */}
+            <p className="font-body text-lg lg:text-xl text-ivory/70 leading-relaxed max-w-lg mb-10">
+              Consultoria especializada e produtos de alta performance para tratamentos personalizados.
+            </p>
+            
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button variant="gold" size="xl" asChild className="group">
+                <Link to="/loja">
+                  Explorar Produtos
+                  <ArrowRight className="w-5 h-5 stroke-[1.5] group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button variant="ghost" size="xl" asChild className="text-ivory border border-ivory/20 hover:bg-ivory/10 hover:text-ivory">
+                <Link to="/monte-sua-rotina">
+                  Monte sua Rotina
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SEÇÃO 3 — CATEGORIAS POR DOR */}
-      <section className="py-16 lg:py-24 bg-cream">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-              Cuidados para cada necessidade
+      {/* CATEGORIAS - Editorial Luxo Grid */}
+      <section className="section-editorial bg-background">
+        <div className="container-editorial">
+          <div className="text-center mb-16">
+            <span className="inline-block font-body text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">
+              Tratamentos
+            </span>
+            <h2 className="text-display-sm md:text-display text-foreground">
+              Cuidados Personalizados
             </h2>
+            <div className="divider-luxo mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-8">
             {categories.map((category) => {
               const IconComponent = category.icon;
               return (
                 <Link
                   key={category.slug}
                   to={`/loja?categoria=${category.slug}`}
-                  className="group bg-card border border-border hover:border-primary p-6 lg:p-8 text-center transition-all duration-300 hover:shadow-luxury hover:-translate-y-1"
+                  className="group relative bg-card border border-border hover:border-gold/40 p-8 lg:p-12 text-center transition-all duration-500 hover:shadow-luxury hover:-translate-y-2"
                 >
-                  <div className="w-12 h-12 mx-auto mb-4 border border-primary/30 flex items-center justify-center group-hover:border-primary group-hover:bg-primary/5 transition-colors">
-                    <IconComponent className="w-5 h-5 text-primary stroke-[1.5]" />
+                  <div className="w-14 h-14 mx-auto mb-6 border border-gold/30 flex items-center justify-center group-hover:border-gold group-hover:bg-gold/5 transition-all duration-500">
+                    <IconComponent className="w-6 h-6 text-gold stroke-[1.5]" />
                   </div>
-                  <h3 className="font-display text-base lg:text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="font-display text-lg lg:text-xl text-foreground mb-3 group-hover:text-gold transition-colors duration-300">
                     {category.name}
                   </h3>
-                  <span className="inline-flex items-center gap-1 font-body text-xs text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                    Ver produtos
-                    <ArrowRight className="w-3 h-3 stroke-[1.5]" />
+                  <span className="inline-flex items-center gap-2 font-body text-xs tracking-wide uppercase text-gold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    Explorar
+                    <ArrowRight className="w-3.5 h-3.5 stroke-[1.5]" />
                   </span>
                 </Link>
               );
@@ -192,179 +198,198 @@ const Index = () => {
         </div>
       </section>
 
-      {/* SEÇÃO 4 — PRODUTOS EM DESTAQUE */}
-      <section className="py-16 lg:py-24 bg-card">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="inline-block font-body text-xs font-semibold text-primary uppercase tracking-widest mb-3">
-              Destaques
-            </span>
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-              Mais procurados
-            </h2>
+      {/* PRODUTOS EM DESTAQUE - Editorial Luxo */}
+      <section className="section-editorial bg-champagne">
+        <div className="container-editorial">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6">
+            <div>
+              <span className="inline-block font-body text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">
+                Curadoria
+              </span>
+              <h2 className="text-display-sm md:text-display text-foreground">
+                Mais Procurados
+              </h2>
+            </div>
+            <Link 
+              to="/loja" 
+              className="inline-flex items-center gap-2 font-body text-sm tracking-wide text-foreground hover:text-gold transition-colors editorial-underline"
+            >
+              Ver Coleção Completa
+              <ArrowRight className="w-4 h-4 stroke-[1.5]" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-12 text-center">
-            <Button variant="gold-outline" size="lg" asChild>
-              <Link to="/loja">
-                Ver todos os produtos
-                <ArrowRight className="w-4 h-4 stroke-[1.5]" />
+      {/* MONTE SUA ROTINA - Editorial Luxo */}
+      <section className="section-editorial bg-noir relative overflow-hidden">
+        {/* Decorative */}
+        <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
+          <img 
+            src={productsImage} 
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
+        
+        <div className="container-editorial relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <span className="inline-block font-body text-xs font-medium tracking-[0.3em] uppercase text-gold mb-6">
+              Rotina Personalizada
+            </span>
+            <h2 className="text-display-sm md:text-display text-ivory mb-8">
+              Monte sua Rotina de Skincare
+            </h2>
+            <div className="divider-luxo mx-auto mb-8" />
+            <p className="font-body text-lg text-ivory/60 max-w-xl mx-auto mb-12">
+              Responda algumas perguntas e descubra os produtos ideais para transformar sua pele.
+            </p>
+
+            {/* Steps */}
+            <div className="flex items-center justify-center gap-6 lg:gap-12 mb-14">
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 lg:w-24 lg:h-24 border border-gold/40 flex items-center justify-center bg-ivory/5 backdrop-blur-sm">
+                  <Droplets className="w-8 h-8 lg:w-10 lg:h-10 text-gold stroke-[1]" />
+                </div>
+                <span className="font-body text-xs tracking-wide uppercase mt-4 text-ivory/50">Limpeza</span>
+              </div>
+              <div className="w-12 h-px bg-gold/30" />
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 lg:w-24 lg:h-24 border border-gold/40 flex items-center justify-center bg-ivory/5 backdrop-blur-sm">
+                  <Sparkles className="w-8 h-8 lg:w-10 lg:h-10 text-gold stroke-[1]" />
+                </div>
+                <span className="font-body text-xs tracking-wide uppercase mt-4 text-ivory/50">Tratamento</span>
+              </div>
+              <div className="w-12 h-px bg-gold/30" />
+              <div className="flex flex-col items-center">
+                <div className="w-20 h-20 lg:w-24 lg:h-24 border border-gold/40 flex items-center justify-center bg-ivory/5 backdrop-blur-sm">
+                  <Sun className="w-8 h-8 lg:w-10 lg:h-10 text-gold stroke-[1]" />
+                </div>
+                <span className="font-body text-xs tracking-wide uppercase mt-4 text-ivory/50">Proteção</span>
+              </div>
+            </div>
+
+            <Button variant="gold" size="xl" asChild className="group">
+              <Link to="/monte-sua-rotina">
+                Iniciar Diagnóstico
+                <ArrowRight className="w-5 h-5 stroke-[1.5] group-hover:translate-x-1 transition-transform" />
               </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* SEÇÃO 5 — MONTE SUA ROTINA */}
-      <section className="py-16 lg:py-24 bg-cream">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-10">
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Monte sua rotina de skincare
+      {/* CONSULTORIA - Editorial Luxo */}
+      <section className="section-editorial bg-background">
+        <div className="container-editorial">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="order-2 lg:order-1 space-y-8">
+              <span className="inline-block font-body text-xs font-medium tracking-[0.3em] uppercase text-gold">
+                Especialistas
+              </span>
+              <h2 className="text-display-sm md:text-display text-foreground">
+                Consultoria de Pele Especializada
               </h2>
-              <p className="font-body text-muted-foreground max-w-xl mx-auto">
-                Responda algumas perguntas e descubra os produtos ideais para sua pele
-              </p>
-            </div>
-
-            {/* Steps Icons */}
-            <div className="flex items-center justify-center gap-4 lg:gap-8 mb-10">
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 border-2 border-primary/30 flex items-center justify-center bg-card">
-                  <Droplets className="w-6 h-6 lg:w-8 lg:h-8 text-primary stroke-[1.5]" />
-                </div>
-                <span className="font-body text-xs mt-2 text-muted-foreground">Limpeza</span>
-              </div>
-              <ArrowRight className="w-5 h-5 text-primary/40 stroke-[1.5]" />
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 border-2 border-primary/30 flex items-center justify-center bg-card">
-                  <Sparkles className="w-6 h-6 lg:w-8 lg:h-8 text-primary stroke-[1.5]" />
-                </div>
-                <span className="font-body text-xs mt-2 text-muted-foreground">Tratamento</span>
-              </div>
-              <ArrowRight className="w-5 h-5 text-primary/40 stroke-[1.5]" />
-              <div className="flex flex-col items-center">
-                <div className="w-16 h-16 lg:w-20 lg:h-20 border-2 border-primary/30 flex items-center justify-center bg-card">
-                  <Sun className="w-6 h-6 lg:w-8 lg:h-8 text-primary stroke-[1.5]" />
-                </div>
-                <span className="font-body text-xs mt-2 text-muted-foreground">Proteção</span>
-              </div>
-            </div>
-
-            <div className="text-center">
-              <Button variant="gold" size="xl" asChild>
-                <Link to="/monte-sua-rotina">
-                  Começar agora
-                  <ArrowRight className="w-5 h-5 stroke-[1.5]" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SEÇÃO 6 — CHAMADA CONSULTORIA */}
-      <section className="py-16 lg:py-24 bg-card">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-                Consultoria de pele especializada
-              </h2>
-              <p className="font-body text-muted-foreground leading-relaxed">
-                Atendimento personalizado para manchas, acne e rejuvenescimento
+              <div className="divider-luxo" />
+              <p className="font-body text-lg text-muted-foreground leading-relaxed">
+                Atendimento personalizado para manchas, acne e rejuvenescimento. Resultados comprovados com acompanhamento contínuo.
               </p>
               
-              <ul className="space-y-3 py-4">
+              <ul className="space-y-4 py-4">
                 {[
                   "Avaliação personalizada",
                   "Acompanhamento contínuo",
                   "Indicação de rotina completa",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3 font-body text-sm text-foreground">
-                    <Check className="w-4 h-4 text-primary stroke-[2]" />
+                  <li key={i} className="flex items-center gap-4 font-body text-foreground">
+                    <div className="w-6 h-6 border border-gold/50 flex items-center justify-center">
+                      <Check className="w-3.5 h-3.5 text-gold stroke-[2.5]" />
+                    </div>
                     {item}
                   </li>
                 ))}
               </ul>
               
-              <Button variant="gold-outline" size="lg" asChild>
+              <Button variant="gold-outline" size="xl" asChild className="group">
                 <Link to="/consultoria">
-                  Quero minha avaliação
-                  <ArrowRight className="w-4 h-4 stroke-[1.5]" />
+                  Agendar Avaliação
+                  <ArrowRight className="w-5 h-5 stroke-[1.5] group-hover:translate-x-1 transition-transform" />
                 </Link>
               </Button>
             </div>
             
-            <div className="relative">
-              <div className="aspect-[4/3] overflow-hidden">
+            <div className="order-1 lg:order-2 relative">
+              <div className="aspect-[4/5] overflow-hidden img-editorial">
                 <img 
                   src={consultationImage} 
                   alt="Consultoria de pele"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-3 -right-3 w-16 h-16 border border-primary/30 hidden lg:block" />
+              {/* Decorative frame */}
+              <div className="absolute -bottom-4 -right-4 w-full h-full border border-gold/30 -z-10 hidden lg:block" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* SEÇÃO 7 — MARCAS */}
-      <section className="py-16 lg:py-20 bg-cream">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="font-display text-xl md:text-2xl font-bold text-foreground mb-2">
-              Trabalhamos com marcas premium
+      {/* MARCAS - Editorial Luxo */}
+      <section className="section-editorial-sm bg-champagne">
+        <div className="container-editorial">
+          <div className="text-center mb-12">
+            <span className="inline-block font-body text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">
+              Parceiros
+            </span>
+            <h2 className="font-display text-2xl md:text-3xl text-foreground">
+              Marcas Premium Selecionadas
             </h2>
           </div>
           
-          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-16 mb-6">
+          <div className="flex flex-wrap items-center justify-center gap-12 lg:gap-20">
             {brands.map((brand) => (
               <Link
                 key={brand.slug}
                 to={`/loja?marca=${brand.slug}`}
-                className="font-display text-lg lg:text-2xl font-semibold text-foreground/40 hover:text-primary transition-colors"
+                className="font-display text-xl lg:text-3xl text-foreground/30 hover:text-gold transition-colors duration-500"
               >
                 {brand.name}
               </Link>
             ))}
           </div>
-          
-          <p className="text-center font-body text-sm text-muted-foreground">
-            Selecione sua marca preferida e encontre seus produtos
-          </p>
         </div>
       </section>
 
-      {/* SEÇÃO 8 — DEPOIMENTOS */}
-      <section className="py-16 lg:py-24 bg-card">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
-              O que nossas clientes falam
+      {/* DEPOIMENTOS - Editorial Luxo */}
+      <section className="section-editorial bg-background">
+        <div className="container-editorial">
+          <div className="text-center mb-16">
+            <span className="inline-block font-body text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">
+              Histórias
+            </span>
+            <h2 className="text-display-sm md:text-display text-foreground">
+              O Que Dizem Nossas Clientes
             </h2>
+            <div className="divider-luxo mx-auto mt-6" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, i) => (
               <div 
                 key={i} 
-                className="p-6 border border-border bg-card hover:border-primary/30 transition-colors"
+                className="p-8 lg:p-10 border border-border bg-card hover:border-gold/30 transition-all duration-500 hover:shadow-luxury"
               >
-                <p className="font-body text-sm text-muted-foreground italic leading-relaxed mb-6">
+                <p className="font-display text-lg lg:text-xl text-foreground italic leading-relaxed mb-8">
                   "{testimonial.text}"
                 </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center">
-                    <span className="font-display text-sm font-semibold text-primary">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-gold/10 flex items-center justify-center">
+                    <span className="font-display text-lg text-gold">
                       {testimonial.name.charAt(0)}
                     </span>
                   </div>
@@ -372,7 +397,7 @@ const Index = () => {
                     <p className="font-body text-sm font-medium text-foreground">
                       {testimonial.name}
                     </p>
-                    <p className="font-body text-xs text-muted-foreground">
+                    <p className="font-body text-xs text-muted-foreground tracking-wide">
                       {testimonial.city}
                     </p>
                   </div>
@@ -380,39 +405,33 @@ const Index = () => {
               </div>
             ))}
           </div>
-
-          <div className="mt-8 text-center">
-            <Link 
-              to="/sobre" 
-              className="font-body text-sm text-primary hover:underline inline-flex items-center gap-1"
-            >
-              Ver mais depoimentos
-              <ArrowRight className="w-3 h-3 stroke-[1.5]" />
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* SEÇÃO 9 — NEWSLETTER */}
-      <section className="py-16 lg:py-20 bg-cream">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="max-w-xl mx-auto text-center">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-              Receba novidades e promoções
+      {/* NEWSLETTER - Editorial Luxo */}
+      <section className="section-editorial-sm bg-noir">
+        <div className="container-editorial">
+          <div className="max-w-2xl mx-auto text-center">
+            <span className="inline-block font-body text-xs font-medium tracking-[0.3em] uppercase text-gold mb-6">
+              Exclusivo
+            </span>
+            <h2 className="text-display-sm text-ivory mb-6">
+              Receba Novidades e Ofertas Exclusivas
             </h2>
+            <div className="divider-luxo mx-auto mb-8" />
             
-            <form className="flex flex-col sm:flex-row gap-3 mt-6">
+            <form className="flex flex-col sm:flex-row gap-4 mt-10">
               <Input
                 type="email"
                 placeholder="Seu melhor e-mail"
-                className="flex-1 h-12 font-body text-sm border-border bg-card"
+                className="flex-1 h-14 font-body text-base border-ivory/20 bg-ivory/5 text-ivory placeholder:text-ivory/40 focus-visible:ring-gold focus-visible:border-gold"
               />
-              <Button variant="gold" size="lg" type="submit">
-                Assinar
+              <Button variant="gold" size="xl" type="submit">
+                Inscrever-se
               </Button>
             </form>
             
-            <p className="font-body text-xs text-muted-foreground mt-4">
+            <p className="font-body text-xs text-ivory/40 mt-6 tracking-wide">
               Não enviamos spam. Cancele quando quiser.
             </p>
           </div>
