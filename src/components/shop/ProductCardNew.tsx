@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingCart, Heart, Scale, Check, ArrowRight } from "lucide-react";
+import { ShoppingCart, Heart, Scale, Check, ArrowRight, BadgePercent } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCompare } from "@/contexts/CompareContext";
+import { useProfessional } from "@/contexts/ProfessionalContext";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
@@ -35,6 +36,11 @@ const extractPrice = (priceStr?: string): number | null => {
   return parseFloat(match) || null;
 };
 
+// Helper to format price in BRL
+const formatPrice = (price: number): string => {
+  return `R$ ${price.toFixed(2).replace(".", ",")}`;
+};
+
 const ProductCardNew = ({ product }: ProductCardNewProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -42,16 +48,23 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
   const { addItem } = useCart();
   const { toggleFavorite, isFavorite } = useFavorites();
   const { addToCompare, removeFromCompare, isInCompare, canAddMore } = useCompare();
+  const { isProfessional, discountPercentage } = useProfessional();
   
   const placeholderImage = "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop";
   const isProductFavorite = isFavorite(product.id);
   const isProductInCompare = isInCompare(product.id);
 
+  // Calculate professional price
+  const originalPrice = extractPrice(product.price);
+  const professionalPrice = isProfessional && originalPrice && discountPercentage > 0
+    ? originalPrice * (1 - discountPercentage / 100)
+    : null;
+
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    const price = extractPrice(product.price);
+    const price = professionalPrice ?? extractPrice(product.price);
     if (price === null) {
       toast.error("Este produto não está disponível para compra online. Entre em contato para consultar.");
       return;
@@ -226,13 +239,33 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
         </Link>
         <div className="mt-4 flex items-center justify-between">
           <div className="flex flex-col">
-            <span className="font-display text-xl font-medium text-foreground">
-              {product.price ? (product.price.startsWith("R$") ? product.price : `R$ ${product.price}`) : "Consultar"}
-            </span>
-            {product.originalPrice && (
-              <span className="font-body text-sm text-muted-foreground line-through">
-                {product.originalPrice.startsWith("R$") ? product.originalPrice : `R$ ${product.originalPrice}`}
-              </span>
+            {/* Professional price */}
+            {professionalPrice ? (
+              <>
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <BadgePercent className="w-3.5 h-3.5 text-espresso" />
+                  <span className="text-[10px] uppercase tracking-wider font-body font-semibold text-espresso">
+                    Preço Profissional
+                  </span>
+                </div>
+                <span className="font-display text-xl font-medium text-espresso">
+                  {formatPrice(professionalPrice)}
+                </span>
+                <span className="font-body text-sm text-muted-foreground line-through">
+                  {product.price ? (product.price.startsWith("R$") ? product.price : `R$ ${product.price}`) : ""}
+                </span>
+              </>
+            ) : (
+              <>
+                <span className="font-display text-xl font-medium text-foreground">
+                  {product.price ? (product.price.startsWith("R$") ? product.price : `R$ ${product.price}`) : "Consultar"}
+                </span>
+                {product.originalPrice && (
+                  <span className="font-body text-sm text-muted-foreground line-through">
+                    {product.originalPrice.startsWith("R$") ? product.originalPrice : `R$ ${product.originalPrice}`}
+                  </span>
+                )}
+              </>
             )}
           </div>
           <Link 
