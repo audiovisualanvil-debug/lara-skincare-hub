@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Lock, CreditCard, Truck, Check, ShoppingBag, Minus, Plus, X, Shield } from "lucide-react";
+import { ArrowLeft, Lock, CreditCard, Truck, Check, ShoppingBag, Minus, Plus, X, Shield, AlertCircle } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useBrandTheme, BrandThemeProvider, getBrandTheme, BrandName } from "@/contexts/BrandThemeContext";
 import { Button } from "@/components/ui/button";
@@ -9,15 +9,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
+import { shippingSchema, paymentSchema } from "@/lib/validations/checkout";
+import FormField from "@/components/checkout/FormField";
+import { cn } from "@/lib/utils";
 
 const CheckoutContent = () => {
   const navigate = useNavigate();
-  const { items, subtotal, discount, total, appliedCoupon, updateQuantity, removeItem, applyCoupon, removeCoupon } = useCart();
+  const { items, subtotal, discount, total, appliedCoupon, updateQuantity, removeItem, applyCoupon, removeCoupon, clearCart } = useCart();
   const { currentTheme, dominantBrand, allBrands, brandCounts } = useBrandTheme();
   
   const [couponCode, setCouponCode] = useState("");
   const [step, setStep] = useState<"cart" | "shipping" | "payment">("cart");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedShipping, setSelectedShipping] = useState<string>("PAC");
+  const [selectedPayment, setSelectedPayment] = useState<"card" | "pix" | "boleto">("card");
   
   const [shippingData, setShippingData] = useState({
     name: "",
@@ -32,6 +37,23 @@ const CheckoutContent = () => {
     state: "",
   });
 
+  const [paymentData, setPaymentData] = useState({
+    cardNumber: "",
+    cardName: "",
+    expiry: "",
+    cvv: "",
+  });
+
+  const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
+  const [paymentErrors, setPaymentErrors] = useState<Record<string, string>>({});
+
+  const shippingOptions = [
+    { name: "PAC", price: 19.90, days: "8-12 dias úteis" },
+    { name: "SEDEX", price: 34.90, days: "3-5 dias úteis" },
+  ];
+
+  const selectedShippingOption = shippingOptions.find(o => o.name === selectedShipping) || shippingOptions[0];
+
   const handleApplyCoupon = () => {
     const result = applyCoupon(couponCode);
     if (result.success) {
@@ -42,14 +64,118 @@ const CheckoutContent = () => {
     }
   };
 
+  const validateShipping = (): boolean => {
+    const result = shippingSchema.safeParse(shippingData);
+    if (!result.success) {
+      const errors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        const field = err.path[0] as string;
+        if (!errors[field]) {
+          errors[field] = err.message;
+        }
+      });
+      setShippingErrors(errors);
+      toast.error("Por favor, corrija os campos destacados");
+      return false;
+    }
+    setShippingErrors({});
+    return true;
+  };
+
+  const validatePayment = (): boolean => {
+    if (selectedPayment !== "card") {
+      setPaymentErrors({});
+      return true;
+    }
+
+    const result = paymentSchema.safeParse(paymentData);
+    if (!result.success) {
+      const errors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        const field = err.path[0] as string;
+        if (!errors[field]) {
+          errors[field] = err.message;
+        }
+      });
+      setPaymentErrors(errors);
+      toast.error("Por favor, corrija os dados do cartão");
+      return false;
+    }
+    setPaymentErrors({});
+    return true;
+  };
+
+  const handleShippingSubmit = () => {
+    if (validateShipping()) {
+      setStep("payment");
+    }
+  };
+
   const handleSubmit = () => {
+    if (!validatePayment()) return;
+
     setIsProcessing(true);
+    
     // Simulate processing
     setTimeout(() => {
       setIsProcessing(false);
-      toast.success(currentTheme.microcopy.thankYou);
-      // Would redirect to confirmation page
+      
+      // Navigate to confirmation page with order data
+      navigate("/confirmacao-pedido", {
+        state: {
+          items: items,
+          shipping: shippingData,
+          payment: {
+            method: selectedPayment === "card" 
+              ? "Cartão de Crédito" 
+              : selectedPayment === "pix" 
+              ? "PIX" 
+              : "Boleto Bancário",
+            lastFourDigits: selectedPayment === "card" 
+              ? paymentData.cardNumber.slice(-4) 
+              : undefined,
+          },
+          subtotal,
+          discount,
+          shippingCost: selectedShippingOption.price,
+          total: total + selectedShippingOption.price,
+          estimatedDelivery: selectedShippingOption.days,
+        },
+      });
+      
+      // Clear cart after successful order
+      clearCart();
     }, 2000);
+  };
+
+  // Format phone number as user types
+  const formatPhone = (value: string) => {
+    const numbers = value.replace(/\D/g, "");
+    if (numbers.length <= 10) {
+      return numbers.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3").trim();
+    }
+    return numbers.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3").trim();
+  };
+
+  // Format CEP as user types
+  const formatCEP = (value: string) => {
+    const numbers = value.replace(/\D/g, "");
+    return numbers.replace(/(\d{5})(\d{0,3})/, "$1-$2").trim();
+  };
+
+  // Format card number as user types
+  const formatCardNumber = (value: string) => {
+    const numbers = value.replace(/\D/g, "");
+    return numbers.replace(/(\d{4})(?=\d)/g, "$1 ").trim();
+  };
+
+  // Format expiry date as user types
+  const formatExpiry = (value: string) => {
+    const numbers = value.replace(/\D/g, "");
+    if (numbers.length >= 2) {
+      return numbers.substring(0, 2) + "/" + numbers.substring(2, 4);
+    }
+    return numbers;
   };
 
   if (items.length === 0) {
@@ -444,98 +570,134 @@ const CheckoutContent = () => {
 
                   <div className="grid gap-4">
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="name">Nome completo</Label>
-                        <Input
-                          id="name"
-                          value={shippingData.name}
-                          onChange={(e) => setShippingData({ ...shippingData, name: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="email">E-mail</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={shippingData.email}
-                          onChange={(e) => setShippingData({ ...shippingData, email: e.target.value })}
-                        />
-                      </div>
+                      <FormField
+                        id="name"
+                        label="Nome completo *"
+                        value={shippingData.name}
+                        onChange={(value) => {
+                          setShippingData({ ...shippingData, name: value });
+                          if (shippingErrors.name) setShippingErrors({ ...shippingErrors, name: "" });
+                        }}
+                        error={shippingErrors.name}
+                        placeholder="Seu nome completo"
+                        maxLength={100}
+                      />
+                      <FormField
+                        id="email"
+                        label="E-mail *"
+                        type="email"
+                        value={shippingData.email}
+                        onChange={(value) => {
+                          setShippingData({ ...shippingData, email: value });
+                          if (shippingErrors.email) setShippingErrors({ ...shippingErrors, email: "" });
+                        }}
+                        error={shippingErrors.email}
+                        placeholder="seu@email.com"
+                        maxLength={255}
+                      />
                     </div>
 
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="phone">Telefone</Label>
-                        <Input
-                          id="phone"
-                          value={shippingData.phone}
-                          onChange={(e) => setShippingData({ ...shippingData, phone: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="cep">CEP</Label>
-                        <Input
-                          id="cep"
-                          value={shippingData.cep}
-                          onChange={(e) => setShippingData({ ...shippingData, cep: e.target.value })}
-                        />
-                      </div>
+                      <FormField
+                        id="phone"
+                        label="Telefone *"
+                        value={shippingData.phone}
+                        onChange={(value) => {
+                          setShippingData({ ...shippingData, phone: formatPhone(value) });
+                          if (shippingErrors.phone) setShippingErrors({ ...shippingErrors, phone: "" });
+                        }}
+                        error={shippingErrors.phone}
+                        placeholder="(11) 99999-9999"
+                        maxLength={15}
+                      />
+                      <FormField
+                        id="cep"
+                        label="CEP *"
+                        value={shippingData.cep}
+                        onChange={(value) => {
+                          setShippingData({ ...shippingData, cep: formatCEP(value) });
+                          if (shippingErrors.cep) setShippingErrors({ ...shippingErrors, cep: "" });
+                        }}
+                        error={shippingErrors.cep}
+                        placeholder="00000-000"
+                        maxLength={9}
+                      />
                     </div>
 
                     <div className="grid sm:grid-cols-3 gap-4">
-                      <div className="sm:col-span-2">
-                        <Label htmlFor="address">Endereço</Label>
-                        <Input
-                          id="address"
-                          value={shippingData.address}
-                          onChange={(e) => setShippingData({ ...shippingData, address: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="number">Número</Label>
-                        <Input
-                          id="number"
-                          value={shippingData.number}
-                          onChange={(e) => setShippingData({ ...shippingData, number: e.target.value })}
-                        />
-                      </div>
+                      <FormField
+                        id="address"
+                        label="Endereço *"
+                        className="sm:col-span-2"
+                        value={shippingData.address}
+                        onChange={(value) => {
+                          setShippingData({ ...shippingData, address: value });
+                          if (shippingErrors.address) setShippingErrors({ ...shippingErrors, address: "" });
+                        }}
+                        error={shippingErrors.address}
+                        placeholder="Rua, Avenida..."
+                        maxLength={200}
+                      />
+                      <FormField
+                        id="number"
+                        label="Número *"
+                        value={shippingData.number}
+                        onChange={(value) => {
+                          setShippingData({ ...shippingData, number: value });
+                          if (shippingErrors.number) setShippingErrors({ ...shippingErrors, number: "" });
+                        }}
+                        error={shippingErrors.number}
+                        placeholder="123"
+                        maxLength={10}
+                      />
                     </div>
 
                     <div className="grid sm:grid-cols-3 gap-4">
-                      <div>
-                        <Label htmlFor="complement">Complemento</Label>
-                        <Input
-                          id="complement"
-                          value={shippingData.complement}
-                          onChange={(e) => setShippingData({ ...shippingData, complement: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="neighborhood">Bairro</Label>
-                        <Input
-                          id="neighborhood"
-                          value={shippingData.neighborhood}
-                          onChange={(e) => setShippingData({ ...shippingData, neighborhood: e.target.value })}
-                        />
-                      </div>
+                      <FormField
+                        id="complement"
+                        label="Complemento"
+                        value={shippingData.complement}
+                        onChange={(value) => setShippingData({ ...shippingData, complement: value })}
+                        placeholder="Apto, bloco..."
+                        maxLength={100}
+                      />
+                      <FormField
+                        id="neighborhood"
+                        label="Bairro *"
+                        value={shippingData.neighborhood}
+                        onChange={(value) => {
+                          setShippingData({ ...shippingData, neighborhood: value });
+                          if (shippingErrors.neighborhood) setShippingErrors({ ...shippingErrors, neighborhood: "" });
+                        }}
+                        error={shippingErrors.neighborhood}
+                        placeholder="Seu bairro"
+                        maxLength={100}
+                      />
                       <div className="grid grid-cols-2 gap-2">
-                        <div>
-                          <Label htmlFor="city">Cidade</Label>
-                          <Input
-                            id="city"
-                            value={shippingData.city}
-                            onChange={(e) => setShippingData({ ...shippingData, city: e.target.value })}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="state">UF</Label>
-                          <Input
-                            id="state"
-                            maxLength={2}
-                            value={shippingData.state}
-                            onChange={(e) => setShippingData({ ...shippingData, state: e.target.value.toUpperCase() })}
-                          />
-                        </div>
+                        <FormField
+                          id="city"
+                          label="Cidade *"
+                          value={shippingData.city}
+                          onChange={(value) => {
+                            setShippingData({ ...shippingData, city: value });
+                            if (shippingErrors.city) setShippingErrors({ ...shippingErrors, city: "" });
+                          }}
+                          error={shippingErrors.city}
+                          placeholder="Cidade"
+                          maxLength={100}
+                        />
+                        <FormField
+                          id="state"
+                          label="UF *"
+                          value={shippingData.state}
+                          onChange={(value) => {
+                            setShippingData({ ...shippingData, state: value.toUpperCase() });
+                            if (shippingErrors.state) setShippingErrors({ ...shippingErrors, state: "" });
+                          }}
+                          error={shippingErrors.state}
+                          placeholder="SP"
+                          maxLength={2}
+                        />
                       </div>
                     </div>
                   </div>
@@ -544,30 +706,48 @@ const CheckoutContent = () => {
                   <div className="space-y-3">
                     <h3 className="font-medium">Opções de Frete</h3>
                     <div className="space-y-2">
-                      {[
-                        { name: "PAC", price: 19.90, days: "8-12 dias úteis" },
-                        { name: "SEDEX", price: 34.90, days: "3-5 dias úteis" },
-                      ].map((option) => (
+                      {shippingOptions.map((option) => (
                         <label
                           key={option.name}
-                          className="flex items-center justify-between p-4 border rounded-lg cursor-pointer hover:border-primary transition-colors"
-                          style={{ borderColor: `hsl(${currentTheme.colors.primary} / 0.2)` }}
+                          className={cn(
+                            "flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all",
+                            selectedShipping === option.name 
+                              ? "border-primary bg-primary/5" 
+                              : "border-border hover:border-primary/50"
+                          )}
+                          onClick={() => setSelectedShipping(option.name)}
                         >
                           <div className="flex items-center gap-3">
+                            <div className={cn(
+                              "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                              selectedShipping === option.name 
+                                ? "border-primary" 
+                                : "border-muted-foreground"
+                            )}>
+                              {selectedShipping === option.name && (
+                                <motion.div 
+                                  initial={{ scale: 0 }}
+                                  animate={{ scale: 1 }}
+                                  className="w-2.5 h-2.5 rounded-full bg-primary"
+                                />
+                              )}
+                            </div>
                             <Truck className="w-5 h-5 text-muted-foreground" />
                             <div>
                               <p className="font-medium">{option.name}</p>
                               <p className="text-sm text-muted-foreground">{option.days}</p>
                             </div>
                           </div>
-                          <span className="font-semibold">R$ {option.price.toFixed(2)}</span>
+                          <span className="font-semibold" style={{ color: currentTheme.colors.primaryHex }}>
+                            R$ {option.price.toFixed(2)}
+                          </span>
                         </label>
                       ))}
                     </div>
                   </div>
 
                   <Button
-                    onClick={() => setStep("payment")}
+                    onClick={handleShippingSubmit}
                     className={`w-full h-12 ${currentTheme.button.className}`}
                   >
                     Continuar para Pagamento
@@ -600,52 +780,152 @@ const CheckoutContent = () => {
 
                   {/* Payment methods */}
                   <div className="space-y-4">
+                    {/* Credit Card Option */}
                     <div 
-                      className="p-6 border rounded-lg"
-                      style={{ borderColor: `hsl(${currentTheme.colors.primary} / 0.2)` }}
+                      className={cn(
+                        "border-2 rounded-lg transition-all cursor-pointer",
+                        selectedPayment === "card" 
+                          ? "border-primary bg-primary/5" 
+                          : "border-border hover:border-primary/50"
+                      )}
+                      onClick={() => setSelectedPayment("card")}
                     >
-                      <div className="flex items-center gap-3 mb-4">
+                      <div className="p-4 flex items-center gap-3">
+                        <div className={cn(
+                          "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                          selectedPayment === "card" ? "border-primary" : "border-muted-foreground"
+                        )}>
+                          {selectedPayment === "card" && (
+                            <motion.div 
+                              initial={{ scale: 0 }}
+                              animate={{ scale: 1 }}
+                              className="w-2.5 h-2.5 rounded-full bg-primary"
+                            />
+                          )}
+                        </div>
                         <CreditCard className="w-5 h-5" style={{ color: currentTheme.colors.primaryHex }} />
-                        <h3 className="font-medium">Cartão de Crédito</h3>
+                        <span className="font-medium">Cartão de Crédito</span>
                       </div>
                       
-                      <div className="grid gap-4">
-                        <div>
-                          <Label htmlFor="cardNumber">Número do cartão</Label>
-                          <Input id="cardNumber" placeholder="0000 0000 0000 0000" />
-                        </div>
-                        <div>
-                          <Label htmlFor="cardName">Nome no cartão</Label>
-                          <Input id="cardName" placeholder="Como está impresso no cartão" />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <Label htmlFor="expiry">Validade</Label>
-                            <Input id="expiry" placeholder="MM/AA" />
-                          </div>
-                          <div>
-                            <Label htmlFor="cvv">CVV</Label>
-                            <Input id="cvv" placeholder="123" />
-                          </div>
-                        </div>
-                      </div>
+                      <AnimatePresence>
+                        {selectedPayment === "card" && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="overflow-hidden"
+                          >
+                            <div className="p-6 pt-2 grid gap-4 border-t">
+                              <FormField
+                                id="cardNumber"
+                                label="Número do cartão *"
+                                value={paymentData.cardNumber}
+                                onChange={(value) => {
+                                  setPaymentData({ ...paymentData, cardNumber: formatCardNumber(value) });
+                                  if (paymentErrors.cardNumber) setPaymentErrors({ ...paymentErrors, cardNumber: "" });
+                                }}
+                                error={paymentErrors.cardNumber}
+                                placeholder="0000 0000 0000 0000"
+                                maxLength={19}
+                              />
+                              <FormField
+                                id="cardName"
+                                label="Nome no cartão *"
+                                value={paymentData.cardName}
+                                onChange={(value) => {
+                                  setPaymentData({ ...paymentData, cardName: value.toUpperCase() });
+                                  if (paymentErrors.cardName) setPaymentErrors({ ...paymentErrors, cardName: "" });
+                                }}
+                                error={paymentErrors.cardName}
+                                placeholder="COMO ESTÁ IMPRESSO NO CARTÃO"
+                                maxLength={100}
+                              />
+                              <div className="grid grid-cols-2 gap-4">
+                                <FormField
+                                  id="expiry"
+                                  label="Validade *"
+                                  value={paymentData.expiry}
+                                  onChange={(value) => {
+                                    setPaymentData({ ...paymentData, expiry: formatExpiry(value) });
+                                    if (paymentErrors.expiry) setPaymentErrors({ ...paymentErrors, expiry: "" });
+                                  }}
+                                  error={paymentErrors.expiry}
+                                  placeholder="MM/AA"
+                                  maxLength={5}
+                                />
+                                <FormField
+                                  id="cvv"
+                                  label="CVV *"
+                                  value={paymentData.cvv}
+                                  onChange={(value) => {
+                                    setPaymentData({ ...paymentData, cvv: value.replace(/\D/g, "") });
+                                    if (paymentErrors.cvv) setPaymentErrors({ ...paymentErrors, cvv: "" });
+                                  }}
+                                  error={paymentErrors.cvv}
+                                  placeholder="123"
+                                  maxLength={4}
+                                />
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
 
+                    {/* PIX Option */}
                     <div 
-                      className="p-4 border rounded-lg flex items-center gap-3 cursor-pointer hover:bg-muted/50 transition-colors"
-                      style={{ borderColor: `hsl(${currentTheme.colors.primary} / 0.2)` }}
+                      className={cn(
+                        "p-4 border-2 rounded-lg flex items-center gap-3 cursor-pointer transition-all",
+                        selectedPayment === "pix" 
+                          ? "border-primary bg-primary/5" 
+                          : "border-border hover:border-primary/50"
+                      )}
+                      onClick={() => setSelectedPayment("pix")}
                     >
-                      <div className="w-8 h-8 rounded bg-muted flex items-center justify-center text-lg">
+                      <div className={cn(
+                        "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                        selectedPayment === "pix" ? "border-primary" : "border-muted-foreground"
+                      )}>
+                        {selectedPayment === "pix" && (
+                          <motion.div 
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="w-2.5 h-2.5 rounded-full bg-primary"
+                          />
+                        )}
+                      </div>
+                      <div className="w-8 h-8 rounded bg-green-100 flex items-center justify-center text-lg">
                         💳
                       </div>
                       <span className="font-medium">PIX</span>
-                      <span className="ml-auto text-sm text-green-600">5% de desconto</span>
+                      <span className="ml-auto text-sm text-green-600 font-medium bg-green-50 px-2 py-1 rounded">
+                        5% de desconto
+                      </span>
                     </div>
 
+                    {/* Boleto Option */}
                     <div 
-                      className="p-4 border rounded-lg flex items-center gap-3 cursor-pointer hover:bg-muted/50 transition-colors"
-                      style={{ borderColor: `hsl(${currentTheme.colors.primary} / 0.2)` }}
+                      className={cn(
+                        "p-4 border-2 rounded-lg flex items-center gap-3 cursor-pointer transition-all",
+                        selectedPayment === "boleto" 
+                          ? "border-primary bg-primary/5" 
+                          : "border-border hover:border-primary/50"
+                      )}
+                      onClick={() => setSelectedPayment("boleto")}
                     >
+                      <div className={cn(
+                        "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                        selectedPayment === "boleto" ? "border-primary" : "border-muted-foreground"
+                      )}>
+                        {selectedPayment === "boleto" && (
+                          <motion.div 
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            className="w-2.5 h-2.5 rounded-full bg-primary"
+                          />
+                        )}
+                      </div>
                       <div className="w-8 h-8 rounded bg-muted flex items-center justify-center text-lg">
                         📄
                       </div>
@@ -666,12 +946,12 @@ const CheckoutContent = () => {
                           transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
                           className="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full"
                         />
-                        {currentTheme.microcopy.processing}
+                        Processando...
                       </span>
                     ) : (
                       <span className="flex items-center gap-2">
                         <Shield className="w-5 h-5" />
-                        {currentTheme.microcopy.ctaText}
+                        Finalizar Pedido - R$ {(total + selectedShippingOption.price).toFixed(2)}
                       </span>
                     )}
                   </Button>
