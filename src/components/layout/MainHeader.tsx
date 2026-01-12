@@ -160,13 +160,10 @@ const menuItems = [
   },
 ];
 
-type CustomerType = "professional" | "home";
-
 const MainHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const [showSearch, setShowSearch] = useState(false);
-  const [customerType, setCustomerType] = useState<CustomerType>("home");
   const megaMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { totalItems, openCart } = useCart();
@@ -214,30 +211,32 @@ const MainHeader = () => {
         <div className="container-editorial">
           <div className="flex items-center justify-center py-2">
             <div className="inline-flex rounded-full bg-background border border-border/50 p-1 shadow-sm">
-              <button
-                onClick={() => setCustomerType("professional")}
-                className={`
-                  px-4 py-1.5 text-xs md:text-sm font-body font-medium rounded-full transition-all duration-300
-                  ${customerType === "professional" 
-                    ? "bg-primary text-primary-foreground shadow-sm" 
-                    : "text-muted-foreground hover:text-foreground"
-                  }
-                `}
-              >
-                Profissional de estética
-              </button>
-              <button
-                onClick={() => setCustomerType("home")}
-                className={`
-                  px-4 py-1.5 text-xs md:text-sm font-body font-medium rounded-full transition-all duration-300
-                  ${customerType === "home" 
-                    ? "bg-primary text-primary-foreground shadow-sm" 
-                    : "text-muted-foreground hover:text-foreground"
-                  }
-                `}
-              >
+              {isProfessional ? (
+                // Already a professional - show active state
+                <span className="px-4 py-1.5 text-xs md:text-sm font-body font-medium rounded-full bg-primary text-primary-foreground shadow-sm flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  Profissional de estética
+                </span>
+              ) : (
+                // Not a professional - link to login/register
+                <button
+                  onClick={() => {
+                    if (!user) {
+                      navigate("/auth");
+                    } else if (!professionalRequest) {
+                      navigate("/solicitar-cadastro-profissional");
+                    } else {
+                      toast.info("Sua solicitação está em análise");
+                    }
+                  }}
+                  className="px-4 py-1.5 text-xs md:text-sm font-body font-medium rounded-full transition-all duration-300 text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                >
+                  Profissional de estética
+                </button>
+              )}
+              <span className={`px-4 py-1.5 text-xs md:text-sm font-body font-medium rounded-full transition-all duration-300 ${!isProfessional ? "bg-primary text-primary-foreground shadow-sm" : "text-muted-foreground"}`}>
                 Skincare em casa
-              </button>
+              </span>
             </div>
           </div>
         </div>
