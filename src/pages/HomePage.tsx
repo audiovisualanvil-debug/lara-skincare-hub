@@ -112,6 +112,30 @@ const testimonials = [
     role: "Médica",
     product: "Resilience Serum Pro",
   },
+  {
+    id: 4,
+    name: "Fernanda Lima",
+    text: "Sofria muito com acne e oleosidade. Depois de usar os produtos da Mezzo, minha pele está controlada e saudável.",
+    rating: 5,
+    role: "Professora",
+    product: "Linha Acne Control",
+  },
+  {
+    id: 5,
+    name: "Juliana Mendes",
+    text: "O atendimento é excepcional! Recebi recomendações personalizadas e os resultados superaram minhas expectativas.",
+    rating: 5,
+    role: "Designer",
+    product: "Miracle Eyes",
+  },
+  {
+    id: 6,
+    name: "Patrícia Oliveira",
+    text: "Produtos profissionais de qualidade acessível. Uso no meu consultório e as pacientes amam os resultados.",
+    rating: 5,
+    role: "Esteticista",
+    product: "Smart GR Peptide",
+  },
 ];
 
 const HomePage = () => {

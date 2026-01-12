@@ -1,6 +1,7 @@
-import { Star, Quote } from "lucide-react";
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useCallback, useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 interface Testimonial {
   id: number;
@@ -23,30 +24,61 @@ const defaultAvatars = [
   "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
   "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
   "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face",
+  "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face",
 ];
 
 const TestimonialsSection = ({ testimonials }: TestimonialsSectionProps) => {
-  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
+  // Calculate items per view based on screen size (handled via CSS)
+  const itemsPerView = 3;
+  const totalPages = Math.ceil(testimonials.length / itemsPerView);
+
+  const nextSlide = useCallback(() => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev + 1) % totalPages);
+  }, [totalPages]);
+
+  const prevSlide = useCallback(() => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev - 1 + totalPages) % totalPages);
+  }, [totalPages]);
+
+  const goToSlide = (index: number) => {
+    setDirection(index > currentIndex ? 1 : -1);
+    setCurrentIndex(index);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 10000);
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
+  // Auto-play
+  useEffect(() => {
+    if (!isAutoPlaying || totalPages <= 1) return;
+    const interval = setInterval(nextSlide, 5000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, nextSlide, totalPages]);
+
+  // Get visible testimonials for current page
+  const getVisibleTestimonials = () => {
+    const start = currentIndex * itemsPerView;
+    return testimonials.slice(start, start + itemsPerView);
+  };
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
       opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
     },
+    exit: (direction: number) => ({
+      x: direction < 0 ? 300 : -300,
+      opacity: 0,
+    }),
   };
 
   return (
@@ -74,111 +106,95 @@ const TestimonialsSection = ({ testimonials }: TestimonialsSectionProps) => {
           </p>
         </motion.div>
 
-        {/* Testimonials Grid */}
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
-        >
-          {testimonials.map((testimonial, index) => (
-            <motion.div 
-              key={testimonial.id}
-              variants={itemVariants}
-              onMouseEnter={() => setHoveredId(testimonial.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              className={`relative bg-card rounded-2xl p-6 md:p-8 border border-border/30 transition-all duration-500 ${
-                hoveredId === testimonial.id 
-                  ? 'shadow-2xl shadow-primary/10 -translate-y-2 border-primary/30' 
-                  : 'shadow-lg hover:shadow-xl'
-              }`}
-            >
-              {/* Quote icon */}
-              <div className="absolute -top-4 -left-2 md:left-4">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                  hoveredId === testimonial.id 
-                    ? 'bg-primary text-white scale-110' 
-                    : 'bg-primary/10 text-primary'
-                }`}>
-                  <Quote className="w-5 h-5" />
-                </div>
-              </div>
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Arrows - Desktop */}
+          {totalPages > 1 && (
+            <>
+              <button
+                onClick={prevSlide}
+                className="hidden md:flex absolute -left-4 lg:-left-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-card border border-border/50 items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-lg"
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="hidden md:flex absolute -right-4 lg:-right-8 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-card border border-border/50 items-center justify-center text-foreground hover:bg-primary hover:text-white hover:border-primary transition-all duration-300 shadow-lg"
+                aria-label="Próximo"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </>
+          )}
 
-              {/* Content */}
-              <div className="pt-4">
-                {/* Stars */}
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.1 * i, duration: 0.3 }}
-                    >
-                      <Star 
-                        className={`h-4 w-4 transition-colors duration-300 ${
-                          i < testimonial.rating 
-                            ? 'fill-gold text-gold' 
-                            : 'text-muted-foreground/30'
-                        }`}
-                      />
-                    </motion.div>
-                  ))}
-                </div>
+          {/* Testimonials Carousel */}
+          <div className="overflow-hidden">
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={currentIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+              >
+                {getVisibleTestimonials().map((testimonial, index) => (
+                  <TestimonialCard
+                    key={testimonial.id}
+                    testimonial={testimonial}
+                    index={(currentIndex * itemsPerView) + index}
+                  />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-                {/* Quote Text */}
-                <p className="text-foreground text-base leading-relaxed font-body mb-6">
-                  "{testimonial.text}"
-                </p>
+          {/* Pagination Dots */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 mt-8">
+              {Array.from({ length: totalPages }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex
+                      ? 'bg-primary w-8'
+                      : 'bg-border w-2 hover:bg-primary/50'
+                  }`}
+                  aria-label={`Ir para página ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
 
-                {/* Product mention if available */}
-                {testimonial.product && (
-                  <div className="mb-4">
-                    <span className="inline-block px-3 py-1 bg-gold/10 text-gold-dark text-xs font-medium rounded-full">
-                      Usou: {testimonial.product}
-                    </span>
-                  </div>
-                )}
-
-                {/* Author */}
-                <div className="flex items-center gap-4 pt-4 border-t border-border/30">
-                  {/* Avatar */}
-                  <motion.div 
-                    whileHover={{ scale: 1.1 }}
-                    className="relative"
-                  >
-                    <img
-                      src={testimonial.image || defaultAvatars[index % defaultAvatars.length]}
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-primary/20"
-                    />
-                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-card flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                  </motion.div>
-
-                  {/* Name & Role */}
-                  <div>
-                    <p className="font-display text-base font-medium text-foreground">
-                      {testimonial.name}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {testimonial.role || "Cliente verificada"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Decorative gradient on hover */}
-              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-gold/5 transition-opacity duration-500 pointer-events-none ${
-                hoveredId === testimonial.id ? 'opacity-100' : 'opacity-0'
-              }`} />
-            </motion.div>
-          ))}
-        </motion.div>
+          {/* Mobile Navigation */}
+          {totalPages > 1 && (
+            <div className="flex md:hidden items-center justify-center gap-4 mt-6">
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={prevSlide}
+                className="rounded-full w-10 h-10"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </Button>
+              <span className="text-sm text-muted-foreground">
+                {currentIndex + 1} / {totalPages}
+              </span>
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={nextSlide}
+                className="rounded-full w-10 h-10"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </Button>
+            </div>
+          )}
+        </div>
 
         {/* Bottom stats */}
         <motion.div 
@@ -203,6 +219,100 @@ const TestimonialsSection = ({ testimonials }: TestimonialsSectionProps) => {
         </motion.div>
       </div>
     </section>
+  );
+};
+
+// Separate component for testimonial card
+const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; index: number }) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`relative bg-card rounded-2xl p-6 md:p-8 border border-border/30 transition-all duration-500 ${
+        isHovered 
+          ? 'shadow-2xl shadow-primary/10 -translate-y-2 border-primary/30' 
+          : 'shadow-lg hover:shadow-xl'
+      }`}
+    >
+      {/* Quote icon */}
+      <div className="absolute -top-4 left-4">
+        <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+          isHovered 
+            ? 'bg-primary text-white scale-110' 
+            : 'bg-primary/10 text-primary'
+        }`}>
+          <Quote className="w-5 h-5" />
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="pt-4">
+        {/* Stars */}
+        <div className="flex gap-1 mb-4">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star 
+              key={i}
+              className={`h-4 w-4 transition-colors duration-300 ${
+                i < testimonial.rating 
+                  ? 'fill-gold text-gold' 
+                  : 'text-muted-foreground/30'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Quote Text */}
+        <p className="text-foreground text-base leading-relaxed font-body mb-6 line-clamp-4">
+          "{testimonial.text}"
+        </p>
+
+        {/* Product mention if available */}
+        {testimonial.product && (
+          <div className="mb-4">
+            <span className="inline-block px-3 py-1 bg-gold/10 text-gold-dark text-xs font-medium rounded-full">
+              Usou: {testimonial.product}
+            </span>
+          </div>
+        )}
+
+        {/* Author */}
+        <div className="flex items-center gap-4 pt-4 border-t border-border/30">
+          {/* Avatar */}
+          <div className="relative">
+            <img
+              src={testimonial.image || defaultAvatars[index % defaultAvatars.length]}
+              alt={testimonial.name}
+              className="w-12 h-12 rounded-full object-cover border-2 border-primary/20"
+            />
+            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-card flex items-center justify-center">
+              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Name & Role */}
+          <div>
+            <p className="font-display text-base font-medium text-foreground">
+              {testimonial.name}
+            </p>
+            <p className="text-xs text-muted-foreground">
+              {testimonial.role || "Cliente verificada"}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Decorative gradient on hover */}
+      <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-gold/5 transition-opacity duration-500 pointer-events-none ${
+        isHovered ? 'opacity-100' : 'opacity-0'
+      }`} />
+    </motion.div>
   );
 };
 
