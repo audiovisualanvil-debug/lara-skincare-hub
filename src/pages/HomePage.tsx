@@ -260,55 +260,6 @@ const HomePage = () => {
         {/* Brand Collections Section - Sub-lines */}
         <BrandCollectionsSection />
 
-        {/* Featured Banners Carousel - Luxo */}
-        <section className="section-editorial bg-champagne">
-          <div className="container-editorial">
-            <AnimatedSection className="mb-10 md:mb-12">
-              <span className="text-xs uppercase tracking-[0.3em] text-gold font-body font-medium">
-                Linha Tulipia
-              </span>
-              <h2 className="font-display text-2xl md:text-display-sm lg:text-display text-foreground mt-3">
-                Destaques Sweet Lips
-              </h2>
-              <div className="w-12 h-px bg-gold/50 mt-4" />
-            </AnimatedSection>
-            
-            <motion.div 
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8"
-            >
-              {[
-                { image: sweetLipsCereja, title: "Sweet Lips Cereja", subtitle: "Gloss labial hidratante", href: "/loja?categoria=labial" },
-                { image: sweetLipsEsfoliante, title: "Esfoliante Labial", subtitle: "Lábios hidratados e joviais", href: "/loja?categoria=labial" },
-                { image: sweetLipsFluido, title: "Fluido Microagulhamento", subtitle: "Preenche, hidrata e rejuvenesce", href: "/loja?categoria=labial" },
-              ].map((banner, index) => (
-                <motion.div key={index} variants={itemVariants}>
-                  <Link to={banner.href} className="group block">
-                    <div className="aspect-[16/9] overflow-hidden bg-secondary relative">
-                      <img
-                        src={banner.image}
-                        alt={banner.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-noir/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </div>
-                    <div className="mt-4 md:mt-5">
-                      <h4 className="font-display text-lg md:text-xl text-foreground group-hover:text-gold transition-colors duration-300">
-                        {banner.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground font-body mt-1">
-                        {banner.subtitle}
-                      </p>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
 
         {/* Categories Section - Editorial Luxo */}
         <section className="section-editorial bg-background">
