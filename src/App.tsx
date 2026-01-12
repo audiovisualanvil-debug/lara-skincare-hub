@@ -29,10 +29,12 @@ import MezzoPage from "./pages/MezzoPage";
 import ExtratosPage from "./pages/ExtratosPage";
 import SmartGRPage from "./pages/SmartGRPage";
 import AdminImageProcessor from "./pages/AdminImageProcessor";
+import AdminProfessionalRequests from "./pages/AdminProfessionalRequests";
 import Checkout from "./pages/Checkout";
 import Promocoes from "./pages/Promocoes";
 import FAQ from "./pages/FAQ";
 import OrderConfirmation from "./pages/OrderConfirmation";
+import ProfessionalRequest from "./pages/ProfessionalRequest";
 
 const queryClient = new QueryClient();
 
@@ -66,9 +68,12 @@ const App = () => (
                     <Route path="/sobre" element={<About />} />
                     <Route path="/contato" element={<Contact />} />
                     <Route path="/admin/processar-imagens" element={<AdminImageProcessor />} />
+                    <Route path="/admin/solicitacoes-profissionais" element={<AdminProfessionalRequests />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/confirmacao-pedido" element={<OrderConfirmation />} />
+                    <Route path="/solicitar-cadastro-profissional" element={<ProfessionalRequest />} />
                     <Route path="/faq" element={<FAQ />} />
+                    <Route path="*" element={<NotFound />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   <MobileBottomNav />
