@@ -326,9 +326,10 @@ const MainHeader = () => {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <Button variant="ghost" size="icon" className="hidden md:flex h-10 w-10 hover:bg-accent/50" asChild>
+                  <Button variant="primary" size="sm" className="hidden md:flex" asChild>
                     <Link to="/auth">
-                      <User className="h-5 w-5" />
+                      <UserCircle className="h-4 w-4 mr-2" />
+                      Entrar
                     </Link>
                   </Button>
                 )
