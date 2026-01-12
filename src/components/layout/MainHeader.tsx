@@ -25,9 +25,10 @@ import hidrasolDermacos from "@/assets/products/hidrasol-dermacos.jpg";
 // Menu items with mega menu content
 const menuItems = [
   { 
-    label: "Ofertas", 
-    href: "/loja?filtro=ofertas",
-    hasMegaMenu: false 
+    label: "Promoções", 
+    href: "/promocoes",
+    hasMegaMenu: false,
+    isHighlight: true,
   },
   { 
     label: "Lançamentos", 
