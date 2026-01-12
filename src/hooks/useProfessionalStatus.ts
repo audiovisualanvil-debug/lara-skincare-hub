@@ -14,6 +14,7 @@ export interface ProfessionalRequest {
   discount_percentage: number;
   reviewed_at: string | null;
   admin_notes: string | null;
+  certificate_url: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -63,22 +64,50 @@ export const useProfessionalStatus = () => {
     fetchStatus();
   }, [user]);
 
+  const uploadCertificate = async (file: File): Promise<string> => {
+    if (!user) throw new Error("User not authenticated");
+
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${user.id}/${Date.now()}.${fileExt}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("professional-certificates")
+      .upload(fileName, file);
+
+    if (uploadError) throw uploadError;
+
+    const { data } = supabase.storage
+      .from("professional-certificates")
+      .getPublicUrl(fileName);
+
+    return fileName; // Store the path, not the public URL since bucket is private
+  };
+
   const submitRequest = async (data: {
     company_name?: string;
     cnpj?: string;
     contact_name: string;
     phone: string;
     reason?: string;
+    certificate_file?: File;
   }) => {
     if (!user) throw new Error("User not authenticated");
+
+    let certificateUrl: string | null = null;
+
+    // Upload certificate if provided
+    if (data.certificate_file) {
+      certificateUrl = await uploadCertificate(data.certificate_file);
+    }
 
     const { error } = await supabase.from("professional_requests").insert({
       user_id: user.id,
       company_name: data.company_name || null,
-      cnpj: data.cnpj || null,
+      cnpj: data.cnpj?.replace(/\D/g, "") || null,
       contact_name: data.contact_name,
       phone: data.phone,
       reason: data.reason || null,
+      certificate_url: certificateUrl,
     });
 
     if (error) throw error;
@@ -95,6 +124,19 @@ export const useProfessionalStatus = () => {
     }
   };
 
+  const getCertificateDownloadUrl = async (path: string): Promise<string | null> => {
+    const { data, error } = await supabase.storage
+      .from("professional-certificates")
+      .createSignedUrl(path, 3600); // 1 hour
+
+    if (error) {
+      console.error("Error getting signed URL:", error);
+      return null;
+    }
+
+    return data.signedUrl;
+  };
+
   return {
     request,
     loading,
@@ -102,5 +144,6 @@ export const useProfessionalStatus = () => {
     discountPercentage,
     submitRequest,
     hasExistingRequest: !!request,
+    getCertificateDownloadUrl,
   };
 };

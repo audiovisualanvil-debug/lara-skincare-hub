@@ -17,6 +17,7 @@ export type Database = {
       professional_requests: {
         Row: {
           admin_notes: string | null
+          certificate_url: string | null
           cnpj: string | null
           company_name: string | null
           contact_name: string
@@ -33,6 +34,7 @@ export type Database = {
         }
         Insert: {
           admin_notes?: string | null
+          certificate_url?: string | null
           cnpj?: string | null
           company_name?: string | null
           contact_name: string
@@ -49,6 +51,7 @@ export type Database = {
         }
         Update: {
           admin_notes?: string | null
+          certificate_url?: string | null
           cnpj?: string | null
           company_name?: string | null
           contact_name?: string
