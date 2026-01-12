@@ -346,9 +346,15 @@ const MainHeader = () => {
                         <>
                           <DropdownMenuSeparator className="bg-border/50" />
                           <DropdownMenuItem asChild>
-                            <Link to="/admin/solicitacoes-profissionais" className="cursor-pointer text-primary">
+                            <Link to="/admin/dashboard" className="cursor-pointer text-primary">
                               <ShieldCheck className="h-4 w-4 mr-2" />
-                              Painel Admin
+                              Dashboard Admin
+                            </Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem asChild>
+                            <Link to="/admin/solicitacoes-profissionais" className="cursor-pointer text-primary/80">
+                              <Building2 className="h-4 w-4 mr-2" />
+                              Solicitações
                             </Link>
                           </DropdownMenuItem>
                         </>
@@ -514,14 +520,24 @@ const MainHeader = () => {
           <div className="container-editorial py-6 space-y-2">
             {/* Admin Panel - Destaque no topo para admins */}
             {isAdmin && (
-              <Link
-                to="/admin/solicitacoes-profissionais"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center gap-3 font-body text-base font-semibold text-primary py-3 px-4 mb-4 bg-primary/10 rounded-lg border border-primary/20 transition-colors hover:bg-primary/20"
-              >
-                <ShieldCheck className="h-5 w-5" />
-                Painel Administrativo
-              </Link>
+              <div className="mb-4 space-y-2">
+                <Link
+                  to="/admin/dashboard"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-3 font-body text-base font-semibold text-primary py-3 px-4 bg-primary/10 rounded-lg border border-primary/20 transition-colors hover:bg-primary/20"
+                >
+                  <ShieldCheck className="h-5 w-5" />
+                  Dashboard Admin
+                </Link>
+                <Link
+                  to="/admin/solicitacoes-profissionais"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-3 font-body text-sm text-primary/80 py-2 px-4 hover:bg-primary/5 rounded-lg transition-colors"
+                >
+                  <Building2 className="h-4 w-4" />
+                  Solicitações Profissionais
+                </Link>
+              </div>
             )}
             
             {menuItems.map((item) => (

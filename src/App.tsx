@@ -30,6 +30,7 @@ import ExtratosPage from "./pages/ExtratosPage";
 import SmartGRPage from "./pages/SmartGRPage";
 import AdminImageProcessor from "./pages/AdminImageProcessor";
 import AdminProfessionalRequests from "./pages/AdminProfessionalRequests";
+import AdminDashboard from "./pages/AdminDashboard";
 import Checkout from "./pages/Checkout";
 import Promocoes from "./pages/Promocoes";
 import FAQ from "./pages/FAQ";
@@ -69,6 +70,7 @@ const App = () => (
                     <Route path="/contato" element={<Contact />} />
                     <Route path="/admin/processar-imagens" element={<AdminImageProcessor />} />
                     <Route path="/admin/solicitacoes-profissionais" element={<AdminProfessionalRequests />} />
+                    <Route path="/admin/dashboard" element={<AdminDashboard />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/confirmacao-pedido" element={<OrderConfirmation />} />
                     <Route path="/solicitar-cadastro-profissional" element={<ProfessionalRequest />} />
