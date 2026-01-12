@@ -6,10 +6,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProductCardNew from "@/components/shop/ProductCardNew";
 import ProductReviews from "@/components/shop/ProductReviews";
 import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
+import PromoBannerCarousel from "@/components/shop/PromoBannerCarousel";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
 import { allSmartGRWithImages } from "@/data/smartGRProducts";
+import { getBannersForBrand } from "@/data/promoBanners";
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useCompare } from "@/contexts/CompareContext";
@@ -564,6 +566,16 @@ const ProductDetail = () => {
               </div>
             </TabsContent>
           </Tabs>
+        </div>
+      </section>
+
+      {/* Promo Banners Carousel */}
+      <section className="py-12 lg:py-16 bg-cream/50 border-t border-detail/20">
+        <div className="container mx-auto px-4 lg:px-8">
+          <PromoBannerCarousel 
+            banners={getBannersForBrand(product.brand)} 
+            title="Explore Linhas Recomendadas"
+          />
         </div>
       </section>
 

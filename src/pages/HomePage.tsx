@@ -5,12 +5,14 @@ import MainFooter from "@/components/layout/MainFooter";
 import HeroBanner from "@/components/home/HeroBanner";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import ProductCarousel from "@/components/shop/ProductCarousel";
+import PromoBannerCarousel from "@/components/shop/PromoBannerCarousel";
 import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
 import AnimatedSection from "@/components/home/AnimatedSection";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
+import { promoBanners } from "@/data/promoBanners";
 import { Link } from "react-router-dom";
 import { ArrowRight, Percent, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -382,6 +384,16 @@ const HomePage = () => {
               </h2>
             </div>
             <ProductCarousel products={tendencias} />
+          </div>
+        </section>
+
+        {/* Promo Banners Carousel */}
+        <section className="py-12 md:py-16 bg-gradient-to-b from-champagne/30 to-background">
+          <div className="container-editorial">
+            <PromoBannerCarousel 
+              banners={promoBanners.slice(0, 4)} 
+              title="Explore Nossas Linhas"
+            />
           </div>
         </section>
 
