@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Lock, CreditCard, Truck, Check, ShoppingBag, Minus, Plus, X, Shield, AlertCircle } from "lucide-react";
+import { ArrowLeft, Lock, CreditCard, Truck, Check, ShoppingBag, Minus, Plus, X, Shield, AlertCircle, Loader2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useBrandTheme, BrandThemeProvider, getBrandTheme, BrandName } from "@/contexts/BrandThemeContext";
 import { Button } from "@/components/ui/button";
@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { shippingSchema, paymentSchema } from "@/lib/validations/checkout";
 import FormField from "@/components/checkout/FormField";
 import { cn } from "@/lib/utils";
+import { fetchAddressByCEP } from "@/lib/cep";
 
 const CheckoutContent = () => {
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ const CheckoutContent = () => {
 
   const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
   const [paymentErrors, setPaymentErrors] = useState<Record<string, string>>({});
+  const [isLoadingCEP, setIsLoadingCEP] = useState(false);
 
   const shippingOptions = [
     { name: "PAC", price: 19.90, days: "8-12 dias úteis" },
@@ -162,6 +164,40 @@ const CheckoutContent = () => {
     const numbers = value.replace(/\D/g, "");
     return numbers.replace(/(\d{5})(\d{0,3})/, "$1-$2").trim();
   };
+
+  // Handle CEP lookup
+  const handleCEPChange = useCallback(async (value: string) => {
+    const formattedCEP = formatCEP(value);
+    setShippingData(prev => ({ ...prev, cep: formattedCEP }));
+    if (shippingErrors.cep) setShippingErrors(prev => ({ ...prev, cep: "" }));
+
+    const cleanCEP = value.replace(/\D/g, "");
+    if (cleanCEP.length === 8) {
+      setIsLoadingCEP(true);
+      const address = await fetchAddressByCEP(cleanCEP);
+      setIsLoadingCEP(false);
+
+      if (address) {
+        setShippingData(prev => ({
+          ...prev,
+          address: address.address,
+          neighborhood: address.neighborhood,
+          city: address.city,
+          state: address.state,
+        }));
+        setShippingErrors(prev => ({
+          ...prev,
+          address: "",
+          neighborhood: "",
+          city: "",
+          state: "",
+        }));
+        toast.success("Endereço encontrado!");
+      } else {
+        toast.error("CEP não encontrado. Preencha o endereço manualmente.");
+      }
+    }
+  }, [shippingErrors.cep]);
 
   // Format card number as user types
   const formatCardNumber = (value: string) => {
@@ -610,18 +646,23 @@ const CheckoutContent = () => {
                         placeholder="(11) 99999-9999"
                         maxLength={15}
                       />
-                      <FormField
-                        id="cep"
-                        label="CEP *"
-                        value={shippingData.cep}
-                        onChange={(value) => {
-                          setShippingData({ ...shippingData, cep: formatCEP(value) });
-                          if (shippingErrors.cep) setShippingErrors({ ...shippingErrors, cep: "" });
-                        }}
-                        error={shippingErrors.cep}
-                        placeholder="00000-000"
-                        maxLength={9}
-                      />
+                      <div className="space-y-1.5">
+                        <FormField
+                          id="cep"
+                          label="CEP *"
+                          value={shippingData.cep}
+                          onChange={handleCEPChange}
+                          error={shippingErrors.cep}
+                          placeholder="00000-000"
+                          maxLength={9}
+                        />
+                        {isLoadingCEP && (
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <Loader2 className="w-3 h-3 animate-spin" />
+                            <span>Buscando endereço...</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                     <div className="grid sm:grid-cols-3 gap-4">
