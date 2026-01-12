@@ -512,6 +512,18 @@ const MainHeader = () => {
       {isMobileMenuOpen && (
         <nav className="lg:hidden bg-background/98 backdrop-blur-md border-b border-border/50 animate-slide-down">
           <div className="container-editorial py-6 space-y-2">
+            {/* Admin Panel - Destaque no topo para admins */}
+            {isAdmin && (
+              <Link
+                to="/admin/solicitacoes-profissionais"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="flex items-center gap-3 font-body text-base font-semibold text-primary py-3 px-4 mb-4 bg-primary/10 rounded-lg border border-primary/20 transition-colors hover:bg-primary/20"
+              >
+                <ShieldCheck className="h-5 w-5" />
+                Painel Administrativo
+              </Link>
+            )}
+            
             {menuItems.map((item) => (
               <Link
                 key={item.label}
@@ -566,18 +578,6 @@ const MainHeader = () => {
                       Solicitação em Análise
                     </div>
                   ) : null}
-                  
-                  {/* Admin Panel */}
-                  {isAdmin && (
-                    <Link
-                      to="/admin/solicitacoes-profissionais"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="flex items-center gap-2 py-3 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                    >
-                      <ShieldCheck className="h-4 w-4" />
-                      Painel Admin
-                    </Link>
-                  )}
                   
                   <Button 
                     variant="outline" 
