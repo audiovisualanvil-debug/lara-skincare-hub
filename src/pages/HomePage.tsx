@@ -26,21 +26,30 @@ import resilienceSerum from "@/assets/banners/resilience-serum-hero.jpg";
 import heroMobile1 from "@/assets/banners/hero-mobile-1.png";
 import heroMobile2 from "@/assets/banners/hero-mobile-2.png";
 
-// Best Sellers - mix from brands
+// Best Sellers - mix from brands with discounts
 const bestSellers = [
-  ...allTulipiaWithImages.slice(0, 2),
-  ...allMezzoWithImages.slice(0, 2),
-  ...allExtratosWithImages.slice(0, 2),
+  { ...allTulipiaWithImages[0], discount: 20, originalPrice: "R$ 189,90" },
+  { ...allTulipiaWithImages[1], isNew: true },
+  { ...allMezzoWithImages[0], discount: 15, originalPrice: "R$ 149,90" },
+  { ...allMezzoWithImages[1] },
+  { ...allExtratosWithImages[0], isNew: true },
+  { ...allExtratosWithImages[1], discount: 10, originalPrice: "R$ 99,90" },
 ];
 
 // Lançamentos - newest products
 const lancamentos = [
-  ...allTulipiaWithImages.slice(0, 4),
+  { ...allTulipiaWithImages[2], isNew: true },
+  { ...allTulipiaWithImages[3], isNew: true },
+  { ...allMezzoWithImages[2], isNew: true },
+  { ...allExtratosWithImages[2], isNew: true },
 ];
 
 // Tendências
 const tendencias = [
-  ...allMezzoWithImages.slice(0, 4),
+  { ...allMezzoWithImages[0], discount: 25, originalPrice: "R$ 199,90" },
+  { ...allMezzoWithImages[1] },
+  { ...allMezzoWithImages[2], isNew: true },
+  { ...allMezzoWithImages[3], discount: 15, originalPrice: "R$ 159,90" },
 ];
 
 // Skin type categories
