@@ -192,44 +192,106 @@ const CheckoutContent = () => {
       )}
 
       <main className="container max-w-6xl mx-auto px-4 py-8">
-        {/* Progress steps */}
-        <div className="flex items-center justify-center gap-4 mb-12">
-          {["cart", "shipping", "payment"].map((s, i) => (
-            <div key={s} className="flex items-center gap-2">
-              <motion.div
-                animate={{
-                  backgroundColor: step === s || ["cart", "shipping", "payment"].indexOf(step) > i
-                    ? currentTheme.colors.primaryHex
-                    : "transparent",
-                  borderColor: currentTheme.colors.primaryHex,
-                }}
-                className="w-8 h-8 rounded-full border-2 flex items-center justify-center text-sm font-medium transition-colors"
-                style={{
-                  color: step === s || ["cart", "shipping", "payment"].indexOf(step) > i
-                    ? "white"
-                    : currentTheme.colors.primaryHex,
-                }}
-              >
-                {["cart", "shipping", "payment"].indexOf(step) > i ? (
-                  <Check className="w-4 h-4" />
-                ) : (
-                  i + 1
-                )}
-              </motion.div>
-              <span 
-                className="hidden sm:block text-sm font-medium"
-                style={{ color: `hsl(${currentTheme.colors.foreground})` }}
-              >
-                {s === "cart" ? "Carrinho" : s === "shipping" ? "Entrega" : "Pagamento"}
-              </span>
-              {i < 2 && (
-                <div 
-                  className="w-8 sm:w-16 h-px mx-2"
-                  style={{ backgroundColor: `hsl(${currentTheme.colors.primary} / 0.3)` }}
-                />
-              )}
+        {/* Enhanced Progress Steps */}
+        <div className="mb-12">
+          <div className="relative">
+            {/* Progress Bar Background */}
+            <div className="absolute top-6 left-0 right-0 h-1 bg-muted rounded-full mx-16 hidden sm:block" />
+            
+            {/* Progress Bar Fill */}
+            <motion.div 
+              className="absolute top-6 left-0 h-1 rounded-full mx-16 hidden sm:block"
+              style={{ backgroundColor: currentTheme.colors.primaryHex }}
+              initial={{ width: "0%" }}
+              animate={{ 
+                width: step === "cart" ? "0%" : step === "shipping" ? "50%" : "100%"
+              }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            />
+            
+            <div className="relative flex items-center justify-between max-w-lg mx-auto">
+              {[
+                { key: "cart", label: "Carrinho", icon: ShoppingBag, description: "Revise seus itens" },
+                { key: "shipping", label: "Entrega", icon: Truck, description: "Endereço e frete" },
+                { key: "payment", label: "Pagamento", icon: CreditCard, description: "Finalize a compra" },
+              ].map((s, i) => {
+                const isActive = step === s.key;
+                const isCompleted = ["cart", "shipping", "payment"].indexOf(step) > i;
+                const Icon = s.icon;
+                
+                return (
+                  <motion.div
+                    key={s.key}
+                    className="flex flex-col items-center z-10"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.1 }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      animate={{
+                        backgroundColor: isActive || isCompleted
+                          ? currentTheme.colors.primaryHex
+                          : "hsl(var(--background))",
+                        borderColor: currentTheme.colors.primaryHex,
+                        boxShadow: isActive 
+                          ? `0 0 0 4px ${currentTheme.colors.primaryHex}30, 0 4px 12px ${currentTheme.colors.primaryHex}40`
+                          : "none",
+                      }}
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 cursor-pointer"
+                      onClick={() => {
+                        const steps = ["cart", "shipping", "payment"];
+                        if (steps.indexOf(s.key) <= steps.indexOf(step)) {
+                          setStep(s.key as "cart" | "shipping" | "payment");
+                        }
+                      }}
+                    >
+                      {isCompleted ? (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        >
+                          <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                        </motion.div>
+                      ) : (
+                        <Icon 
+                          className="w-5 h-5 sm:w-6 sm:h-6 transition-colors"
+                          style={{ 
+                            color: isActive ? "white" : currentTheme.colors.primaryHex 
+                          }}
+                        />
+                      )}
+                    </motion.div>
+                    
+                    <motion.div 
+                      className="mt-3 text-center"
+                      animate={{ opacity: isActive ? 1 : 0.6 }}
+                    >
+                      <p 
+                        className={`text-sm font-medium ${isActive ? '' : 'text-muted-foreground'}`}
+                        style={{ color: isActive ? currentTheme.colors.primaryHex : undefined }}
+                      >
+                        {s.label}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-0.5 hidden sm:block">
+                        {s.description}
+                      </p>
+                    </motion.div>
+                    
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeIndicator"
+                        className="absolute -bottom-2 w-1.5 h-1.5 rounded-full"
+                        style={{ backgroundColor: currentTheme.colors.primaryHex }}
+                      />
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
-          ))}
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
