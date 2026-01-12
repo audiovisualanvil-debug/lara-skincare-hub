@@ -260,16 +260,17 @@ const HomePage = () => {
         {/* Brand Collections Section - Sub-lines */}
         <BrandCollectionsSection />
 
-        {/* Featured Banners Carousel */}
-        <section className="section-editorial bg-secondary/20">
+        {/* Featured Banners Carousel - Luxo */}
+        <section className="section-editorial bg-champagne">
           <div className="container-editorial">
-            <AnimatedSection className="mb-8">
-              <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+            <AnimatedSection className="mb-10 md:mb-12">
+              <span className="text-xs uppercase tracking-[0.3em] text-gold font-body font-medium">
                 Linha Tulipia
               </span>
-              <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
+              <h2 className="font-display text-2xl md:text-display-sm lg:text-display text-foreground mt-3">
                 Destaques Sweet Lips
               </h2>
+              <div className="w-12 h-px bg-gold/50 mt-4" />
             </AnimatedSection>
             
             <motion.div 
@@ -277,7 +278,7 @@ const HomePage = () => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-8"
             >
               {[
                 { image: sweetLipsCereja, title: "Sweet Lips Cereja", subtitle: "Gloss labial hidratante", href: "/loja?categoria=labial" },
@@ -285,17 +286,17 @@ const HomePage = () => {
                 { image: sweetLipsFluido, title: "Fluido Microagulhamento", subtitle: "Preenche, hidrata e rejuvenesce", href: "/loja?categoria=labial" },
               ].map((banner, index) => (
                 <motion.div key={index} variants={itemVariants}>
-                  <Link to={banner.href} className="group block img-editorial">
+                  <Link to={banner.href} className="group block">
                     <div className="aspect-[16/9] overflow-hidden bg-secondary relative">
                       <img
                         src={banner.image}
                         alt={banner.title}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-noir/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    <div className="mt-4">
-                      <h4 className="font-display text-lg font-medium text-foreground group-hover:text-primary transition-colors">
+                    <div className="mt-4 md:mt-5">
+                      <h4 className="font-display text-lg md:text-xl text-foreground group-hover:text-gold transition-colors duration-300">
                         {banner.title}
                       </h4>
                       <p className="text-sm text-muted-foreground font-body mt-1">
@@ -309,41 +310,42 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Categories Section - Editorial with Scroll Animation */}
-        <section className="section-editorial">
+        {/* Categories Section - Editorial Luxo */}
+        <section className="section-editorial bg-background">
           <div className="container-editorial">
-            {/* Section Header - Animated */}
-            <AnimatedSection className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            {/* Section Header */}
+            <AnimatedSection className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-10 md:mb-14">
               <div>
                 <motion.span 
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
-                  className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold"
+                  className="text-xs uppercase tracking-[0.3em] text-gold font-body font-medium"
                 >
                   Explore
                 </motion.span>
-                <h2 className="font-display text-display-sm md:text-display text-foreground mt-3">
-                  Categorias por preocupação
+                <h2 className="font-display text-2xl md:text-display-sm lg:text-display text-foreground mt-3">
+                  Categorias por Preocupação
                 </h2>
+                <div className="w-12 h-px bg-gold/50 mt-4" />
               </div>
               <Link 
                 to="/loja" 
-                className="flex items-center gap-2 text-sm uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors font-body font-medium group"
+                className="inline-flex items-center gap-2 text-sm uppercase tracking-wider text-foreground hover:text-gold transition-colors font-body font-medium group"
               >
-                Ver todos os produtos
+                Ver todos
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </AnimatedSection>
             
-            {/* Categories Grid with Stagger */}
+            {/* Categories Grid */}
             <motion.div 
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-5"
             >
               {categories.map((category, index) => (
                 <motion.div key={category.title} variants={itemVariants}>
@@ -354,7 +356,7 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* Tulipia Promotional Banner */}
+        {/* Tulipia Promotional Banner - Luxo */}
         <section className="relative overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Image Side */}
@@ -363,38 +365,38 @@ const HomePage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative h-[400px] lg:h-[600px]"
+              className="relative h-[350px] md:h-[450px] lg:h-[600px]"
             >
               <img
                 src={sweetLipsLayane}
                 alt="Linha Tulipia - Dermocosméticos Premium"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20 lg:hidden" />
+              <div className="absolute inset-0 bg-gradient-to-t from-noir/60 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-noir/30" />
             </motion.div>
 
-            {/* Content Side */}
+            {/* Content Side - Luxo */}
             <motion.div 
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="bg-espresso flex items-center justify-center p-8 lg:p-16"
+              className="bg-noir flex items-center justify-center p-8 md:p-12 lg:p-16"
             >
               <div className="max-w-md text-center lg:text-left">
-                <span className="text-xs uppercase tracking-[0.25em] text-primary font-body font-semibold">
+                <span className="text-xs uppercase tracking-[0.3em] text-gold font-body font-medium">
                   Linha Exclusiva
                 </span>
-                <h2 className="font-display text-display-sm md:text-display text-white mt-4">
+                <h2 className="font-display text-3xl md:text-display-sm lg:text-display text-ivory mt-4">
                   Tulipia <br />
-                  <span className="text-primary">Dermocosméticos</span>
+                  <span className="text-gold">Dermocosméticos</span>
                 </h2>
-                <p className="mt-6 text-white/80 font-body leading-relaxed">
-                  Tecnologia nano encapsulada e ingredientes premium para resultados profissionais. 
-                  Sweet Lips, Life C Nano, Miracle Eyes e muito mais.
+                <div className="w-12 h-px bg-gold/50 mt-6 mb-6 mx-auto lg:mx-0" />
+                <p className="text-ivory/70 font-body leading-relaxed">
+                  Tecnologia nano encapsulada e ingredientes premium para resultados profissionais.
                 </p>
                 
-                {/* Feature highlights */}
+                {/* Feature highlights - Luxo */}
                 <div className="grid grid-cols-2 gap-4 mt-8">
                   {[
                     { label: "Nano Tech", desc: "Ativos encapsulados" },
@@ -403,8 +405,8 @@ const HomePage = () => {
                     { label: "Profissional", desc: "Clínicas e estéticas" },
                   ].map((item) => (
                     <div key={item.label} className="text-left">
-                      <p className="text-primary text-sm font-semibold">{item.label}</p>
-                      <p className="text-white/60 text-xs">{item.desc}</p>
+                      <p className="text-gold text-sm font-medium">{item.label}</p>
+                      <p className="text-ivory/50 text-xs mt-0.5">{item.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -418,16 +420,16 @@ const HomePage = () => {
                 >
                   <Link 
                     to="/tulipia"
-                    className="inline-flex h-12 px-8 items-center justify-center bg-primary text-primary-foreground font-body font-semibold uppercase tracking-wider text-sm hover:bg-primary/90 transition-colors group"
+                    className="inline-flex h-12 md:h-14 px-8 items-center justify-center bg-gold text-noir font-body font-medium uppercase tracking-widest text-xs md:text-sm hover:bg-gold-light transition-colors group"
                   >
                     Explorar Linha
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                   <Link 
                     to="/consultoria"
-                    className="inline-flex h-12 px-8 items-center justify-center border border-white/30 text-white font-body font-semibold uppercase tracking-wider text-sm hover:bg-white/10 transition-colors"
+                    className="inline-flex h-12 md:h-14 px-8 items-center justify-center border border-ivory/30 text-ivory font-body font-medium uppercase tracking-widest text-xs md:text-sm hover:bg-ivory/10 transition-colors"
                   >
-                    Consultoria Grátis
+                    Consultoria
                   </Link>
                 </motion.div>
               </div>
