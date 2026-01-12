@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, BadgePercent } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useProfessional } from "@/contexts/ProfessionalContext";
 
 export interface ProtocolStep {
   step: number;
@@ -36,7 +37,27 @@ interface ProductCardProps {
   product: Product;
 }
 
+// Helper to extract numeric price from string
+const extractPrice = (priceStr?: string): number | null => {
+  if (!priceStr || priceStr === "Consultar") return null;
+  const match = priceStr.replace(/[^\d,]/g, "").replace(",", ".");
+  return parseFloat(match) || null;
+};
+
+// Helper to format price in BRL
+const formatPrice = (price: number): string => {
+  return `R$ ${price.toFixed(2).replace(".", ",")}`;
+};
+
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { isProfessional, discountPercentage } = useProfessional();
+
+  // Calculate professional price
+  const originalPrice = extractPrice(product.price);
+  const professionalPrice = isProfessional && originalPrice && discountPercentage > 0
+    ? originalPrice * (1 - discountPercentage / 100)
+    : null;
+
   return (
     <div className="group bg-card border border-border hover:border-primary/40 hover:shadow-luxury transition-all duration-300 hover:-translate-y-1">
       {/* Product Image */}
@@ -75,10 +96,30 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {product.description}
         </p>
 
-        {product.price && (
-          <p className="font-display text-lg font-bold text-foreground">
-            {product.price}
-          </p>
+        {/* Price display with professional pricing */}
+        {professionalPrice ? (
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-1">
+              <BadgePercent className="w-3 h-3 text-espresso" />
+              <span className="text-[10px] uppercase tracking-wider font-body font-semibold text-espresso">
+                Preço Profissional
+              </span>
+            </div>
+            <p className="font-display text-lg font-bold text-espresso">
+              {formatPrice(professionalPrice)}
+            </p>
+            {product.price && (
+              <p className="font-body text-xs text-muted-foreground line-through">
+                {product.price}
+              </p>
+            )}
+          </div>
+        ) : (
+          product.price && (
+            <p className="font-display text-lg font-bold text-foreground">
+              {product.price}
+            </p>
+          )
         )}
 
         {/* CTA */}

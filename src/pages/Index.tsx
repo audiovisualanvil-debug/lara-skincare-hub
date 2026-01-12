@@ -3,6 +3,7 @@ import { ArrowRight, MessageCircle, Check, Sparkles, Droplets, Sun, Heart, Flowe
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import ProductCard, { Product } from "@/components/shop/ProductCard";
+import ProfessionalBanner from "@/components/home/ProfessionalBanner";
 import heroImage from "@/assets/hero-skincare.jpg";
 import productsImage from "@/assets/products-display.jpg";
 import consultationImage from "@/assets/consultation.jpg";
@@ -106,6 +107,8 @@ const testimonials = [
 const Index = () => {
   return (
     <main className="pt-[104px] lg:pt-[136px]">
+      {/* Professional Banner */}
+      <ProfessionalBanner />
       {/* HERO - Editorial Luxo */}
       <section className="relative bg-noir overflow-hidden min-h-[85vh] flex items-center">
         {/* Background Image */}
