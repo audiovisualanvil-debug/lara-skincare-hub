@@ -14,9 +14,12 @@ interface Product {
   name: string;
   brand: string;
   price?: string;
+  originalPrice?: string;
+  discount?: number;
   image?: string;
   imageHover?: string;
   isProfessional?: boolean;
+  isNew?: boolean;
   category?: string;
   description?: string;
 }
@@ -139,14 +142,24 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
           )}
         />
         
-        {/* Professional Badge */}
-        {product.isProfessional && (
-          <div className="absolute top-3 left-3">
-            <span className="text-[10px] uppercase tracking-wider font-body font-semibold text-white bg-primary/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
+        {/* Badges */}
+        <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+          {product.discount && product.discount > 0 && (
+            <span className="text-[10px] uppercase tracking-wider font-body font-bold text-white bg-terracotta px-2.5 py-1 rounded-full shadow-sm">
+              -{product.discount}%
+            </span>
+          )}
+          {product.isNew && (
+            <span className="text-[10px] uppercase tracking-wider font-body font-semibold text-white bg-gold px-2.5 py-1 rounded-full shadow-sm">
+              Novo
+            </span>
+          )}
+          {product.isProfessional && (
+            <span className="text-[10px] uppercase tracking-wider font-body font-semibold text-white bg-espresso/90 backdrop-blur-sm px-2.5 py-1 rounded-full shadow-sm">
               Profissional
             </span>
-          </div>
-        )}
+          )}
+        </div>
         
         {/* Action buttons - Floating style */}
         <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
@@ -212,9 +225,16 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
           </h3>
         </Link>
         <div className="mt-4 flex items-center justify-between">
-          <span className="font-display text-xl font-medium text-foreground">
-            {product.price ? (product.price.startsWith("R$") ? product.price : `R$ ${product.price}`) : "Consultar"}
-          </span>
+          <div className="flex flex-col">
+            <span className="font-display text-xl font-medium text-foreground">
+              {product.price ? (product.price.startsWith("R$") ? product.price : `R$ ${product.price}`) : "Consultar"}
+            </span>
+            {product.originalPrice && (
+              <span className="font-body text-sm text-muted-foreground line-through">
+                {product.originalPrice.startsWith("R$") ? product.originalPrice : `R$ ${product.originalPrice}`}
+              </span>
+            )}
+          </div>
           <Link 
             to={`/produto/${product.id}`}
             className="text-xs uppercase tracking-wider text-primary font-body font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity"
