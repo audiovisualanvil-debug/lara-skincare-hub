@@ -6,106 +6,121 @@
 
 @layer base {
   :root {
-    /* Editorial Moderno - Terracotta + Nude Premium */
-    --background: 30 20% 98%; /* Off-white quente */
-    --foreground: 20 15% 12%; /* Marrom escuro */
+    /* Editorial Luxo - Alto Contraste & Sofisticação */
+    --background: 40 15% 97%; /* Ivory */
+    --foreground: 30 15% 8%; /* Quase preto quente */
     
-    --card: 30 25% 97%;
-    --card-foreground: 20 15% 12%;
+    --card: 40 20% 99%;
+    --card-foreground: 30 15% 8%;
     
-    --popover: 30 20% 98%;
-    --popover-foreground: 20 15% 12%;
+    --popover: 40 20% 99%;
+    --popover-foreground: 30 15% 8%;
     
-    --primary: 16 45% 55%; /* Terracotta */
-    --primary-foreground: 30 20% 98%;
+    --primary: 25 85% 28%; /* Marrom chocolate profundo */
+    --primary-foreground: 40 30% 96%;
     
-    --secondary: 25 30% 92%; /* Nude claro */
-    --secondary-foreground: 20 15% 12%;
+    --secondary: 35 25% 92%; /* Champagne suave */
+    --secondary-foreground: 30 15% 8%;
     
-    --muted: 25 20% 94%;
-    --muted-foreground: 20 10% 45%;
+    --muted: 35 15% 90%;
+    --muted-foreground: 30 10% 40%;
     
-    --accent: 20 35% 88%; /* Nude rosado */
-    --accent-foreground: 20 15% 12%;
+    --accent: 45 45% 88%; /* Dourado suave */
+    --accent-foreground: 30 15% 8%;
     
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 30 20% 98%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 40 30% 98%;
     
-    --border: 25 20% 88%;
-    --input: 25 20% 90%;
-    --ring: 16 45% 55%;
+    --border: 35 20% 85%;
+    --input: 35 15% 92%;
+    --ring: 25 85% 28%;
     
-    --radius: 0.25rem;
+    --radius: 0rem;
     
-    /* Cores da marca - Editorial */
-    --terracotta: 16 45% 55%;
-    --terracotta-light: 16 40% 65%;
-    --terracotta-dark: 16 50% 42%;
-    --nude: 25 30% 92%;
-    --nude-dark: 25 25% 85%;
-    --nude-rose: 20 35% 88%;
-    --espresso: 20 15% 12%;
-    --cream: 30 25% 97%;
-    --sand: 35 20% 80%;
+    /* Cores da marca - Editorial Luxo */
+    --terracotta: 18 70% 38%; /* Terracota sofisticado */
+    --terracotta-light: 18 55% 52%;
+    --terracotta-dark: 18 80% 25%;
+    --nude: 35 25% 92%;
+    --nude-dark: 35 20% 82%;
+    --nude-rose: 25 30% 88%;
+    --espresso: 30 15% 8%;
+    --cream: 40 30% 97%;
+    --sand: 38 18% 75%;
+    
+    /* Novos tokens Editorial Luxo */
+    --gold: 42 60% 50%;
+    --gold-light: 45 55% 65%;
+    --gold-dark: 38 65% 38%;
+    --champagne: 40 35% 92%;
+    --noir: 30 15% 6%;
+    --ivory: 42 30% 97%;
     
     /* Sidebar */
-    --sidebar-background: 25 30% 92%;
-    --sidebar-foreground: 20 15% 12%;
-    --sidebar-primary: 16 45% 55%;
-    --sidebar-primary-foreground: 30 20% 98%;
-    --sidebar-accent: 20 35% 88%;
-    --sidebar-accent-foreground: 20 15% 12%;
-    --sidebar-border: 25 20% 85%;
-    --sidebar-ring: 16 45% 55%;
+    --sidebar-background: 30 15% 6%;
+    --sidebar-foreground: 40 30% 92%;
+    --sidebar-primary: 42 60% 50%;
+    --sidebar-primary-foreground: 30 15% 6%;
+    --sidebar-accent: 30 20% 15%;
+    --sidebar-accent-foreground: 40 30% 92%;
+    --sidebar-border: 30 15% 15%;
+    --sidebar-ring: 42 60% 50%;
   }
 
   .dark {
-    --background: 20 15% 8%;
-    --foreground: 30 15% 92%;
+    --background: 30 15% 5%;
+    --foreground: 40 20% 92%;
     
-    --card: 20 15% 10%;
-    --card-foreground: 30 15% 92%;
+    --card: 30 15% 7%;
+    --card-foreground: 40 20% 92%;
     
-    --popover: 20 15% 10%;
-    --popover-foreground: 30 15% 92%;
+    --popover: 30 15% 7%;
+    --popover-foreground: 40 20% 92%;
     
-    --primary: 16 45% 55%;
-    --primary-foreground: 20 15% 8%;
+    --primary: 42 60% 50%;
+    --primary-foreground: 30 15% 5%;
     
-    --secondary: 20 12% 16%;
-    --secondary-foreground: 30 15% 92%;
+    --secondary: 30 12% 12%;
+    --secondary-foreground: 40 20% 92%;
     
-    --muted: 20 12% 16%;
-    --muted-foreground: 30 10% 55%;
+    --muted: 30 12% 14%;
+    --muted-foreground: 40 15% 55%;
     
-    --accent: 20 20% 20%;
-    --accent-foreground: 30 15% 92%;
+    --accent: 35 25% 18%;
+    --accent-foreground: 40 20% 92%;
     
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 30 20% 98%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 40 30% 98%;
     
-    --border: 20 15% 18%;
-    --input: 20 15% 18%;
-    --ring: 16 45% 55%;
+    --border: 30 12% 18%;
+    --input: 30 12% 15%;
+    --ring: 42 60% 50%;
     
-    --terracotta: 16 45% 55%;
-    --terracotta-light: 16 40% 65%;
-    --terracotta-dark: 16 50% 42%;
-    --nude: 20 12% 16%;
-    --nude-dark: 20 15% 22%;
-    --nude-rose: 20 20% 20%;
-    --espresso: 30 15% 92%;
-    --cream: 20 15% 10%;
-    --sand: 20 15% 25%;
+    --terracotta: 18 70% 45%;
+    --terracotta-light: 18 55% 58%;
+    --terracotta-dark: 18 80% 32%;
+    --nude: 30 12% 12%;
+    --nude-dark: 30 15% 18%;
+    --nude-rose: 25 20% 16%;
+    --espresso: 40 20% 92%;
+    --cream: 30 15% 8%;
+    --sand: 30 12% 25%;
     
-    --sidebar-background: 20 15% 10%;
-    --sidebar-foreground: 30 15% 92%;
-    --sidebar-primary: 16 45% 55%;
-    --sidebar-primary-foreground: 20 15% 8%;
-    --sidebar-accent: 20 12% 16%;
-    --sidebar-accent-foreground: 30 15% 92%;
-    --sidebar-border: 20 15% 18%;
-    --sidebar-ring: 16 45% 55%;
+    --gold: 42 60% 50%;
+    --gold-light: 45 55% 60%;
+    --gold-dark: 38 65% 38%;
+    --champagne: 30 12% 14%;
+    --noir: 40 20% 92%;
+    --ivory: 30 15% 8%;
+    
+    --sidebar-background: 30 15% 5%;
+    --sidebar-foreground: 40 20% 92%;
+    --sidebar-primary: 42 60% 50%;
+    --sidebar-primary-foreground: 30 15% 5%;
+    --sidebar-accent: 30 12% 12%;
+    --sidebar-accent-foreground: 40 20% 92%;
+    --sidebar-border: 30 12% 18%;
+    --sidebar-ring: 42 60% 50%;
   }
 }
 
@@ -117,19 +132,35 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
   }
   
-  h1, h2, h3 {
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+  
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  h3 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
   }
   
   h4, h5, h6 {
     font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-weight: 500;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
+    font-size: 0.75rem;
   }
 }
 
@@ -159,35 +190,45 @@
     font-family: 'Roboto', sans-serif;
   }
   
-  /* Editorial shadows */
+  /* Editorial Luxo shadows */
   .shadow-editorial {
-    box-shadow: 0 4px 30px -8px hsl(var(--espresso) / 0.08);
+    box-shadow: 0 4px 40px -12px hsl(var(--espresso) / 0.12);
   }
   
   .shadow-editorial-hover {
-    box-shadow: 0 8px 40px -10px hsl(var(--espresso) / 0.15);
+    box-shadow: 0 12px 50px -15px hsl(var(--espresso) / 0.2);
   }
   
   .shadow-dramatic {
-    box-shadow: 0 20px 50px -15px hsl(var(--espresso) / 0.2);
+    box-shadow: 0 25px 60px -20px hsl(var(--espresso) / 0.25);
   }
   
-  /* Editorial borders */
+  .shadow-luxury {
+    box-shadow: 
+      0 4px 20px -8px hsl(var(--gold) / 0.15),
+      0 20px 50px -15px hsl(var(--espresso) / 0.12);
+  }
+  
+  /* Editorial Luxo borders */
   .border-editorial {
-    border: 1px solid hsl(var(--terracotta) / 0.3);
+    border: 1px solid hsl(var(--gold) / 0.25);
+  }
+  
+  .border-gold {
+    border: 1px solid hsl(var(--gold) / 0.4);
   }
   
   /* Hover effects */
   .hover-editorial {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .hover-editorial:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px -10px hsl(var(--espresso) / 0.18);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px -15px hsl(var(--espresso) / 0.2);
   }
   
-  /* Editorial underline */
+  /* Editorial underline - Luxo style */
   .editorial-underline {
     position: relative;
     display: inline-block;
@@ -196,14 +237,14 @@
   .editorial-underline::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -4px;
     left: 0;
     width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, hsl(var(--terracotta)), hsl(var(--terracotta-light)));
+    height: 1px;
+    background: linear-gradient(90deg, hsl(var(--gold)), hsl(var(--gold-light)));
     transform: scaleX(0);
     transform-origin: right;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .editorial-underline:hover::after {
@@ -211,53 +252,97 @@
     transform-origin: left;
   }
   
-  /* Text gradient */
+  /* Text gradient - Luxo */
   .text-gradient-editorial {
-    background: linear-gradient(135deg, hsl(var(--terracotta)), hsl(var(--terracotta-dark)));
+    background: linear-gradient(135deg, hsl(var(--gold-dark)), hsl(var(--gold)));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
-  /* Section spacing */
+  .text-gradient-luxury {
+    background: linear-gradient(135deg, hsl(var(--espresso)), hsl(var(--terracotta)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Section spacing - Luxo (more generous) */
   .section-editorial {
-    @apply py-20 md:py-32;
+    @apply py-24 md:py-40;
   }
   
   .section-editorial-sm {
-    @apply py-14 md:py-20;
+    @apply py-16 md:py-24;
   }
   
   /* Editorial container */
   .container-editorial {
-    @apply max-w-7xl mx-auto px-6 md:px-10;
+    @apply max-w-7xl mx-auto px-6 md:px-12 lg:px-16;
   }
   
-  /* Asymmetric grid */
+  /* Asymmetric grid - Luxo */
   .grid-editorial {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
   }
   
   @media (min-width: 768px) {
     .grid-editorial {
-      grid-template-columns: 1.2fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 6rem;
     }
   }
   
-  /* Image treatment */
+  /* Image treatment - Luxo */
   .img-editorial {
     @apply overflow-hidden;
+    position: relative;
+  }
+  
+  .img-editorial::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, hsl(var(--espresso) / 0.1) 100%);
+    z-index: 1;
+    pointer-events: none;
   }
   
   .img-editorial img {
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .img-editorial:hover img {
-    transform: scale(1.05);
+    transform: scale(1.06);
+  }
+  
+  /* Luxo divider */
+  .divider-luxo {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--gold)), transparent);
+  }
+  
+  /* Button Luxo style */
+  .btn-luxo {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+  
+  .btn-luxo::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, hsl(var(--gold) / 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  
+  .btn-luxo:hover::before {
+    opacity: 1;
   }
 }
 
