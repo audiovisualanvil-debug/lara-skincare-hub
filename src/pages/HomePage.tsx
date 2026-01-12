@@ -195,28 +195,31 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* 3. Banner Promo - Linha Tulipia */}
-        <section className="py-6 md:py-8 bg-champagne">
+        {/* 3. Banner Promo - Rosa e Dourado */}
+        <section className="py-8 md:py-10 bg-gradient-to-r from-primary/10 via-gold/10 to-primary/10">
           <div className="container-editorial">
-            <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-              <div className="w-full md:w-1/3">
+            <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 bg-white/60 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-primary/20 shadow-lg">
+              <div className="w-full md:w-1/4">
                 <img 
                   src={lifeCNano} 
                   alt="Linha Life C Nano" 
-                  className="w-full h-48 md:h-56 object-cover"
+                  className="w-full h-40 md:h-48 object-cover rounded-xl shadow-md"
                 />
               </div>
               <div className="flex-1 text-center md:text-left">
-                <p className="text-foreground font-body text-lg md:text-xl">
-                  COMPRE QUALQUER PRODUTO DA LINHA <span className="font-semibold text-gold">LIFE C NANO</span>
-                </p>
+                <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-xs font-medium uppercase tracking-wider rounded-full mb-3">
+                  Oferta Especial
+                </span>
+                <h3 className="font-display text-xl md:text-2xl text-foreground">
+                  Linha <span className="text-gold font-semibold">Life C Nano</span>
+                </h3>
                 <p className="text-muted-foreground text-sm mt-2">
-                  *Tecnologia nano encapsulada para máxima absorção
+                  Tecnologia nano encapsulada para máxima absorção e luminosidade
                 </p>
               </div>
-              <Button variant="gold" size="lg" asChild>
+              <Button variant="primary" size="lg" asChild className="rounded-full">
                 <Link to="/tulipia">
-                  Comprar
+                  Comprar Agora
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -280,54 +283,60 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* 7. Banners Duplos - Promos */}
-        <section className="py-6 md:py-8 bg-background">
+        {/* 7. Banners Duplos - Promos Rosa/Dourado */}
+        <section className="py-8 md:py-10 bg-background">
           <div className="container-editorial">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-              {/* Banner 1 - Tulipia */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+              {/* Banner 1 - Rosa */}
               <Link 
                 to="/tulipia" 
-                className="relative overflow-hidden bg-champagne group"
+                className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 group hover:shadow-xl hover:shadow-primary/10 transition-all duration-300"
               >
-                <div className="flex items-center p-6 md:p-8 gap-4 md:gap-6">
+                <div className="flex items-center p-5 md:p-7 gap-4 md:gap-6">
                   <img 
                     src={miracleEyesHero} 
                     alt="Miracle Eyes"
-                    className="w-24 md:w-32 h-32 md:h-40 object-cover"
+                    className="w-24 md:w-28 h-28 md:h-32 object-cover rounded-xl shadow-md group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="flex-1">
-                    <h3 className="font-display text-xl md:text-2xl text-foreground">
-                      MIRACLE EYES
+                    <span className="inline-block px-2.5 py-1 bg-primary text-primary-foreground text-[10px] font-medium uppercase tracking-wider rounded-full mb-2">
+                      Bestseller
+                    </span>
+                    <h3 className="font-display text-lg md:text-xl text-foreground">
+                      Miracle Eyes
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-2">
+                    <p className="text-xs text-muted-foreground mt-1">
                       Tratamento intensivo para área dos olhos
                     </p>
-                    <Button variant="gold" size="sm" className="mt-4">
+                    <Button variant="outline" size="sm" className="mt-3 rounded-full border-primary/40 text-primary hover:bg-primary hover:text-white">
                       Comprar
                     </Button>
                   </div>
                 </div>
               </Link>
 
-              {/* Banner 2 - Mezzo */}
+              {/* Banner 2 - Dourado */}
               <Link 
                 to="/mezzo" 
-                className="relative overflow-hidden bg-secondary group"
+                className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gold/15 to-gold/5 border border-gold/20 group hover:shadow-xl hover:shadow-gold/10 transition-all duration-300"
               >
-                <div className="flex items-center p-6 md:p-8 gap-4 md:gap-6">
+                <div className="flex items-center p-5 md:p-7 gap-4 md:gap-6">
                   <img 
                     src={resilienceSerum} 
                     alt="Resilience Serum"
-                    className="w-24 md:w-32 h-32 md:h-40 object-cover"
+                    className="w-24 md:w-28 h-28 md:h-32 object-cover rounded-xl shadow-md group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="flex-1">
-                    <h3 className="font-display text-xl md:text-2xl text-foreground">
-                      RESILIENCE PRO
+                    <span className="inline-block px-2.5 py-1 bg-gold text-noir text-[10px] font-medium uppercase tracking-wider rounded-full mb-2">
+                      Anti-idade
+                    </span>
+                    <h3 className="font-display text-lg md:text-xl text-foreground">
+                      Resilience Pro
                     </h3>
-                    <p className="text-sm text-muted-foreground mt-2">
+                    <p className="text-xs text-muted-foreground mt-1">
                       Sérum anti-idade com peptídeos
                     </p>
-                    <Button variant="gold" size="sm" className="mt-4">
+                    <Button variant="outline" size="sm" className="mt-3 rounded-full border-gold/40 text-gold hover:bg-gold hover:text-noir">
                       Comprar
                     </Button>
                   </div>

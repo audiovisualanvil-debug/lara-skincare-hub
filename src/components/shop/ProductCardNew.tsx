@@ -118,12 +118,12 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
 
   return (
     <div 
-      className="group bg-card border border-border/50 overflow-hidden hover-editorial"
+      className="group bg-card rounded-lg border border-border/30 overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-1"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Container - Editorial Style */}
-      <Link to={`/produto/${product.id}`} className="block relative aspect-[4/5] overflow-hidden bg-secondary">
+      {/* Image Container */}
+      <Link to={`/produto/${product.id}`} className="block relative aspect-[4/5] overflow-hidden bg-secondary/50">
         {/* Skeleton placeholder while loading */}
         {!imageLoaded && (
           <div className="absolute inset-0 bg-secondary animate-pulse" />
@@ -141,23 +141,23 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
         
         {/* Professional Badge */}
         {product.isProfessional && (
-          <div className="absolute top-4 left-4">
-            <span className="text-[10px] uppercase tracking-wider font-body font-semibold text-primary bg-background/90 backdrop-blur-sm px-3 py-1.5">
+          <div className="absolute top-3 left-3">
+            <span className="text-[10px] uppercase tracking-wider font-body font-semibold text-white bg-primary/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
               Profissional
             </span>
           </div>
         )}
         
-        {/* Action buttons - Editorial floating style */}
-        <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+        {/* Action buttons - Floating style */}
+        <div className="absolute top-3 right-3 flex flex-col gap-2 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
           {/* Favorite Button */}
           <button
             onClick={handleToggleFavorite}
             className={cn(
-              "w-10 h-10 flex items-center justify-center transition-all duration-300 backdrop-blur-sm",
+              "w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 backdrop-blur-sm shadow-sm",
               isProductFavorite 
                 ? "bg-primary text-primary-foreground" 
-                : "bg-background/80 text-muted-foreground hover:text-primary hover:bg-background"
+                : "bg-white/90 text-muted-foreground hover:text-primary hover:bg-white"
             )}
           >
             <Heart className={cn("h-4 w-4", isProductFavorite && "fill-current")} />
@@ -167,10 +167,10 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
           <button
             onClick={handleToggleCompare}
             className={cn(
-              "w-10 h-10 flex items-center justify-center transition-all duration-300 backdrop-blur-sm",
+              "w-9 h-9 flex items-center justify-center rounded-full transition-all duration-300 backdrop-blur-sm shadow-sm",
               isProductInCompare 
                 ? "bg-primary text-primary-foreground" 
-                : "bg-background/80 text-muted-foreground hover:text-primary hover:bg-background"
+                : "bg-white/90 text-muted-foreground hover:text-primary hover:bg-white"
             )}
           >
             <Scale className="h-4 w-4" />
@@ -178,10 +178,10 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
         </div>
 
         {/* Quick add overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+        <div className="absolute bottom-0 left-0 right-0 p-3 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
           <Button 
             className={cn(
-              "w-full h-12 bg-primary hover:bg-terracotta-dark text-primary-foreground font-body font-semibold uppercase tracking-wider text-xs transition-all duration-300",
+              "w-full h-11 rounded-full bg-primary hover:bg-primary/85 text-primary-foreground font-body font-medium uppercase tracking-wider text-xs transition-all duration-300 shadow-md",
               addedToCart && "bg-green-600 hover:bg-green-600"
             )}
             onClick={handleAddToCart}
