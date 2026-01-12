@@ -3,12 +3,17 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "./useAuth";
 
 export const useAdminRole = () => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAdminRole = async () => {
+      // Wait for auth to finish loading first
+      if (authLoading) {
+        return;
+      }
+
       if (!user) {
         setIsAdmin(false);
         setLoading(false);
@@ -23,6 +28,7 @@ export const useAdminRole = () => {
         });
 
         if (error) throw error;
+        console.log("useAdminRole - has_role result:", data, "for user:", user.id);
         setIsAdmin(data === true);
       } catch (error) {
         console.error("Error checking admin role:", error);
@@ -33,7 +39,7 @@ export const useAdminRole = () => {
     };
 
     checkAdminRole();
-  }, [user]);
+  }, [user, authLoading]);
 
   return { isAdmin, loading };
 };
