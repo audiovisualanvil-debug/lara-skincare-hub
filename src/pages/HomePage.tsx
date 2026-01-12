@@ -12,7 +12,7 @@ import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
 import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
 import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Percent, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 // Import banners
@@ -50,6 +50,16 @@ const tendencias = [
   { ...allMezzoWithImages[1] },
   { ...allMezzoWithImages[2], isNew: true },
   { ...allMezzoWithImages[3], discount: 15, originalPrice: "R$ 159,90" },
+];
+
+// Promoções - produtos com desconto
+const promocoes = [
+  { ...allTulipiaWithImages[0], discount: 30, originalPrice: "R$ 219,90", price: "R$ 153,93" },
+  { ...allMezzoWithImages[4], discount: 25, originalPrice: "R$ 179,90", price: "R$ 134,93" },
+  { ...allExtratosWithImages[3], discount: 20, originalPrice: "R$ 159,90", price: "R$ 127,92" },
+  { ...allTulipiaWithImages[5], discount: 35, originalPrice: "R$ 249,90", price: "R$ 162,44" },
+  { ...allMezzoWithImages[6], discount: 15, originalPrice: "R$ 129,90", price: "R$ 110,42" },
+  { ...allExtratosWithImages[5], discount: 40, originalPrice: "R$ 199,90", price: "R$ 119,94" },
 ];
 
 // Skin type categories
@@ -294,11 +304,50 @@ const HomePage = () => {
           </div>
         </section>
 
-        {/* 6. Tendências */}
+        {/* 6. Promoções */}
+        <section className="py-12 md:py-16 bg-gradient-to-br from-terracotta/10 via-background to-gold/10 relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-terracotta/5 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-gold/5 rounded-full blur-3xl" />
+          
+          <div className="container-editorial relative z-10">
+            <div className="text-center mb-8 md:mb-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-terracotta/10 rounded-full mb-4">
+                <Percent className="w-4 h-4 text-terracotta" />
+                <span className="text-xs uppercase tracking-wider text-terracotta font-medium">
+                  Ofertas Imperdíveis
+                </span>
+              </div>
+              <h2 className="font-display text-2xl md:text-3xl text-foreground">
+                Promoções da Semana
+              </h2>
+              <p className="text-muted-foreground text-sm mt-2">
+                Até 40% OFF em produtos selecionados
+              </p>
+            </div>
+            <ProductCarousel products={promocoes} />
+            <div className="text-center mt-8">
+              <Button variant="outline" size="lg" asChild className="rounded-full border-terracotta/40 text-terracotta hover:bg-terracotta hover:text-white">
+                <Link to="/loja?promocao=true">
+                  Ver Todas as Ofertas
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* 7. Tendências */}
         <section className="py-12 md:py-16 bg-background">
           <div className="container-editorial">
             <div className="text-center mb-8 md:mb-10">
-              <h2 className="font-display text-2xl md:text-3xl text-gold">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gold/10 rounded-full mb-4">
+                <Sparkles className="w-4 h-4 text-gold" />
+                <span className="text-xs uppercase tracking-wider text-gold font-medium">
+                  Em Alta
+                </span>
+              </div>
+              <h2 className="font-display text-2xl md:text-3xl text-foreground">
                 Tendências
               </h2>
             </div>
