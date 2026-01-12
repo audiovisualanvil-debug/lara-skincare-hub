@@ -30,6 +30,7 @@ import ExtratosPage from "./pages/ExtratosPage";
 import SmartGRPage from "./pages/SmartGRPage";
 import AdminImageProcessor from "./pages/AdminImageProcessor";
 import Checkout from "./pages/Checkout";
+import Promocoes from "./pages/Promocoes";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +49,7 @@ const App = () => (
                     <Route path="/" element={<HomePage />} />
                     <Route path="/shop" element={<Shop />} />
                     <Route path="/loja" element={<Shop />} />
+                    <Route path="/promocoes" element={<Promocoes />} />
                     <Route path="/tulipia" element={<TulipiaPage />} />
                     <Route path="/mezzo" element={<MezzoPage />} />
                     <Route path="/extratos-da-terra" element={<ExtratosPage />} />
