@@ -160,10 +160,13 @@ const menuItems = [
   },
 ];
 
+type CustomerType = "professional" | "home";
+
 const MainHeader = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeMegaMenu, setActiveMegaMenu] = useState<string | null>(null);
   const [showSearch, setShowSearch] = useState(false);
+  const [customerType, setCustomerType] = useState<CustomerType>("home");
   const megaMenuRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { totalItems, openCart } = useCart();
@@ -206,6 +209,40 @@ const MainHeader = () => {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50" ref={megaMenuRef}>
+      {/* Customer Type Selector - Prominent Bar */}
+      <div className="bg-muted border-b border-border/30">
+        <div className="container-editorial">
+          <div className="flex items-center justify-center py-2">
+            <div className="inline-flex rounded-full bg-background border border-border/50 p-1 shadow-sm">
+              <button
+                onClick={() => setCustomerType("professional")}
+                className={`
+                  px-4 py-1.5 text-xs md:text-sm font-body font-medium rounded-full transition-all duration-300
+                  ${customerType === "professional" 
+                    ? "bg-primary text-primary-foreground shadow-sm" 
+                    : "text-muted-foreground hover:text-foreground"
+                  }
+                `}
+              >
+                Profissional de estética
+              </button>
+              <button
+                onClick={() => setCustomerType("home")}
+                className={`
+                  px-4 py-1.5 text-xs md:text-sm font-body font-medium rounded-full transition-all duration-300
+                  ${customerType === "home" 
+                    ? "bg-primary text-primary-foreground shadow-sm" 
+                    : "text-muted-foreground hover:text-foreground"
+                  }
+                `}
+              >
+                Skincare em casa
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Top Bar - Editorial Style */}
       <div className="bg-background/95 backdrop-blur-md border-b border-border/50">
         <div className="container-editorial">
