@@ -16,6 +16,10 @@ import {
   PieChart as PieChartIcon,
   ArrowLeft,
   RefreshCw,
+  Package,
+  ShoppingCart,
+  DollarSign,
+  AlertTriangle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -52,6 +56,14 @@ interface DashboardStats {
   rejectedRequests: number;
   quizCompletions: number;
   avgDiscount: number;
+  // New: Products & Orders
+  totalProducts: number;
+  activeProducts: number;
+  lowStockProducts: number;
+  totalOrders: number;
+  pendingOrders: number;
+  totalRevenue: number;
+  avgOrderValue: number;
 }
 
 interface RequestByDate {
@@ -66,7 +78,7 @@ interface ProfessionalRequest {
   created_at: string;
 }
 
-const COLORS = ["hsl(var(--primary))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))"];
+const COLORS = ["hsl(var(--primary))", "hsl(var(--chart-2))", "hsl(var(--chart-3))", "hsl(var(--chart-4))", "hsl(var(--chart-5))"];
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -81,8 +93,16 @@ const AdminDashboard = () => {
     rejectedRequests: 0,
     quizCompletions: 0,
     avgDiscount: 0,
+    totalProducts: 0,
+    activeProducts: 0,
+    lowStockProducts: 0,
+    totalOrders: 0,
+    pendingOrders: 0,
+    totalRevenue: 0,
+    avgOrderValue: 0,
   });
   const [requestsByDate, setRequestsByDate] = useState<RequestByDate[]>([]);
+  const [ordersByDate, setOrdersByDate] = useState<RequestByDate[]>([]);
   const [allRequests, setAllRequests] = useState<ProfessionalRequest[]>([]);
   const [loading, setLoading] = useState(true);
   const [period, setPeriod] = useState("month");
@@ -132,6 +152,43 @@ const AdminDashboard = () => {
         .from("quiz_results")
         .select("*", { count: "exact", head: true });
 
+      // Fetch products stats
+      const { data: products } = await supabase
+        .from("products")
+        .select("id, is_active, stock");
+
+      const totalProducts = products?.length || 0;
+      const activeProducts = products?.filter((p) => p.is_active).length || 0;
+      const lowStockProducts = products?.filter((p) => p.stock <= 5).length || 0;
+
+      // Fetch orders stats
+      const { data: orders } = await supabase
+        .from("orders")
+        .select("id, status, total, created_at");
+
+      const totalOrders = orders?.length || 0;
+      const pendingOrders = orders?.filter((o) => o.status === "pending" || o.status === "paid").length || 0;
+      const totalRevenue = orders?.reduce((acc, o) => acc + Number(o.total || 0), 0) || 0;
+      const avgOrderValue = totalOrders > 0 ? totalRevenue / totalOrders : 0;
+
+      // Orders by date for chart
+      const filteredOrders = orders?.filter(
+        (o) => new Date(o.created_at) >= getDateFilter()
+      ) || [];
+
+      const ordersByDateGrouped = filteredOrders.reduce((acc: Record<string, number>, o) => {
+        const date = format(new Date(o.created_at), "dd/MM", { locale: ptBR });
+        acc[date] = (acc[date] || 0) + 1;
+        return acc;
+      }, {});
+
+      const ordersChartData = Object.entries(ordersByDateGrouped).map(([date, count]) => ({
+        date,
+        count,
+      }));
+
+      setOrdersByDate(ordersChartData);
+
       // Fetch all professional requests
       const { data: requests, error } = await supabase
         .from("professional_requests")
@@ -160,6 +217,13 @@ const AdminDashboard = () => {
         rejectedRequests: rejected,
         quizCompletions: quizCount || 0,
         avgDiscount,
+        totalProducts,
+        activeProducts,
+        lowStockProducts,
+        totalOrders,
+        pendingOrders,
+        totalRevenue,
+        avgOrderValue,
       });
 
       // Group requests by date for chart
@@ -286,6 +350,62 @@ const AdminDashboard = () => {
                 Solicitações Profissionais
               </Link>
             </Button>
+            <Button variant="outline" asChild>
+              <Link to="/admin/produtos">
+                <Package className="w-4 h-4 mr-2" />
+                Gerenciar Produtos
+              </Link>
+            </Button>
+          </div>
+
+          {/* Sales Stats */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <Card className="border-border/50 bg-primary/5">
+              <CardHeader className="pb-2">
+                <CardDescription className="flex items-center gap-2">
+                  <DollarSign className="w-4 h-4 text-primary" />
+                  Faturamento Total
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-display font-bold text-primary">
+                  R$ {stats.totalRevenue.toFixed(2).replace(".", ",")}
+                </p>
+              </CardContent>
+            </Card>
+            <Card className="border-border/50">
+              <CardHeader className="pb-2">
+                <CardDescription className="flex items-center gap-2">
+                  <ShoppingCart className="w-4 h-4" />
+                  Total Pedidos
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-display font-bold">{stats.totalOrders}</p>
+              </CardContent>
+            </Card>
+            <Card className="border-border/50">
+              <CardHeader className="pb-2">
+                <CardDescription className="flex items-center gap-2">
+                  <Package className="w-4 h-4" />
+                  Produtos Ativos
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-display font-bold">{stats.activeProducts}</p>
+              </CardContent>
+            </Card>
+            <Card className="border-border/50">
+              <CardHeader className="pb-2">
+                <CardDescription className="flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4 text-orange-500" />
+                  Estoque Baixo
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-2xl font-display font-bold text-orange-600">{stats.lowStockProducts}</p>
+              </CardContent>
+            </Card>
           </div>
 
           {/* Stats Cards */}
