@@ -487,26 +487,75 @@ const MainHeader = () => {
               </Link>
             ))}
             
-            {/* Mobile Auth & Favorites */}
-            <div className="pt-4 flex gap-4">
-              {!loading && !user && (
-                <Link
-                  to="/auth"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-2 text-sm font-medium text-primary"
-                >
-                  <User className="h-4 w-4" />
-                  Entrar
-                </Link>
+            {/* Mobile Auth Section */}
+            <div className="pt-6 space-y-3">
+              {!loading && !user ? (
+                <Button variant="primary" className="w-full" asChild>
+                  <Link
+                    to="/auth"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    <UserCircle className="h-4 w-4 mr-2" />
+                    Entrar ou Criar Conta
+                  </Link>
+                </Button>
+              ) : user && (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between py-3 px-4 bg-secondary/50 rounded-lg">
+                    <div>
+                      <p className="text-xs uppercase tracking-wider text-muted-foreground font-body">Minha conta</p>
+                      <p className="text-sm font-medium truncate mt-0.5">{user.email}</p>
+                      {isProfessional && (
+                        <span className="inline-flex items-center gap-1 text-xs text-green-600 mt-1">
+                          <ShieldCheck className="w-3 h-3" />
+                          Profissional
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Professional Status */}
+                  {!professionalRequest ? (
+                    <Link
+                      to="/solicitar-cadastro-profissional"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-2 py-3 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                    >
+                      <Building2 className="h-4 w-4" />
+                      Cadastro Profissional
+                    </Link>
+                  ) : professionalRequest.status === "pending" ? (
+                    <div className="flex items-center gap-2 py-3 text-sm font-medium text-yellow-600">
+                      <Building2 className="h-4 w-4" />
+                      Solicitação em Análise
+                    </div>
+                  ) : null}
+                  
+                  {/* Admin Panel */}
+                  {isAdmin && (
+                    <Link
+                      to="/admin/solicitacoes-profissionais"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="flex items-center gap-2 py-3 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+                    >
+                      <ShieldCheck className="h-4 w-4" />
+                      Painel Admin
+                    </Link>
+                  )}
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full text-destructive hover:text-destructive hover:bg-destructive/10"
+                    onClick={() => {
+                      handleSignOut();
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sair da Conta
+                  </Button>
+                </div>
               )}
-              <Link
-                to="/favoritos"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground"
-              >
-                <Heart className="h-4 w-4" />
-                Favoritos ({totalFavorites})
-              </Link>
             </div>
           </div>
         </nav>
