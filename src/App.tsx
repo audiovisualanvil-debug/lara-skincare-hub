@@ -32,6 +32,7 @@ import AdminImageProcessor from "./pages/AdminImageProcessor";
 import Checkout from "./pages/Checkout";
 import Promocoes from "./pages/Promocoes";
 import FAQ from "./pages/FAQ";
+import OrderConfirmation from "./pages/OrderConfirmation";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +67,7 @@ const App = () => (
                     <Route path="/contato" element={<Contact />} />
                     <Route path="/admin/processar-imagens" element={<AdminImageProcessor />} />
                     <Route path="/checkout" element={<Checkout />} />
+                    <Route path="/confirmacao-pedido" element={<OrderConfirmation />} />
                     <Route path="/faq" element={<FAQ />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
