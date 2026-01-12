@@ -1,0 +1,335 @@
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useNavigate, Link } from "react-router-dom";
+import { ArrowLeft, Building2, User, Phone, FileText, CheckCircle, Clock, XCircle, Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
+import { useProfessionalStatus } from "@/hooks/useProfessionalStatus";
+import MainHeader from "@/components/layout/MainHeader";
+
+const formatPhone = (value: string) => {
+  const numbers = value.replace(/\D/g, "");
+  if (numbers.length <= 10) {
+    return numbers.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3").trim();
+  }
+  return numbers.replace(/(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3").trim();
+};
+
+const formatCNPJ = (value: string) => {
+  const numbers = value.replace(/\D/g, "");
+  return numbers
+    .replace(/(\d{2})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1.$2")
+    .replace(/(\d{3})(\d)/, "$1/$2")
+    .replace(/(\d{4})(\d)/, "$1-$2")
+    .substring(0, 18);
+};
+
+const ProfessionalRequest = () => {
+  const navigate = useNavigate();
+  const { user, loading: authLoading } = useAuth();
+  const { request, loading: statusLoading, submitRequest, hasExistingRequest } = useProfessionalStatus();
+  
+  const [formData, setFormData] = useState({
+    company_name: "",
+    cnpj: "",
+    contact_name: "",
+    phone: "",
+    reason: "",
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!authLoading && !user) {
+      navigate("/auth", { state: { from: "/solicitar-cadastro-profissional" } });
+    }
+  }, [user, authLoading, navigate]);
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.contact_name.trim()) {
+      newErrors.contact_name = "Nome de contato é obrigatório";
+    }
+    
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Telefone é obrigatório";
+    } else if (formData.phone.replace(/\D/g, "").length < 10) {
+      newErrors.phone = "Telefone inválido";
+    }
+    
+    if (formData.cnpj && formData.cnpj.replace(/\D/g, "").length !== 14) {
+      newErrors.cnpj = "CNPJ inválido";
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!validateForm()) {
+      toast.error("Por favor, corrija os campos destacados");
+      return;
+    }
+    
+    setIsSubmitting(true);
+    
+    try {
+      await submitRequest({
+        company_name: formData.company_name || undefined,
+        cnpj: formData.cnpj.replace(/\D/g, "") || undefined,
+        contact_name: formData.contact_name,
+        phone: formData.phone,
+        reason: formData.reason || undefined,
+      });
+      
+      toast.success("Solicitação enviada com sucesso! Aguarde a análise.");
+    } catch (error: any) {
+      console.error("Error submitting request:", error);
+      toast.error(error.message || "Erro ao enviar solicitação");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (authLoading || statusLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  const getStatusInfo = () => {
+    if (!request) return null;
+    
+    switch (request.status) {
+      case "pending":
+        return {
+          icon: Clock,
+          color: "text-yellow-600",
+          bgColor: "bg-yellow-50",
+          borderColor: "border-yellow-200",
+          title: "Solicitação em Análise",
+          description: "Sua solicitação está sendo analisada pela nossa equipe. Você receberá uma resposta em breve.",
+        };
+      case "approved":
+        return {
+          icon: CheckCircle,
+          color: "text-green-600",
+          bgColor: "bg-green-50",
+          borderColor: "border-green-200",
+          title: "Cadastro Aprovado!",
+          description: `Parabéns! Você tem ${request.discount_percentage}% de desconto em todas as compras.`,
+        };
+      case "rejected":
+        return {
+          icon: XCircle,
+          color: "text-red-600",
+          bgColor: "bg-red-50",
+          borderColor: "border-red-200",
+          title: "Solicitação Não Aprovada",
+          description: request.admin_notes || "Sua solicitação não foi aprovada. Entre em contato para mais informações.",
+        };
+    }
+  };
+
+  const statusInfo = getStatusInfo();
+
+  return (
+    <div className="min-h-screen bg-background">
+      <MainHeader />
+      
+      <main className="container max-w-2xl mx-auto px-4 py-8">
+        <button 
+          onClick={() => navigate(-1)} 
+          className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-6"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Voltar
+        </button>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <Card>
+            <CardHeader className="text-center">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Building2 className="w-8 h-8 text-primary" />
+              </div>
+              <CardTitle className="text-2xl">Cadastro Profissional</CardTitle>
+              <CardDescription>
+                Solicite seu cadastro para ter acesso a preços especiais e descontos exclusivos.
+              </CardDescription>
+            </CardHeader>
+            
+            <CardContent>
+              {hasExistingRequest && statusInfo ? (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className={`p-6 rounded-lg border-2 ${statusInfo.bgColor} ${statusInfo.borderColor}`}
+                >
+                  <div className="flex items-start gap-4">
+                    <statusInfo.icon className={`w-8 h-8 ${statusInfo.color} flex-shrink-0`} />
+                    <div>
+                      <h3 className={`text-lg font-semibold ${statusInfo.color}`}>
+                        {statusInfo.title}
+                      </h3>
+                      <p className="text-muted-foreground mt-1">
+                        {statusInfo.description}
+                      </p>
+                      
+                      {request?.status === "approved" && (
+                        <div className="mt-4">
+                          <Button asChild>
+                            <Link to="/shop">Ver Produtos com Desconto</Link>
+                          </Button>
+                        </div>
+                      )}
+                      
+                      <div className="mt-4 pt-4 border-t border-current/10">
+                        <p className="text-sm text-muted-foreground">
+                          Enviado em: {new Date(request!.created_at).toLocaleDateString("pt-BR")}
+                        </p>
+                        {request?.reviewed_at && (
+                          <p className="text-sm text-muted-foreground">
+                            Analisado em: {new Date(request.reviewed_at).toLocaleDateString("pt-BR")}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-4">
+                    <div>
+                      <Label htmlFor="contact_name" className="flex items-center gap-2">
+                        <User className="w-4 h-4" />
+                        Nome de Contato *
+                      </Label>
+                      <Input
+                        id="contact_name"
+                        value={formData.contact_name}
+                        onChange={(e) => {
+                          setFormData({ ...formData, contact_name: e.target.value });
+                          if (errors.contact_name) setErrors({ ...errors, contact_name: "" });
+                        }}
+                        placeholder="Seu nome completo"
+                        className={errors.contact_name ? "border-destructive" : ""}
+                      />
+                      {errors.contact_name && (
+                        <p className="text-sm text-destructive mt-1">{errors.contact_name}</p>
+                      )}
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="phone" className="flex items-center gap-2">
+                        <Phone className="w-4 h-4" />
+                        Telefone/WhatsApp *
+                      </Label>
+                      <Input
+                        id="phone"
+                        value={formData.phone}
+                        onChange={(e) => {
+                          setFormData({ ...formData, phone: formatPhone(e.target.value) });
+                          if (errors.phone) setErrors({ ...errors, phone: "" });
+                        }}
+                        placeholder="(11) 99999-9999"
+                        maxLength={15}
+                        className={errors.phone ? "border-destructive" : ""}
+                      />
+                      {errors.phone && (
+                        <p className="text-sm text-destructive mt-1">{errors.phone}</p>
+                      )}
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="company_name" className="flex items-center gap-2">
+                        <Building2 className="w-4 h-4" />
+                        Nome da Empresa (opcional)
+                      </Label>
+                      <Input
+                        id="company_name"
+                        value={formData.company_name}
+                        onChange={(e) => setFormData({ ...formData, company_name: e.target.value })}
+                        placeholder="Nome da sua empresa ou salão"
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="cnpj">CNPJ (opcional)</Label>
+                      <Input
+                        id="cnpj"
+                        value={formData.cnpj}
+                        onChange={(e) => {
+                          setFormData({ ...formData, cnpj: formatCNPJ(e.target.value) });
+                          if (errors.cnpj) setErrors({ ...errors, cnpj: "" });
+                        }}
+                        placeholder="00.000.000/0000-00"
+                        maxLength={18}
+                        className={errors.cnpj ? "border-destructive" : ""}
+                      />
+                      {errors.cnpj && (
+                        <p className="text-sm text-destructive mt-1">{errors.cnpj}</p>
+                      )}
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Não é obrigatório ter CNPJ para solicitar o cadastro profissional.
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="reason" className="flex items-center gap-2">
+                        <FileText className="w-4 h-4" />
+                        Conte-nos sobre você (opcional)
+                      </Label>
+                      <Textarea
+                        id="reason"
+                        value={formData.reason}
+                        onChange={(e) => setFormData({ ...formData, reason: e.target.value })}
+                        placeholder="Descreva sua área de atuação, experiência, ou qualquer informação relevante..."
+                        rows={4}
+                      />
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    type="submit" 
+                    className="w-full" 
+                    size="lg"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Enviando...
+                      </>
+                    ) : (
+                      "Enviar Solicitação"
+                    )}
+                  </Button>
+                  
+                  <p className="text-xs text-center text-muted-foreground">
+                    Ao enviar, você concorda com nossos termos de uso e política de privacidade.
+                  </p>
+                </form>
+              )}
+            </CardContent>
+          </Card>
+        </motion.div>
+      </main>
+    </div>
+  );
+};
+
+export default ProfessionalRequest;
