@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { User, ShoppingBag, Menu, X, ChevronDown, Heart, LogOut, Search } from "lucide-react";
+import { User, ShoppingBag, Menu, X, ChevronDown, Heart, LogOut, Search, Building2, ShieldCheck, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,6 +12,8 @@ import {
 import { useCart } from "@/contexts/CartContext";
 import { useFavorites } from "@/contexts/FavoritesContext";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdminRole } from "@/hooks/useAdminRole";
+import { useProfessionalStatus } from "@/hooks/useProfessionalStatus";
 import { useBrandTheme } from "@/contexts/BrandThemeContext";
 import SearchAutocomplete from "@/components/shop/SearchAutocomplete";
 import { toast } from "sonner";
@@ -167,6 +169,8 @@ const MainHeader = () => {
   const { totalItems, openCart } = useCart();
   const { totalFavorites } = useFavorites();
   const { user, signOut, loading } = useAuth();
+  const { isAdmin } = useAdminRole();
+  const { isProfessional, request: professionalRequest } = useProfessionalStatus();
   const { currentTheme, isOnBrandPage } = useBrandTheme();
 
   const handleSignOut = async () => {
@@ -264,15 +268,56 @@ const MainHeader = () => {
                 user ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="hidden md:flex h-10 w-10 hover:bg-accent/50">
+                      <Button variant="ghost" size="icon" className="hidden md:flex h-10 w-10 hover:bg-accent/50 relative">
                         <User className="h-5 w-5" />
+                        {isProfessional && (
+                          <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-background" />
+                        )}
                       </Button>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-52 bg-background/95 backdrop-blur-md border-border/50">
+                    <DropdownMenuContent align="end" className="w-56 bg-background/95 backdrop-blur-md border-border/50">
                       <div className="px-3 py-2">
                         <p className="text-xs uppercase tracking-wider text-muted-foreground font-body">Minha conta</p>
                         <p className="text-sm font-medium truncate mt-1">{user.email}</p>
+                        {isProfessional && (
+                          <span className="inline-flex items-center gap-1 text-xs text-green-600 mt-1">
+                            <ShieldCheck className="w-3 h-3" />
+                            Profissional
+                          </span>
+                        )}
                       </div>
+                      <DropdownMenuSeparator className="bg-border/50" />
+                      
+                      {/* Professional Status */}
+                      {!professionalRequest ? (
+                        <DropdownMenuItem asChild>
+                          <Link to="/solicitar-cadastro-profissional" className="cursor-pointer">
+                            <Building2 className="h-4 w-4 mr-2" />
+                            Cadastro Profissional
+                          </Link>
+                        </DropdownMenuItem>
+                      ) : professionalRequest.status === "pending" ? (
+                        <DropdownMenuItem asChild>
+                          <Link to="/solicitar-cadastro-profissional" className="cursor-pointer text-yellow-600">
+                            <Building2 className="h-4 w-4 mr-2" />
+                            Solicitação em Análise
+                          </Link>
+                        </DropdownMenuItem>
+                      ) : null}
+                      
+                      {/* Admin Panel */}
+                      {isAdmin && (
+                        <>
+                          <DropdownMenuSeparator className="bg-border/50" />
+                          <DropdownMenuItem asChild>
+                            <Link to="/admin/solicitacoes-profissionais" className="cursor-pointer text-primary">
+                              <ShieldCheck className="h-4 w-4 mr-2" />
+                              Painel Admin
+                            </Link>
+                          </DropdownMenuItem>
+                        </>
+                      )}
+                      
                       <DropdownMenuSeparator className="bg-border/50" />
                       <DropdownMenuItem onClick={handleSignOut} className="text-destructive focus:text-destructive focus:bg-destructive/10">
                         <LogOut className="h-4 w-4 mr-2" />
