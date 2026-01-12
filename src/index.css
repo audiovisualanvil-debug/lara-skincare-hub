@@ -267,18 +267,18 @@
     background-clip: text;
   }
   
-  /* Section spacing - Luxo (more generous) */
+  /* Section spacing - Luxo (mobile-first, generous on desktop) */
   .section-editorial {
-    @apply py-24 md:py-40;
+    @apply py-16 md:py-24 lg:py-32;
   }
   
   .section-editorial-sm {
-    @apply py-16 md:py-24;
+    @apply py-12 md:py-16 lg:py-24;
   }
   
-  /* Editorial container */
+  /* Editorial container - mobile-first padding */
   .container-editorial {
-    @apply max-w-7xl mx-auto px-6 md:px-12 lg:px-16;
+    @apply max-w-7xl mx-auto px-5 md:px-8 lg:px-16;
   }
   
   /* Asymmetric grid - Luxo */
