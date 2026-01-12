@@ -86,25 +86,31 @@ const skinTypes = [
   },
 ];
 
-// Testimonials
+// Testimonials with extended data
 const testimonials = [
   {
     id: 1,
     name: "Maria Silva",
-    text: "Os produtos são incríveis! Em apenas 2 semanas já notei diferença nas manchas.",
+    text: "Os produtos são incríveis! Em apenas 2 semanas já notei diferença nas manchas. Minha pele está mais uniforme e radiante.",
     rating: 5,
+    role: "Empresária",
+    product: "Life C Nano Mousse",
   },
   {
     id: 2,
-    name: "Ana Paula",
-    text: "A consultoria personalizada fez toda a diferença. Finalmente encontrei a rotina perfeita.",
+    name: "Ana Paula Costa",
+    text: "A consultoria personalizada fez toda a diferença. Finalmente encontrei a rotina perfeita para minha pele sensível.",
     rating: 5,
+    role: "Arquiteta",
+    product: "Kit Rotina Completa",
   },
   {
     id: 3,
     name: "Carla Santos",
-    text: "Uso a linha anti-idade há 3 meses e os resultados são surpreendentes.",
+    text: "Uso a linha anti-idade há 3 meses e os resultados são surpreendentes. Rugas visivelmente reduzidas!",
     rating: 5,
+    role: "Médica",
+    product: "Resilience Serum Pro",
   },
 ];
 
