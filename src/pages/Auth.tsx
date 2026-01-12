@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, Lock, User, Loader2, Eye, EyeOff } from "lucide-react";
+import { Mail, Lock, User, Loader2, Eye, EyeOff, Briefcase } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -250,6 +250,17 @@ const Auth = () => {
                   {isLogin ? "Criar conta" : "Entrar"}
                 </button>
               </p>
+            </div>
+
+            {/* Professional Request Link */}
+            <div className="mt-6 pt-6 border-t border-border">
+              <Link
+                to="/solicitar-profissional"
+                className="flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg bg-muted/50 hover:bg-muted transition-colors text-sm text-muted-foreground hover:text-foreground"
+              >
+                <Briefcase className="h-4 w-4" />
+                <span>É profissional da saúde? <strong className="text-foreground">Solicite desconto especial</strong></span>
+              </Link>
             </div>
           </motion.div>
         </div>
