@@ -240,10 +240,13 @@ const HomePage = () => {
         </section>
 
         {/* 5. Procure por tipo de pele */}
-        <section className="py-12 md:py-16 bg-champagne">
+        <section className="py-12 md:py-16 bg-gradient-to-b from-champagne to-background">
           <div className="container-editorial">
             <div className="text-center mb-8 md:mb-10">
-              <h2 className="font-display text-2xl md:text-3xl text-foreground">
+              <span className="text-xs uppercase tracking-[0.2em] text-primary font-body font-medium">
+                Encontre o ideal para você
+              </span>
+              <h2 className="font-display text-2xl md:text-3xl text-foreground mt-2">
                 Procure por tipo de pele
               </h2>
             </div>
@@ -252,18 +255,29 @@ const HomePage = () => {
                 <Link 
                   key={type.title}
                   to={type.href}
-                  className="group relative overflow-hidden aspect-[3/4]"
+                  className="group relative overflow-hidden rounded-2xl aspect-[3/4] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                 >
                   <img 
                     src={type.image} 
                     alt={type.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-noir/70 via-noir/20 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                    <h3 className="font-display text-lg md:text-xl text-ivory uppercase tracking-wide text-center">
+                  <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                        {type.title === "Acne" && <span className="text-white text-sm">💧</span>}
+                        {type.title === "Manchas" && <span className="text-white text-sm">✨</span>}
+                        {type.title === "Mistas" && <span className="text-white text-sm">🌿</span>}
+                        {type.title === "Oleosidade" && <span className="text-white text-sm">💎</span>}
+                      </div>
+                    </div>
+                    <h3 className="font-display text-lg md:text-xl text-ivory text-center mt-2">
                       {type.title}
                     </h3>
+                    <p className="text-xs text-ivory/70 text-center mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Ver produtos →
+                    </p>
                   </div>
                 </Link>
               ))}
