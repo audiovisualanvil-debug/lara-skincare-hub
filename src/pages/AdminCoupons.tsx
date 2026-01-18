@@ -18,7 +18,7 @@ interface Coupon {
   id: string;
   code: string;
   description: string | null;
-  discount_type: string;
+  discount_type: "percentage" | "fixed";
   discount_value: number;
   min_order_value: number;
   max_uses: number | null;
@@ -59,7 +59,7 @@ const AdminCoupons = () => {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setCoupons(data || []);
+      setCoupons((data || []) as Coupon[]);
     } catch (error) {
       console.error("Error fetching coupons:", error);
     } finally {
