@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowLeft, Droplets, Sparkles, Beaker, Leaf, Heart, Activity } from "lucide-react";
+import { ArrowLeft, Droplets, Sparkles, Beaker, Leaf, Heart, Activity, FlaskConical, Syringe } from "lucide-react";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import ProductGrid from "@/components/shop/ProductGrid";
@@ -23,6 +23,8 @@ const categories = [
   { id: "all", label: "Todos", count: getCategoryCount("all") },
   { id: "ativos", label: "Ativos Skin Pro", icon: Droplets, count: getCategoryCount("ativos") },
   { id: "corporal", label: "Corporal", icon: Activity, count: getCategoryCount("corporal") },
+  { id: "peelings", label: "Peelings", icon: FlaskConical, count: getCategoryCount("peelings") },
+  { id: "microagulhamento", label: "Microagulhamento", icon: Syringe, count: getCategoryCount("microagulhamento") },
 ];
 
 const SmartGRPage = () => {
