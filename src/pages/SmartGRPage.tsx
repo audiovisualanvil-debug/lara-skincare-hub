@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowLeft, Droplets, Sparkles, Beaker, Leaf, Heart } from "lucide-react";
+import { ArrowLeft, Droplets, Sparkles, Beaker, Leaf, Heart, Activity } from "lucide-react";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import ProductGrid from "@/components/shop/ProductGrid";
@@ -13,13 +13,16 @@ import { allSmartGRWithImages } from "@/data/smartGRProducts";
 // Import hero banner
 import smartgrHero from "@/assets/banners/smartgr-hero-wide.jpg";
 
+// Contagem por categoria
+const getCategoryCount = (category: string) => 
+  category === "all" 
+    ? allSmartGRWithImages.length 
+    : allSmartGRWithImages.filter(p => p.category === category).length;
+
 const categories = [
-  { id: "all", label: "Todos", count: allSmartGRWithImages.length },
-  { id: "skin-pro", label: "Skin Pro", icon: Droplets },
-  { id: "boosters", label: "Boosters", icon: Beaker },
-  { id: "especialidades", label: "Especialidades", icon: Sparkles },
-  { id: "labios", label: "Lábios", icon: Heart },
-  { id: "capilar", label: "Capilar", icon: Leaf },
+  { id: "all", label: "Todos", count: getCategoryCount("all") },
+  { id: "ativos", label: "Ativos Skin Pro", icon: Droplets, count: getCategoryCount("ativos") },
+  { id: "corporal", label: "Corporal", icon: Activity, count: getCategoryCount("corporal") },
 ];
 
 const SmartGRPage = () => {

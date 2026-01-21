@@ -149,6 +149,37 @@ export const smartGRAtivos: SmartGRProduct[] = [
     price: "Consultar",
     image: smartHair,
   },
+  // ========== LINHA CORPORAL ==========
+  {
+    id: 6013,
+    name: "Lipo Reduce",
+    brand: "Smart GR",
+    category: "corporal",
+    isProfessional: true,
+    description: "Fluido lipolítico corporal com Fosfatidilcolina, Cafeína e L-Carnitina. Reduz gordura localizada, ativa lipólise e melhora contorno corporal.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
+  {
+    id: 6014,
+    name: "Cellucare",
+    brand: "Smart GR",
+    category: "corporal",
+    isProfessional: true,
+    description: "Fluido anticelulite com Centella Asiática, Ginkgo Biloba e Silício Orgânico. Melhora microcirculação, reduz nódulos e uniformiza textura da pele.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
+  {
+    id: 6015,
+    name: "Body Firm",
+    brand: "Smart GR",
+    category: "corporal",
+    isProfessional: true,
+    description: "Fluido tensor corporal com DMAE, Elastina e Colágeno Hidrolisado. Promove efeito lifting imediato, aumenta firmeza e elasticidade da pele.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
 ];
 
 export const smartGRProducts = smartGRAtivos;
