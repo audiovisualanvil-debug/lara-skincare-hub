@@ -180,6 +180,68 @@ export const smartGRAtivos: SmartGRProduct[] = [
     price: "Consultar",
     image: flacipress, // Placeholder
   },
+  // ========== LINHA PEELINGS ==========
+  {
+    id: 6016,
+    name: "Peeling Salicílico",
+    brand: "Smart GR",
+    category: "peelings",
+    isProfessional: true,
+    description: "Peeling químico com Ácido Salicílico 20%. Ideal para peles acneicas e oleosas. Controla oleosidade, desobstrui poros e reduz comedões.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
+  {
+    id: 6017,
+    name: "Peeling Mandélico",
+    brand: "Smart GR",
+    category: "peelings",
+    isProfessional: true,
+    description: "Peeling suave com Ácido Mandélico 30%. Indicado para peles sensíveis e fototipos altos. Clareia manchas, uniformiza tom e renova textura.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
+  {
+    id: 6018,
+    name: "Peeling Retinóico",
+    brand: "Smart GR",
+    category: "peelings",
+    isProfessional: true,
+    description: "Peeling potente com Ácido Retinóico 5%. Estimula renovação celular intensa, reduz rugas profundas e trata fotoenvelhecimento severo.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
+  // ========== LINHA MICROAGULHAMENTO ==========
+  {
+    id: 6019,
+    name: "Drug Delivery Serum",
+    brand: "Smart GR",
+    category: "microagulhamento",
+    isProfessional: true,
+    description: "Sérum para drug delivery com Ácido Hialurônico, Vitamina C e Peptídeos. Potencializa absorção de ativos durante microagulhamento.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
+  {
+    id: 6020,
+    name: "Regenera Plus",
+    brand: "Smart GR",
+    category: "microagulhamento",
+    isProfessional: true,
+    description: "Fluido regenerador pós-procedimento com Fatores de Crescimento, Alantoína e Pantenol. Acelera cicatrização e minimiza downtime.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
+  {
+    id: 6021,
+    name: "Growth Factor Complex",
+    brand: "Smart GR",
+    category: "microagulhamento",
+    isProfessional: true,
+    description: "Complexo de Fatores de Crescimento EGF, FGF e IGF. Estimula produção de colágeno, elastina e regeneração celular profunda.",
+    price: "Consultar",
+    image: flacipress, // Placeholder
+  },
 ];
 
 export const smartGRProducts = smartGRAtivos;
