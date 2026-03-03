@@ -160,7 +160,7 @@ serve(async (req) => {
           state: shippingData.state,
         }),
       },
-      payment_method_types: ["card", "boleto", "pix"],
+      payment_method_types: ["card"],
       locale: "pt-BR",
     });
 
