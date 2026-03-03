@@ -70,18 +70,26 @@ serve(async (req) => {
     }
 
     // Build line items from cart
-    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item) => ({
-      price_data: {
-        currency: "brl",
-        product_data: {
-          name: item.name,
-          description: item.brand,
-          ...(item.image ? { images: [item.image] } : {}),
+    const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item) => {
+      // Only include images if they are valid absolute URLs
+      const images: string[] = [];
+      if (item.image && (item.image.startsWith("http://") || item.image.startsWith("https://"))) {
+        images.push(item.image);
+      }
+
+      return {
+        price_data: {
+          currency: "brl",
+          product_data: {
+            name: item.name,
+            description: item.brand,
+            ...(images.length > 0 ? { images } : {}),
+          },
+          unit_amount: Math.round(item.price * 100),
         },
-        unit_amount: Math.round(item.price * 100), // Convert to cents
-      },
-      quantity: item.quantity,
-    }));
+        quantity: item.quantity,
+      };
+    });
 
     // Add shipping as a line item
     if (shippingCost > 0) {
@@ -152,7 +160,7 @@ serve(async (req) => {
           state: shippingData.state,
         }),
       },
-      payment_method_types: ["card", "boleto"],
+      payment_method_types: ["card", "boleto", "pix"],
       locale: "pt-BR",
     });
 
