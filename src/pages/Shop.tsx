@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
 import { Search, Filter, X, ChevronDown, ArrowRight, MessageCircle, ChevronRight, Grid3X3, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -114,17 +115,13 @@ const extractPrice = (priceStr?: string): number | null => {
   return parseFloat(match) || null;
 };
 
-// Merge all products with images
-const allProducts = [
+// Hardcoded products
+const hardcodedProducts = [
   ...allMezzoWithImages,
   ...allExtratosWithImages,
   ...allTulipiaWithImages,
   ...allSmartGRWithImages,
 ];
-
-// Get price statistics
-const productPrices = allProducts.map(p => extractPrice(p.price)).filter((p): p is number => p !== null);
-const maxProductPrice = Math.max(...productPrices);
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -157,6 +154,38 @@ const Shop = () => {
   const [sortBy, setSortBy] = useState("relevancia");
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [currentPage, setCurrentPage] = useState(1);
+  const [dbProducts, setDbProducts] = useState<any[]>([]);
+
+  // Fetch products from database
+  useEffect(() => {
+    const fetchDbProducts = async () => {
+      const { data } = await supabase
+        .from("products")
+        .select("*")
+        .eq("is_active", true);
+      if (data) {
+        const mapped = data.map((p) => ({
+          id: p.id,
+          name: p.name,
+          brand: p.brand,
+          category: p.category || "todos",
+          isProfessional: false,
+          description: p.short_description || p.description || "",
+          price: `R$ ${Number(p.price).toFixed(2).replace(".", ",")}`,
+          image: p.image_url || undefined,
+          slug: p.slug,
+          isDbProduct: true,
+        }));
+        setDbProducts(mapped);
+      }
+    };
+    fetchDbProducts();
+  }, []);
+
+  // Merge hardcoded + database products
+  const allProducts = useMemo(() => [...hardcodedProducts, ...dbProducts], [dbProducts]);
+  const productPrices = allProducts.map(p => extractPrice(p.price)).filter((p): p is number => p !== null);
+  const maxProductPrice = productPrices.length > 0 ? Math.max(...productPrices) : 999;
   
   // Get category from URL
   const categoryParam = searchParams.get("categoria") || "todos";
