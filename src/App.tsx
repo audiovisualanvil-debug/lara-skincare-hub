@@ -77,7 +77,7 @@ const App = () => (
                       <Route path="/admin/produtos" element={<AdminProducts />} />
                       <Route path="/checkout" element={<Checkout />} />
                       <Route path="/confirmacao-pedido" element={<OrderConfirmation />} />
-                      <Route path="/solicitar-profissional" element={<ProfessionalRequest />} />
+                      <Route path="/solicitar-cadastro-profissional" element={<ProfessionalRequest />} />
                       <Route path="/faq" element={<FAQ />} />
                       <Route path="*" element={<NotFound />} />
                     </Routes>
