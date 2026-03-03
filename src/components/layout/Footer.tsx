@@ -34,7 +34,7 @@ const Footer = () => {
                 <Instagram className="w-4 h-4 text-primary stroke-[1.5]" />
               </a>
               <a
-                href="https://wa.me/5500000000000"
+                href="https://wa.me/5551951572050"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 border border-primary/30 flex items-center justify-center hover:border-primary hover:bg-primary/10 transition-all"
@@ -74,10 +74,10 @@ const Footer = () => {
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-primary shrink-0 stroke-[1.5]" />
                 <a
-                  href="https://wa.me/5500000000000"
+                  href="https://wa.me/5551951572050"
                   className="font-body text-sm text-pearl/70 hover:text-primary transition-colors"
                 >
-                  (00) 00000-0000
+                  (51) 9515-7205
                 </a>
               </li>
             </ul>

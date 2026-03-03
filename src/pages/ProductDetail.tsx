@@ -641,7 +641,7 @@ const ProductDetail = () => {
                 </Link>
               </Button>
               <Button variant="gold-outline" size="lg" asChild>
-                <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5551951572050" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-4 h-4" />
                   Falar com especialista
                 </a>
