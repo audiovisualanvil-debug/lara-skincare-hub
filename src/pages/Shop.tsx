@@ -554,7 +554,7 @@ const Shop = () => {
                       Receba orientação profissional gratuita
                     </p>
                     <Button variant="gold" size="sm" className="w-full" asChild>
-                      <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+                      <a href="https://wa.me/5551951572050" target="_blank" rel="noopener noreferrer">
                         <MessageCircle className="w-4 h-4" />
                         Falar com especialista
                       </a>
@@ -808,7 +808,7 @@ const Shop = () => {
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" asChild>
-                  <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/5551951572050" target="_blank" rel="noopener noreferrer">
                     <MessageCircle className="w-4 h-4" />
                     Falar com especialista
                   </a>

@@ -42,7 +42,7 @@ const Contact = () => {
               {/* Contact Cards */}
               <div className="space-y-4">
                 <a
-                  href="https://wa.me/5500000000000"
+                  href="https://wa.me/5551951572050"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-6 bg-background border border-border hover:border-primary/50 hover:shadow-luxury transition-all duration-300 group"
@@ -52,7 +52,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-display text-lg font-medium text-foreground tracking-wide">WhatsApp</h3>
-                    <p className="font-body text-sm text-muted-foreground">(00) 00000-0000</p>
+                    <p className="font-body text-sm text-muted-foreground">(51) 9515-7205</p>
                   </div>
                 </a>
 
@@ -158,7 +158,7 @@ const Contact = () => {
               Agende uma consultoria de skincare e receba recomendações personalizadas
             </p>
             <Button variant="elegant" size="lg" asChild>
-              <a href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/5551951572050" target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="w-5 h-5 stroke-[1.5]" />
                 Falar pelo WhatsApp
               </a>
