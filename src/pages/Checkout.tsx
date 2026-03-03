@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, Lock, CreditCard, Truck, Check, ShoppingBag, Minus, Plus, X, Shield, AlertCircle, Loader2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { supabase } from "@/integrations/supabase/client";
 import { useBrandTheme, BrandThemeProvider, getBrandTheme, BrandName } from "@/contexts/BrandThemeContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -113,41 +114,46 @@ const CheckoutContent = () => {
     }
   };
 
-  const handleSubmit = () => {
-    if (!validatePayment()) return;
+  const handleSubmit = async () => {
+    if (selectedPayment === "card" && !validatePayment()) return;
 
     setIsProcessing(true);
     
-    // Simulate processing
-    setTimeout(() => {
-      setIsProcessing(false);
-      
-      // Navigate to confirmation page with order data
-      navigate("/confirmacao-pedido", {
-        state: {
-          items: items,
-          shipping: shippingData,
-          payment: {
-            method: selectedPayment === "card" 
-              ? "Cartão de Crédito" 
-              : selectedPayment === "pix" 
-              ? "PIX" 
-              : "Boleto Bancário",
-            lastFourDigits: selectedPayment === "card" 
-              ? paymentData.cardNumber.slice(-4) 
-              : undefined,
-          },
-          subtotal,
-          discount,
+    try {
+      const { data, error } = await supabase.functions.invoke('create-payment', {
+        body: {
+          items: items.map(item => ({
+            id: item.id,
+            name: item.name,
+            brand: item.brand,
+            price: item.price,
+            image: item.image,
+            quantity: item.quantity,
+          })),
+          shippingData,
           shippingCost: selectedShippingOption.price,
-          total: total + selectedShippingOption.price,
-          estimatedDelivery: selectedShippingOption.days,
+          shippingMethod: selectedShipping,
+          couponCode: appliedCoupon?.code,
+          discount,
         },
       });
-      
-      // Clear cart after successful order
-      clearCart();
-    }, 2000);
+
+      if (error) throw new Error(error.message);
+      if (data?.error) throw new Error(data.error);
+
+      if (data?.url) {
+        // Clear cart before redirecting
+        clearCart();
+        // Redirect to Stripe Checkout
+        window.location.href = data.url;
+      } else {
+        throw new Error("URL de pagamento não recebida");
+      }
+    } catch (error) {
+      console.error("Payment error:", error);
+      toast.error("Erro ao processar pagamento. Tente novamente.");
+      setIsProcessing(false);
+    }
   };
 
   // Format phone number as user types
