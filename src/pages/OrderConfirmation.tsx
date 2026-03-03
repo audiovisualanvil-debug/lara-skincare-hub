@@ -1,168 +1,123 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { 
   CheckCircle, 
   Package, 
   Truck, 
-  Mail, 
-  Copy, 
   ShoppingBag,
   ArrowRight,
   Clock,
   MapPin,
   CreditCard,
-  Phone,
-  HelpCircle
+  HelpCircle,
+  Loader2,
+  AlertCircle
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
-import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
-interface OrderItem {
-  id: string;
-  name: string;
-  brand: string;
-  price: number;
-  quantity: number;
-  image?: string;
-}
-
-interface OrderData {
-  orderId: string;
-  items: OrderItem[];
-  shipping: {
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    number: string;
-    complement?: string;
-    neighborhood: string;
-    city: string;
-    state: string;
-    cep: string;
-  };
-  payment: {
-    method: string;
-    lastFourDigits?: string;
-  };
+interface OrderInfo {
+  order_number: string;
+  customer_name: string;
+  customer_email: string;
+  payment_status: string;
+  order_status: string;
+  items: Array<{
+    product_name: string;
+    quantity: number;
+    unit_price: number;
+    total_price: number;
+    product_image?: string;
+  }>;
   subtotal: number;
-  discount: number;
-  shippingCost: number;
+  discount_amount: number;
+  shipping_amount: number;
   total: number;
-  estimatedDelivery: string;
-  createdAt: string;
 }
-
-const generateOrderId = () => {
-  const timestamp = Date.now().toString(36).toUpperCase();
-  const random = Math.random().toString(36).substring(2, 6).toUpperCase();
-  return `BE-${timestamp}${random}`;
-};
 
 const OrderConfirmation = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [orderData, setOrderData] = useState<OrderData | null>(null);
+  const [searchParams] = useSearchParams();
+  const sessionId = searchParams.get("session_id");
+  const [orderInfo, setOrderInfo] = useState<OrderInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Get order data from navigation state or localStorage
-    const stateData = location.state as Partial<OrderData> | null;
-    
-    if (stateData && stateData.items) {
-      const order: OrderData = {
-        orderId: generateOrderId(),
-        items: stateData.items || [],
-        shipping: stateData.shipping || {
-          name: "",
-          email: "",
-          phone: "",
-          address: "",
-          number: "",
-          neighborhood: "",
-          city: "",
-          state: "",
-          cep: "",
-        },
-        payment: stateData.payment || { method: "Cartão de Crédito" },
-        subtotal: stateData.subtotal || 0,
-        discount: stateData.discount || 0,
-        shippingCost: stateData.shippingCost || 0,
-        total: stateData.total || 0,
-        estimatedDelivery: stateData.estimatedDelivery || "5-8 dias úteis",
-        createdAt: new Date().toISOString(),
-      };
-      setOrderData(order);
-    } else {
-      // Demo order for direct access
-      setOrderData({
-        orderId: generateOrderId(),
-        items: [
-          {
-            id: "1",
-            name: "Sérum Vitamina C Nano",
-            brand: "Tulípia",
-            price: 189.90,
-            quantity: 1,
-          },
-          {
-            id: "2",
-            name: "Hidratante Facial Intensivo",
-            brand: "Mezzo",
-            price: 129.90,
-            quantity: 2,
-          },
-        ],
-        shipping: {
-          name: "Maria Silva",
-          email: "maria@exemplo.com",
-          phone: "(11) 99999-9999",
-          address: "Rua das Flores",
-          number: "123",
-          complement: "Apto 45",
-          neighborhood: "Jardim Primavera",
-          city: "São Paulo",
-          state: "SP",
-          cep: "01234-567",
-        },
-        payment: {
-          method: "Cartão de Crédito",
-          lastFourDigits: "4567",
-        },
-        subtotal: 449.70,
-        discount: 44.97,
-        shippingCost: 0,
-        total: 404.73,
-        estimatedDelivery: "5-8 dias úteis",
-        createdAt: new Date().toISOString(),
-      });
+    if (!sessionId) {
+      setLoading(false);
+      setError("Sessão de pagamento não encontrada");
+      return;
     }
-  }, [location.state]);
 
-  const copyOrderId = () => {
-    if (orderData) {
-      navigator.clipboard.writeText(orderData.orderId);
-      toast.success("Código do pedido copiado!");
-    }
-  };
+    const verifyPayment = async () => {
+      try {
+        const { data, error: fnError } = await supabase.functions.invoke('verify-payment', {
+          body: { session_id: sessionId },
+        });
 
-  if (!orderData) {
+        if (fnError) throw new Error(fnError.message);
+        if (data?.error) throw new Error(data.error);
+
+        setOrderInfo({
+          order_number: data.order?.order_number || "—",
+          customer_name: data.customer_name || "",
+          customer_email: data.customer_email || "",
+          payment_status: data.payment_status,
+          order_status: data.order_status,
+          items: data.order?.order_items || [],
+          subtotal: data.order?.subtotal || 0,
+          discount_amount: data.order?.discount_amount || 0,
+          shipping_amount: data.order?.shipping_amount || 0,
+          total: data.order?.total || 0,
+        });
+      } catch (err) {
+        console.error("Error verifying payment:", err);
+        setError(err instanceof Error ? err.message : "Erro ao verificar pagamento");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    verifyPayment();
+  }, [sessionId]);
+
+  if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
-          <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto" />
-          <p className="text-muted-foreground">Carregando...</p>
+          <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto" />
+          <p className="text-muted-foreground">Verificando pagamento...</p>
         </div>
       </div>
     );
   }
 
+  if (error || !orderInfo) {
+    return (
+      <div className="min-h-screen bg-background">
+        <MainHeader />
+        <main className="container max-w-lg mx-auto px-4 py-20 text-center">
+          <AlertCircle className="w-16 h-16 text-destructive mx-auto mb-4" />
+          <h1 className="text-2xl font-bold mb-2">Ops!</h1>
+          <p className="text-muted-foreground mb-6">{error || "Pedido não encontrado"}</p>
+          <Button asChild>
+            <Link to="/loja">Voltar à Loja</Link>
+          </Button>
+        </main>
+        <MainFooter />
+      </div>
+    );
+  }
+
+  const isPaid = orderInfo.payment_status === "paid";
+
   const steps = [
-    { icon: CheckCircle, label: "Pedido Confirmado", status: "completed" },
-    { icon: Package, label: "Em Preparação", status: "current" },
+    { icon: CheckCircle, label: "Pedido Confirmado", status: isPaid ? "completed" : "current" },
+    { icon: Package, label: "Em Preparação", status: isPaid ? "current" : "pending" },
     { icon: Truck, label: "Em Transporte", status: "pending" },
     { icon: MapPin, label: "Entregue", status: "pending" },
   ];
@@ -188,10 +143,12 @@ const OrderConfirmation = () => {
           </motion.div>
           
           <h1 className="text-3xl sm:text-4xl font-display font-bold text-foreground mb-3">
-            Pedido Confirmado! 🎉
+            {isPaid ? "Pedido Confirmado! 🎉" : "Pagamento Pendente"}
           </h1>
           <p className="text-muted-foreground text-lg max-w-md mx-auto">
-            Obrigado pela sua compra! Você receberá um e-mail com todos os detalhes.
+            {isPaid 
+              ? "Obrigado pela sua compra! Você receberá um e-mail com todos os detalhes."
+              : "Seu pedido foi registrado. Aguardando confirmação do pagamento."}
           </p>
         </motion.div>
 
@@ -205,12 +162,13 @@ const OrderConfirmation = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <p className="text-sm text-muted-foreground mb-1">Número do Pedido</p>
-              <p className="text-2xl font-mono font-bold text-foreground">{orderData.orderId}</p>
+              <p className="text-2xl font-mono font-bold text-foreground">{orderInfo.order_number}</p>
             </div>
-            <Button variant="outline" onClick={copyOrderId} className="gap-2">
-              <Copy className="w-4 h-4" />
-              Copiar Código
-            </Button>
+            <div className={`px-4 py-2 rounded-full text-sm font-medium ${
+              isPaid ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"
+            }`}>
+              {isPaid ? "✅ Pago" : "⏳ Pendente"}
+            </div>
           </div>
         </motion.div>
 
@@ -223,218 +181,103 @@ const OrderConfirmation = () => {
         >
           <h2 className="font-semibold text-lg mb-6">Acompanhe seu Pedido</h2>
           
-          <div className="relative">
-            {/* Progress Line */}
-            <div className="absolute top-6 left-0 right-0 h-1 bg-muted rounded-full hidden sm:block" />
-            <div className="absolute top-6 left-0 h-1 bg-green-500 rounded-full w-[12.5%] hidden sm:block" />
-            
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 relative">
-              {steps.map((step, index) => {
-                const Icon = step.icon;
-                const isCompleted = step.status === "completed";
-                const isCurrent = step.status === "current";
-                
-                return (
-                  <div key={step.label} className="flex flex-col items-center text-center">
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ delay: 0.5 + index * 0.1 }}
-                      className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
-                        isCompleted
-                          ? "bg-green-500 text-white"
-                          : isCurrent
-                          ? "bg-primary/10 text-primary border-2 border-primary"
-                          : "bg-muted text-muted-foreground"
-                      }`}
-                    >
-                      <Icon className="w-5 h-5" />
-                    </motion.div>
-                    <p className={`text-sm font-medium ${
-                      isCompleted || isCurrent ? "text-foreground" : "text-muted-foreground"
-                    }`}>
-                      {step.label}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
+              const isCompleted = step.status === "completed";
+              const isCurrent = step.status === "current";
+              
+              return (
+                <div key={step.label} className="flex flex-col items-center text-center">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.5 + index * 0.1 }}
+                    className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 ${
+                      isCompleted
+                        ? "bg-green-500 text-white"
+                        : isCurrent
+                        ? "bg-primary/10 text-primary border-2 border-primary"
+                        : "bg-muted text-muted-foreground"
+                    }`}
+                  >
+                    <Icon className="w-5 h-5" />
+                  </motion.div>
+                  <p className={`text-sm font-medium ${
+                    isCompleted || isCurrent ? "text-foreground" : "text-muted-foreground"
+                  }`}>
+                    {step.label}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
           <div className="mt-6 p-4 bg-primary/5 rounded-xl flex items-center gap-3">
             <Clock className="w-5 h-5 text-primary flex-shrink-0" />
             <p className="text-sm">
               <span className="font-medium">Previsão de entrega:</span>{" "}
-              <span className="text-primary font-semibold">{orderData.estimatedDelivery}</span>
+              <span className="text-primary font-semibold">5-12 dias úteis</span>
             </p>
           </div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-6">
-          {/* Order Items */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="bg-white rounded-2xl border border-border/50 p-6 shadow-sm"
-          >
-            <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-              <ShoppingBag className="w-5 h-5 text-primary" />
-              Itens do Pedido
-            </h2>
-            
-            <div className="space-y-4">
-              {orderData.items.map((item) => (
-                <div key={item.id} className="flex gap-4 p-3 bg-muted/30 rounded-xl">
-                  <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center">
-                    {item.image ? (
-                      <img src={item.image} alt={item.name} className="w-full h-full object-cover rounded-lg" />
-                    ) : (
-                      <Package className="w-6 h-6 text-muted-foreground" />
-                    )}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs text-muted-foreground">{item.brand}</p>
-                    <p className="font-medium text-sm truncate">{item.name}</p>
-                    <div className="flex items-center justify-between mt-1">
-                      <span className="text-xs text-muted-foreground">Qtd: {item.quantity}</span>
-                      <span className="font-semibold text-primary">R$ {(item.price * item.quantity).toFixed(2)}</span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <Separator className="my-4" />
-
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Subtotal</span>
-                <span>R$ {orderData.subtotal.toFixed(2)}</span>
-              </div>
-              {orderData.discount > 0 && (
-                <div className="flex justify-between text-green-600">
-                  <span>Desconto</span>
-                  <span>- R$ {orderData.discount.toFixed(2)}</span>
-                </div>
-              )}
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Frete</span>
-                <span className={orderData.shippingCost === 0 ? "text-green-600" : ""}>
-                  {orderData.shippingCost === 0 ? "Grátis" : `R$ ${orderData.shippingCost.toFixed(2)}`}
-                </span>
-              </div>
-              <Separator className="my-2" />
-              <div className="flex justify-between text-lg font-bold">
-                <span>Total</span>
-                <span className="text-primary">R$ {orderData.total.toFixed(2)}</span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Shipping & Payment Info */}
-          <div className="space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="bg-white rounded-2xl border border-border/50 p-6 shadow-sm"
-            >
-              <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                <MapPin className="w-5 h-5 text-primary" />
-                Endereço de Entrega
-              </h2>
-              
-              <div className="space-y-2 text-sm">
-                <p className="font-medium">{orderData.shipping.name}</p>
-                <p className="text-muted-foreground">
-                  {orderData.shipping.address}, {orderData.shipping.number}
-                  {orderData.shipping.complement && ` - ${orderData.shipping.complement}`}
-                </p>
-                <p className="text-muted-foreground">
-                  {orderData.shipping.neighborhood}, {orderData.shipping.city} - {orderData.shipping.state}
-                </p>
-                <p className="text-muted-foreground">CEP: {orderData.shipping.cep}</p>
-              </div>
-
-              <Separator className="my-4" />
-
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Mail className="w-4 h-4" />
-                  <span>{orderData.shipping.email}</span>
-                </div>
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Phone className="w-4 h-4" />
-                  <span>{orderData.shipping.phone}</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7 }}
-              className="bg-white rounded-2xl border border-border/50 p-6 shadow-sm"
-            >
-              <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                <CreditCard className="w-5 h-5 text-primary" />
-                Pagamento
-              </h2>
-              
-              <div className="flex items-center gap-3 p-3 bg-muted/30 rounded-xl">
-                <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                  <CreditCard className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-medium text-sm">{orderData.payment.method}</p>
-                  {orderData.payment.lastFourDigits && (
-                    <p className="text-xs text-muted-foreground">
-                      Terminado em ****{orderData.payment.lastFourDigits}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-
-        {/* Next Steps */}
+        {/* Order Items */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="mt-6 bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-6 sm:p-8"
+          transition={{ delay: 0.5 }}
+          className="bg-white rounded-2xl border border-border/50 p-6 mb-6 shadow-sm"
         >
-          <h2 className="font-semibold text-lg mb-4">Próximos Passos</h2>
+          <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
+            <ShoppingBag className="w-5 h-5 text-primary" />
+            Itens do Pedido
+          </h2>
           
-          <div className="grid sm:grid-cols-3 gap-4">
-            <div className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-primary font-bold text-sm">1</span>
+          <div className="space-y-4">
+            {orderInfo.items.map((item, idx) => (
+              <div key={idx} className="flex gap-4 p-3 bg-muted/30 rounded-xl">
+                <div className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center">
+                  {item.product_image ? (
+                    <img src={item.product_image} alt={item.product_name} className="w-full h-full object-cover rounded-lg" />
+                  ) : (
+                    <Package className="w-6 h-6 text-muted-foreground" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-sm truncate">{item.product_name}</p>
+                  <div className="flex items-center justify-between mt-1">
+                    <span className="text-xs text-muted-foreground">Qtd: {item.quantity}</span>
+                    <span className="font-semibold text-primary">R$ {item.total_price.toFixed(2)}</span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="font-medium text-sm">Confirmação por E-mail</p>
-                <p className="text-xs text-muted-foreground">Você receberá um e-mail com os detalhes do pedido</p>
-              </div>
+            ))}
+          </div>
+
+          <Separator className="my-4" />
+
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Subtotal</span>
+              <span>R$ {orderInfo.subtotal.toFixed(2)}</span>
             </div>
-            <div className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-primary font-bold text-sm">2</span>
+            {orderInfo.discount_amount > 0 && (
+              <div className="flex justify-between text-green-600">
+                <span>Desconto</span>
+                <span>- R$ {orderInfo.discount_amount.toFixed(2)}</span>
               </div>
-              <div>
-                <p className="font-medium text-sm">Rastreamento</p>
-                <p className="text-xs text-muted-foreground">Enviaremos o código de rastreio assim que sair</p>
-              </div>
+            )}
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Frete</span>
+              <span className={orderInfo.shipping_amount === 0 ? "text-green-600" : ""}>
+                {orderInfo.shipping_amount === 0 ? "Grátis" : `R$ ${orderInfo.shipping_amount.toFixed(2)}`}
+              </span>
             </div>
-            <div className="flex gap-3">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <span className="text-primary font-bold text-sm">3</span>
-              </div>
-              <div>
-                <p className="font-medium text-sm">Receba em Casa</p>
-                <p className="text-xs text-muted-foreground">Aguarde seu pedido no prazo estimado</p>
-              </div>
+            <Separator className="my-2" />
+            <div className="flex justify-between text-lg font-bold">
+              <span>Total</span>
+              <span className="text-primary">R$ {orderInfo.total.toFixed(2)}</span>
             </div>
           </div>
         </motion.div>
@@ -443,7 +286,7 @@ const OrderConfirmation = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
+          transition={{ delay: 0.6 }}
           className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Button asChild size="lg" className="w-full sm:w-auto gap-2">
