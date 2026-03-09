@@ -123,6 +123,53 @@ const AdminProducts = () => {
   const [deleteProduct, setDeleteProduct] = useState<Product | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Image upload
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadingGallery, setUploadingGallery] = useState(false);
+
+  const handleImageUpload = async (file: File, type: 'main' | 'gallery') => {
+    if (!file) return;
+    const isMain = type === 'main';
+    isMain ? setUploadingImage(true) : setUploadingGallery(true);
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `products/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('product-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('product-images')
+        .getPublicUrl(filePath);
+
+      if (isMain) {
+        setEditingProduct(prev => prev ? { ...prev, image_url: publicUrl } : prev);
+      } else {
+        setEditingProduct(prev => prev ? { ...prev, images: [...(prev.images || []), publicUrl] } : prev);
+      }
+      toast.success('Imagem enviada!');
+    } catch (error: any) {
+      console.error('Upload error:', error);
+      toast.error('Erro ao enviar imagem');
+    } finally {
+      isMain ? setUploadingImage(false) : setUploadingGallery(false);
+    }
+  };
+
+  const removeGalleryImage = (index: number) => {
+    setEditingProduct(prev => {
+      if (!prev) return prev;
+      const newImages = [...(prev.images || [])];
+      newImages.splice(index, 1);
+      return { ...prev, images: newImages };
+    });
+  };
+
   useEffect(() => {
     if (!authLoading && !adminLoading) {
       if (!user) {
@@ -572,16 +619,85 @@ const AdminProducts = () => {
                   />
                 </div>
 
-                <div className="md:col-span-2">
-                  <Label htmlFor="image_url">URL da Imagem</Label>
-                  <Input
-                    id="image_url"
-                    value={editingProduct.image_url || ""}
-                    onChange={(e) =>
-                      setEditingProduct({ ...editingProduct, image_url: e.target.value })
-                    }
-                    placeholder="https://..."
-                  />
+                {/* Image Upload */}
+                <div className="md:col-span-2 space-y-4">
+                  <Label>Imagem Principal</Label>
+                  <div className="flex items-center gap-4">
+                    {editingProduct.image_url ? (
+                      <div className="relative">
+                        <img src={editingProduct.image_url} alt="Produto" className="w-24 h-24 object-cover rounded-lg border border-border" />
+                        <button
+                          type="button"
+                          onClick={() => setEditingProduct({ ...editingProduct, image_url: "" })}
+                          className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="w-24 h-24 border-2 border-dashed border-border rounded-lg flex items-center justify-center">
+                        <ImageIcon className="w-8 h-8 text-muted-foreground" />
+                      </div>
+                    )}
+                    <div className="flex-1">
+                      <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:bg-secondary/80 transition-colors text-sm font-medium">
+                        {uploadingImage ? <Loader2 className="w-4 h-4 animate-spin" /> : <ImageIcon className="w-4 h-4" />}
+                        {uploadingImage ? "Enviando..." : "Enviar Imagem"}
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleImageUpload(file, 'main');
+                            e.target.value = '';
+                          }}
+                          disabled={uploadingImage}
+                        />
+                      </label>
+                      <p className="text-xs text-muted-foreground mt-1">ou cole a URL abaixo</p>
+                      <Input
+                        value={editingProduct.image_url || ""}
+                        onChange={(e) => setEditingProduct({ ...editingProduct, image_url: e.target.value })}
+                        placeholder="https://..."
+                        className="mt-1"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Gallery Images */}
+                <div className="md:col-span-2 space-y-3">
+                  <Label>Galeria de Imagens</Label>
+                  <div className="flex flex-wrap gap-3">
+                    {(editingProduct.images || []).map((img, idx) => (
+                      <div key={idx} className="relative">
+                        <img src={img} alt={`Galeria ${idx + 1}`} className="w-20 h-20 object-cover rounded-lg border border-border" />
+                        <button
+                          type="button"
+                          onClick={() => removeGalleryImage(idx)}
+                          className="absolute -top-2 -right-2 bg-destructive text-destructive-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                        >
+                          <X className="w-3 h-3" />
+                        </button>
+                      </div>
+                    ))}
+                    <label className="w-20 h-20 border-2 border-dashed border-border rounded-lg flex flex-col items-center justify-center cursor-pointer hover:border-primary/50 transition-colors">
+                      {uploadingGallery ? <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" /> : <Plus className="w-5 h-5 text-muted-foreground" />}
+                      <span className="text-[10px] text-muted-foreground mt-1">{uploadingGallery ? "..." : "Adicionar"}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleImageUpload(file, 'gallery');
+                          e.target.value = '';
+                        }}
+                        disabled={uploadingGallery}
+                      />
+                    </label>
+                  </div>
                 </div>
 
                 <div className="md:col-span-2">
