@@ -129,6 +129,29 @@ const AdminProducts = () => {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [uploadingGallery, setUploadingGallery] = useState(false);
 
+  // Seed state
+  const [isSeeding, setIsSeeding] = useState(false);
+  const [seedProgress, setSeedProgress] = useState("");
+
+  const handleSeedProducts = async () => {
+    if (isSeeding) return;
+    setIsSeeding(true);
+    setSeedProgress("Iniciando importação...");
+    try {
+      const result = await seedAllProducts((current, total, name) => {
+        setSeedProgress(`Importando ${current}/${total}: ${name}`);
+      });
+      toast.success(`Importação concluída! ${result.total} produtos processados.`);
+      fetchProducts();
+    } catch (error: any) {
+      console.error("Seed error:", error);
+      toast.error("Erro na importação: " + error.message);
+    } finally {
+      setIsSeeding(false);
+      setSeedProgress("");
+    }
+  };
+
   const handleImageUpload = async (file: File, type: 'main' | 'gallery') => {
     if (!file) return;
     const isMain = type === 'main';
