@@ -236,6 +236,34 @@ const Auth = () => {
                   "Criar conta"
                 )}
               </Button>
+
+              {isLogin && (
+                <div className="text-center pt-1">
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      if (!formData.email) {
+                        toast({ title: "Informe seu email", description: "Digite seu email acima para receber o link de recuperação", variant: "destructive" });
+                        return;
+                      }
+                      setForgotLoading(true);
+                      const { error } = await supabase.auth.resetPasswordForEmail(formData.email, {
+                        redirectTo: `${window.location.origin}/reset-password`,
+                      });
+                      setForgotLoading(false);
+                      if (error) {
+                        toast({ title: "Erro", description: error.message, variant: "destructive" });
+                      } else {
+                        toast({ title: "Email enviado!", description: "Verifique sua caixa de entrada para redefinir a senha" });
+                      }
+                    }}
+                    disabled={forgotLoading}
+                    className="text-sm text-primary hover:underline"
+                  >
+                    {forgotLoading ? "Enviando..." : "Esqueci minha senha"}
+                  </button>
+                </div>
+              )}
             </form>
 
             {/* Toggle */}
