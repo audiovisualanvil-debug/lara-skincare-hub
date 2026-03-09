@@ -172,7 +172,7 @@ const Shop = () => {
           isProfessional: false,
           description: p.short_description || p.description || "",
           price: `R$ ${Number(p.price).toFixed(2).replace(".", ",")}`,
-          image: p.image_url || undefined,
+          image: resolveProductImage(p.image_url),
           slug: p.slug,
           isDbProduct: true,
         }));

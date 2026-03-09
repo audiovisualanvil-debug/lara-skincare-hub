@@ -724,7 +724,7 @@ const AdminProducts = () => {
                   <div className="flex flex-wrap gap-3">
                     {(editingProduct.images || []).map((img, idx) => (
                       <div key={idx} className="relative">
-                        <img src={img} alt={`Galeria ${idx + 1}`} className="w-20 h-20 object-cover rounded-lg border border-border" />
+                        <img src={resolveProductImage(img)} alt={`Galeria ${idx + 1}`} className="w-20 h-20 object-cover rounded-lg border border-border" />
                         <button
                           type="button"
                           onClick={() => removeGalleryImage(idx)}
