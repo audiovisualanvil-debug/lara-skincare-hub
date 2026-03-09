@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Lock, User, Loader2, Eye, EyeOff, Briefcase } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,6 +30,8 @@ const Auth = () => {
     fullName: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [forgotLoading, setForgotLoading] = useState(false);
 
   // Get the redirect path from location state
   const from = (location.state as { from?: string })?.from || "/";
@@ -233,6 +236,34 @@ const Auth = () => {
                   "Criar conta"
                 )}
               </Button>
+
+              {isLogin && (
+                <div className="text-center pt-1">
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      if (!formData.email) {
+                        toast({ title: "Informe seu email", description: "Digite seu email acima para receber o link de recuperação", variant: "destructive" });
+                        return;
+                      }
+                      setForgotLoading(true);
+                      const { error } = await supabase.auth.resetPasswordForEmail(formData.email, {
+                        redirectTo: `${window.location.origin}/reset-password`,
+                      });
+                      setForgotLoading(false);
+                      if (error) {
+                        toast({ title: "Erro", description: error.message, variant: "destructive" });
+                      } else {
+                        toast({ title: "Email enviado!", description: "Verifique sua caixa de entrada para redefinir a senha" });
+                      }
+                    }}
+                    disabled={forgotLoading}
+                    className="text-sm text-primary hover:underline"
+                  >
+                    {forgotLoading ? "Enviando..." : "Esqueci minha senha"}
+                  </button>
+                </div>
+              )}
             </form>
 
             {/* Toggle */}

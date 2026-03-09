@@ -38,6 +38,7 @@ import Promocoes from "./pages/Promocoes";
 import FAQ from "./pages/FAQ";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import ProfessionalRequest from "./pages/ProfessionalRequest";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
@@ -68,6 +69,7 @@ const App = () => (
                       <Route path="/monte-sua-rotina" element={<BuildRoutine />} />
                       <Route path="/quiz-pele" element={<SkinQuiz />} />
                       <Route path="/auth" element={<Auth />} />
+                      <Route path="/reset-password" element={<ResetPassword />} />
                       <Route path="/consultoria" element={<Consultation />} />
                       <Route path="/sobre" element={<About />} />
                       <Route path="/contato" element={<Contact />} />
