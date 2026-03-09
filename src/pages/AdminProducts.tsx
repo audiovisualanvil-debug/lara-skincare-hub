@@ -455,7 +455,7 @@ const AdminProducts = () => {
                         <TableCell>
                           {product.image_url ? (
                             <img
-                              src={product.image_url}
+                              src={resolveProductImage(product.image_url)}
                               alt={product.name}
                               className="w-12 h-12 object-cover rounded-md"
                             />
