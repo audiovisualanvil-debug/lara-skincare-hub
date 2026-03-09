@@ -182,8 +182,11 @@ const Shop = () => {
     fetchDbProducts();
   }, []);
 
-  // Merge hardcoded + database products
-  const allProducts = useMemo(() => [...hardcodedProducts, ...dbProducts], [dbProducts]);
+  // Use DB products if available, otherwise fall back to hardcoded
+  const allProducts = useMemo(() => {
+    if (dbProducts.length > 0) return [...dbProducts, ...hardcodedProducts.filter(hp => !dbProducts.some(dp => dp.name === hp.name))];
+    return hardcodedProducts;
+  }, [dbProducts]);
   const productPrices = allProducts.map(p => extractPrice(p.price)).filter((p): p is number => p !== null);
   const maxProductPrice = productPrices.length > 0 ? Math.max(...productPrices) : 999;
   
