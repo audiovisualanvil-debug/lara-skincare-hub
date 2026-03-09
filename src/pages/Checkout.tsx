@@ -124,17 +124,12 @@ const CheckoutContent = () => {
         body: {
           items: items.map(item => ({
             id: item.id,
-            name: item.name,
-            brand: item.brand,
-            price: item.price,
-            image: item.image,
             quantity: item.quantity,
           })),
           shippingData,
           shippingCost: selectedShippingOption.price,
           shippingMethod: selectedShipping,
           couponCode: appliedCoupon?.code,
-          discount,
         },
       });
 
