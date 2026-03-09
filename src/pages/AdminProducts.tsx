@@ -123,6 +123,53 @@ const AdminProducts = () => {
   const [deleteProduct, setDeleteProduct] = useState<Product | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Image upload
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [uploadingGallery, setUploadingGallery] = useState(false);
+
+  const handleImageUpload = async (file: File, type: 'main' | 'gallery') => {
+    if (!file) return;
+    const isMain = type === 'main';
+    isMain ? setUploadingImage(true) : setUploadingGallery(true);
+
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const filePath = `products/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('product-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('product-images')
+        .getPublicUrl(filePath);
+
+      if (isMain) {
+        setEditingProduct(prev => prev ? { ...prev, image_url: publicUrl } : prev);
+      } else {
+        setEditingProduct(prev => prev ? { ...prev, images: [...(prev.images || []), publicUrl] } : prev);
+      }
+      toast.success('Imagem enviada!');
+    } catch (error: any) {
+      console.error('Upload error:', error);
+      toast.error('Erro ao enviar imagem');
+    } finally {
+      isMain ? setUploadingImage(false) : setUploadingGallery(false);
+    }
+  };
+
+  const removeGalleryImage = (index: number) => {
+    setEditingProduct(prev => {
+      if (!prev) return prev;
+      const newImages = [...(prev.images || [])];
+      newImages.splice(index, 1);
+      return { ...prev, images: newImages };
+    });
+  };
+
   useEffect(() => {
     if (!authLoading && !adminLoading) {
       if (!user) {
