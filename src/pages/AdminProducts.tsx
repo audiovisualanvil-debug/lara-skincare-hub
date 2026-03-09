@@ -677,7 +677,7 @@ const AdminProducts = () => {
                   <div className="flex items-center gap-4">
                     {editingProduct.image_url ? (
                       <div className="relative">
-                        <img src={editingProduct.image_url} alt="Produto" className="w-24 h-24 object-cover rounded-lg border border-border" />
+                        <img src={resolveProductImage(editingProduct.image_url)} alt="Produto" className="w-24 h-24 object-cover rounded-lg border border-border" />
                         <button
                           type="button"
                           onClick={() => setEditingProduct({ ...editingProduct, image_url: "" })}
