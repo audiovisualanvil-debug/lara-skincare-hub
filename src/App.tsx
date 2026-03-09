@@ -38,6 +38,7 @@ import Promocoes from "./pages/Promocoes";
 import FAQ from "./pages/FAQ";
 import OrderConfirmation from "./pages/OrderConfirmation";
 import ProfessionalRequest from "./pages/ProfessionalRequest";
+import ResetPassword from "./pages/ResetPassword";
 
 const queryClient = new QueryClient();
 
