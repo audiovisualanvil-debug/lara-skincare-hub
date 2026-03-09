@@ -9,11 +9,7 @@ const corsHeaders = {
 };
 
 interface CartItem {
-  id: number;
-  name: string;
-  brand: string;
-  price: number;
-  image?: string;
+  id: string;
   quantity: number;
 }
 
@@ -34,7 +30,6 @@ interface CheckoutRequest {
   shippingCost: number;
   shippingMethod: string;
   couponCode?: string;
-  discount?: number;
 }
 
 serve(async (req) => {
@@ -53,6 +48,11 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_ANON_KEY") ?? ""
     );
 
+    const supabaseAdmin = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+    );
+
     // Check for authenticated user (optional - supports guest checkout)
     let user = null;
     const authHeader = req.headers.get("Authorization");
@@ -63,29 +63,86 @@ serve(async (req) => {
     }
 
     const body: CheckoutRequest = await req.json();
-    const { items, shippingData, shippingCost, shippingMethod, couponCode, discount } = body;
+    const { items, shippingData, shippingCost, shippingMethod, couponCode } = body;
 
     if (!items || items.length === 0) {
       throw new Error("Carrinho vazio");
     }
 
-    // Build line items from cart
+    // Validate items: max 50 items, quantity 1-100
+    if (items.length > 50) throw new Error("Muitos itens no carrinho");
+    for (const item of items) {
+      if (!item.id || typeof item.quantity !== "number" || item.quantity < 1 || item.quantity > 100) {
+        throw new Error("Item inválido no carrinho");
+      }
+    }
+
+    // Validate shipping cost range
+    if (typeof shippingCost !== "number" || shippingCost < 0 || shippingCost > 500) {
+      throw new Error("Custo de frete inválido");
+    }
+
+    // SERVER-SIDE: Fetch real product prices from database
+    const productIds = items.map((item) => item.id);
+    const { data: dbProducts, error: productsError } = await supabaseAdmin
+      .from("products")
+      .select("id, name, brand, price, image_url, is_active, stock")
+      .in("id", productIds);
+
+    if (productsError) throw new Error("Erro ao buscar produtos");
+    if (!dbProducts || dbProducts.length === 0) throw new Error("Produtos não encontrados");
+
+    // Verify all requested products exist and are active
+    const productMap = new Map(dbProducts.map((p) => [p.id, p]));
+    for (const item of items) {
+      const product = productMap.get(item.id);
+      if (!product) throw new Error(`Produto não encontrado: ${item.id}`);
+      if (!product.is_active) throw new Error(`Produto indisponível: ${product.name}`);
+      if (product.stock < item.quantity) throw new Error(`Estoque insuficiente: ${product.name}`);
+    }
+
+    // SERVER-SIDE: Validate coupon using the database function
+    let discount = 0;
+    const subtotal = items.reduce((sum, item) => {
+      const product = productMap.get(item.id)!;
+      return sum + product.price * item.quantity;
+    }, 0);
+
+    if (couponCode) {
+      const { data: couponResult, error: couponError } = await supabaseAdmin
+        .rpc("validate_coupon", { p_code: couponCode, p_order_value: subtotal });
+
+      if (couponError) {
+        console.error("Coupon validation error:", couponError);
+      } else if (couponResult && couponResult.length > 0 && couponResult[0].is_valid) {
+        const couponData = couponResult[0];
+        if (couponData.discount_type === "percentage") {
+          discount = Math.round((subtotal * couponData.discount_value) / 100 * 100) / 100;
+        } else {
+          discount = couponData.discount_value;
+        }
+      } else if (couponResult?.[0]?.error_message) {
+        throw new Error(couponResult[0].error_message);
+      }
+    }
+
+    // Build line items from SERVER-SIDE verified prices
     const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = items.map((item) => {
-      // Only include images if they are valid absolute URLs
+      const product = productMap.get(item.id)!;
       const images: string[] = [];
-      if (item.image && (item.image.startsWith("http://") || item.image.startsWith("https://"))) {
-        images.push(item.image);
+      if (product.image_url && (product.image_url.startsWith("http://") || product.image_url.startsWith("https://"))) {
+        images.push(product.image_url);
       }
 
       return {
         price_data: {
           currency: "brl",
           product_data: {
-            name: item.name,
-            description: item.brand,
+            name: product.name,
+            description: product.brand,
             ...(images.length > 0 ? { images } : {}),
           },
-          unit_amount: Math.round(item.price * 100),
+          unit_amount: Math.round(product.price * 100),
         },
         quantity: item.quantity,
       };
@@ -106,10 +163,9 @@ serve(async (req) => {
       });
     }
 
-    // Build discounts if coupon applied
+    // Build discounts if coupon validated server-side
     const discounts: Stripe.Checkout.SessionCreateParams.Discount[] = [];
-    if (discount && discount > 0) {
-      // Create an inline coupon for the discount
+    if (discount > 0) {
       const stripeCoupon = await stripe.coupons.create({
         amount_off: Math.round(discount * 100),
         currency: "brl",
@@ -122,7 +178,7 @@ serve(async (req) => {
     // Check if Stripe customer exists
     let customerId: string | undefined;
     const customerEmail = user?.email || shippingData.email;
-    
+
     if (customerEmail) {
       const customers = await stripe.customers.list({
         email: customerEmail,
@@ -164,14 +220,7 @@ serve(async (req) => {
       locale: "pt-BR",
     });
 
-    // Create order in database
-    const supabaseAdmin = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
-    );
-
-    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
+    // Create order in database with server-verified amounts
     const { data: order, error: orderError } = await supabaseAdmin
       .from("orders")
       .insert({
@@ -179,13 +228,13 @@ serve(async (req) => {
         customer_email: customerEmail,
         customer_name: shippingData.name,
         customer_phone: shippingData.phone,
-        order_number: "TEMP", // Will be replaced by trigger
+        order_number: "TEMP",
         subtotal,
-        discount_amount: discount || 0,
+        discount_amount: discount,
         shipping_amount: shippingCost,
-        total: subtotal - (discount || 0) + shippingCost,
+        total: subtotal - discount + shippingCost,
         coupon_code: couponCode || null,
-        coupon_discount: discount || 0,
+        coupon_discount: discount,
         payment_method: "stripe",
         payment_id: session.id,
         payment_status: "pending",
@@ -207,16 +256,20 @@ serve(async (req) => {
       console.error("Error creating order:", orderError);
     }
 
-    // Insert order items
+    // Insert order items with server-verified prices
     if (order) {
-      const orderItems = items.map((item) => ({
-        order_id: order.id,
-        product_name: item.name,
-        quantity: item.quantity,
-        unit_price: item.price,
-        total_price: item.price * item.quantity,
-        product_image: item.image || null,
-      }));
+      const orderItems = items.map((item) => {
+        const product = productMap.get(item.id)!;
+        return {
+          order_id: order.id,
+          product_id: product.id,
+          product_name: product.name,
+          quantity: item.quantity,
+          unit_price: product.price,
+          total_price: product.price * item.quantity,
+          product_image: product.image_url || null,
+        };
+      });
 
       const { error: itemsError } = await supabaseAdmin
         .from("order_items")

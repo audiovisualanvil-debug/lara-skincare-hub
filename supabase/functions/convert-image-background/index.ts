@@ -17,6 +17,40 @@ serve(async (req) => {
   }
 
   try {
+    // --- AUTH CHECK: require authenticated admin user ---
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    const supabaseAuth = createClient(SUPABASE_URL!, Deno.env.get('SUPABASE_ANON_KEY')!, {
+      global: { headers: { Authorization: authHeader } }
+    });
+
+    const token = authHeader.replace('Bearer ', '');
+    const { data: claimsData, error: claimsError } = await supabaseAuth.auth.getUser(token);
+    if (claimsError || !claimsData.user) {
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // Check admin role using service role client
+    const supabaseAdmin = createClient(SUPABASE_URL!, SUPABASE_SERVICE_ROLE_KEY!);
+    const { data: isAdmin, error: roleError } = await supabaseAdmin.rpc('has_role', {
+      _user_id: claimsData.user.id,
+      _role: 'admin'
+    });
+
+    if (roleError || !isAdmin) {
+      return new Response(JSON.stringify({ error: 'Forbidden: admin role required' }), {
+        status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+    // --- END AUTH CHECK ---
+
     const { imageBase64, imagePath, saveToStorage } = await req.json();
 
     if (!imageBase64) {
@@ -58,7 +92,7 @@ serve(async (req) => {
     if (!response.ok) {
       const errorText = await response.text();
       console.error('AI API error:', errorText);
-      throw new Error(`AI API error: ${response.status} - ${errorText}`);
+      throw new Error(`AI API error: ${response.status}`);
     }
 
     const data = await response.json();
@@ -67,7 +101,7 @@ serve(async (req) => {
     const processedImageUrl = data.choices?.[0]?.message?.images?.[0]?.image_url?.url;
 
     if (!processedImageUrl) {
-      console.error('No image in response:', JSON.stringify(data));
+      console.error('No image in response');
       throw new Error('No processed image returned from AI');
     }
 
@@ -75,24 +109,17 @@ serve(async (req) => {
 
     // If saveToStorage is true, upload to Supabase Storage
     if (saveToStorage && imagePath && SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY) {
-      const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
-
       // Extract base64 data from data URL
       const base64Data = processedImageUrl.replace(/^data:image\/\w+;base64,/, '');
       const imageBuffer = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
 
-      // Determine file extension and content type
-      const isWebp = processedImageUrl.includes('webp');
-      const isPng = processedImageUrl.includes('png');
-      const contentType = isPng ? 'image/png' : isWebp ? 'image/webp' : 'image/jpeg';
-      
-      // Create storage path - convert original path to processed path
+      // Create storage path
       const fileName = imagePath.split('/').pop()?.replace(/\.(jpg|jpeg|png|webp)$/i, '.png') || 'processed.png';
       const storagePath = `processed/${fileName}`;
 
       console.log(`Uploading to storage: ${storagePath}`);
 
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabaseAdmin.storage
         .from('product-images')
         .upload(storagePath, imageBuffer, {
           contentType: 'image/png',
@@ -104,8 +131,7 @@ serve(async (req) => {
         throw new Error(`Storage upload error: ${uploadError.message}`);
       }
 
-      // Get public URL
-      const { data: urlData } = supabase.storage
+      const { data: urlData } = supabaseAdmin.storage
         .from('product-images')
         .getPublicUrl(storagePath);
 
@@ -126,7 +152,7 @@ serve(async (req) => {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Error processing image:', errorMessage);
     return new Response(
-      JSON.stringify({ error: errorMessage, success: false }),
+      JSON.stringify({ error: 'An error occurred processing the image', success: false }),
       { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
     );
   }
