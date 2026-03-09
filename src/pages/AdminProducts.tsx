@@ -54,6 +54,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminRole } from "@/hooks/useAdminRole";
 import MainHeader from "@/components/layout/MainHeader";
+import { resolveProductImage, resolveProductImages } from "@/utils/resolveProductImage";
 
 interface Product {
   id: string;
@@ -454,7 +455,7 @@ const AdminProducts = () => {
                         <TableCell>
                           {product.image_url ? (
                             <img
-                              src={product.image_url}
+                              src={resolveProductImage(product.image_url)}
                               alt={product.name}
                               className="w-12 h-12 object-cover rounded-md"
                             />
@@ -676,7 +677,7 @@ const AdminProducts = () => {
                   <div className="flex items-center gap-4">
                     {editingProduct.image_url ? (
                       <div className="relative">
-                        <img src={editingProduct.image_url} alt="Produto" className="w-24 h-24 object-cover rounded-lg border border-border" />
+                        <img src={resolveProductImage(editingProduct.image_url)} alt="Produto" className="w-24 h-24 object-cover rounded-lg border border-border" />
                         <button
                           type="button"
                           onClick={() => setEditingProduct({ ...editingProduct, image_url: "" })}
@@ -723,7 +724,7 @@ const AdminProducts = () => {
                   <div className="flex flex-wrap gap-3">
                     {(editingProduct.images || []).map((img, idx) => (
                       <div key={idx} className="relative">
-                        <img src={img} alt={`Galeria ${idx + 1}`} className="w-20 h-20 object-cover rounded-lg border border-border" />
+                        <img src={resolveProductImage(img)} alt={`Galeria ${idx + 1}`} className="w-20 h-20 object-cover rounded-lg border border-border" />
                         <button
                           type="button"
                           onClick={() => removeGalleryImage(idx)}
