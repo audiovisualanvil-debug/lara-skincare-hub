@@ -30,6 +30,8 @@ const Auth = () => {
     fullName: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [forgotLoading, setForgotLoading] = useState(false);
 
   // Get the redirect path from location state
   const from = (location.state as { from?: string })?.from || "/";
