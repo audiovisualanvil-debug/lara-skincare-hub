@@ -54,6 +54,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useAdminRole } from "@/hooks/useAdminRole";
 import MainHeader from "@/components/layout/MainHeader";
+import { resolveProductImage, resolveProductImages } from "@/utils/resolveProductImage";
 
 interface Product {
   id: string;
