@@ -385,7 +385,7 @@ const Shop = () => {
           <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
           
-          <div className="container-editorial py-16 lg:py-24 relative z-10">
+          <div className="container-editorial py-10 lg:py-14 relative z-10">
             {/* Breadcrumb */}
             <motion.nav 
               initial={{ opacity: 0, y: 10 }}
