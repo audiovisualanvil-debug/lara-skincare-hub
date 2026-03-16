@@ -1,15 +1,7 @@
-import "https://deno.land/x/xhr@0.1.0/mod.ts";
-
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
-
-// Embed SQL files at build time
-import part1 from "./products_part1.sql" with { type: "text" };
-import part2 from "./products_part2.sql" with { type: "text" };
-import part3 from "./products_part3.sql" with { type: "text" };
-import outros from "./outros_dados.sql" with { type: "text" };
 
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -25,7 +17,14 @@ Deno.serve(async (req) => {
 
     const results: string[] = [];
 
-    // Delete existing products first
+    // Read SQL files as text
+    const basePath = new URL(".", import.meta.url).pathname;
+    const part1 = await Deno.readTextFile(basePath + "products_part1.sql");
+    const part2 = await Deno.readTextFile(basePath + "products_part2.sql");
+    const part3 = await Deno.readTextFile(basePath + "products_part3.sql");
+    const outros = await Deno.readTextFile(basePath + "outros_dados.sql");
+
+    // Delete existing data first
     await db.unsafe("DELETE FROM order_items; DELETE FROM orders; DELETE FROM products;");
     results.push("Cleaned tables");
 
