@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 interface Product {
-  id: string;
+  id: string | number;
   name: string;
   brand: string;
   price?: string;

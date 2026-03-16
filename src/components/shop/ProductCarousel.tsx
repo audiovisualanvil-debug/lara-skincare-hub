@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import ProductCardNew from "./ProductCardNew";
 
 interface Product {
-  id: string;
+  id: string | number;
   name: string;
   brand: string;
   price?: string;
