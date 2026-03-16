@@ -54,7 +54,7 @@ const Consultation = () => {
                 individuais para criar uma rotina que realmente funciona para você.
               </p>
               <Button variant="gold" size="xl" asChild>
-                <a href="https://wa.me/5551951572050" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5551995672101" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-5 h-5 stroke-[1.5]" />
                   Agendar Consultoria
                 </a>
@@ -195,7 +195,7 @@ const Consultation = () => {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
               <Button variant="gold" size="xl" asChild>
-                <a href="https://wa.me/5551951572050" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/5551995672101" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-5 h-5 stroke-[1.5]" />
                   Agendar pelo WhatsApp
                 </a>

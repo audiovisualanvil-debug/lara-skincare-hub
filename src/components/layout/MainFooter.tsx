@@ -206,7 +206,7 @@ const MainFooter = () => {
             <ul className="space-y-4">
               <li>
                 <a 
-                  href="https://wa.me/5511999999999" 
+                  href="https://wa.me/5551995672101" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 group"
