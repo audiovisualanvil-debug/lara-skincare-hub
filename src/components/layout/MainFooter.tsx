@@ -310,13 +310,13 @@ const MainFooter = () => {
               </p>
             </div>
             <div className="flex flex-wrap gap-6">
-              <Link to="/privacidade" className="text-xs text-ivory/50 hover:text-primary transition-colors">
+              <Link to="/politica-de-privacidade" className="text-xs text-ivory/50 hover:text-primary transition-colors">
                 Política de Privacidade
               </Link>
-              <Link to="/termos" className="text-xs text-ivory/50 hover:text-primary transition-colors">
+              <Link to="/termos-de-uso" className="text-xs text-ivory/50 hover:text-primary transition-colors">
                 Termos de Uso
               </Link>
-              <Link to="/trocas" className="text-xs text-ivory/50 hover:text-primary transition-colors">
+              <Link to="/politica-de-trocas" className="text-xs text-ivory/50 hover:text-primary transition-colors">
                 Trocas e Devoluções
               </Link>
             </div>
