@@ -35,6 +35,11 @@ const brands = [
 const About = () => {
   return (
     <main className="pt-20 bg-card">
+      <SEOHead
+        title="Sobre Nós | Multti Med Porto Alegre"
+        description="Conheça a Multti Med Dermocosméticos. Sua parceira em cuidados com a pele, oferecendo produtos de alta qualidade para profissionais e consumidores."
+        canonical="/sobre"
+      />
       <BreadcrumbNav />
       {/* Hero */}
       <section className="py-24 bg-gradient-pearl">

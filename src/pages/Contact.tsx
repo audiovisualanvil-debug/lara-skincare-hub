@@ -8,6 +8,11 @@ import BreadcrumbNav from "@/components/layout/BreadcrumbNav";
 const Contact = () => {
   return (
     <main className="pt-20 bg-card">
+      <SEOHead
+        title="Contato | Multti Med Porto Alegre"
+        description="Entre em contato com a Multti Med Dermocosméticos. Atendimento via WhatsApp, e-mail e formulário. Tire suas dúvidas ou agende uma consultoria."
+        canonical="/contato"
+      />
       <BreadcrumbNav />
       {/* Header */}
       <section className="py-16 bg-gradient-pearl">

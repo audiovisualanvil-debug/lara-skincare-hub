@@ -385,6 +385,11 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title="Loja | Multti Med Porto Alegre"
+        description="Explore nossa linha completa de dermocosméticos profissionais. Clareamento, anti-idade, acne, hidratação e mais. Frete grátis acima de R$299."
+        canonical="/loja"
+      />
       <MainHeader />
       
       {/* Spacer for fixed header */}

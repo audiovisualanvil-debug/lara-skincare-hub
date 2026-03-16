@@ -231,6 +231,21 @@ const ProductDetail = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEOHead
+        title={`${product.name} | Multti Med`}
+        description={product.short_description || product.description || `${product.name} - Dermocosmético ${product.brand} disponível na Multti Med Porto Alegre.`}
+        canonical={`/produto/${product.slug}`}
+        ogImage={product.image_url || undefined}
+      />
+      <ProductJsonLd
+        name={product.name}
+        description={product.short_description || product.description || product.name}
+        image={product.image_url || ""}
+        price={product.price}
+        brand={product.brand}
+        sku={product.sku}
+        inStock={product.stock > 0}
+      />
       <MainHeader />
 
       <main className="flex-1 pt-28 md:pt-32">
