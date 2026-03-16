@@ -144,11 +144,6 @@ const menuItems = [
     },
   },
   { 
-    label: "Quiz de Pele", 
-    href: "/quiz-pele",
-    hasMegaMenu: false 
-  },
-  { 
     label: "Monte sua Rotina", 
     href: "/monte-sua-rotina",
     hasMegaMenu: false 

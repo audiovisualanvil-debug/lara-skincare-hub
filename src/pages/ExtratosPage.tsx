@@ -225,7 +225,7 @@ const ExtratosPage = () => {
                 style={{ backgroundColor: EXTRATOS_GREEN }}
                 className="text-white"
               >
-                <Link to="/quiz-pele">Fazer Quiz de Pele</Link>
+                <Link to="/loja">Ver Produtos</Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
                 <Link to="/consultoria">Agendar Consultoria</Link>

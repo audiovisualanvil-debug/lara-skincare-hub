@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
-  User, Package, MapPin, Heart, Star, Award, 
+  User, Package, MapPin, Heart, Star, 
   Settings, LogOut, ChevronRight, Plus, Edit2, 
-  Trash2, Crown, Gift, Loader2, ShoppingBag
+  Trash2, Loader2, ShoppingBag
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -44,18 +44,6 @@ interface Address {
   is_default: boolean;
 }
 
-interface LoyaltyData {
-  total_points: number;
-  lifetime_points: number;
-  tier: string;
-}
-
-const tierInfo = {
-  bronze: { name: "Bronze", icon: Award, color: "text-amber-700", minPoints: 0 },
-  silver: { name: "Prata", icon: Award, color: "text-gray-400", minPoints: 500 },
-  gold: { name: "Ouro", icon: Crown, color: "text-yellow-500", minPoints: 1500 },
-  platinum: { name: "Platina", icon: Crown, color: "text-purple-500", minPoints: 5000 },
-};
 
 const statusColors: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",
@@ -82,7 +70,7 @@ const MyAccount = () => {
   
   const [orders, setOrders] = useState<Order[]>([]);
   const [addresses, setAddresses] = useState<Address[]>([]);
-  const [loyalty, setLoyalty] = useState<LoyaltyData | null>(null);
+  
   const [profile, setProfile] = useState<{ full_name: string | null; email: string | null } | null>(null);
   const [loading, setLoading] = useState(true);
   const [addressDialogOpen, setAddressDialogOpen] = useState(false);
@@ -142,24 +130,6 @@ const MyAccount = () => {
         .order("is_default", { ascending: false });
       setAddresses(addressesData || []);
 
-      // Fetch loyalty points
-      const { data: loyaltyData } = await supabase
-        .from("loyalty_points")
-        .select("total_points, lifetime_points, tier")
-        .eq("user_id", user.id)
-        .single();
-      
-      if (loyaltyData) {
-        setLoyalty(loyaltyData);
-      } else {
-        // Create loyalty record if doesn't exist
-        const { data: newLoyalty } = await supabase
-          .from("loyalty_points")
-          .insert({ user_id: user.id })
-          .select("total_points, lifetime_points, tier")
-          .single();
-        setLoyalty(newLoyalty);
-      }
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -230,9 +200,6 @@ const MyAccount = () => {
 
   if (!user) return null;
 
-  const currentTier = loyalty?.tier || "bronze";
-  const TierIcon = tierInfo[currentTier as keyof typeof tierInfo]?.icon || Award;
-  const tierColor = tierInfo[currentTier as keyof typeof tierInfo]?.color || "text-amber-700";
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -251,19 +218,12 @@ const MyAccount = () => {
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             <Card>
               <CardContent className="p-4 text-center">
-                <TierIcon className={`w-8 h-8 mx-auto mb-2 ${tierColor}`} />
-                <p className="text-sm text-muted-foreground">Nível</p>
-                <p className="font-semibold capitalize">{tierInfo[currentTier as keyof typeof tierInfo]?.name}</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4 text-center">
-                <Gift className="w-8 h-8 mx-auto mb-2 text-primary" />
-                <p className="text-sm text-muted-foreground">Pontos</p>
-                <p className="font-semibold">{loyalty?.total_points || 0}</p>
+                <Package className="w-8 h-8 mx-auto mb-2 text-primary" />
+                <p className="text-sm text-muted-foreground">Pedidos</p>
+                <p className="font-semibold">{orders.length}</p>
               </CardContent>
             </Card>
             <Card>
@@ -296,7 +256,7 @@ const MyAccount = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="orders" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:inline-grid">
+            <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:inline-grid">
               <TabsTrigger value="orders" className="gap-2">
                 <Package className="w-4 h-4" />
                 <span className="hidden sm:inline">Pedidos</span>
@@ -304,10 +264,6 @@ const MyAccount = () => {
               <TabsTrigger value="addresses" className="gap-2">
                 <MapPin className="w-4 h-4" />
                 <span className="hidden sm:inline">Endereços</span>
-              </TabsTrigger>
-              <TabsTrigger value="loyalty" className="gap-2">
-                <Award className="w-4 h-4" />
-                <span className="hidden sm:inline">Fidelidade</span>
               </TabsTrigger>
               <TabsTrigger value="settings" className="gap-2">
                 <Settings className="w-4 h-4" />
@@ -531,75 +487,6 @@ const MyAccount = () => {
               </Card>
             </TabsContent>
 
-            {/* Loyalty Tab */}
-            <TabsContent value="loyalty">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Programa de Fidelidade</CardTitle>
-                  <CardDescription>Ganhe pontos a cada compra e troque por descontos</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  {/* Current Status */}
-                  <div className="flex items-center gap-6 p-6 bg-gradient-to-r from-primary/10 to-gold/10 rounded-xl">
-                    <div className="w-20 h-20 rounded-full bg-background flex items-center justify-center">
-                      <TierIcon className={`w-10 h-10 ${tierColor}`} />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-sm text-muted-foreground mb-1">Seu nível atual</p>
-                      <h3 className="text-2xl font-bold capitalize">
-                        {tierInfo[currentTier as keyof typeof tierInfo]?.name}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mt-1">
-                        {loyalty?.lifetime_points || 0} pontos acumulados
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-3xl font-bold text-primary">{loyalty?.total_points || 0}</p>
-                      <p className="text-sm text-muted-foreground">pontos disponíveis</p>
-                    </div>
-                  </div>
-
-                  {/* How it works */}
-                  <div>
-                    <h4 className="font-semibold mb-4">Como funciona</h4>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <div className="p-4 border rounded-lg text-center">
-                        <ShoppingBag className="w-8 h-8 mx-auto mb-2 text-primary" />
-                        <p className="font-medium">Compre</p>
-                        <p className="text-sm text-muted-foreground">Ganhe 1 ponto a cada R$ 1</p>
-                      </div>
-                      <div className="p-4 border rounded-lg text-center">
-                        <Gift className="w-8 h-8 mx-auto mb-2 text-primary" />
-                        <p className="font-medium">Acumule</p>
-                        <p className="text-sm text-muted-foreground">Suba de nível e ganhe mais</p>
-                      </div>
-                      <div className="p-4 border rounded-lg text-center">
-                        <Award className="w-8 h-8 mx-auto mb-2 text-primary" />
-                        <p className="font-medium">Troque</p>
-                        <p className="text-sm text-muted-foreground">100 pontos = R$ 5</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Tiers */}
-                  <div>
-                    <h4 className="font-semibold mb-4">Níveis</h4>
-                    <div className="grid md:grid-cols-4 gap-4">
-                      {Object.entries(tierInfo).map(([key, info]) => (
-                        <div 
-                          key={key} 
-                          className={`p-4 border rounded-lg text-center ${currentTier === key ? 'border-primary bg-primary/5' : ''}`}
-                        >
-                          <info.icon className={`w-6 h-6 mx-auto mb-2 ${info.color}`} />
-                          <p className="font-medium">{info.name}</p>
-                          <p className="text-xs text-muted-foreground">{info.minPoints}+ pts</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
 
             {/* Settings Tab */}
             <TabsContent value="settings">
