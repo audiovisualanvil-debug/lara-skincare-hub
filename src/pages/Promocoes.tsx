@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { motion } from "framer-motion";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
@@ -6,10 +6,7 @@ import ProductCardNew from "@/components/shop/ProductCardNew";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Percent, Tag, Sparkles, Filter, X } from "lucide-react";
-import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
-import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
-import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
-import { allSmartGRWithImages } from "@/data/smartGRProducts";
+import { supabase } from "@/integrations/supabase/client";
 import {
   Sheet,
   SheetContent,
