@@ -40,7 +40,7 @@ const MainFooter = () => {
     { label: "Loja", href: "/loja" },
     { label: "Promoções", href: "/promocoes", highlight: true },
     { label: "Monte sua Rotina", href: "/monte-sua-rotina" },
-    { label: "Quiz de Pele", href: "/quiz-pele" },
+    
     { label: "Sobre Nós", href: "/sobre" },
     { label: "Consultoria", href: "/consultoria" },
     { label: "Contato", href: "/contato" },

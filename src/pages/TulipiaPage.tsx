@@ -225,7 +225,7 @@ const TulipiaPage = () => {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button size="lg" asChild>
-                <Link to="/quiz-pele">Fazer Quiz de Pele</Link>
+                <Link to="/loja">Ver Produtos</Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
                 <Link to="/consultoria">Agendar Consultoria</Link>

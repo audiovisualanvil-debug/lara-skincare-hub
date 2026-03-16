@@ -376,7 +376,7 @@ const MezzoPage = () => {
                 className="bg-white text-[#C91E5B] hover:bg-gray-100"
                 asChild
               >
-                <Link to="/quiz-pele">Fazer Quiz de Pele</Link>
+                <Link to="/loja">Ver Produtos</Link>
               </Button>
               <Button 
                 variant="outline" 

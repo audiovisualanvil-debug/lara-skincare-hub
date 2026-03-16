@@ -67,7 +67,7 @@ const App = () => (
                       <Route path="/favoritos" element={<Favorites />} />
                       <Route path="/comparar" element={<Compare />} />
                       <Route path="/monte-sua-rotina" element={<BuildRoutine />} />
-                      <Route path="/quiz-pele" element={<SkinQuiz />} />
+                      
                       <Route path="/auth" element={<Auth />} />
                       <Route path="/reset-password" element={<ResetPassword />} />
                       <Route path="/consultoria" element={<Consultation />} />
