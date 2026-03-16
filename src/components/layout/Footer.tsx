@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Instagram, MessageCircle, MapPin, Phone } from "lucide-react";
+import { Instagram, MessageCircle, MapPin, Phone, Facebook } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -26,12 +26,20 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-3 pt-2">
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/multtimed.poa/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 border border-primary/30 flex items-center justify-center hover:border-primary hover:bg-primary/10 transition-all"
               >
                 <Instagram className="w-4 h-4 text-primary stroke-[1.5]" />
+              </a>
+              <a
+                href="https://www.facebook.com/multtimedpoa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 border border-primary/30 flex items-center justify-center hover:border-primary hover:bg-primary/10 transition-all"
+              >
+                <Facebook className="w-4 h-4 text-primary stroke-[1.5]" />
               </a>
               <a
                 href="https://wa.me/5551951572050"

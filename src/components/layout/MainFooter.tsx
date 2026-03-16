@@ -13,7 +13,8 @@ import {
   Truck,
   Shield,
   Heart,
-  Sparkles
+  Sparkles,
+  Music
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -56,6 +57,7 @@ const MainFooter = () => {
   const socialLinks: { icon: any; href: string; label: string; color: string }[] = [
     { icon: Instagram, href: "https://www.instagram.com/multtimed.poa/", label: "Instagram", color: "hover:bg-gradient-to-tr hover:from-yellow-500 hover:via-pink-500 hover:to-purple-600" },
     { icon: Facebook, href: "https://www.facebook.com/multtimedpoa", label: "Facebook", color: "hover:bg-[#1877F2]" },
+    { icon: Music, href: "https://www.tiktok.com/@multtimed.poa", label: "TikTok", color: "hover:bg-[#010101]" },
   ];
 
 
