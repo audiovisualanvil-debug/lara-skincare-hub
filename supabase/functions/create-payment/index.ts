@@ -226,15 +226,12 @@ serve(async (req) => {
       paymentMethodTypes.push("card", "pix");
     }
 
-    console.log("Creating Stripe session with payment methods:", paymentMethodTypes);
-
-    // Create checkout session
-    const session = await stripe.checkout.sessions.create({
+    const sessionParams = {
       customer: customerId,
       customer_email: customerId ? undefined : customerEmail,
       line_items: lineItems,
       ...(discounts.length > 0 ? { discounts } : {}),
-      mode: "payment",
+      mode: "payment" as const,
       success_url: `${origin}/confirmacao-pedido?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout`,
       metadata: {
@@ -254,10 +251,36 @@ serve(async (req) => {
         }),
       },
       payment_method_types: paymentMethodTypes,
-      locale: "pt-BR",
-    });
+      locale: "pt-BR" as const,
+    };
 
-    console.log("Stripe session created:", session.id);
+    console.log("Creating Stripe session with params:", JSON.stringify({
+      payment_method_types: sessionParams.payment_method_types,
+      mode: sessionParams.mode,
+      line_items_count: sessionParams.line_items.length,
+      has_customer: !!sessionParams.customer,
+      customer_email: sessionParams.customer_email,
+      has_discounts: discounts.length > 0,
+      success_url: sessionParams.success_url,
+    }));
+
+    let session;
+    try {
+      session = await stripe.checkout.sessions.create(sessionParams);
+    } catch (stripeError: any) {
+      console.error("Stripe API error:", JSON.stringify({
+        type: stripeError?.type,
+        code: stripeError?.code,
+        message: stripeError?.message,
+        statusCode: stripeError?.statusCode,
+        raw: stripeError?.raw?.message,
+        param: stripeError?.param,
+        decline_code: stripeError?.decline_code,
+      }));
+      throw new Error(`Stripe: ${stripeError?.message || stripeError}`);
+    }
+
+    console.log("Stripe session created:", session.id, "url:", session.url?.substring(0, 60));
 
     // Create order in database with server-verified amounts
     const { data: order, error: orderError } = await supabaseAdmin
