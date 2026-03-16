@@ -30,22 +30,22 @@ import heroMobile2 from "@/assets/banners/hero-mobile-2.png";
 const skinTypes = [
   { 
     title: "Acne", 
-    image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&h=500&fit=crop",
+    image: catAcne,
     href: "/loja?categoria=acne-oleosidade" 
   },
   { 
     title: "Manchas", 
-    image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=400&h=500&fit=crop",
+    image: catManchas,
     href: "/loja?categoria=clareamento" 
   },
   { 
     title: "Mistas", 
-    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=400&h=500&fit=crop",
+    image: catMistas,
     href: "/loja?categoria=hidratacao-reparacao" 
   },
   { 
     title: "Oleosidade", 
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=500&fit=crop",
+    image: catOleosidade,
     href: "/loja?categoria=acne-oleosidade" 
   },
 ];
