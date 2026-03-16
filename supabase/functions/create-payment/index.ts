@@ -30,6 +30,7 @@ interface CheckoutRequest {
   shippingCost: number;
   shippingMethod: string;
   couponCode?: string;
+  paymentMethod?: "card" | "pix" | "boleto";
 }
 
 serve(async (req) => {
@@ -41,12 +42,13 @@ serve(async (req) => {
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+    // Log key type for debugging (never log the full key)
+    console.log("Stripe key info:", {
+      prefix: stripeKey.substring(0, 7),
+      length: stripeKey.length,
+    });
 
-    const supabaseClient = createClient(
-      Deno.env.get("SUPABASE_URL") ?? "",
-      Deno.env.get("SUPABASE_ANON_KEY") ?? ""
-    );
+    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
 
     const supabaseAdmin = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
@@ -57,23 +59,34 @@ serve(async (req) => {
     let user = null;
     const authHeader = req.headers.get("Authorization");
     if (authHeader) {
+      const supabaseClient = createClient(
+        Deno.env.get("SUPABASE_URL") ?? "",
+        Deno.env.get("SUPABASE_ANON_KEY") ?? ""
+      );
       const token = authHeader.replace("Bearer ", "");
       const { data } = await supabaseClient.auth.getUser(token);
       user = data.user;
     }
 
     const body: CheckoutRequest = await req.json();
-    const { items, shippingData, shippingCost, shippingMethod, couponCode } = body;
+    const { items, shippingData, shippingCost, shippingMethod, couponCode, paymentMethod } = body;
+
+    console.log("Checkout request:", {
+      itemCount: items?.length,
+      itemIds: items?.map(i => i.id),
+      paymentMethod,
+      shippingMethod,
+    });
 
     if (!items || items.length === 0) {
       throw new Error("Carrinho vazio");
     }
 
-    // Validate items: max 50 items, quantity 1-100
+    // Validate items
     if (items.length > 50) throw new Error("Muitos itens no carrinho");
     for (const item of items) {
       if (!item.id || typeof item.quantity !== "number" || item.quantity < 1 || item.quantity > 100) {
-        throw new Error("Item inválido no carrinho");
+        throw new Error(`Item inválido no carrinho: ${JSON.stringify(item)}`);
       }
     }
 
@@ -84,13 +97,24 @@ serve(async (req) => {
 
     // SERVER-SIDE: Fetch real product prices from database
     const productIds = items.map((item) => item.id);
+
+    // Try fetching by UUID first
     const { data: dbProducts, error: productsError } = await supabaseAdmin
       .from("products")
       .select("id, name, brand, price, image_url, is_active, stock")
       .in("id", productIds);
 
-    if (productsError) throw new Error("Erro ao buscar produtos");
-    if (!dbProducts || dbProducts.length === 0) throw new Error("Produtos não encontrados");
+    if (productsError) {
+      console.error("DB query error:", JSON.stringify(productsError));
+      throw new Error(`Erro ao buscar produtos: ${productsError.message}`);
+    }
+
+    if (!dbProducts || dbProducts.length === 0) {
+      console.error("No products found for IDs:", productIds);
+      throw new Error("Produtos não encontrados no banco de dados");
+    }
+
+    console.log(`Found ${dbProducts.length} of ${productIds.length} products`);
 
     // Verify all requested products exist and are active
     const productMap = new Map(dbProducts.map((p) => [p.id, p]));
@@ -101,7 +125,7 @@ serve(async (req) => {
       if (product.stock < item.quantity) throw new Error(`Estoque insuficiente: ${product.name}`);
     }
 
-    // SERVER-SIDE: Validate coupon using the database function
+    // SERVER-SIDE: Validate coupon
     let discount = 0;
     const subtotal = items.reduce((sum, item) => {
       const product = productMap.get(item.id)!;
@@ -189,7 +213,20 @@ serve(async (req) => {
       }
     }
 
-    const origin = req.headers.get("origin") || "https://glow-quest-site.lovable.app";
+    const origin = req.headers.get("origin") || "https://lara-skincare-hub.lovable.app";
+
+    // Determine payment methods based on user selection
+    const paymentMethodTypes: Stripe.Checkout.SessionCreateParams.PaymentMethodType[] = [];
+    if (paymentMethod === "pix") {
+      paymentMethodTypes.push("pix");
+    } else if (paymentMethod === "boleto") {
+      paymentMethodTypes.push("boleto");
+    } else {
+      // Default: card + pix
+      paymentMethodTypes.push("card", "pix");
+    }
+
+    console.log("Creating Stripe session with payment methods:", paymentMethodTypes);
 
     // Create checkout session
     const session = await stripe.checkout.sessions.create({
@@ -216,9 +253,11 @@ serve(async (req) => {
           state: shippingData.state,
         }),
       },
-      payment_method_types: ["card"],
+      payment_method_types: paymentMethodTypes,
       locale: "pt-BR",
     });
+
+    console.log("Stripe session created:", session.id);
 
     // Create order in database with server-verified amounts
     const { data: order, error: orderError } = await supabaseAdmin
@@ -235,7 +274,7 @@ serve(async (req) => {
         total: subtotal - discount + shippingCost,
         coupon_code: couponCode || null,
         coupon_discount: discount,
-        payment_method: "stripe",
+        payment_method: paymentMethod || "card",
         payment_id: session.id,
         payment_status: "pending",
         status: "pending",
@@ -253,7 +292,7 @@ serve(async (req) => {
       .single();
 
     if (orderError) {
-      console.error("Error creating order:", orderError);
+      console.error("Error creating order:", JSON.stringify(orderError));
     }
 
     // Insert order items with server-verified prices
@@ -276,7 +315,7 @@ serve(async (req) => {
         .insert(orderItems);
 
       if (itemsError) {
-        console.error("Error creating order items:", itemsError);
+        console.error("Error creating order items:", JSON.stringify(itemsError));
       }
     }
 

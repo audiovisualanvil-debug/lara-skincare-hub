@@ -130,6 +130,7 @@ const CheckoutContent = () => {
           shippingCost: selectedShippingOption.price,
           shippingMethod: selectedShipping,
           couponCode: appliedCoupon?.code,
+          paymentMethod: selectedPayment,
         },
       });
 
@@ -144,9 +145,10 @@ const CheckoutContent = () => {
       } else {
         throw new Error("URL de pagamento não recebida");
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Payment error:", error);
-      toast.error("Erro ao processar pagamento. Tente novamente.");
+      const msg = error?.message || "Erro ao processar pagamento. Tente novamente.";
+      toast.error(msg);
       setIsProcessing(false);
     }
   };
