@@ -81,7 +81,7 @@ const AdminProfessionalRequests = () => {
         navigate("/");
         toast.error("Acesso não autorizado");
       } else {
-        console.log("AdminPanel - IS ADMIN, fetching requests...");
+        
         fetchRequests();
       }
     }
