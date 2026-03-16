@@ -28,7 +28,7 @@ export const useAdminRole = () => {
         });
 
         if (error) throw error;
-        console.log("useAdminRole - has_role result:", data, "for user:", user.id);
+        
         setIsAdmin(data === true);
       } catch (error) {
         console.error("Error checking admin role:", error);

@@ -69,21 +69,19 @@ const AdminProfessionalRequests = () => {
   const [adminNotes, setAdminNotes] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Debug logs
-  console.log("AdminPanel - authLoading:", authLoading, "adminLoading:", adminLoading, "user:", !!user, "isAdmin:", isAdmin);
 
   useEffect(() => {
     // Only redirect when BOTH loadings are complete
     if (!authLoading && !adminLoading) {
-      console.log("AdminPanel - Check access: user=", !!user, "isAdmin=", isAdmin);
+      
       if (!user) {
         navigate("/auth", { state: { from: "/admin/solicitacoes-profissionais" } });
       } else if (!isAdmin) {
-        console.log("AdminPanel - NOT ADMIN, redirecting...");
+        
         navigate("/");
         toast.error("Acesso não autorizado");
       } else {
-        console.log("AdminPanel - IS ADMIN, fetching requests...");
+        
         fetchRequests();
       }
     }
