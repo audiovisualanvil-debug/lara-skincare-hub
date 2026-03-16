@@ -35,6 +35,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminProducts from "./pages/AdminProducts";
 import AdminCoupons from "./pages/AdminCoupons";
 import AdminOrders from "./pages/AdminOrders";
+import AdminBlog from "./pages/AdminBlog";
 import Checkout from "./pages/Checkout";
 import Promocoes from "./pages/Promocoes";
 import FAQ from "./pages/FAQ";
