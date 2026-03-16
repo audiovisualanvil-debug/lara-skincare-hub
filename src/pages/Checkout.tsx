@@ -106,6 +106,10 @@ const CheckoutContent = () => {
   };
 
   const handleShippingSubmit = () => {
+    if (!selectedShippingOption) {
+      toast.error("Selecione uma opção de frete");
+      return;
+    }
     if (validateShipping()) {
       setStep("payment");
     }
