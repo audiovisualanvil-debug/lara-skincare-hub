@@ -14,10 +14,6 @@ import MobileFiltersSheet from "@/components/shop/MobileFiltersSheet";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import AnimatedSection from "@/components/home/AnimatedSection";
-import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
-import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
-import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
-import { allSmartGRWithImages } from "@/data/smartGRProducts";
 
 // Category definitions with descriptions
 const categoryDefinitions: Record<string, { title: string; description: string }> = {
