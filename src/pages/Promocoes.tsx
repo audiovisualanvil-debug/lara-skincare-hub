@@ -82,6 +82,21 @@ const Promocoes = () => {
   const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("maior-desconto");
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [promoProducts, setPromoProducts] = useState<PromoProduct[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await supabase
+        .from("products")
+        .select("*")
+        .eq("is_active", true)
+        .gt("stock", 0);
+      if (data) {
+        setPromoProducts(createPromoProducts(data));
+      }
+    };
+    fetchProducts();
+  }, []);
 
   const toggleDiscount = (discountId: string) => {
     setSelectedDiscounts(prev =>
