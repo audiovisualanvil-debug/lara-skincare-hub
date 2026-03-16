@@ -30,7 +30,7 @@ import TulipiaPage from "./pages/TulipiaPage";
 import MezzoPage from "./pages/MezzoPage";
 import ExtratosPage from "./pages/ExtratosPage";
 import SmartGRPage from "./pages/SmartGRPage";
-import AdminImageProcessor from "./pages/AdminImageProcessor";
+
 import AdminProfessionalRequests from "./pages/AdminProfessionalRequests";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProducts from "./pages/AdminProducts";
