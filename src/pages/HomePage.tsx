@@ -12,6 +12,10 @@ import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { useHomeProducts } from "@/hooks/useHomeProducts";
 import { promoBanners } from "@/data/promoBanners";
 import { Link } from "react-router-dom";
+import catAcne from "@/assets/cat-acne.jpg";
+import catManchas from "@/assets/cat-manchas.jpg";
+import catMistas from "@/assets/cat-mistas.jpg";
+import catOleosidade from "@/assets/cat-oleosidade.jpg";
 import { ArrowRight, Percent, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -30,74 +34,74 @@ import heroMobile2 from "@/assets/banners/hero-mobile-2.png";
 const skinTypes = [
   { 
     title: "Acne", 
-    image: "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&h=500&fit=crop",
+    image: catAcne,
     href: "/loja?categoria=acne-oleosidade" 
   },
   { 
     title: "Manchas", 
-    image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=400&h=500&fit=crop",
+    image: catManchas,
     href: "/loja?categoria=clareamento" 
   },
   { 
     title: "Mistas", 
-    image: "https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?w=400&h=500&fit=crop",
+    image: catMistas,
     href: "/loja?categoria=hidratacao-reparacao" 
   },
   { 
     title: "Oleosidade", 
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=500&fit=crop",
+    image: catOleosidade,
     href: "/loja?categoria=acne-oleosidade" 
   },
 ];
 
-// Testimonials with extended data
+// Testimonials - usando apenas iniciais, sem fotos de banco de imagem
 const testimonials = [
   {
     id: 1,
-    name: "Maria Silva",
-    text: "Os produtos são incríveis! Em apenas 2 semanas já notei diferença nas manchas. Minha pele está mais uniforme e radiante.",
+    name: "Ana Paula M.",
+    text: "Minha pele clareou visivelmente em 4 semanas! As manchas do melasma reduziram bastante e a textura ficou muito mais uniforme.",
     rating: 5,
-    role: "Empresária",
+    role: "São Paulo, SP",
     product: "Life C Nano Mousse",
   },
   {
     id: 2,
-    name: "Ana Paula Costa",
-    text: "A consultoria personalizada fez toda a diferença. Finalmente encontrei a rotina perfeita para minha pele sensível.",
+    name: "Fernanda L.",
+    text: "Textura leve, absorve super rápido e não deixa a pele oleosa. Resultado visível desde a segunda semana de uso.",
     rating: 5,
-    role: "Arquiteta",
+    role: "Curitiba, PR",
     product: "Kit Rotina Completa",
   },
   {
     id: 3,
-    name: "Carla Santos",
-    text: "Uso a linha anti-idade há 3 meses e os resultados são surpreendentes. Rugas visivelmente reduzidas!",
-    rating: 5,
-    role: "Médica",
+    name: "Juliana S.",
+    text: "Uso a linha anti-idade há 3 meses e os resultados são surpreendentes. Minha esteticista também recomendou.",
+    rating: 4,
+    role: "Belo Horizonte, MG",
     product: "Resilience Serum Pro",
   },
   {
     id: 4,
-    name: "Fernanda Lima",
-    text: "Sofria muito com acne e oleosidade. Depois de usar os produtos da Mezzo, minha pele está controlada e saudável.",
+    name: "Mariana C.",
+    text: "Uso diariamente e minha pele nunca esteve tão bonita! A vitamina C faz toda diferença na luminosidade.",
     rating: 5,
-    role: "Professora",
+    role: "Rio de Janeiro, RJ",
     product: "Linha Acne Control",
   },
   {
     id: 5,
-    name: "Juliana Mendes",
-    text: "O atendimento é excepcional! Recebi recomendações personalizadas e os resultados superaram minhas expectativas.",
+    name: "Camila R.",
+    text: "O atendimento é excepcional! Recebi recomendações que realmente funcionaram para minha pele sensível.",
     rating: 5,
-    role: "Designer",
+    role: "Porto Alegre, RS",
     product: "Miracle Eyes",
   },
   {
     id: 6,
-    name: "Patrícia Oliveira",
+    name: "Patrícia O.",
     text: "Produtos profissionais de qualidade acessível. Uso no meu consultório e as pacientes amam os resultados.",
     rating: 5,
-    role: "Esteticista",
+    role: "Florianópolis, SC",
     product: "Smart GR Peptide",
   },
 ];
