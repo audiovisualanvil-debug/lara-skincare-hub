@@ -1,3 +1,4 @@
+import SEOHead from "@/components/seo/SEOHead";
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -56,6 +57,11 @@ const TulipiaPage = () => {
 
   return (
     <>
+      <SEOHead
+        title="Tulípia Dermocosméticos | Multti Med Porto Alegre"
+        description="Linha Tulípia: skincare de alta performance com vitamina C, tratamento labial Sweet Lips, área dos olhos e muito mais."
+        canonical="/tulipia"
+      />
       <MainHeader />
       <main className="min-h-screen bg-background">
         {/* Hero Section with Parallax */}

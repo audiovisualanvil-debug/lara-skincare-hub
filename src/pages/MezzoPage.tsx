@@ -1,3 +1,4 @@
+import SEOHead from "@/components/seo/SEOHead";
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -123,6 +124,11 @@ const MezzoPage = () => {
 
   return (
     <BrandPageLayout overrideBackground="#FFFFFF">
+      <SEOHead
+        title="Mezzo Dermocosméticos | Multti Med Porto Alegre"
+        description="Linha Mezzo: tratamentos profissionais para acne, clareamento, anti-idade e rejuvenescimento. Dermocosméticos de alta eficácia."
+        canonical="/mezzo"
+      />
       <MainHeader />
       <main className="min-h-screen bg-white font-poppins">
         {/* Mezzo Sub-Header */}

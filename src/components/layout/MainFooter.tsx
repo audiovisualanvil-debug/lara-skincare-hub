@@ -53,7 +53,10 @@ const MainFooter = () => {
     { icon: Clock, label: "Suporte", description: "Seg-Sex 9h às 18h" },
   ];
 
-  const socialLinks: { icon: any; href: string; label: string; color: string }[] = [];
+  const socialLinks: { icon: any; href: string; label: string; color: string }[] = [
+    { icon: Instagram, href: "https://www.instagram.com/multtimed.poa/", label: "Instagram", color: "hover:bg-gradient-to-tr hover:from-yellow-500 hover:via-pink-500 hover:to-purple-600" },
+    { icon: Facebook, href: "https://www.facebook.com/multtimedpoa", label: "Facebook", color: "hover:bg-[#1877F2]" },
+  ];
 
 
   return (
@@ -307,13 +310,13 @@ const MainFooter = () => {
               </p>
             </div>
             <div className="flex flex-wrap gap-6">
-              <Link to="/privacidade" className="text-xs text-ivory/50 hover:text-primary transition-colors">
+              <Link to="/politica-de-privacidade" className="text-xs text-ivory/50 hover:text-primary transition-colors">
                 Política de Privacidade
               </Link>
-              <Link to="/termos" className="text-xs text-ivory/50 hover:text-primary transition-colors">
+              <Link to="/termos-de-uso" className="text-xs text-ivory/50 hover:text-primary transition-colors">
                 Termos de Uso
               </Link>
-              <Link to="/trocas" className="text-xs text-ivory/50 hover:text-primary transition-colors">
+              <Link to="/politica-de-trocas" className="text-xs text-ivory/50 hover:text-primary transition-colors">
                 Trocas e Devoluções
               </Link>
             </div>

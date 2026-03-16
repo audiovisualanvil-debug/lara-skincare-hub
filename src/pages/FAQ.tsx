@@ -1,3 +1,4 @@
+import SEOHead from "@/components/seo/SEOHead";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
@@ -242,6 +243,11 @@ const FAQ = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Perguntas Frequentes (FAQ) | Multti Med Porto Alegre"
+        description="Tire suas dúvidas sobre frete, pagamento, trocas e devoluções na Multti Med. Respostas rápidas para suas perguntas."
+        canonical="/faq"
+      />
       <MainHeader />
       
       {/* Hero Section */}

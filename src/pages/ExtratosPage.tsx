@@ -1,3 +1,4 @@
+import SEOHead from "@/components/seo/SEOHead";
 import { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -61,6 +62,11 @@ const ExtratosPage = () => {
 
   return (
     <>
+      <SEOHead
+        title="Extratos da Terra | Multti Med Porto Alegre"
+        description="Linha Extratos da Terra: cosméticos naturais com eficácia comprovada. Hidratação, clareamento, proteção solar e mais."
+        canonical="/extratos-da-terra"
+      />
       <MainHeader />
       <main className="min-h-screen bg-background">
         {/* Hero Section */}

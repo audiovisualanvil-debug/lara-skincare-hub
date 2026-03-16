@@ -1,3 +1,5 @@
+import SEOHead from "@/components/seo/SEOHead";
+import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import MainHeader from "@/components/layout/MainHeader";
@@ -121,6 +123,12 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background overflow-x-hidden">
+      <SEOHead
+        title="Multti Med Porto Alegre | Dermocosméticos Profissionais"
+        description="Loja de dermocosméticos de alta performance em Porto Alegre. Mezzo, Tulípia, Extratos da Terra e Smart GR. Entrega para todo Brasil."
+        canonical="/"
+      />
+      <OrganizationJsonLd />
       <MainHeader />
       
       {/* Spacer for fixed header */}
