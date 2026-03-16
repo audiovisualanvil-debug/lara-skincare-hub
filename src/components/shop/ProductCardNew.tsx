@@ -63,6 +63,13 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+
+    // Only allow UUID product IDs (DB products) for checkout compatibility
+    const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!UUID_REGEX.test(String(product.id))) {
+      toast.error("Produto indisponível para compra online. Entre em contato.");
+      return;
+    }
     
     const price = professionalPrice ?? extractPrice(product.price);
     if (price === null) {
