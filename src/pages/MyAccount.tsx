@@ -256,7 +256,7 @@ const MyAccount = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="orders" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4 lg:w-auto lg:inline-grid">
+            <TabsList className="grid w-full grid-cols-3 lg:w-auto lg:inline-grid">
               <TabsTrigger value="orders" className="gap-2">
                 <Package className="w-4 h-4" />
                 <span className="hidden sm:inline">Pedidos</span>
