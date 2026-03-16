@@ -174,7 +174,27 @@ const CheckoutContent = () => {
     const cleanCEP = value.replace(/\D/g, "");
     if (cleanCEP.length === 8) {
       setIsLoadingCEP(true);
-      const address = await fetchAddressByCEP(cleanCEP);
+      
+      // Fetch address and shipping in parallel
+      const [address, shippingResult] = await Promise.all([
+        fetchAddressByCEP(cleanCEP),
+        (async () => {
+          try {
+            setIsLoadingShipping(true);
+            const { data, error } = await supabase.functions.invoke('calculate-shipping', {
+              body: { cepDestino: cleanCEP },
+            });
+            if (error) throw error;
+            return data;
+          } catch (err) {
+            console.error("Shipping calculation error:", err);
+            return null;
+          } finally {
+            setIsLoadingShipping(false);
+          }
+        })(),
+      ]);
+      
       setIsLoadingCEP(false);
 
       if (address) {
@@ -195,6 +215,27 @@ const CheckoutContent = () => {
         toast.success("Endereço encontrado!");
       } else {
         toast.error("CEP não encontrado. Preencha o endereço manualmente.");
+      }
+
+      // Update shipping options
+      if (shippingResult?.options) {
+        const options = shippingResult.options.map((opt: any) => ({
+          name: opt.name,
+          price: opt.price,
+          days: opt.fallback ? `até ${opt.deadline} dias úteis (estimativa)` : `${opt.deadline} dias úteis`,
+          service: opt.service,
+        }));
+        setShippingOptions(options);
+        if (options.length > 0 && !selectedShipping) {
+          setSelectedShipping(options[0].name);
+        }
+      } else {
+        // Fallback if API fails
+        setShippingOptions([
+          { name: "PAC", price: 19.90, days: "8-12 dias úteis (estimativa)", service: "04510" },
+          { name: "SEDEX", price: 34.90, days: "3-5 dias úteis (estimativa)", service: "04014" },
+        ]);
+        if (!selectedShipping) setSelectedShipping("PAC");
       }
     }
   }, [shippingErrors.cep]);
