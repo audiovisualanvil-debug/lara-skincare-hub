@@ -23,7 +23,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import Favorites from "./pages/Favorites";
 import Compare from "./pages/Compare";
-import SkinQuiz from "./pages/SkinQuiz";
+
 import Auth from "./pages/Auth";
 import TulipiaPage from "./pages/TulipiaPage";
 import MezzoPage from "./pages/MezzoPage";
