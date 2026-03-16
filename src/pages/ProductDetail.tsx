@@ -384,7 +384,7 @@ const ProductDetail = () => {
                       return;
                     }
                     addItem({
-                      id: product.id,
+                      id: String(product.id),
                       name: product.name,
                       brand: product.brand,
                       price: price,

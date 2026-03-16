@@ -57,7 +57,7 @@ const createPromoProducts = (): PromoProduct[] => {
       const discountedPrice = numericPrice * (1 - discount / 100);
       
       promoItems.push({
-        id: product.id,
+        id: String(product.id),
         name: product.name,
         brand: product.brand,
         price: `R$ ${discountedPrice.toFixed(2).replace(".", ",")}`,
