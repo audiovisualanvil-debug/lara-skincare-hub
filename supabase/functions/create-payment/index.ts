@@ -30,7 +30,7 @@ interface CheckoutRequest {
   shippingCost: number;
   shippingMethod: string;
   couponCode?: string;
-  paymentMethod?: "card" | "pix" | "boleto";
+  paymentMethod?: "card" | "pix";
 }
 
 serve(async (req) => {
@@ -219,8 +219,6 @@ serve(async (req) => {
     const paymentMethodTypes: Stripe.Checkout.SessionCreateParams.PaymentMethodType[] = [];
     if (paymentMethod === "pix") {
       paymentMethodTypes.push("pix");
-    } else if (paymentMethod === "boleto") {
-      paymentMethodTypes.push("boleto");
     } else {
       // Default: card + pix
       paymentMethodTypes.push("card", "pix");

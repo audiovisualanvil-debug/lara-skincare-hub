@@ -255,7 +255,7 @@ const MainFooter = () => {
                   { label: "Visa", color: "bg-blue-500/20 text-blue-400" },
                   { label: "Master", color: "bg-orange-500/20 text-orange-400" },
                   { label: "Elo", color: "bg-yellow-500/20 text-yellow-400" },
-                  { label: "Boleto", color: "bg-gray-500/20 text-gray-400" },
+                  
                 ].map((method) => (
                   <div 
                     key={method.label}
