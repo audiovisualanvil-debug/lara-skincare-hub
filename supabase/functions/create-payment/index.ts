@@ -30,7 +30,7 @@ interface CheckoutRequest {
   shippingCost: number;
   shippingMethod: string;
   couponCode?: string;
-  paymentMethod?: "card" | "pix" | "boleto";
+  paymentMethod?: "card" | "pix";
 }
 
 serve(async (req) => {
