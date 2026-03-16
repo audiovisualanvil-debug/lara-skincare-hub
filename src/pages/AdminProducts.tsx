@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { seedAllProducts } from "@/utils/seedProducts";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
@@ -131,28 +131,6 @@ const AdminProducts = () => {
   const [uploadingGallery, setUploadingGallery] = useState(false);
 
   // Seed state
-  const [isSeeding, setIsSeeding] = useState(false);
-  const [seedProgress, setSeedProgress] = useState("");
-
-  const handleSeedProducts = async () => {
-    if (isSeeding) return;
-    setIsSeeding(true);
-    setSeedProgress("Iniciando importação...");
-    try {
-      const result = await seedAllProducts((current, total, name) => {
-        setSeedProgress(`Importando ${current}/${total}: ${name}`);
-      });
-      toast.success(`Importação concluída! ${result.total} produtos processados.`);
-      fetchProducts();
-    } catch (error: any) {
-      console.error("Seed error:", error);
-      toast.error("Erro na importação: " + error.message);
-    } finally {
-      setIsSeeding(false);
-      setSeedProgress("");
-    }
-  };
-
   const handleImageUpload = async (file: File, type: 'main' | 'gallery') => {
     if (!file) return;
     const isMain = type === 'main';
@@ -369,36 +347,12 @@ const AdminProducts = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              {products.length === 0 && (
-                <Button
-                  variant="outline"
-                  onClick={handleSeedProducts}
-                  disabled={isSeeding}
-                >
-                  {isSeeding ? (
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  ) : (
-                    <Download className="w-4 h-4 mr-2" />
-                  )}
-                  {isSeeding ? "Importando..." : "Importar Catálogo"}
-                </Button>
-              )}
               <Button variant="primary" onClick={openNewProduct}>
                 <Plus className="w-4 h-4 mr-2" />
                 Novo Produto
               </Button>
             </div>
           </div>
-
-          {/* Seed progress */}
-          {isSeeding && seedProgress && (
-            <div className="mb-6 p-4 bg-muted rounded-lg">
-              <div className="flex items-center gap-3">
-                <Loader2 className="w-5 h-5 animate-spin text-primary" />
-                <p className="text-sm text-foreground">{seedProgress}</p>
-              </div>
-            </div>
-          )}
 
           {/* Filters */}
           <div className="flex flex-col md:flex-row gap-4 mb-6">

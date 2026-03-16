@@ -18,11 +18,12 @@ import { useBrandTheme } from "@/contexts/BrandThemeContext";
 import SearchAutocomplete from "@/components/shop/SearchAutocomplete";
 import { toast } from "sonner";
 
-// Import product images
-import niacineSerum from "@/assets/products/niacine-serum.jpg";
-import dermacosImmortalite from "@/assets/products/dermacos-immortalite.jpg";
-import blackSecretHydrogen from "@/assets/products/black-secret-hydrogen.jpg";
-import hidrasolDermacos from "@/assets/products/hidrasol-dermacos.jpg";
+// CDN product images
+const CDN_HERO = "https://kmblagikmhbigsceyqjo.supabase.co/storage/v1/object/public/product-images/hero";
+const niacineSerum = `${CDN_HERO}/niacine-serum.jpg`;
+const dermacosImmortalite = `${CDN_HERO}/dermacos-immortalite.jpg`;
+const blackSecretHydrogen = `${CDN_HERO}/black-secret-hydrogen.jpg`;
+const hidrasolDermacos = `${CDN_HERO}/hidrasol-dermacos.jpg`;
 
 // Menu items with mega menu content
 const menuItems = [

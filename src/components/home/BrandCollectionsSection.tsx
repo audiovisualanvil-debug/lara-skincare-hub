@@ -3,26 +3,28 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
-// Import product images for each collection
-import blackSecretPeeling2Fases from "@/assets/products/tulipia/black-secret-2fases-hero.jpg";
-import lifeCSerum from "@/assets/products/tulipia/life-c-serum-20.jpg";
-import niacineEspuma from "@/assets/products/tulipia/niacine-espuma-150ml-hero.jpg";
-import sweetLipsEsfoliante from "@/assets/products/tulipia/sweet-lips-esfoliante.jpg";
+const CDN = "https://kmblagikmhbigsceyqjo.supabase.co/storage/v1/object/public/product-images/hero";
 
-import acneXsome from "@/assets/products/mezzo/acne-xsome.jpg";
-import mellanWhiteXsome from "@/assets/products/mezzo/mellan-white-xsome-new.png";
-import trichologyXsome from "@/assets/products/mezzo/trichology-xsome.jpg";
-import skinFillXsome from "@/assets/products/mezzo/skin-fill-xsome-new.png";
+// CDN URLs for collection images
+const blackSecretPeeling2Fases = `${CDN}/black-secret-2fases-hero.jpg`;
+const lifeCSerum = `${CDN}/life-c-serum-20.jpg`;
+const niacineEspuma = `${CDN}/niacine-espuma-150ml-hero.jpg`;
+const sweetLipsEsfoliante = `${CDN}/sweet-lips-esfoliante.jpg`;
 
-import hydraVitCHidratante from "@/assets/products/extratos/hydra-vit-c-hidratante.jpg";
-import serumNiacinamida from "@/assets/products/extratos/serum-niacinamida.jpg";
-import exoIntenseSerum from "@/assets/products/extratos/exo-intense-serum.jpg";
-import aquafaceSabonete from "@/assets/products/extratos/sabonete-aquaface.jpg";
+const acneXsome = `${CDN}/acne-xsome.jpg`;
+const mellanWhiteXsome = `${CDN}/mellan-white-xsome-new.png`;
+const trichologyXsome = `${CDN}/trichology-xsome.jpg`;
+const skinFillXsome = `${CDN}/skin-fill-xsome-new.png`;
 
-import smartPeptideSkinPro from "@/assets/products/smartgr/smart-peptide-skin-pro.jpg";
-import smartExoSkinPro from "@/assets/products/smartgr/smart-exo-skin-pro.jpg";
-import smartVitac from "@/assets/products/smartgr/smart-vitac.jpg";
-import smartHair from "@/assets/products/smartgr/smart-hair.jpg";
+const hydraVitCHidratante = `${CDN}/hydra-vit-c-hidratante.jpg`;
+const serumNiacinamida = `${CDN}/serum-niacinamida.jpg`;
+const exoIntenseSerum = `${CDN}/exo-intense-serum.jpg`;
+const aquafaceSabonete = `${CDN}/sabonete-aquaface.jpg`;
+
+const smartPeptideSkinPro = `${CDN}/smart-peptide-skin-pro.jpg`;
+const smartExoSkinPro = `${CDN}/smart-exo-skin-pro.jpg`;
+const smartVitac = `${CDN}/smart-vitac.jpg`;
+const smartHair = `${CDN}/smart-hair.jpg`;
 
 interface Collection {
   id: string;

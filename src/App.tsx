@@ -30,7 +30,7 @@ import TulipiaPage from "./pages/TulipiaPage";
 import MezzoPage from "./pages/MezzoPage";
 import ExtratosPage from "./pages/ExtratosPage";
 import SmartGRPage from "./pages/SmartGRPage";
-import AdminImageProcessor from "./pages/AdminImageProcessor";
+
 import AdminProfessionalRequests from "./pages/AdminProfessionalRequests";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminProducts from "./pages/AdminProducts";
@@ -84,7 +84,7 @@ const App = () => (
                         <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
                         <Route path="/termos-de-uso" element={<TermosDeUso />} />
                         <Route path="/politica-de-trocas" element={<PoliticaTrocas />} />
-                        <Route path="/admin/processar-imagens" element={<AdminImageProcessor />} />
+                        
                         <Route path="/admin/solicitacoes-profissionais" element={<AdminProfessionalRequests />} />
                         <Route path="/admin/dashboard" element={<AdminDashboard />} />
                         <Route path="/admin/produtos" element={<AdminProducts />} />

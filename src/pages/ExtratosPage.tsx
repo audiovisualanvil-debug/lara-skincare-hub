@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useBrandProducts } from "@/hooks/useBrandProducts";
 
-import hydraVitCModel1 from "@/assets/products/extratos/hydra-vit-c-model-1.png";
+const hydraVitCModel1 = "https://kmblagikmhbigsceyqjo.supabase.co/storage/v1/object/public/product-images/hero/hydra-vit-c-model-1.png";
 
 const EXTRATOS_GREEN = "#6FAF8E";
 

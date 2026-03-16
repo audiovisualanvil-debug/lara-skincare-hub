@@ -14,10 +14,6 @@ import MobileFiltersSheet from "@/components/shop/MobileFiltersSheet";
 import MainHeader from "@/components/layout/MainHeader";
 import MainFooter from "@/components/layout/MainFooter";
 import AnimatedSection from "@/components/home/AnimatedSection";
-import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
-import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
-import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
-import { allSmartGRWithImages } from "@/data/smartGRProducts";
 
 // Category definitions with descriptions
 const categoryDefinitions: Record<string, { title: string; description: string }> = {
@@ -117,14 +113,6 @@ const extractPrice = (priceStr?: string): number | null => {
   return parseFloat(match) || null;
 };
 
-// Hardcoded products
-const hardcodedProducts = [
-  ...allMezzoWithImages,
-  ...allExtratosWithImages,
-  ...allTulipiaWithImages,
-  ...allSmartGRWithImages,
-];
-
 const PRODUCTS_PER_PAGE = 12;
 
 // Animation variants
@@ -184,12 +172,7 @@ const Shop = () => {
     fetchDbProducts();
   }, []);
 
-  // Use DB products if available, otherwise fall back to hardcoded
-  // IMPORTANT: Only use DB products for checkout compatibility (UUIDs required)
-  const allProducts = useMemo(() => {
-    if (dbProducts.length > 0) return dbProducts;
-    return hardcodedProducts;
-  }, [dbProducts]);
+  const allProducts = dbProducts;
   const productPrices = allProducts.map(p => extractPrice(p.price)).filter((p): p is number => p !== null);
   const maxProductPrice = productPrices.length > 0 ? Math.max(...productPrices) : 999;
   
