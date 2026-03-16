@@ -172,12 +172,7 @@ const Shop = () => {
     fetchDbProducts();
   }, []);
 
-  // Use DB products if available, otherwise fall back to hardcoded
-  // IMPORTANT: Only use DB products for checkout compatibility (UUIDs required)
-  const allProducts = useMemo(() => {
-    if (dbProducts.length > 0) return dbProducts;
-    return hardcodedProducts;
-  }, [dbProducts]);
+  const allProducts = dbProducts;
   const productPrices = allProducts.map(p => extractPrice(p.price)).filter((p): p is number => p !== null);
   const maxProductPrice = productPrices.length > 0 ? Math.max(...productPrices) : 999;
   
