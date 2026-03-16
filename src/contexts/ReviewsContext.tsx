@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect, ReactNode } from "react
 
 export interface Review {
   id: string;
-  productId: number;
+  productId: string;
   userName: string;
   userCity?: string;
   rating: number;
