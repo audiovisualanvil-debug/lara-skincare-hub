@@ -481,7 +481,7 @@ const HomePage = () => {
             </p>
             <Button variant="gold" size="xl" asChild className="mt-8 md:mt-10">
               <a 
-                href="https://wa.me/5511999999999" 
+                href="https://wa.me/5551995672101" 
                 target="_blank"
                 rel="noopener noreferrer"
               >

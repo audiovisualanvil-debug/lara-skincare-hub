@@ -42,7 +42,7 @@ const Footer = () => {
                 <Facebook className="w-4 h-4 text-primary stroke-[1.5]" />
               </a>
               <a
-                href="https://wa.me/5551951572050"
+                href="https://wa.me/5551995672101"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 border border-primary/30 flex items-center justify-center hover:border-primary hover:bg-primary/10 transition-all"
@@ -76,16 +76,16 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5 stroke-[1.5]" />
                 <span className="font-body text-sm text-pearl/70">
-                  Endereço a confirmar
+                  Av. Cristóvão Colombo, 2176, sala 505 – Floresta, Porto Alegre/RS
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-primary shrink-0 stroke-[1.5]" />
                 <a
-                  href="https://wa.me/5551951572050"
+                  href="https://wa.me/5551995672101"
                   className="font-body text-sm text-pearl/70 hover:text-primary transition-colors"
                 >
-                  (51) 9515-7205
+                  (51) 99567-2101
                 </a>
               </li>
             </ul>

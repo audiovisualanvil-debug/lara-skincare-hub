@@ -206,7 +206,7 @@ const MainFooter = () => {
             <ul className="space-y-4">
               <li>
                 <a 
-                  href="https://wa.me/5511999999999" 
+                  href="https://wa.me/5551995672101" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 group"
@@ -215,8 +215,8 @@ const MainFooter = () => {
                     <Phone className="w-4 h-4 text-green-400 group-hover:text-white transition-colors" />
                   </div>
                   <div>
-                    <p className="text-sm text-ivory/90 group-hover:text-primary transition-colors">(11) 99999-9999</p>
-                    <p className="text-xs text-ivory/50">WhatsApp</p>
+                     <p className="text-sm text-ivory/90 group-hover:text-primary transition-colors">(51) 99567-2101</p>
+                     <p className="text-xs text-ivory/50">WhatsApp</p>
                   </div>
                 </a>
               </li>
@@ -239,8 +239,8 @@ const MainFooter = () => {
                   <MapPin className="w-4 h-4 text-gold" />
                 </div>
                 <div>
-                  <p className="text-sm text-ivory/90">São Paulo, SP</p>
-                  <p className="text-xs text-ivory/50">Brasil</p>
+                   <p className="text-sm text-ivory/90">Av. Cristóvão Colombo, 2176</p>
+                   <p className="text-xs text-ivory/50">Sala 505 – Floresta, Porto Alegre/RS</p>
                 </div>
               </li>
             </ul>
