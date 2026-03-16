@@ -17,14 +17,14 @@ interface TestimonialsSectionProps {
   testimonials: Testimonial[];
 }
 
-// Default avatar images for testimonials
-const defaultAvatars = [
-  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face",
-  "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face",
+// Warm color palette for initial avatars
+const avatarColors = [
+  "bg-primary/20 text-primary",
+  "bg-gold/20 text-gold-dark",
+  "bg-terracotta/20 text-terracotta",
+  "bg-champagne text-primary",
+  "bg-rose/20 text-rose-dark",
+  "bg-sage/20 text-sage-dark",
 ];
 
 const TestimonialsSection = ({ testimonials }: TestimonialsSectionProps) => {
