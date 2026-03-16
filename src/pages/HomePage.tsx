@@ -9,9 +9,7 @@ import PromoBannerCarousel from "@/components/shop/PromoBannerCarousel";
 import RecentlyViewedSection from "@/components/shop/RecentlyViewedSection";
 import AnimatedSection from "@/components/home/AnimatedSection";
 import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
-import { allMezzoWithImages } from "@/data/mezzoProductsWithImages";
-import { allExtratosWithImages } from "@/data/extratosProductsWithImages";
-import { allTulipiaWithImages } from "@/data/tulipiaProductsWithImages";
+import { useHomeProducts } from "@/hooks/useHomeProducts";
 import { promoBanners } from "@/data/promoBanners";
 import { Link } from "react-router-dom";
 import { ArrowRight, Percent, Sparkles } from "lucide-react";
@@ -27,42 +25,6 @@ import resilienceSerum from "@/assets/banners/resilience-serum-hero.jpg";
 // Mobile hero images
 import heroMobile1 from "@/assets/banners/hero-mobile-1.png";
 import heroMobile2 from "@/assets/banners/hero-mobile-2.png";
-
-// Best Sellers - mix from brands with discounts
-const bestSellers = [
-  { ...allTulipiaWithImages[0], discount: 20, originalPrice: "R$ 189,90" },
-  { ...allTulipiaWithImages[1], isNew: true },
-  { ...allMezzoWithImages[0], discount: 15, originalPrice: "R$ 149,90" },
-  { ...allMezzoWithImages[1] },
-  { ...allExtratosWithImages[0], isNew: true },
-  { ...allExtratosWithImages[1], discount: 10, originalPrice: "R$ 99,90" },
-];
-
-// Lançamentos - newest products
-const lancamentos = [
-  { ...allTulipiaWithImages[2], isNew: true },
-  { ...allTulipiaWithImages[3], isNew: true },
-  { ...allMezzoWithImages[2], isNew: true },
-  { ...allExtratosWithImages[2], isNew: true },
-];
-
-// Tendências
-const tendencias = [
-  { ...allMezzoWithImages[0], discount: 25, originalPrice: "R$ 199,90" },
-  { ...allMezzoWithImages[1] },
-  { ...allMezzoWithImages[2], isNew: true },
-  { ...allMezzoWithImages[3], discount: 15, originalPrice: "R$ 159,90" },
-];
-
-// Promoções - produtos com desconto
-const promocoes = [
-  { ...allTulipiaWithImages[0], discount: 30, originalPrice: "R$ 219,90", price: "R$ 153,93" },
-  { ...allMezzoWithImages[4], discount: 25, originalPrice: "R$ 179,90", price: "R$ 134,93" },
-  { ...allExtratosWithImages[3], discount: 20, originalPrice: "R$ 159,90", price: "R$ 127,92" },
-  { ...allTulipiaWithImages[5], discount: 35, originalPrice: "R$ 249,90", price: "R$ 162,44" },
-  { ...allMezzoWithImages[6], discount: 15, originalPrice: "R$ 129,90", price: "R$ 110,42" },
-  { ...allExtratosWithImages[5], discount: 40, originalPrice: "R$ 199,90", price: "R$ 119,94" },
-];
 
 // Skin type categories
 const skinTypes = [
