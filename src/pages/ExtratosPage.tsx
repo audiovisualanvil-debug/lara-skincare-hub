@@ -70,7 +70,7 @@ const ExtratosPage = () => {
       <MainHeader />
       <main className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+        <section className="relative h-[45vh] md:h-[55vh] overflow-hidden">
           <motion.div className="absolute inset-0" style={{ y, scale }}>
             <img src={hydraVitCModel1} alt="Linha Extratos da Terra - Dermocosméticos Naturais" className="w-full h-full object-cover" />
           </motion.div>
