@@ -248,17 +248,6 @@ const Header = () => {
               </Link>
             ))}
 
-            <div className="pt-3 border-t border-border">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 font-body text-sm text-foreground/70 hover:text-primary py-2"
-              >
-                <Instagram className="w-4 h-4 stroke-[1.5]" />
-                @multtimed
-              </a>
-            </div>
           </div>
         </div>
       )}

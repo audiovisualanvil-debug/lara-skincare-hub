@@ -56,20 +56,15 @@ const Contact = () => {
                   </div>
                 </a>
 
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-6 bg-background border border-border hover:border-primary/50 hover:shadow-luxury transition-all duration-300 group"
-                >
-                  <div className="w-12 h-12 border border-primary flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+                <div className="flex items-center gap-4 p-6 bg-background border border-border">
+                  <div className="w-12 h-12 border border-primary flex items-center justify-center">
                     <Instagram className="w-6 h-6 text-primary stroke-[1.5]" />
                   </div>
                   <div>
                     <h3 className="font-display text-lg font-medium text-foreground tracking-wide">Instagram</h3>
-                    <p className="font-body text-sm text-muted-foreground">@multtimed</p>
+                    <p className="font-body text-sm text-muted-foreground">Em breve</p>
                   </div>
-                </a>
+                </div>
 
                 <div className="flex items-center gap-4 p-6 bg-background border border-border">
                   <div className="w-12 h-12 border border-primary flex items-center justify-center">
