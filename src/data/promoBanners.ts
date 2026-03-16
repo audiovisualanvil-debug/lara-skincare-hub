@@ -1,10 +1,10 @@
 import { PromoBanner } from "@/components/shop/PromoBannerCarousel";
-import promoVitaminC from "@/assets/promo-vitaminc.jpg";
-import promoExossomas from "@/assets/promo-exossomas.jpg";
-import promoHidratacao from "@/assets/promo-hidratacao.jpg";
-import promoClareamento from "@/assets/promo-clareamento.jpg";
-import promoAntiage from "@/assets/promo-antiage.jpg";
-import promoAcne from "@/assets/promo-acne.jpg";
+import promoVitaminC from "@/assets/banners/life-c-nano-hero.jpg";
+import promoExossomas from "@/assets/banners/mezzo-lha-exo-banner.png";
+import promoHidratacao from "@/assets/banners/proskin-repair-hero.jpg";
+import promoClareamento from "@/assets/products/tulipia/black-secret-clareador-official.png";
+import promoAntiage from "@/assets/banners/resilience-serum-hero.jpg";
+import promoAcne from "@/assets/products/mezzo/acne-xsome-promo.png";
 
 // Sample promo banners for different brands/product lines
 export const promoBanners: PromoBanner[] = [

@@ -12,10 +12,10 @@ import { useRecentlyViewed } from "@/hooks/useRecentlyViewed";
 import { useHomeProducts } from "@/hooks/useHomeProducts";
 import { promoBanners } from "@/data/promoBanners";
 import { Link } from "react-router-dom";
-import catAcne from "@/assets/cat-acne.jpg";
-import catManchas from "@/assets/cat-manchas.jpg";
-import catMistas from "@/assets/cat-mistas.jpg";
-import catOleosidade from "@/assets/cat-oleosidade.jpg";
+import catAcne from "@/assets/products/mezzo/acne-xsome-official.png";
+import catManchas from "@/assets/products/tulipia/black-secret-clareador-official.png";
+import catMistas from "@/assets/products/tulipia/niacine-espuma-official.png";
+import catOleosidade from "@/assets/products/tulipia/age-matte-serum-new.png";
 import { ArrowRight, Percent, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
