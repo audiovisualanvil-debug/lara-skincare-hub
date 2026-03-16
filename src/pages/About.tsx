@@ -1,3 +1,4 @@
+import SEOHead from "@/components/seo/SEOHead";
 import { Link } from "react-router-dom";
 import { ArrowRight, Award, Users, Heart, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
