@@ -215,8 +215,8 @@ const MainFooter = () => {
                     <Phone className="w-4 h-4 text-green-400 group-hover:text-white transition-colors" />
                   </div>
                   <div>
-                    <p className="text-sm text-ivory/90 group-hover:text-primary transition-colors">(11) 99999-9999</p>
-                    <p className="text-xs text-ivory/50">WhatsApp</p>
+                     <p className="text-sm text-ivory/90 group-hover:text-primary transition-colors">(51) 99567-2101</p>
+                     <p className="text-xs text-ivory/50">WhatsApp</p>
                   </div>
                 </a>
               </li>
