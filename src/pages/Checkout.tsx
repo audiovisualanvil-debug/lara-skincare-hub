@@ -23,8 +23,10 @@ const CheckoutContent = () => {
   const [couponCode, setCouponCode] = useState("");
   const [step, setStep] = useState<"cart" | "shipping" | "payment">("cart");
   const [isProcessing, setIsProcessing] = useState(false);
-  const [selectedShipping, setSelectedShipping] = useState<string>("PAC");
+  const [selectedShipping, setSelectedShipping] = useState<string>("");
   const [selectedPayment, setSelectedPayment] = useState<"card" | "pix">("card");
+  const [shippingOptions, setShippingOptions] = useState<Array<{ name: string; price: number; days: string; service: string }>>([]);
+  const [isLoadingShipping, setIsLoadingShipping] = useState(false);
   
   const [shippingData, setShippingData] = useState({
     name: "",
@@ -49,11 +51,6 @@ const CheckoutContent = () => {
   const [shippingErrors, setShippingErrors] = useState<Record<string, string>>({});
   const [paymentErrors, setPaymentErrors] = useState<Record<string, string>>({});
   const [isLoadingCEP, setIsLoadingCEP] = useState(false);
-
-  const shippingOptions = [
-    { name: "PAC", price: 19.90, days: "8-12 dias úteis" },
-    { name: "SEDEX", price: 34.90, days: "3-5 dias úteis" },
-  ];
 
   const selectedShippingOption = shippingOptions.find(o => o.name === selectedShipping) || shippingOptions[0];
 
