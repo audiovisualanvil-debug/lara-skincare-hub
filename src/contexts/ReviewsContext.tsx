@@ -130,7 +130,7 @@ export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
     return Math.round((sum / productReviews.length) * 10) / 10;
   };
 
-  const getReviewCount = (productId: number): number => {
+  const getReviewCount = (productId: string): number => {
     return reviews.filter(r => r.productId === productId).length;
   };
 

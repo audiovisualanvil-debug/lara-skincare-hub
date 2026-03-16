@@ -2,7 +2,7 @@ import ProductCardNew from "./ProductCardNew";
 import ProductCardSkeleton from "./ProductCardSkeleton";
 
 interface Product {
-  id: number;
+  id: string;
   name: string;
   brand: string;
   price?: string;
