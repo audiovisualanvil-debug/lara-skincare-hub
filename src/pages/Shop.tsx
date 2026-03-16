@@ -113,14 +113,6 @@ const extractPrice = (priceStr?: string): number | null => {
   return parseFloat(match) || null;
 };
 
-// Hardcoded products
-const hardcodedProducts = [
-  ...allMezzoWithImages,
-  ...allExtratosWithImages,
-  ...allTulipiaWithImages,
-  ...allSmartGRWithImages,
-];
-
 const PRODUCTS_PER_PAGE = 12;
 
 // Animation variants
