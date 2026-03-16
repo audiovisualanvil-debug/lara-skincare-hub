@@ -70,7 +70,7 @@ const MyAccount = () => {
   
   const [orders, setOrders] = useState<Order[]>([]);
   const [addresses, setAddresses] = useState<Address[]>([]);
-  const [loyalty, setLoyalty] = useState<LoyaltyData | null>(null);
+  
   const [profile, setProfile] = useState<{ full_name: string | null; email: string | null } | null>(null);
   const [loading, setLoading] = useState(true);
   const [addressDialogOpen, setAddressDialogOpen] = useState(false);
