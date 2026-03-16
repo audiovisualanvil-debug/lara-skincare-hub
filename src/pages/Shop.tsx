@@ -283,7 +283,7 @@ const Shop = () => {
     }
 
     return result;
-  }, [selectedObjectives, selectedBrands, selectedUsageTypes, searchQuery, selectedPriceRanges, sortBy]);
+  }, [allProducts, selectedObjectives, selectedBrands, selectedUsageTypes, searchQuery, selectedPriceRanges, sortBy]);
 
   // Pagination
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
