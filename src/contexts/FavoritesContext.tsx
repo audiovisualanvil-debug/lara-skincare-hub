@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export interface FavoriteItem {
-  id: number;
+  id: string;
   name: string;
   brand: string;
   price?: string;
@@ -11,9 +11,9 @@ export interface FavoriteItem {
 interface FavoritesContextType {
   favorites: FavoriteItem[];
   addFavorite: (product: FavoriteItem) => void;
-  removeFavorite: (id: number) => void;
+  removeFavorite: (id: string) => void;
   toggleFavorite: (product: FavoriteItem) => void;
-  isFavorite: (id: number) => boolean;
+  isFavorite: (id: string) => boolean;
   totalFavorites: number;
 }
 
@@ -54,7 +54,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const removeFavorite = (id: number) => {
+  const removeFavorite = (id: string) => {
     setFavorites((prev) => prev.filter((item) => item.id !== id));
   };
 
@@ -66,7 +66,7 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const isFavorite = (id: number) => {
+  const isFavorite = (id: string) => {
     return favorites.some((item) => item.id === id);
   };
 

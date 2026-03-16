@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 interface RecentProduct {
-  id: number;
+  id: string;
   name: string;
   brand: string;
   price?: string;
@@ -52,7 +52,7 @@ export const useRecentlyViewed = () => {
   }, []);
 
   // Get products excluding a specific ID (useful to not show current product)
-  const getRecentlyViewed = useCallback((excludeId?: number, limit = 4) => {
+  const getRecentlyViewed = useCallback((excludeId?: string, limit = 4) => {
     return recentProducts
       .filter(p => p.id !== excludeId)
       .slice(0, limit);

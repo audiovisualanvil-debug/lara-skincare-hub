@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export interface CompareItem {
-  id: number;
+  id: string;
   name: string;
   brand: string;
   price?: string;
@@ -14,9 +14,9 @@ export interface CompareItem {
 interface CompareContextType {
   compareItems: CompareItem[];
   addToCompare: (product: CompareItem) => boolean;
-  removeFromCompare: (id: number) => void;
+  removeFromCompare: (id: string) => void;
   clearCompare: () => void;
-  isInCompare: (id: number) => boolean;
+  isInCompare: (id: string) => boolean;
   canAddMore: boolean;
   isCompareBarVisible: boolean;
   showCompareBar: () => void;
@@ -49,7 +49,7 @@ export const CompareProvider = ({ children }: { children: ReactNode }) => {
     return true;
   };
 
-  const removeFromCompare = (id: number) => {
+  const removeFromCompare = (id: string) => {
     setCompareItems(prev => prev.filter(item => item.id !== id));
   };
 
@@ -58,7 +58,7 @@ export const CompareProvider = ({ children }: { children: ReactNode }) => {
     setIsCompareBarVisible(false);
   };
 
-  const isInCompare = (id: number) => {
+  const isInCompare = (id: string) => {
     return compareItems.some(item => item.id === id);
   };
 
