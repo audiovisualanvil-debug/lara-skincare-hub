@@ -77,7 +77,7 @@ const AdminProfessionalRequests = () => {
       if (!user) {
         navigate("/auth", { state: { from: "/admin/solicitacoes-profissionais" } });
       } else if (!isAdmin) {
-        console.log("AdminPanel - NOT ADMIN, redirecting...");
+        
         navigate("/");
         toast.error("Acesso não autorizado");
       } else {
