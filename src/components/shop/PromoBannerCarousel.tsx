@@ -120,6 +120,7 @@ const PromoBannerCarousel = ({
                     <img 
                       src={banner.image}
                       alt={banner.title}
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     {/* Gradient overlay for text visibility on mobile */}

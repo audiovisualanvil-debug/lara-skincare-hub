@@ -152,6 +152,7 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
           <div className="absolute inset-0 bg-secondary animate-pulse" />
         )}
         <img
+          loading="lazy"
           src={isHovered && product.imageHover ? product.imageHover : (product.image || placeholderImage)}
           alt={product.name}
           onLoad={() => setImageLoaded(true)}

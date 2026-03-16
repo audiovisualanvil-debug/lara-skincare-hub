@@ -251,7 +251,7 @@ const SearchAutocomplete = ({
                 {popularProducts.map((product) => (
                   <button key={product.id} type="button" onClick={() => handleSuggestionClick(product.id)} className="flex items-center gap-2 p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors text-left">
                     {product.image_url && (
-                      <img src={product.image_url} alt={product.name} className="w-10 h-10 object-contain rounded bg-background p-0.5" />
+                      <img src={product.image_url} alt={product.name} loading="lazy" className="w-10 h-10 object-contain rounded bg-background p-0.5" />
                     )}
                     <div className="flex-1 min-w-0">
                       <p className="text-xs font-medium text-foreground truncate">{product.name}</p>
@@ -277,7 +277,7 @@ const SearchAutocomplete = ({
                   className={`w-full px-4 py-3 flex items-center gap-3 text-left transition-colors ${index === selectedIndex ? "bg-secondary" : "hover:bg-secondary/50"}`}
                 >
                   {product.image_url ? (
-                    <img src={product.image_url} alt={product.name} className="w-12 h-12 object-contain rounded-lg bg-secondary p-1" />
+                    <img src={product.image_url} alt={product.name} loading="lazy" className="w-12 h-12 object-contain rounded-lg bg-secondary p-1" />
                   ) : (
                     <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
                       <Search className="w-4 h-4 text-muted-foreground" />

@@ -221,6 +221,7 @@ const HomePage = () => {
                 <img 
                   src={lifeCNano} 
                   alt="Linha Life C Nano" 
+                  loading="lazy"
                   className="w-full h-40 md:h-48 object-cover rounded-xl shadow-md"
                 />
               </div>
@@ -278,6 +279,7 @@ const HomePage = () => {
                   <img 
                     src={type.image} 
                     alt={type.title}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/30 to-transparent" />
@@ -377,6 +379,7 @@ const HomePage = () => {
                   <img 
                     src={miracleEyesHero} 
                     alt="Miracle Eyes"
+                    loading="lazy"
                     className="w-24 md:w-28 h-28 md:h-32 object-cover rounded-xl shadow-md group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="flex-1">
@@ -405,6 +408,7 @@ const HomePage = () => {
                   <img 
                     src={resilienceSerum} 
                     alt="Resilience Serum"
+                    loading="lazy"
                     className="w-24 md:w-28 h-28 md:h-32 object-cover rounded-xl shadow-md group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="flex-1">
