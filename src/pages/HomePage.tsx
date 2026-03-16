@@ -1,3 +1,5 @@
+import SEOHead from "@/components/seo/SEOHead";
+import OrganizationJsonLd from "@/components/seo/OrganizationJsonLd";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import MainHeader from "@/components/layout/MainHeader";
