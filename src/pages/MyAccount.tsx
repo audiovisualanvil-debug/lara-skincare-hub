@@ -200,9 +200,6 @@ const MyAccount = () => {
 
   if (!user) return null;
 
-  const currentTier = loyalty?.tier || "bronze";
-  const TierIcon = tierInfo[currentTier as keyof typeof tierInfo]?.icon || Award;
-  const tierColor = tierInfo[currentTier as keyof typeof tierInfo]?.color || "text-amber-700";
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
