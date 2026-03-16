@@ -1,3 +1,4 @@
+import SEOHead from "@/components/seo/SEOHead";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
