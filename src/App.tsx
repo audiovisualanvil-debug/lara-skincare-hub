@@ -84,7 +84,7 @@ const App = () => (
                         <Route path="/politica-de-privacidade" element={<PoliticaPrivacidade />} />
                         <Route path="/termos-de-uso" element={<TermosDeUso />} />
                         <Route path="/politica-de-trocas" element={<PoliticaTrocas />} />
-                        <Route path="/admin/processar-imagens" element={<AdminImageProcessor />} />
+                        
                         <Route path="/admin/solicitacoes-profissionais" element={<AdminProfessionalRequests />} />
                         <Route path="/admin/dashboard" element={<AdminDashboard />} />
                         <Route path="/admin/produtos" element={<AdminProducts />} />
