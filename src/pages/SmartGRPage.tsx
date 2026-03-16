@@ -56,7 +56,7 @@ const SmartGRPage = () => {
       <MainHeader />
       <main className="min-h-screen bg-background">
         {/* Hero Section with Parallax */}
-        <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+        <section className="relative h-[45vh] md:h-[55vh] overflow-hidden">
           <motion.div className="absolute inset-0" style={{ y, scale }}>
             <img src={smartgrHero} alt="Smart GR - Ativos Inteligentes" className="w-full h-full object-cover" />
           </motion.div>
@@ -112,7 +112,7 @@ const SmartGRPage = () => {
         </AnimatedSection>
 
         {/* Products Section */}
-        <section className="container mx-auto px-4 py-12 md:py-16">
+        <section className="container mx-auto px-4 py-8 md:py-12">
           <Link to="/loja" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 transition-colors">
             <ArrowLeft className="w-4 h-4" />Voltar para a loja
           </Link>
