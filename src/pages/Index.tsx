@@ -85,19 +85,19 @@ const brands = [
 // Testimonials
 const testimonials = [
   {
-    name: "Ana Paula",
+    name: "Ana Paula M.",
     city: "São Paulo, SP",
     text: "Minha pele nunca esteve tão bonita! A consultoria fez toda a diferença na escolha dos produtos.",
     image: null,
   },
   {
-    name: "Fernanda Lima",
+    name: "Fernanda L.",
     city: "Curitiba, PR",
     text: "Produtos de qualidade e atendimento excepcional. Recomendo demais!",
     image: null,
   },
   {
-    name: "Juliana Santos",
+    name: "Juliana S.",
     city: "Belo Horizonte, MG",
     text: "Finalmente encontrei produtos que funcionam para minha pele sensível.",
     image: null,

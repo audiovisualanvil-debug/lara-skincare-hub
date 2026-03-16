@@ -50,7 +50,7 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
   const { addToCompare, removeFromCompare, isInCompare, canAddMore } = useCompare();
   const { isProfessional, discountPercentage } = useProfessional();
   
-  const placeholderImage = "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop";
+  const placeholderImage = "/placeholder.svg";
   const isProductFavorite = isFavorite(product.id);
   const isProductInCompare = isInCompare(product.id);
 
