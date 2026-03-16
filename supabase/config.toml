@@ -1,10 +1,1 @@
-project_id = "scnrejflmrhpcheqfjog"
-
-[functions.convert-image-background]
-verify_jwt = false
-
-[functions.create-payment]
-verify_jwt = false
-
-[functions.verify-payment]
-verify_jwt = false
+project_id = "kmblagikmhbigsceyqjo"
