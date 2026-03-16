@@ -15,15 +15,31 @@ Deno.serve(async (req) => {
     const { default: postgres } = await import("https://deno.land/x/postgresjs@v3.4.4/mod.js");
     const db = postgres(dbUrl);
 
-    const { sql } = await req.json();
-    if (!sql) throw new Error("sql field required");
+    const { sql, urls } = await req.json();
+    const results: string[] = [];
 
-    await db.unsafe(sql);
-    
+    if (urls && Array.isArray(urls)) {
+      for (const url of urls) {
+        const resp = await fetch(url);
+        if (!resp.ok) {
+          results.push(`Failed to fetch: ${url} (${resp.status})`);
+          continue;
+        }
+        const sqlContent = await resp.text();
+        await db.unsafe(sqlContent);
+        results.push(`Executed: ${url.split('/').pop()}`);
+      }
+    } else if (sql) {
+      await db.unsafe(sql);
+      results.push("SQL executed");
+    }
+
     const count = await db`SELECT COUNT(*) as total FROM products`;
+    results.push(`Total products: ${count[0].total}`);
+    
     await db.end();
 
-    return new Response(JSON.stringify({ success: true, total: count[0].total }), {
+    return new Response(JSON.stringify({ success: true, results }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
