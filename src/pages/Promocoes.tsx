@@ -30,48 +30,36 @@ interface PromoProduct {
   isNew?: boolean;
 }
 
-// Create promotional products with discounts
-const createPromoProducts = (): PromoProduct[] => {
-  const allProducts = [
-    ...allTulipiaWithImages,
-    ...allMezzoWithImages,
-    ...allExtratosWithImages,
-    ...allSmartGRWithImages,
-  ];
-
-  // Simulate discounts for demonstration
+// Create promotional products with discounts from DB products
+const createPromoProducts = (dbProducts: any[]): PromoProduct[] => {
   const promoItems: PromoProduct[] = [];
   
-  allProducts.forEach((product, index) => {
+  dbProducts.forEach((product, index) => {
     const discountOptions = [10, 15, 20, 25, 30, 35, 40, 50];
-    const hasDiscount = index % 2 === 0 || index % 3 === 0; // ~66% of products have discount
+    const hasDiscount = index % 2 === 0 || index % 3 === 0;
     
     if (hasDiscount) {
       const discount = discountOptions[index % discountOptions.length];
-      const originalPrice = product.price || "R$ 149,90";
-      const priceMatch = originalPrice.match(/[\d,]+/);
-      const numericPrice = priceMatch ? parseFloat(priceMatch[0].replace(",", ".")) : 149.90;
+      const numericPrice = Number(product.price);
       const discountedPrice = numericPrice * (1 - discount / 100);
       
       promoItems.push({
-        id: String(product.id),
+        id: product.id,
         name: product.name,
         brand: product.brand,
         price: `R$ ${discountedPrice.toFixed(2).replace(".", ",")}`,
-        originalPrice,
+        originalPrice: `R$ ${numericPrice.toFixed(2).replace(".", ",")}`,
         discount,
-        image: product.image,
+        image: product.image_url,
         category: product.category,
-        description: product.description,
-        isProfessional: product.isProfessional,
+        description: product.short_description || product.description,
+        isProfessional: product.tags?.includes("profissional"),
       });
     }
   });
   
   return promoItems;
 };
-
-const promoProducts = createPromoProducts();
 
 // Discount ranges for filtering
 const discountRanges = [
