@@ -948,34 +948,6 @@ const CheckoutContent = () => {
                       </span>
                     </div>
 
-                    {/* Boleto Option */}
-                    <div 
-                      className={cn(
-                        "p-4 border-2 rounded-lg flex items-center gap-3 cursor-pointer transition-all",
-                        selectedPayment === "boleto" 
-                          ? "border-primary bg-primary/5" 
-                          : "border-border hover:border-primary/50"
-                      )}
-                      onClick={() => setSelectedPayment("boleto")}
-                    >
-                      <div className={cn(
-                        "w-5 h-5 rounded-full border-2 flex items-center justify-center",
-                        selectedPayment === "boleto" ? "border-primary" : "border-muted-foreground"
-                      )}>
-                        {selectedPayment === "boleto" && (
-                          <motion.div 
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="w-2.5 h-2.5 rounded-full bg-primary"
-                          />
-                        )}
-                      </div>
-                      <div className="w-8 h-8 rounded bg-muted flex items-center justify-center text-lg">
-                        📄
-                      </div>
-                      <span className="font-medium">Boleto Bancário</span>
-                      <span className="ml-auto text-sm text-muted-foreground">Até 3 dias úteis</span>
-                    </div>
                   </div>
 
                   <Button
