@@ -11,10 +11,8 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { sql_statements } = await req.json();
-    if (!sql_statements || !Array.isArray(sql_statements)) {
-      throw new Error("sql_statements array required");
-    }
+    const { sql } = await req.json();
+    if (!sql) throw new Error("sql field required");
 
     const dbUrl = Deno.env.get("SUPABASE_DB_URL");
     if (!dbUrl) throw new Error("SUPABASE_DB_URL not set");
@@ -22,20 +20,10 @@ Deno.serve(async (req) => {
     const { default: postgres } = await import("https://deno.land/x/postgresjs@v3.4.4/mod.js");
     const db = postgres(dbUrl);
 
-    const results: string[] = [];
-
-    for (const stmt of sql_statements) {
-      try {
-        await db.unsafe(stmt);
-        results.push("OK");
-      } catch (e) {
-        results.push(`Error: ${e.message}`);
-      }
-    }
-
+    await db.unsafe(sql);
     await db.end();
 
-    return new Response(JSON.stringify({ success: true, results }), {
+    return new Response(JSON.stringify({ success: true }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
