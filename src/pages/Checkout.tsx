@@ -24,7 +24,7 @@ const CheckoutContent = () => {
   const [step, setStep] = useState<"cart" | "shipping" | "payment">("cart");
   const [isProcessing, setIsProcessing] = useState(false);
   const [selectedShipping, setSelectedShipping] = useState<string>("PAC");
-  const [selectedPayment, setSelectedPayment] = useState<"card" | "pix" | "boleto">("card");
+  const [selectedPayment, setSelectedPayment] = useState<"card" | "pix">("card");
   
   const [shippingData, setShippingData] = useState({
     name: "",

@@ -64,7 +64,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "Quais formas de pagamento vocês aceitam?",
-        answer: "Aceitamos cartões de crédito (Visa, Mastercard, Elo, American Express), PIX, boleto bancário e carteiras digitais. No cartão, você pode parcelar em até 12x sem juros."
+        answer: "Aceitamos cartões de crédito (Visa, Mastercard, Elo, American Express), PIX e carteiras digitais. No cartão, você pode parcelar em até 12x sem juros."
       },
       {
         question: "O pagamento é seguro?",
