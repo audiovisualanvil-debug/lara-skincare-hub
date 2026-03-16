@@ -787,45 +787,58 @@ const CheckoutContent = () => {
                   {/* Shipping options */}
                   <div className="space-y-3">
                     <h3 className="font-medium">Opções de Frete</h3>
-                    <div className="space-y-2">
-                      {shippingOptions.map((option) => (
-                        <label
-                          key={option.name}
-                          className={cn(
-                            "flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all",
-                            selectedShipping === option.name 
-                              ? "border-primary bg-primary/5" 
-                              : "border-border hover:border-primary/50"
-                          )}
-                          onClick={() => setSelectedShipping(option.name)}
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className={cn(
-                              "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                    {isLoadingShipping ? (
+                      <div className="flex items-center gap-2 p-4 border-2 border-border rounded-lg">
+                        <Loader2 className="w-5 h-5 animate-spin text-muted-foreground" />
+                        <span className="text-muted-foreground">Calculando frete...</span>
+                      </div>
+                    ) : shippingOptions.length === 0 ? (
+                      <div className="p-4 border-2 border-border rounded-lg text-center">
+                        <p className="text-muted-foreground text-sm">
+                          Preencha o CEP para calcular o frete
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        {shippingOptions.map((option) => (
+                          <label
+                            key={option.name}
+                            className={cn(
+                              "flex items-center justify-between p-4 border-2 rounded-lg cursor-pointer transition-all",
                               selectedShipping === option.name 
-                                ? "border-primary" 
-                                : "border-muted-foreground"
-                            )}>
-                              {selectedShipping === option.name && (
-                                <motion.div 
-                                  initial={{ scale: 0 }}
-                                  animate={{ scale: 1 }}
-                                  className="w-2.5 h-2.5 rounded-full bg-primary"
-                                />
-                              )}
+                                ? "border-primary bg-primary/5" 
+                                : "border-border hover:border-primary/50"
+                            )}
+                            onClick={() => setSelectedShipping(option.name)}
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className={cn(
+                                "w-5 h-5 rounded-full border-2 flex items-center justify-center",
+                                selectedShipping === option.name 
+                                  ? "border-primary" 
+                                  : "border-muted-foreground"
+                              )}>
+                                {selectedShipping === option.name && (
+                                  <motion.div 
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    className="w-2.5 h-2.5 rounded-full bg-primary"
+                                  />
+                                )}
+                              </div>
+                              <Truck className="w-5 h-5 text-muted-foreground" />
+                              <div>
+                                <p className="font-medium">{option.name}</p>
+                                <p className="text-sm text-muted-foreground">{option.days}</p>
+                              </div>
                             </div>
-                            <Truck className="w-5 h-5 text-muted-foreground" />
-                            <div>
-                              <p className="font-medium">{option.name}</p>
-                              <p className="text-sm text-muted-foreground">{option.days}</p>
-                            </div>
-                          </div>
-                          <span className="font-semibold" style={{ color: currentTheme.colors.primaryHex }}>
-                            R$ {option.price.toFixed(2)}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
+                            <span className="font-semibold" style={{ color: currentTheme.colors.primaryHex }}>
+                              R$ {option.price.toFixed(2)}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
                   </div>
 
                   <Button
