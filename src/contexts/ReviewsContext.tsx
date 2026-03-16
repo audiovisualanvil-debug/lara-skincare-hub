@@ -14,10 +14,10 @@ export interface Review {
 }
 
 interface ReviewsContextType {
-  getProductReviews: (productId: number) => Review[];
+  getProductReviews: (productId: string) => Review[];
   addReview: (review: Omit<Review, "id" | "date" | "helpful">) => void;
-  getAverageRating: (productId: number) => number;
-  getReviewCount: (productId: number) => number;
+  getAverageRating: (productId: string) => number;
+  getReviewCount: (productId: string) => number;
   markHelpful: (reviewId: string) => void;
 }
 
