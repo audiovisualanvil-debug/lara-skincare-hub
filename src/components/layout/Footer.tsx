@@ -76,7 +76,7 @@ const Footer = () => {
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5 stroke-[1.5]" />
                 <span className="font-body text-sm text-pearl/70">
-                  Endereço a confirmar
+                  Av. Cristóvão Colombo, 2176, sala 505 – Floresta, Porto Alegre/RS
                 </span>
               </li>
               <li className="flex items-center gap-3">

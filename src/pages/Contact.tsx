@@ -78,7 +78,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-display text-lg font-medium text-foreground tracking-wide">Endereço</h3>
-                    <p className="font-body text-sm text-muted-foreground">Endereço a confirmar</p>
+                    <p className="font-body text-sm text-muted-foreground">Av. Cristóvão Colombo, 2176, sala 505 – Floresta, Porto Alegre/RS</p>
                   </div>
                 </div>
 

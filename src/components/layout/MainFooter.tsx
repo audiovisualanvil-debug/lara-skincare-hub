@@ -239,8 +239,8 @@ const MainFooter = () => {
                   <MapPin className="w-4 h-4 text-gold" />
                 </div>
                 <div>
-                  <p className="text-sm text-ivory/90">São Paulo, SP</p>
-                  <p className="text-xs text-ivory/50">Brasil</p>
+                   <p className="text-sm text-ivory/90">Av. Cristóvão Colombo, 2176</p>
+                   <p className="text-xs text-ivory/50">Sala 505 – Floresta, Porto Alegre/RS</p>
                 </div>
               </li>
             </ul>
