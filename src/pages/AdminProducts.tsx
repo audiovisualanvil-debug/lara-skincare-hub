@@ -347,36 +347,12 @@ const AdminProducts = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              {products.length === 0 && (
-                <Button
-                  variant="outline"
-                  onClick={handleSeedProducts}
-                  disabled={isSeeding}
-                >
-                  {isSeeding ? (
-                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  ) : (
-                    <Download className="w-4 h-4 mr-2" />
-                  )}
-                  {isSeeding ? "Importando..." : "Importar Catálogo"}
-                </Button>
-              )}
               <Button variant="primary" onClick={openNewProduct}>
                 <Plus className="w-4 h-4 mr-2" />
                 Novo Produto
               </Button>
             </div>
           </div>
-
-          {/* Seed progress */}
-          {isSeeding && seedProgress && (
-            <div className="mb-6 p-4 bg-muted rounded-lg">
-              <div className="flex items-center gap-3">
-                <Loader2 className="w-5 h-5 animate-spin text-primary" />
-                <p className="text-sm text-foreground">{seedProgress}</p>
-              </div>
-            </div>
-          )}
 
           {/* Filters */}
           <div className="flex flex-col md:flex-row gap-4 mb-6">
