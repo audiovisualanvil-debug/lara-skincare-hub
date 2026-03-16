@@ -345,15 +345,27 @@ const AdminDashboard = () => {
           {/* Quick Links */}
           <div className="flex gap-3 mb-8 flex-wrap">
             <Button variant="outline" asChild>
-              <Link to="/admin/solicitacoes-profissionais">
-                <Building2 className="w-4 h-4 mr-2" />
-                Solicitações Profissionais
+              <Link to="/admin/pedidos">
+                <ShoppingCart className="w-4 h-4 mr-2" />
+                Gerenciar Pedidos
               </Link>
             </Button>
             <Button variant="outline" asChild>
               <Link to="/admin/produtos">
                 <Package className="w-4 h-4 mr-2" />
                 Gerenciar Produtos
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/admin/cupons">
+                <DollarSign className="w-4 h-4 mr-2" />
+                Cupons de Desconto
+              </Link>
+            </Button>
+            <Button variant="outline" asChild>
+              <Link to="/admin/solicitacoes-profissionais">
+                <Building2 className="w-4 h-4 mr-2" />
+                Solicitações Profissionais
               </Link>
             </Button>
           </div>
