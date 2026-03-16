@@ -53,10 +53,16 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   useEffect(() => {
+    const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
     try {
       const savedCart = localStorage.getItem(CART_STORAGE_KEY);
       if (savedCart) {
-        setItems(JSON.parse(savedCart));
+        const parsed: CartItem[] = JSON.parse(savedCart);
+        const valid = parsed.filter((item) => UUID_REGEX.test(item.id));
+        if (valid.length < parsed.length) {
+          console.warn(`Carrinho: removidos ${parsed.length - valid.length} itens com IDs inválidos`);
+        }
+        setItems(valid);
       }
       const savedCoupon = localStorage.getItem(COUPON_STORAGE_KEY);
       if (savedCoupon) {
