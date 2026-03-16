@@ -29,7 +29,7 @@ const REVIEWS_STORAGE_KEY = "dermostore-reviews";
 const sampleReviews: Review[] = [
   {
     id: "r1",
-    productId: 1401,
+    productId: "1401",
     userName: "Ana Paula M.",
     userCity: "São Paulo, SP",
     rating: 5,
