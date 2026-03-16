@@ -3,7 +3,7 @@ import { Clock, ArrowRight } from "lucide-react";
 import ProductCardNew from "./ProductCardNew";
 
 interface Product {
-  id: number;
+  id: string;
   name: string;
   brand: string;
   price?: string;
@@ -12,7 +12,7 @@ interface Product {
 
 interface RecentlyViewedSectionProps {
   products: Product[];
-  currentProductId?: number;
+  currentProductId?: string;
 }
 
 const RecentlyViewedSection = ({ products, currentProductId }: RecentlyViewedSectionProps) => {
