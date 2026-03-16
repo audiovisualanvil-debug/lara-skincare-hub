@@ -130,24 +130,6 @@ const MyAccount = () => {
         .order("is_default", { ascending: false });
       setAddresses(addressesData || []);
 
-      // Fetch loyalty points
-      const { data: loyaltyData } = await supabase
-        .from("loyalty_points")
-        .select("total_points, lifetime_points, tier")
-        .eq("user_id", user.id)
-        .single();
-      
-      if (loyaltyData) {
-        setLoyalty(loyaltyData);
-      } else {
-        // Create loyalty record if doesn't exist
-        const { data: newLoyalty } = await supabase
-          .from("loyalty_points")
-          .insert({ user_id: user.id })
-          .select("total_points, lifetime_points, tier")
-          .single();
-        setLoyalty(newLoyalty);
-      }
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
