@@ -50,6 +50,27 @@ serve(async (req) => {
       console.error("Error updating order:", updateError);
     }
 
+    // Send order confirmation email if payment was successful
+    if (orderStatus === "paid" && order) {
+      try {
+        const supabaseUrl = Deno.env.get("SUPABASE_URL") ?? "";
+        const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "";
+        const emailResponse = await fetch(`${supabaseUrl}/functions/v1/send-order-email`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${serviceKey}`,
+          },
+          body: JSON.stringify({ orderId: order.id }),
+        });
+        const emailResult = await emailResponse.json();
+        console.log("Order email result:", emailResult);
+      } catch (emailErr) {
+        console.error("Failed to send order email:", emailErr);
+        // Don't fail the payment verification if email fails
+      }
+    }
+
     return new Response(
       JSON.stringify({
         success: true,
