@@ -104,6 +104,7 @@ const testimonials = [
 
 const HomePage = () => {
   const { recentProducts } = useRecentlyViewed();
+  const { bestSellers, lancamentos, promocoes, tendencias, isLoading } = useHomeProducts();
   const heroRef = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress: heroScrollProgress } = useScroll({
