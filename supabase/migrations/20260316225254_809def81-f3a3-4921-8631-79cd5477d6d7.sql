@@ -1,0 +1,1 @@
+UPDATE products SET images = '{}' WHERE images::text LIKE '%/src/assets/%';
