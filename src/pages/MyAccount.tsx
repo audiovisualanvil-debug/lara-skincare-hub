@@ -44,18 +44,6 @@ interface Address {
   is_default: boolean;
 }
 
-interface LoyaltyData {
-  total_points: number;
-  lifetime_points: number;
-  tier: string;
-}
-
-const tierInfo = {
-  bronze: { name: "Bronze", icon: Award, color: "text-amber-700", minPoints: 0 },
-  silver: { name: "Prata", icon: Award, color: "text-gray-400", minPoints: 500 },
-  gold: { name: "Ouro", icon: Crown, color: "text-yellow-500", minPoints: 1500 },
-  platinum: { name: "Platina", icon: Crown, color: "text-purple-500", minPoints: 5000 },
-};
 
 const statusColors: Record<string, string> = {
   pending: "bg-yellow-100 text-yellow-800",
