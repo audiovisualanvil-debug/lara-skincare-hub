@@ -1,3 +1,5 @@
+import SEOHead from "@/components/seo/SEOHead";
+import ProductJsonLd from "@/components/seo/ProductJsonLd";
 import { useParams, Link } from "react-router-dom";
 import { Check, Star, MessageCircle, ArrowRight, Sparkles, Droplets, Shield, Leaf, ChevronRight, Minus, Plus, Heart, Share2, ShoppingCart, Loader2 } from "lucide-react";
 import { useState, useMemo, useEffect } from "react";
