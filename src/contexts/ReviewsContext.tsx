@@ -53,7 +53,7 @@ const sampleReviews: Review[] = [
   },
   {
     id: "r3",
-    productId: 1402,
+    productId: "1402",
     userName: "Juliana S.",
     userCity: "Belo Horizonte, MG",
     rating: 4,
