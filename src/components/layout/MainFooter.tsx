@@ -13,7 +13,8 @@ import {
   Truck,
   Shield,
   Heart,
-  Sparkles
+  Sparkles,
+  Music
 } from "lucide-react";
 import { motion } from "framer-motion";
 
