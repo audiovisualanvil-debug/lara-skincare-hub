@@ -53,12 +53,8 @@ const MainFooter = () => {
     { icon: Clock, label: "Suporte", description: "Seg-Sex 9h às 18h" },
   ];
 
-  const socialLinks = [
-    { icon: Instagram, href: "https://instagram.com/multtimed", label: "Instagram", color: "hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500" },
-    { icon: Facebook, href: "https://facebook.com/multtimed", label: "Facebook", color: "hover:bg-blue-600" },
-    { icon: Youtube, href: "https://youtube.com/@multtimed", label: "YouTube", color: "hover:bg-red-600" },
-    { icon: Linkedin, href: "https://linkedin.com/company/multtimed", label: "LinkedIn", color: "hover:bg-blue-700" },
-  ];
+  const socialLinks: { icon: any; href: string; label: string; color: string }[] = [];
+
 
   return (
     <footer className="bg-espresso text-ivory relative overflow-hidden">
