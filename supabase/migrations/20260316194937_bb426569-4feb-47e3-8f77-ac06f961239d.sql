@@ -1,0 +1,3 @@
+UPDATE products SET image_url = 'https://kmblagikmhbigsceyqjo.supabase.co/storage/v1/object/public/product-images/processed/mask-xsome-pdrn-tratamento-multi-regenerativo-1404.png' WHERE id = '4e004235-668a-42e4-9ef9-6741a85a1f2b';
+UPDATE products SET image_url = 'https://kmblagikmhbigsceyqjo.supabase.co/storage/v1/object/public/product-images/processed/pigment-control-serum-iluminador-inverse-c-1801.jpg' WHERE id = '12da8dfb-419e-452d-af9e-e39cd6382c8c';
+UPDATE products SET image_url = 'https://kmblagikmhbigsceyqjo.supabase.co/storage/v1/object/public/product-images/processed/fluid-antiacne-fps-70-protetor-antiacne-1504.png' WHERE id = '68067f27-d670-4b5d-9094-183e33466d14';
