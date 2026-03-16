@@ -36,6 +36,7 @@ const KitsSection = ({ kits }: KitsSectionProps) => {
                 <img
                   src={kit.image}
                   alt={kit.name}
+                  loading="lazy"
                   className="w-full h-full object-cover"
                 />
               </div>
