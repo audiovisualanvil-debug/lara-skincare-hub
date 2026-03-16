@@ -62,6 +62,11 @@ const ExtratosPage = () => {
 
   return (
     <>
+      <SEOHead
+        title="Extratos da Terra | Multti Med Porto Alegre"
+        description="Linha Extratos da Terra: cosméticos naturais com eficácia comprovada. Hidratação, clareamento, proteção solar e mais."
+        canonical="/extratos-da-terra"
+      />
       <MainHeader />
       <main className="min-h-screen bg-background">
         {/* Hero Section */}

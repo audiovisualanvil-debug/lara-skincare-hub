@@ -57,6 +57,11 @@ const TulipiaPage = () => {
 
   return (
     <>
+      <SEOHead
+        title="Tulípia Dermocosméticos | Multti Med Porto Alegre"
+        description="Linha Tulípia: skincare de alta performance com vitamina C, tratamento labial Sweet Lips, área dos olhos e muito mais."
+        canonical="/tulipia"
+      />
       <MainHeader />
       <main className="min-h-screen bg-background">
         {/* Hero Section with Parallax */}

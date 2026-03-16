@@ -48,6 +48,11 @@ const SmartGRPage = () => {
 
   return (
     <>
+      <SEOHead
+        title="Smart GR Dermocosméticos | Multti Med Porto Alegre"
+        description="Linha Smart GR: ativos profissionais, peelings, microagulhamento e tratamentos corporais. Tecnologia avançada para resultados reais."
+        canonical="/smart-gr"
+      />
       <MainHeader />
       <main className="min-h-screen bg-background">
         {/* Hero Section with Parallax */}
