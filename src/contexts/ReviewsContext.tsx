@@ -123,7 +123,7 @@ export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
     saveUserReviews(updatedReviews);
   };
 
-  const getAverageRating = (productId: number): number => {
+  const getAverageRating = (productId: string): number => {
     const productReviews = reviews.filter(r => r.productId === productId);
     if (productReviews.length === 0) return 0;
     const sum = productReviews.reduce((acc, r) => acc + r.rating, 0);
