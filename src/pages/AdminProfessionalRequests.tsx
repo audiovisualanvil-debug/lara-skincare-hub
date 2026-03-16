@@ -69,8 +69,6 @@ const AdminProfessionalRequests = () => {
   const [adminNotes, setAdminNotes] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Debug logs
-  console.log("AdminPanel - authLoading:", authLoading, "adminLoading:", adminLoading, "user:", !!user, "isAdmin:", isAdmin);
 
   useEffect(() => {
     // Only redirect when BOTH loadings are complete
