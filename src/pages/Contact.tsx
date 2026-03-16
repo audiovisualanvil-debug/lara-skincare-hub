@@ -1,3 +1,4 @@
+import SEOHead from "@/components/seo/SEOHead";
 import { MessageCircle, Instagram, MapPin, Mail, Phone, Clock, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
