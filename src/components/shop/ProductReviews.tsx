@@ -7,7 +7,7 @@ import { useReviews, Review } from "@/contexts/ReviewsContext";
 import { toast } from "sonner";
 
 interface ProductReviewsProps {
-  productId: number;
+  productId: string | number;
 }
 
 const ProductReviews = ({ productId }: ProductReviewsProps) => {

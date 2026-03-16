@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 
 interface Product {
-  id: number;
+  id: string | number;
   name: string;
   brand: string;
   price?: string;
@@ -71,7 +71,7 @@ const ProductCardNew = ({ product }: ProductCardNewProps) => {
     }
     
     addItem({
-      id: product.id,
+      id: String(product.id),
       name: product.name,
       brand: product.brand,
       price: price,

@@ -20,7 +20,7 @@ import {
 
 // Extended product type with promo fields
 interface PromoProduct {
-  id: number;
+  id: string;
   name: string;
   brand: string;
   price: string;

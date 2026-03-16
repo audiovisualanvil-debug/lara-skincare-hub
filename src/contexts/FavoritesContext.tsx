@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 export interface FavoriteItem {
-  id: number;
+  id: string;
   name: string;
   brand: string;
   price?: string;
@@ -10,10 +10,10 @@ export interface FavoriteItem {
 
 interface FavoritesContextType {
   favorites: FavoriteItem[];
-  addFavorite: (product: FavoriteItem) => void;
-  removeFavorite: (id: number) => void;
-  toggleFavorite: (product: FavoriteItem) => void;
-  isFavorite: (id: number) => boolean;
+  addFavorite: (product: { id: string | number; name: string; brand: string; price?: string; image?: string }) => void;
+  removeFavorite: (id: string | number) => void;
+  toggleFavorite: (product: { id: string | number; name: string; brand: string; price?: string; image?: string }) => void;
+  isFavorite: (id: string | number) => boolean;
   totalFavorites: number;
 }
 
@@ -24,7 +24,6 @@ const FAVORITES_STORAGE_KEY = "dermostore-favorites";
 export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
 
-  // Load favorites from localStorage on mount
   useEffect(() => {
     try {
       const savedFavorites = localStorage.getItem(FAVORITES_STORAGE_KEY);
@@ -36,7 +35,6 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  // Save favorites to localStorage whenever it changes
   useEffect(() => {
     try {
       localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
@@ -45,20 +43,22 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [favorites]);
 
-  const addFavorite = (product: FavoriteItem) => {
+  const addFavorite = (product: { id: string | number; name: string; brand: string; price?: string; image?: string }) => {
+    const sid = String(product.id);
     setFavorites((prev) => {
-      if (prev.some((item) => item.id === product.id)) {
+      if (prev.some((item) => item.id === sid)) {
         return prev;
       }
-      return [...prev, product];
+      return [...prev, { ...product, id: sid }];
     });
   };
 
-  const removeFavorite = (id: number) => {
-    setFavorites((prev) => prev.filter((item) => item.id !== id));
+  const removeFavorite = (id: string | number) => {
+    const sid = String(id);
+    setFavorites((prev) => prev.filter((item) => item.id !== sid));
   };
 
-  const toggleFavorite = (product: FavoriteItem) => {
+  const toggleFavorite = (product: { id: string | number; name: string; brand: string; price?: string; image?: string }) => {
     if (isFavorite(product.id)) {
       removeFavorite(product.id);
     } else {
@@ -66,8 +66,9 @@ export const FavoritesProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const isFavorite = (id: number) => {
-    return favorites.some((item) => item.id === id);
+  const isFavorite = (id: string | number) => {
+    const sid = String(id);
+    return favorites.some((item) => item.id === sid);
   };
 
   const totalFavorites = favorites.length;
