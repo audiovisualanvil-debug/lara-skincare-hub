@@ -221,6 +221,7 @@ const HomePage = () => {
                 <img 
                   src={lifeCNano} 
                   alt="Linha Life C Nano" 
+                  loading="lazy"
                   className="w-full h-40 md:h-48 object-cover rounded-xl shadow-md"
                 />
               </div>
