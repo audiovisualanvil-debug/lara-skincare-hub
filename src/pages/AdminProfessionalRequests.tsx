@@ -73,7 +73,7 @@ const AdminProfessionalRequests = () => {
   useEffect(() => {
     // Only redirect when BOTH loadings are complete
     if (!authLoading && !adminLoading) {
-      console.log("AdminPanel - Check access: user=", !!user, "isAdmin=", isAdmin);
+      
       if (!user) {
         navigate("/auth", { state: { from: "/admin/solicitacoes-profissionais" } });
       } else if (!isAdmin) {
