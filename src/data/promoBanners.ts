@@ -1,4 +1,10 @@
 import { PromoBanner } from "@/components/shop/PromoBannerCarousel";
+import promoVitaminC from "@/assets/promo-vitaminc.jpg";
+import promoExossomas from "@/assets/promo-exossomas.jpg";
+import promoHidratacao from "@/assets/promo-hidratacao.jpg";
+import promoClareamento from "@/assets/promo-clareamento.jpg";
+import promoAntiage from "@/assets/promo-antiage.jpg";
+import promoAcne from "@/assets/promo-acne.jpg";
 
 // Sample promo banners for different brands/product lines
 export const promoBanners: PromoBanner[] = [
@@ -8,7 +14,7 @@ export const promoBanners: PromoBanner[] = [
     title: "Linha",
     highlight: "Life C Nano",
     description: "Tecnologia nano encapsulada para máxima absorção e luminosidade",
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=600&h=600&fit=crop",
+    image: promoVitaminC,
     link: "/shop?categoria=vitamina-c",
     bgColor: "#e8d5c4",
     accentColor: "#c9956c",
@@ -19,7 +25,7 @@ export const promoBanners: PromoBanner[] = [
     title: "Linha",
     highlight: "Exossomas",
     description: "Regeneração celular avançada com biotecnologia de última geração",
-    image: "https://images.unsplash.com/photo-1570194065650-d99fb4b38b15?w=600&h=600&fit=crop",
+    image: promoExossomas,
     link: "/shop?categoria=exossomas",
     bgColor: "#f0e6dc",
     accentColor: "#8b7355",
@@ -30,7 +36,7 @@ export const promoBanners: PromoBanner[] = [
     title: "Linha",
     highlight: "Hidratação Profunda",
     description: "Ácido hialurônico de múltiplos pesos moleculares para hidratação em todas as camadas",
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&h=600&fit=crop",
+    image: promoHidratacao,
     link: "/shop?categoria=hidratacao",
     bgColor: "#dce8e8",
     accentColor: "#5a8a8a",
@@ -41,7 +47,7 @@ export const promoBanners: PromoBanner[] = [
     title: "Linha",
     highlight: "Clareamento",
     description: "Ação despigmentante com alfa-arbutin e vitamina C para uma pele uniforme",
-    image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=600&h=600&fit=crop",
+    image: promoClareamento,
     link: "/shop?categoria=clareamento",
     bgColor: "#f5e6e0",
     accentColor: "#c48b76",
@@ -52,7 +58,7 @@ export const promoBanners: PromoBanner[] = [
     title: "Linha",
     highlight: "Anti-Idade",
     description: "Peptídeos e retinol para redução de rugas e firmeza da pele",
-    image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=600&h=600&fit=crop",
+    image: promoAntiage,
     link: "/shop?categoria=antiage",
     bgColor: "#e8e0f0",
     accentColor: "#8b6b9e",
@@ -63,7 +69,7 @@ export const promoBanners: PromoBanner[] = [
     title: "Linha",
     highlight: "Controle de Acne",
     description: "Ácido salicílico e niacinamida para peles oleosas e com tendência acneica",
-    image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=600&fit=crop",
+    image: promoAcne,
     link: "/shop?categoria=acne",
     bgColor: "#e0e8e0",
     accentColor: "#5a7a5a",

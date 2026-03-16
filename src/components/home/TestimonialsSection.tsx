@@ -282,17 +282,10 @@ const TestimonialCard = ({ testimonial, index }: { testimonial: Testimonial; ind
 
         {/* Author */}
         <div className="flex items-center gap-4 pt-4 border-t border-border/30">
-          {/* Avatar */}
+          {/* Initial Avatar */}
           <div className="relative">
-            <img
-              src={testimonial.image || defaultAvatars[index % defaultAvatars.length]}
-              alt={testimonial.name}
-              className="w-12 h-12 rounded-full object-cover border-2 border-primary/20"
-            />
-            <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-card flex items-center justify-center">
-              <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
+            <div className={`w-12 h-12 rounded-full flex items-center justify-center font-display text-lg font-medium ${avatarColors[index % avatarColors.length]}`}>
+              {testimonial.name.charAt(0)}
             </div>
           </div>
 
