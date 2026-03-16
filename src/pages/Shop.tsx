@@ -1,3 +1,4 @@
+import SEOHead from "@/components/seo/SEOHead";
 import { useState, useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
