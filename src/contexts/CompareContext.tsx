@@ -13,10 +13,10 @@ export interface CompareItem {
 
 interface CompareContextType {
   compareItems: CompareItem[];
-  addToCompare: (product: CompareItem) => boolean;
-  removeFromCompare: (id: string) => void;
+  addToCompare: (product: { id: string | number; name: string; brand: string; price?: string; image?: string; category?: string; description?: string; isProfessional?: boolean }) => boolean;
+  removeFromCompare: (id: string | number) => void;
   clearCompare: () => void;
-  isInCompare: (id: string) => boolean;
+  isInCompare: (id: string | number) => boolean;
   canAddMore: boolean;
   isCompareBarVisible: boolean;
   showCompareBar: () => void;
@@ -31,26 +31,27 @@ export const CompareProvider = ({ children }: { children: ReactNode }) => {
   const [compareItems, setCompareItems] = useState<CompareItem[]>([]);
   const [isCompareBarVisible, setIsCompareBarVisible] = useState(false);
 
-  // Show compare bar when items are added
   useEffect(() => {
     if (compareItems.length > 0) {
       setIsCompareBarVisible(true);
     }
   }, [compareItems]);
 
-  const addToCompare = (product: CompareItem): boolean => {
+  const addToCompare = (product: { id: string | number; name: string; brand: string; price?: string; image?: string; category?: string; description?: string; isProfessional?: boolean }): boolean => {
     if (compareItems.length >= MAX_COMPARE_ITEMS) {
       return false;
     }
-    if (compareItems.some(item => item.id === product.id)) {
+    const sid = String(product.id);
+    if (compareItems.some(item => item.id === sid)) {
       return false;
     }
-    setCompareItems(prev => [...prev, product]);
+    setCompareItems(prev => [...prev, { ...product, id: sid }]);
     return true;
   };
 
-  const removeFromCompare = (id: string) => {
-    setCompareItems(prev => prev.filter(item => item.id !== id));
+  const removeFromCompare = (id: string | number) => {
+    const sid = String(id);
+    setCompareItems(prev => prev.filter(item => item.id !== sid));
   };
 
   const clearCompare = () => {
@@ -58,8 +59,9 @@ export const CompareProvider = ({ children }: { children: ReactNode }) => {
     setIsCompareBarVisible(false);
   };
 
-  const isInCompare = (id: string) => {
-    return compareItems.some(item => item.id === id);
+  const isInCompare = (id: string | number) => {
+    const sid = String(id);
+    return compareItems.some(item => item.id === sid);
   };
 
   const canAddMore = compareItems.length < MAX_COMPARE_ITEMS;

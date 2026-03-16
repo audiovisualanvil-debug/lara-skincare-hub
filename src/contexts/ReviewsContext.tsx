@@ -14,10 +14,10 @@ export interface Review {
 }
 
 interface ReviewsContextType {
-  getProductReviews: (productId: string) => Review[];
+  getProductReviews: (productId: string | number) => Review[];
   addReview: (review: Omit<Review, "id" | "date" | "helpful">) => void;
-  getAverageRating: (productId: string) => number;
-  getReviewCount: (productId: string) => number;
+  getAverageRating: (productId: string | number) => number;
+  getReviewCount: (productId: string | number) => number;
   markHelpful: (reviewId: string) => void;
 }
 
@@ -25,7 +25,6 @@ const ReviewsContext = createContext<ReviewsContextType | undefined>(undefined);
 
 const REVIEWS_STORAGE_KEY = "dermostore-reviews";
 
-// Sample reviews for demo
 const sampleReviews: Review[] = [
   {
     id: "r1",
@@ -80,7 +79,6 @@ const sampleReviews: Review[] = [
 export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
-  // Load reviews from localStorage on mount
   useEffect(() => {
     try {
       const savedReviews = localStorage.getItem(REVIEWS_STORAGE_KEY);
@@ -95,7 +93,6 @@ export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  // Save user reviews to localStorage (excluding sample reviews)
   const saveUserReviews = (allReviews: Review[]) => {
     const userReviews = allReviews.filter(r => !sampleReviews.some(sr => sr.id === r.id));
     try {
@@ -105,9 +102,10 @@ export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const getProductReviews = (productId: string): Review[] => {
+  const getProductReviews = (productId: string | number): Review[] => {
+    const sid = String(productId);
     return reviews
-      .filter(r => r.productId === productId)
+      .filter(r => r.productId === sid)
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   };
 
@@ -123,15 +121,17 @@ export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
     saveUserReviews(updatedReviews);
   };
 
-  const getAverageRating = (productId: string): number => {
-    const productReviews = reviews.filter(r => r.productId === productId);
+  const getAverageRating = (productId: string | number): number => {
+    const sid = String(productId);
+    const productReviews = reviews.filter(r => r.productId === sid);
     if (productReviews.length === 0) return 0;
     const sum = productReviews.reduce((acc, r) => acc + r.rating, 0);
     return Math.round((sum / productReviews.length) * 10) / 10;
   };
 
-  const getReviewCount = (productId: string): number => {
-    return reviews.filter(r => r.productId === productId).length;
+  const getReviewCount = (productId: string | number): number => {
+    const sid = String(productId);
+    return reviews.filter(r => r.productId === sid).length;
   };
 
   const markHelpful = (reviewId: string) => {

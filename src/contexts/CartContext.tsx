@@ -27,8 +27,8 @@ const AVAILABLE_COUPONS: Coupon[] = [
 interface CartContextType {
   items: CartItem[];
   addItem: (product: Omit<CartItem, "quantity">, quantity?: number) => void;
-  removeItem: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  removeItem: (id: string | number) => void;
+  updateQuantity: (id: string | number, quantity: number) => void;
   clearCart: () => void;
   totalItems: number;
   subtotal: number;
@@ -52,7 +52,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [appliedCoupon, setAppliedCoupon] = useState<Coupon | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  // Load cart and coupon from localStorage on mount
   useEffect(() => {
     try {
       const savedCart = localStorage.getItem(CART_STORAGE_KEY);
@@ -68,7 +67,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, []);
 
-  // Save cart to localStorage whenever it changes
   useEffect(() => {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(items));
@@ -77,7 +75,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [items]);
 
-  // Save coupon to localStorage whenever it changes
   useEffect(() => {
     try {
       if (appliedCoupon) {
@@ -91,32 +88,35 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   }, [appliedCoupon]);
 
   const addItem = (product: Omit<CartItem, "quantity">, quantity = 1) => {
+    const productId = String(product.id);
     setItems((prevItems) => {
-      const existingItem = prevItems.find((item) => item.id === product.id);
+      const existingItem = prevItems.find((item) => item.id === productId);
       if (existingItem) {
         return prevItems.map((item) =>
-          item.id === product.id
+          item.id === productId
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
       }
-      return [...prevItems, { ...product, quantity }];
+      return [...prevItems, { ...product, id: productId, quantity }];
     });
     setIsCartOpen(true);
   };
 
-  const removeItem = (id: string) => {
-    setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  const removeItem = (id: string | number) => {
+    const sid = String(id);
+    setItems((prevItems) => prevItems.filter((item) => item.id !== sid));
   };
 
-  const updateQuantity = (id: string, quantity: number) => {
+  const updateQuantity = (id: string | number, quantity: number) => {
     if (quantity < 1) {
       removeItem(id);
       return;
     }
+    const sid = String(id);
     setItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id ? { ...item, quantity } : item
+        item.id === sid ? { ...item, quantity } : item
       )
     );
   };
@@ -160,7 +160,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
   const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  // Calculate discount
   const discount = appliedCoupon
     ? appliedCoupon.discountType === "percentage"
       ? (subtotal * appliedCoupon.discountValue) / 100
