@@ -16,7 +16,7 @@ export interface BeforeAfterImage {
 }
 
 export interface Product {
-  id: number;
+  id: string | number;
   name: string;
   brand: string;
   category: string;
