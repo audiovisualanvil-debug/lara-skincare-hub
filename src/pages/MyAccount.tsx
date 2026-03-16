@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
-  User, Package, MapPin, Heart, Star, Award, 
+  User, Package, MapPin, Heart, Star, 
   Settings, LogOut, ChevronRight, Plus, Edit2, 
-  Trash2, Crown, Gift, Loader2, ShoppingBag
+  Trash2, Loader2, ShoppingBag
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
