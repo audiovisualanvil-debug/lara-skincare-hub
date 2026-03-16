@@ -157,7 +157,7 @@ const SearchAutocomplete = ({
     setSelectedIndex(-1);
   };
 
-  const handleSuggestionClick = (productId: number) => {
+  const handleSuggestionClick = (productId: string | number) => {
     navigate(`/produto/${productId}`);
     setIsOpen(false);
     setQuery("");

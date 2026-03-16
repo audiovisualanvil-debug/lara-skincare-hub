@@ -41,7 +41,7 @@ const ProductReviews = ({ productId }: ProductReviewsProps) => {
     }
 
     addReview({
-      productId,
+      productId: String(productId),
       userName: userName.trim(),
       userCity: userCity.trim() || undefined,
       rating,

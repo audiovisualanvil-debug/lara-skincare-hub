@@ -45,7 +45,7 @@ export const seedAllProducts = async (
     const batch = allHardcoded.slice(i, i + batchSize);
     const productRows = batch.map((p) => {
       const price = parsePrice(p.price);
-      const slug = generateSlug(p.name, p.id);
+      const slug = generateSlug(p.name, Number(p.id));
       return {
         name: p.name,
         slug,
