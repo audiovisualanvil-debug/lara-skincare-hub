@@ -408,6 +408,7 @@ const HomePage = () => {
                   <img 
                     src={resilienceSerum} 
                     alt="Resilience Serum"
+                    loading="lazy"
                     className="w-24 md:w-28 h-28 md:h-32 object-cover rounded-xl shadow-md group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="flex-1">
