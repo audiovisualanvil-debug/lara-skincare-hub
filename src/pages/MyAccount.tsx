@@ -218,19 +218,12 @@ const MyAccount = () => {
           </div>
 
           {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
             <Card>
               <CardContent className="p-4 text-center">
-                <TierIcon className={`w-8 h-8 mx-auto mb-2 ${tierColor}`} />
-                <p className="text-sm text-muted-foreground">Nível</p>
-                <p className="font-semibold capitalize">{tierInfo[currentTier as keyof typeof tierInfo]?.name}</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4 text-center">
-                <Gift className="w-8 h-8 mx-auto mb-2 text-primary" />
-                <p className="text-sm text-muted-foreground">Pontos</p>
-                <p className="font-semibold">{loyalty?.total_points || 0}</p>
+                <Package className="w-8 h-8 mx-auto mb-2 text-primary" />
+                <p className="text-sm text-muted-foreground">Pedidos</p>
+                <p className="font-semibold">{orders.length}</p>
               </CardContent>
             </Card>
             <Card>
