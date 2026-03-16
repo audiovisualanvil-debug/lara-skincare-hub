@@ -105,7 +105,7 @@ export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const getProductReviews = (productId: number): Review[] => {
+  const getProductReviews = (productId: string): Review[] => {
     return reviews
       .filter(r => r.productId === productId)
       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
