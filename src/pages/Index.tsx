@@ -236,7 +236,7 @@ const Index = () => {
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
           <img 
             src={productsImage} 
-            alt=""
+            alt="Produtos dermocosméticos Multti Med"
             className="w-full h-full object-cover"
           />
         </div>
