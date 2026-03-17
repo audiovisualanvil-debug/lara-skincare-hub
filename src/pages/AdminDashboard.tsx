@@ -147,10 +147,7 @@ const AdminDashboard = () => {
         .from("profiles")
         .select("*", { count: "exact", head: true });
 
-      // Fetch quiz completions
-      const { count: quizCount } = await supabase
-        .from("quiz_results")
-        .select("*", { count: "exact", head: true });
+      // Products stats
 
       // Fetch products stats
       const { data: products } = await supabase
