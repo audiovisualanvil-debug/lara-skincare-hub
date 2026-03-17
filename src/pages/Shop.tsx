@@ -419,7 +419,7 @@ const Shop = () => {
         </section>
 
         {/* Main Content */}
-        <section className="section-editorial">
+        <section className="py-8 md:py-12">
           <div className="container-editorial">
             <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
               
