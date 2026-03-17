@@ -134,13 +134,13 @@ const HeroBanner = ({
               {/* Desktop Image */}
               <img
                 src={currentData.image}
-                alt=""
+                alt={currentData.title || "Banner promocional Multti Med Dermocosméticos"}
                 className="hidden md:block w-full h-full object-cover opacity-50"
               />
               {/* Mobile Image */}
               <img
                 src={currentData.mobileImage || currentData.image}
-                alt=""
+                alt={currentData.title || "Banner promocional Multti Med Dermocosméticos"}
                 className="md:hidden w-full h-full object-cover object-[center_25%] opacity-40"
               />
               {/* Gradient overlays */}
