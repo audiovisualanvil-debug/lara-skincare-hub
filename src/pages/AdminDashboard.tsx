@@ -212,7 +212,7 @@ const AdminDashboard = () => {
         pendingRequests: pending,
         approvedRequests: approved.length,
         rejectedRequests: rejected,
-        quizCompletions: quizCount || 0,
+        quizCompletions: 0,
         avgDiscount,
         totalProducts,
         activeProducts,
