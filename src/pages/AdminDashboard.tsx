@@ -147,10 +147,7 @@ const AdminDashboard = () => {
         .from("profiles")
         .select("*", { count: "exact", head: true });
 
-      // Fetch quiz completions
-      const { count: quizCount } = await supabase
-        .from("quiz_results")
-        .select("*", { count: "exact", head: true });
+      // Products stats
 
       // Fetch products stats
       const { data: products } = await supabase
@@ -215,7 +212,7 @@ const AdminDashboard = () => {
         pendingRequests: pending,
         approvedRequests: approved.length,
         rejectedRequests: rejected,
-        quizCompletions: quizCount || 0,
+        quizCompletions: 0,
         avgDiscount,
         totalProducts,
         activeProducts,
@@ -366,12 +363,6 @@ const AdminDashboard = () => {
               <Link to="/admin/solicitacoes-profissionais">
                 <Building2 className="w-4 h-4 mr-2" />
                 Solicitações Profissionais
-              </Link>
-            </Button>
-            <Button variant="outline" asChild>
-              <Link to="/admin/blog">
-                <FileText className="w-4 h-4 mr-2" />
-                Blog
               </Link>
             </Button>
           </div>
@@ -539,13 +530,13 @@ const AdminDashboard = () => {
               <Card className="border-border/50">
                 <CardHeader className="pb-2">
                   <CardDescription className="flex items-center gap-2">
-                    <FileText className="w-4 h-4" />
-                    Quiz Completados
+                    <DollarSign className="w-4 h-4" />
+                    Ticket Médio
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-display font-bold text-foreground">
-                    {stats.quizCompletions}
+                    R$ {stats.avgOrderValue.toFixed(2).replace(".", ",")}
                   </p>
                 </CardContent>
               </Card>
