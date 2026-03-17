@@ -368,12 +368,6 @@ const AdminDashboard = () => {
                 Solicitações Profissionais
               </Link>
             </Button>
-            <Button variant="outline" asChild>
-              <Link to="/admin/blog">
-                <FileText className="w-4 h-4 mr-2" />
-                Blog
-              </Link>
-            </Button>
           </div>
 
           {/* Sales Stats */}
