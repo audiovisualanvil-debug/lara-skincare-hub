@@ -533,13 +533,13 @@ const AdminDashboard = () => {
               <Card className="border-border/50">
                 <CardHeader className="pb-2">
                   <CardDescription className="flex items-center gap-2">
-                    <FileText className="w-4 h-4" />
-                    Quiz Completados
+                    <DollarSign className="w-4 h-4" />
+                    Ticket Médio
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-display font-bold text-foreground">
-                    {stats.quizCompletions}
+                    R$ {stats.avgOrderValue.toFixed(2).replace(".", ",")}
                   </p>
                 </CardContent>
               </Card>
